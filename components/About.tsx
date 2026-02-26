@@ -7,9 +7,6 @@ import {
   Code, 
   Cloud, 
   Search, 
-  Briefcase, 
-  Award, 
-  Zap,
   Quote
 } from 'lucide-react'
 

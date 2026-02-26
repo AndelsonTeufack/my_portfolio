@@ -316,21 +316,6 @@ export default function Projects({ language }: ProjectsProps) {
               </motion.article>
             ))}
           </motion.div>
-
-          {/* Appel à l'action supplémentaire */}
-          {/* <motion.div variants={itemVariants} className="text-center">
-            <Button
-              variant="outline"
-              size="lg"
-              className="rounded-full border-primary/30 hover:bg-primary/10 hover:border-primary transition-all group"
-              asChild
-            >
-              <a href="#contact">
-                {language === 'en' ? 'Want to work together?' : 'Vous souhaitez collaborer ?'}
-                <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-              </a>
-            </Button>
-          </motion.div> */}
         </motion.div>
       </div>
     </section>
