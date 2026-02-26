@@ -1,3 +1,7 @@
+import { motion, useInView, Variants } from 'framer-motion'
+import { useRef } from 'react'
+import { Calendar, MapPin, Briefcase, GraduationCap, Award, ChevronRight } from 'lucide-react'
+
 interface ExperienceProps {
   language: 'en' | 'fr'
 }
@@ -197,78 +201,157 @@ const content = {
   },
 }
 
+// Variants pour les animations
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.3,
+    },
+  },
+}
+
+const itemVariants: Variants = {
+  hidden: { y: 30, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring' as const,
+      stiffness: 100,
+      damping: 12,
+    },
+  },
+}
+
 export default function Experience({ language }: ExperienceProps) {
   const text = language === 'en' ? content.en : content.fr
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8 bg-card">
-      <div className="max-w-6xl mx-auto">
-        <div className="space-y-12">
+    <section id="experience" className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Éléments décoratifs de fond */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-background/95 to-background" />
+      <div className="absolute top-40 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-40 right-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl -z-10" />
+
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          ref={ref}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={containerVariants}
+          className="space-y-16"
+        >
           {/* Header */}
-          <div className="space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground">{text.title}</h2>
-            <div className="h-1 w-24 bg-primary rounded-full" />
-          </div>
+          <motion.div variants={itemVariants} className="space-y-4 text-center md:text-left">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground inline-flex items-center gap-3">
+              {text.title}
+              <Briefcase className="w-8 h-8 text-primary/70" />
+            </h2>
+            <div className="h-1 w-24 bg-gradient-to-r from-primary to-primary/50 rounded-full mx-auto md:mx-0" />
+            <p className="text-muted-foreground max-w-2xl mx-auto md:mx-0 text-lg">
+              {language === 'en'
+                ? 'My professional journey and the experiences that shaped my skills.'
+                : 'Mon parcours professionnel et les expériences qui ont façonné mes compétences.'}
+            </p>
+          </motion.div>
 
           {/* Timeline */}
-          <div className="space-y-8 relative">
-            {/* Timeline line */}
-            <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-primary/50 to-primary/0 transform md:-translate-x-1/2" />
+          <div className="relative">
+            {/* Ligne verticale de la timeline (cachée sur mobile) */}
+            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-primary/40 to-transparent hidden md:block transform -translate-x-1/2" />
 
-            {text.experiences.map((exp, idx) => (
-              <div
-                key={idx}
-                className={`md:flex gap-8 ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
-              >
-                {/* Timeline dot */}
-                <div className="md:flex-1 hidden md:flex items-center justify-center">
-                  <div className="w-4 h-4 rounded-full bg-primary border-4 border-background absolute left-1/2 transform -translate-x-1/2" />
-                </div>
+            <div className="space-y-8">
+              {text.experiences.map((exp, idx) => {
+                const isEven = idx % 2 === 0
+                return (
+                  <motion.div
+                    key={idx}
+                    variants={itemVariants}
+                    className={`relative flex flex-col md:flex-row ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} gap-6 md:gap-8`}
+                  >
+                    {/* Point de la timeline */}
+                    <div className="absolute left-4 md:left-1/2 top-6 w-3 h-3 bg-primary rounded-full ring-4 ring-background z-10 hidden md:block transform -translate-x-1/2" />
 
-                {/* Content */}
-                <div className="md:flex-1 ml-8 md:ml-0">
-                  <div className="bg-background border border-border rounded-xl p-6 hover:border-primary hover:shadow-lg hover:shadow-primary/10 transition-all duration-300">
-                    <div className="flex items-start justify-between mb-2">
-                      <div>
-                        <h3 className="text-xl font-bold text-foreground">{exp.position}</h3>
-                        <p className="text-primary font-semibold">{exp.company}</p>
-                      </div>
-                      <span className="text-xs font-medium bg-primary/10 text-primary px-3 py-1 rounded-full whitespace-nowrap">
-                        {exp.type}
-                      </span>
+                    {/* Contenu */}
+                    <div className="flex-1 md:ml-0 ml-8 md:ml-0">
+                      <motion.div
+                        whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                        className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-6 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300"
+                      >
+                        {/* En-tête */}
+                        <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
+                          <div>
+                            <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                              {exp.position}
+                            </h3>
+                            <p className="text-primary font-semibold">{exp.company}</p>
+                          </div>
+                          <span className="text-xs font-mono px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 whitespace-nowrap">
+                            {exp.type}
+                          </span>
+                        </div>
+
+                        {/* Métadonnées */}
+                        <div className="flex flex-wrap gap-3 text-xs text-muted-foreground mb-4">
+                          <span className="flex items-center gap-1">
+                            <Calendar className="w-3 h-3" /> {exp.period}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <MapPin className="w-3 h-3" /> {exp.location}
+                          </span>
+                        </div>
+
+                        {/* Points forts */}
+                        <ul className="space-y-2">
+                          {exp.highlights.map((highlight, hidx) => (
+                            <motion.li
+                              key={hidx}
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 0.3 + hidx * 0.05 }}
+                              className="text-sm text-muted-foreground flex gap-3"
+                            >
+                              <ChevronRight className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                              <span>{highlight}</span>
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </motion.div>
                     </div>
-                    <p className="text-xs text-muted-foreground mb-1">{exp.period}</p>
-                    <p className="text-xs text-muted-foreground mb-4">{exp.location}</p>
 
-                    <ul className="space-y-2">
-                      {exp.highlights.map((highlight, hidx) => (
-                        <li key={hidx} className="text-sm text-muted-foreground flex gap-3">
-                          <span className="text-primary font-bold flex-shrink-0 mt-0.5">▪</span>
-                          <span>{highlight}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            ))}
+                    {/* Espace vide pour aligner les points */}
+                    <div className="hidden md:block flex-1" />
+                  </motion.div>
+                )
+              })}
+            </div>
           </div>
 
-          {/* Education */}
-          <div className="mt-16 pt-12 border-t border-border">
-            <div className="space-y-12">
-              {/* Academic Formation */}
+          {/* Section Éducation & Certifications */}
+          <motion.div variants={itemVariants} className="mt-20 pt-12 border-t border-border/50">
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Formation académique */}
               <div className="space-y-6">
                 <h3 className="text-2xl font-bold text-foreground flex items-center gap-2">
-                  <span className="text-2xl">🎓</span> {text.education.academicTitle}
+                  <GraduationCap className="w-6 h-6 text-primary" />
+                  {text.education.academicTitle}
                 </h3>
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-4">
                   {text.education.academicItems.map((edu, idx) => (
-                    <div key={idx} className="p-6 rounded-xl border border-border bg-background hover:border-primary transition-colors">
+                    <motion.div
+                      key={idx}
+                      whileHover={{ scale: 1.02 }}
+                      className="p-6 rounded-xl border border-border/50 bg-card/30 backdrop-blur-sm hover:border-primary/30 transition-all"
+                    >
                       <h4 className="font-semibold text-foreground mb-1">{edu.degree}</h4>
                       <p className="text-sm text-primary font-medium mb-2">{edu.school}</p>
                       <p className="text-xs text-muted-foreground">{edu.year}</p>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
@@ -276,21 +359,26 @@ export default function Experience({ language }: ExperienceProps) {
               {/* Certifications */}
               <div className="space-y-6">
                 <h3 className="text-2xl font-bold text-foreground flex items-center gap-2">
-                  <span className="text-2xl">📜</span> {text.education.certificationsTitle}
+                  <Award className="w-6 h-6 text-primary" />
+                  {text.education.certificationsTitle}
                 </h3>
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-4">
                   {text.education.certifications.map((cert, idx) => (
-                    <div key={idx} className="p-6 rounded-xl border border-accent/30 bg-accent/5 hover:border-accent transition-colors">
+                    <motion.div
+                      key={idx}
+                      whileHover={{ scale: 1.02 }}
+                      className="p-6 rounded-xl border border-primary/20 bg-primary/5 backdrop-blur-sm hover:border-primary/50 transition-all"
+                    >
                       <h4 className="font-semibold text-foreground mb-1">{cert.name}</h4>
-                      <p className="text-sm text-accent font-medium mb-2">{cert.issuer}</p>
+                      <p className="text-sm text-primary font-medium mb-2">{cert.issuer}</p>
                       <p className="text-xs text-muted-foreground">{cert.year}</p>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   )
