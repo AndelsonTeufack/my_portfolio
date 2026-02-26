@@ -73,12 +73,12 @@ const content = {
     categories: [
       {
         name: 'Langages',
-        skills: ['Java', 'Python', 'JavaScript', 'Dart', 'PHP', 'C/C++', 'HTML/CSS'],
+        skills: ['Java', 'Python', 'JavaScript', 'TypeScript' , 'Dart', 'PHP', 'C/C++', 'HTML/CSS'],
         icon: Code,
       },
       {
         name: 'Frontend',
-        skills: ['React', 'Next.js', 'Flutter', 'Tailwind CSS', 'Bootstrap', 'Design Responsif'],
+        skills: ['React', 'Next.js', 'Flutter', 'Tailwind CSS', 'Bootstrap', 'Design Responsif', 'Wordpress'],
         icon: Layout,
       },
       {
@@ -93,7 +93,7 @@ const content = {
       },
       {
         name: 'Outils & DevOps',
-        skills: ['Git/GitLab', 'Docker', 'Postman', 'Jira', 'VS Code', 'IntelliJ', 'Power BI'],
+        skills: ['Git/GitLab', 'Docker', 'Kubernate' , 'Postman', 'Jira', 'VS Code', 'Android Studio', 'Power BI', 'Swagger'],
         icon: GitBranch,
       },
       {
