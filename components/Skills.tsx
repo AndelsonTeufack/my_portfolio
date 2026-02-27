@@ -37,7 +37,7 @@ const content = {
       {
         name: 'Backend',
         skills: ['Spring Boot', 'Django', 'NestJS', 'Node.js', 'REST APIs', 'Microservices'],
-        icon: Server, // à importer
+        icon: Server,
       },
       {
         name: 'Databases',
@@ -46,7 +46,7 @@ const content = {
       },
       {
         name: 'Tools & DevOps',
-        skills: ['Git/GitLab', 'Docker', 'Postman', 'Jira', 'VS Code', 'IntelliJ', 'Power BI'],
+        skills: ['Git/GitLab', 'Docker', 'Kubernate', 'Kafka' , 'Postman', 'Jira', 'VS Code', 'Android Studio', 'Power BI', 'Swagger'],
         icon: GitBranch,
       },
       {
@@ -93,7 +93,7 @@ const content = {
       },
       {
         name: 'Outils & DevOps',
-        skills: ['Git/GitLab', 'Docker', 'Kubernate' , 'Postman', 'Jira', 'VS Code', 'Android Studio', 'Power BI', 'Swagger'],
+        skills: ['Git/GitLab', 'Docker', 'Kubernate', 'Kafka' , 'Postman', 'Jira', 'VS Code', 'Android Studio', 'Power BI', 'Swagger'],
         icon: GitBranch,
       },
       {
