@@ -41,7 +41,7 @@ const content = {
       },
       {
         name: 'Databases',
-        skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'SQL Server', 'Oracle'],
+        skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'SQL Server', 'Oracle', 'Redis'],
         icon: Database,
       },
       {
@@ -88,7 +88,7 @@ const content = {
       },
       {
         name: 'Bases de Données',
-        skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'SQL Server', 'Oracle'],
+        skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'SQL Server', 'Oracle', 'Redis'],
         icon: Database,
       },
       {
