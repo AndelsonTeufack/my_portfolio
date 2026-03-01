@@ -60,7 +60,7 @@ const mobileItemVariants: Variants = {
   exit: { opacity: 0, x: -20, transition: { duration: 0.2 } },
 }
 
-// Variants pour les items du menu desktop (effet de stagger à l'entrée)
+// Variants pour les items du menu desktop
 const desktopNavVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -109,7 +109,6 @@ export default function Header({ isDark, onThemeToggle, language, onLanguageTogg
   // Fermer le menu mobile au clic sur un lien
   const handleNavClick = (href: string) => {
     setIsOpen(false)
-    // Scroll smooth vers la section
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
   }
 
@@ -120,7 +119,7 @@ export default function Header({ isDark, onThemeToggle, language, onLanguageTogg
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
-          {/* Logo avec animation */}
+          {/* Logo */}
           <motion.a
             href="#"
             className="font-bold text-xl md:text-2xl text-primary hover:text-primary/80 transition-colors"
@@ -130,7 +129,7 @@ export default function Header({ isDark, onThemeToggle, language, onLanguageTogg
             AT
           </motion.a>
 
-          {/* Desktop Navigation avec animations */}
+          {/* Desktop Navigation */}
           <motion.nav
             className="hidden md:flex items-center gap-8"
             initial="hidden"
@@ -139,7 +138,7 @@ export default function Header({ isDark, onThemeToggle, language, onLanguageTogg
           >
             {currentNav.map((item) => (
               <motion.a
-                key={item.name}
+                key={item.href}               // ← clé par href, stable d'une langue à l'autre
                 href={item.href}
                 variants={desktopItemVariants}
                 whileHover={{ scale: 1.05 }}
@@ -155,7 +154,7 @@ export default function Header({ isDark, onThemeToggle, language, onLanguageTogg
                 }`}
               >
                 {item.name}
-                {/* Indicateur de section active (ligne) */}
+                {/* Indicateur de section active */}
                 {activeSection === item.href && (
                   <motion.span
                     layoutId="activeSection"
@@ -173,7 +172,7 @@ export default function Header({ isDark, onThemeToggle, language, onLanguageTogg
 
           {/* Right Controls */}
           <div className="flex items-center gap-2">
-            {/* Language Toggle avec animation */}
+            {/* Language Toggle */}
             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
               <Button
                 variant="ghost"
@@ -194,7 +193,7 @@ export default function Header({ isDark, onThemeToggle, language, onLanguageTogg
               </Button>
             </motion.div>
 
-            {/* Theme Toggle avec animation */}
+            {/* Theme Toggle */}
             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
               <Button
                 variant="ghost"
@@ -242,7 +241,7 @@ export default function Header({ isDark, onThemeToggle, language, onLanguageTogg
           </div>
         </div>
 
-        {/* Mobile Navigation avec AnimatePresence */}
+        {/* Mobile Navigation */}
         <AnimatePresence>
           {isOpen && (
             <motion.nav
@@ -254,7 +253,7 @@ export default function Header({ isDark, onThemeToggle, language, onLanguageTogg
             >
               {currentNav.map((item) => (
                 <motion.a
-                  key={item.name}
+                  key={item.href}               // ← clé par href également
                   href={item.href}
                   variants={mobileItemVariants}
                   onClick={(e) => {

@@ -138,6 +138,10 @@ export default function About({ language }: AboutProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
+  // Ref pour l'icône du développeur
+  const iconContainerRef = useRef(null)
+  const iconInView = useInView(iconContainerRef, { once: false, amount: 0.5 })
+
   return (
     <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Éléments décoratifs de fond */}
@@ -297,13 +301,27 @@ export default function About({ language }: AboutProps) {
               })}
             </motion.div>
 
-            {/* Avatar / Profile placeholder (optionnel) */}
-            <motion.div variants={itemVariants} className="flex justify-center md:justify-start">
+            {/* Avatar / Profile avec animation flottante */}
+            <motion.div
+              ref={iconContainerRef}
+              variants={itemVariants}
+              className="flex justify-center md:justify-start"
+            >
               <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-full blur opacity-30 group-hover:opacity-50 transition duration-300" />
-                <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center border-2 border-white/20 backdrop-blur-sm">
+                {/* Anneau lumineux avec pulse */}
+                <motion.div
+                  className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-full blur opacity-30 group-hover:opacity-50 transition duration-300"
+                  animate={iconInView ? { scale: [1, 1.08, 1], opacity: [0.3, 0.6, 0.3] } : {}}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                />
+                {/* Cercle principal avec flottement */}
+                <motion.div
+                  className="relative w-24 h-24 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center border-2 border-white/20 backdrop-blur-sm"
+                  animate={iconInView ? { y: [0, -8, 0] } : {}}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                >
                   <span className="text-4xl">👨‍💻</span>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           </div>

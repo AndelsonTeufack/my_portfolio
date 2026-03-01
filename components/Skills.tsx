@@ -13,7 +13,8 @@ import {
   Brain,
   MessageCircle,
   Target,
-  Clock
+  Clock,
+  Server // Ajout de l'import manquant
 } from 'lucide-react'
 
 interface SkillsProps {
@@ -176,7 +177,7 @@ export default function Skills({ language }: SkillsProps) {
             </p>
           </motion.div>
 
-          {/* Grille des catégories techniques (inchangée, déjà cohérente) */}
+          {/* Grille des catégories techniques */}
           <motion.div variants={containerVariants} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {text.categories.map((category, idx) => {
               const Icon = category.icon
@@ -215,9 +216,9 @@ export default function Skills({ language }: SkillsProps) {
             })}
           </motion.div>
 
-          {/* Section Soft Skills & Langues - version harmonisée */}
+          {/* Section Soft Skills & Langues */}
           <motion.div variants={itemVariants} className="grid md:grid-cols-2 gap-8">
-            {/* Soft Skills repensées avec le thème */}
+            {/* Soft Skills */}
             <div className="space-y-6">
               <h3 className="text-2xl font-bold text-foreground flex items-center gap-2">
                 <Users className="w-6 h-6 text-primary" />
@@ -237,7 +238,8 @@ export default function Skills({ language }: SkillsProps) {
                         <skill.icon className="w-4 h-4" />
                       </div>
                       <div>
-                        <h4 className="font-medium text-foreground text-sm">{skill.name}</h4>
+                        {/* Modification ici : taille du titre augmentée à text-base et font-semibold */}
+                        <h4 className="font-semibold text-foreground text-base">{skill.name}</h4>
                         <p className="text-xs text-muted-foreground mt-1">{skill.description}</p>
                       </div>
                     </div>
@@ -246,7 +248,7 @@ export default function Skills({ language }: SkillsProps) {
               </div>
             </div>
 
-            {/* Langues (inchangées) */}
+            {/* Langues */}
             <div className="space-y-6">
               <h3 className="text-2xl font-bold text-foreground flex items-center gap-2">
                 <Globe className="w-6 h-6 text-primary" />
@@ -285,6 +287,3 @@ export default function Skills({ language }: SkillsProps) {
     </section>
   )
 }
-
-// N'oubliez pas d'importer Server depuis lucide-react si ce n'est pas déjà fait
-import { Server } from 'lucide-react' // à ajouter en haut avec les autres imports

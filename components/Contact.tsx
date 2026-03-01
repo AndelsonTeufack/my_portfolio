@@ -11,7 +11,8 @@ import {
   FaGithub, 
   FaPaperPlane,
   FaCheckCircle,
-  FaTimesCircle
+  FaTimesCircle,
+  FaPhone // Ajout de l'icône téléphone
 } from 'react-icons/fa'
 import { Sparkles, Send } from 'lucide-react'
 
@@ -24,7 +25,8 @@ const content = {
     title: 'Get In Touch',
     subtitle: 'Have a project in mind? Let\'s collaborate and create something amazing together.',
     email: 'teufackandelson123@gmail.com',
-    phone: '+237 690 819 035',
+    phoneTel: '+237 651 489 468',
+    phoneWhatsapp: '+237 690 819 035',
     location: 'Douala, Cameroon',
     formTitle: 'Send me a message',
     namePlaceholder: 'Your Name',
@@ -47,7 +49,8 @@ const content = {
     title: 'Parlons-nous',
     subtitle: 'Vous avez un projet en tête? Collaborons et créons quelque chose d\'extraordinaire ensemble.',
     email: 'teufackandelson123@gmail.com',
-    phone: '+237 690 819 035',
+    phoneTel: '+237 651 489 468',     
+    phoneWhatsapp: '+237 690 819 035',
     location: 'Douala, Cameroun',
     formTitle: 'Envoyez-moi un message',
     namePlaceholder: 'Votre Nom',
@@ -188,8 +191,8 @@ export default function Contact({ language }: ContactProps) {
             <p className="text-lg text-muted-foreground">{text.subtitle}</p>
           </motion.div>
 
-          {/* Contact Methods Cards */}
-          <motion.div variants={containerVariants} className="grid md:grid-cols-3 gap-6">
+          {/* Contact Methods Cards - 4 cartes */}
+          <motion.div variants={containerVariants} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Email */}
             <motion.div
               variants={itemVariants}
@@ -211,7 +214,30 @@ export default function Contact({ language }: ContactProps) {
               </div>
             </motion.div>
 
-            {/* Phone & WhatsApp */}
+            {/* Téléphone*/}
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ y: -5, scale: 1.02 }}
+              className="group relative rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-6 text-center hover:border-primary/30 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+              <div className="relative">
+                <div className="w-14 h-14 rounded-xl bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center mx-auto mb-4 transition-colors">
+                  <FaPhone className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="font-semibold text-foreground mb-2">
+                  {language === 'en' ? 'Phone' : 'Téléphone'}
+                </h3>
+                <a
+                  href={`tel:${text.phoneTel.replace(/\s/g, '')}`}
+                  className="text-primary hover:text-primary/80 transition-colors text-sm block"
+                >
+                  {text.phoneTel}
+                </a>
+              </div>
+            </motion.div>
+
+            {/* WhatsApp*/}
             <motion.div
               variants={itemVariants}
               whileHover={{ y: -5, scale: 1.02 }}
@@ -222,21 +248,19 @@ export default function Contact({ language }: ContactProps) {
                 <div className="w-14 h-14 rounded-xl bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center mx-auto mb-4 transition-colors">
                   <FaWhatsapp className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">
-                  {language === 'en' ? 'Phone & WhatsApp' : 'Téléphone & WhatsApp'}
-                </h3>
+                <h3 className="font-semibold text-foreground mb-2">WhatsApp</h3>
                 <a
-                  href={`https://wa.me/237690819035`}
+                  href={`https://wa.me/${text.phoneWhatsapp.replace(/\s/g, '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:text-primary/80 transition-colors text-sm block"
                 >
-                  {text.phone}
+                  {text.phoneWhatsapp}
                 </a>
               </div>
             </motion.div>
 
-            {/* Location */}
+            {/* Localisation */}
             <motion.div
               variants={itemVariants}
               whileHover={{ y: -5, scale: 1.02 }}
@@ -255,7 +279,7 @@ export default function Contact({ language }: ContactProps) {
             </motion.div>
           </motion.div>
 
-          {/* Contact Form & Social Links */}
+          {/* Contact Form & Social Links (inchangé) */}
           <motion.div variants={containerVariants} className="grid md:grid-cols-2 gap-12">
             {/* Form */}
             <motion.form
@@ -264,7 +288,6 @@ export default function Contact({ language }: ContactProps) {
               className="space-y-5 relative"
             >
               <h3 className="text-2xl font-bold text-foreground mb-6 inline-flex items-center gap-2">
-                {/* <Send className="w-5 h-5 text-primary" /> */}
                 {text.formTitle}
               </h3>
 
@@ -359,7 +382,6 @@ export default function Contact({ language }: ContactProps) {
             <motion.div variants={itemVariants} className="space-y-8 flex flex-col justify-between">
               <div>
                 <h3 className="text-2xl font-bold text-foreground mb-6 inline-flex items-center gap-2">
-                  {/* <FaLinkedin className="w-5 h-5 text-primary" /> */}
                   {text.connectTitle}
                 </h3>
                 <p className="text-muted-foreground mb-6">

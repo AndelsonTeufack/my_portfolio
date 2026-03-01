@@ -1,6 +1,6 @@
-import { motion, useInView, Variants } from 'framer-motion'
-import { useRef } from 'react'
-import { ExternalLink, Github, Sparkles } from 'lucide-react'
+import { motion, useInView, Variants, AnimatePresence } from 'framer-motion'
+import { useRef, useState } from 'react'
+import { ExternalLink, Github, Sparkles, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 interface ProjectsProps {
@@ -20,8 +20,8 @@ const content = {
           'Role-based access control',
           'Real-time notifications',
         ],
-        demo: '#',   // placeholder
-        code: '#',   // placeholder
+        demo: '#',
+        code: 'https://github.com/AndelsonTeufack/credix-Hrm',
       },
       {
         title: 'MomoKash Mobile App',
@@ -33,7 +33,7 @@ const content = {
           'Cross-platform compatibility',
         ],
         demo: '#',
-        code: '#',
+        code: 'https://github.com/AndelsonTeufack/MomoKash-Mobile-App',
       },
       {
         title: 'Maintenance Tracking System',
@@ -45,19 +45,19 @@ const content = {
           'Real-time tracking',
         ],
         demo: '#',
-        code: '#',
+        code: 'https://github.com/AndelsonTeufack/Gav-App',
       },
       {
         title: 'MULEMA Language Learning App',
         description: 'Mobile application for learning Cameroonian native languages. Features interactive lessons, voice recognition, and progress tracking.',
-        tags: ['Flutter', 'Spring Boot', 'REST API', 'Education', 'Mobile'],
+        tags: ['React Native', 'Spring Boot', 'REST API', 'Education', 'Mobile'],
         highlights: [
           'Interactive lessons',
           'Voice recognition',
           'Progress tracking',
         ],
         demo: '#',
-        code: '#',
+        code: 'https://github.com/noubayou237/mulema',
       },
       {
         title: 'Desktop Inventory Manager',
@@ -69,7 +69,7 @@ const content = {
           'Complete automation',
         ],
         demo: '#',
-        code: '#',
+        code: 'https://github.com/AndelsonTeufack/BuildingManagement',
       },
       {
         title: 'Student Sponsorship System',
@@ -81,7 +81,19 @@ const content = {
           'Scalable architecture',
         ],
         demo: '#',
-        code: '#',
+        code: 'https://github.com/AndelsonTeufack/sponsorship-IAI-Douala',
+      },
+      {
+        title: 'Laoshi Consulting',
+        description: 'Professional website for an immigration company in China, presenting its services for students and professionals. Modern design and optimal performance.',
+        tags: ['React', 'Next.js', 'NestJS', 'TypeScript', 'Tailwind CSS'],
+        highlights: [
+          'Service presentation',
+          'Contact form',
+          'Multilingual content',
+        ],
+        demo: 'https://laoshi-consulting.vercel.app',
+        code: 'https://github.com/AndelsonTeufack/laochi_site',
       },
     ],
   },
@@ -98,7 +110,7 @@ const content = {
           'Notifications en temps réel',
         ],
         demo: '#',
-        code: '#',
+        code: 'https://github.com/AndelsonTeufack/credix-Hrm',
       },
       {
         title: 'Application Mobile MomoKash',
@@ -110,7 +122,7 @@ const content = {
           'Compatibilité multiplateforme',
         ],
         demo: '#',
-        code: '#',
+        code: 'https://github.com/AndelsonTeufack/MomoKash-Mobile-App',
       },
       {
         title: 'Système de Suivi de Maintenance',
@@ -122,19 +134,19 @@ const content = {
           'Suivi en temps réel',
         ],
         demo: '#',
-        code: '#',
+        code: 'https://github.com/AndelsonTeufack/Gav-App',
       },
       {
         title: 'Application MULEMA d\'Apprentissage des Langues',
         description: 'Application mobile pour l\'apprentissage des langues maternelles camerounaises. Leçons interactives, reconnaissance vocale et suivi des progrès.',
-        tags: ['Flutter', 'Spring Boot', 'API REST', 'Éducation', 'Mobile'],
+        tags: ['React Native', 'Spring Boot', 'API REST', 'Éducation', 'Mobile'],
         highlights: [
           'Leçons interactives',
           'Reconnaissance vocale',
           'Suivi des progrès',
         ],
         demo: '#',
-        code: '#',
+        code: 'https://github.com/noubayou237/mulema',
       },
       {
         title: 'Gestionnaire d\'Inventaire Bureau',
@@ -146,7 +158,7 @@ const content = {
           'Automatisation complète',
         ],
         demo: '#',
-        code: '#',
+        code: 'https://github.com/AndelsonTeufack/BuildingManagement',
       },
       {
         title: 'Système de Parrainage Étudiant',
@@ -158,13 +170,24 @@ const content = {
           'Architecture scalable',
         ],
         demo: '#',
-        code: '#',
+        code: 'https://github.com/AndelsonTeufack/sponsorship-IAI-Douala',
+      },
+      {
+        title: 'Laoshi Consulting',
+        description: 'Site web professionnel pour une entreprise d\'immigration en Chine, présentant ses services d\'accompagnement aux étudiants et professionnels. Design moderne et performance optimale.',
+        tags: ['React', 'Next.js', 'NestJS', 'TypeScript', 'Tailwind CSS'],
+        highlights: [
+          'Présentation des services',
+          'Formulaire de contact',
+          'Contenu multilingue',
+        ],
+        demo: 'https://laoshi-consulting.vercel.app',
+        code: 'https://github.com/AndelsonTeufack/laochi_site',
       },
     ],
   },
 }
 
-// Variants for container and items animations
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -194,6 +217,25 @@ export default function Projects({ language }: ProjectsProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
+  const [showNotification, setShowNotification] = useState(false)
+  const [notificationMessage, setNotificationMessage] = useState('')
+
+  const handleDemoClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    project: typeof content.en.projects[0]
+  ) => {
+    if (project.demo === '#') {
+      e.preventDefault()
+      const message =
+        language === 'en'
+          ? `Demo for "${project.title}" is not available online yet.`
+          : `La démo de "${project.title}" n'est pas encore en ligne.`
+      setNotificationMessage(message)
+      setShowNotification(true)
+      setTimeout(() => setShowNotification(false), 4000)
+    }
+  }
+
   return (
     <section id="projects" className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Contexte décoratif */}
@@ -209,7 +251,7 @@ export default function Projects({ language }: ProjectsProps) {
           variants={containerVariants}
           className="space-y-16"
         >
-          {/* Header avec animation */}
+          {/* Header */}
           <motion.div variants={itemVariants} className="space-y-4 text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-3">
               <h2 className="text-4xl md:text-5xl font-bold text-foreground inline-flex items-center gap-3">
@@ -219,8 +261,8 @@ export default function Projects({ language }: ProjectsProps) {
             </div>
             <div className="h-1 w-24 bg-gradient-to-r from-primary to-primary/50 rounded-full mx-auto md:mx-0" />
             <p className="text-muted-foreground max-w-2xl mx-auto md:mx-0 text-lg">
-              {language === 'en' 
-                ? 'A selection of projects I\'ve built, combining robust backends with polished interfaces.'
+              {language === 'en'
+                ? "A selection of projects I've built, combining robust backends with polished interfaces."
                 : 'Une sélection de projets que j\'ai réalisés, alliant backends robustes et interfaces soignées.'}
             </p>
           </motion.div>
@@ -230,94 +272,137 @@ export default function Projects({ language }: ProjectsProps) {
             variants={containerVariants}
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr"
           >
-            {text.projects.map((project, idx) => (
-              <motion.article
-                key={idx}
-                variants={itemVariants}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                className="group relative rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 overflow-hidden flex flex-col"
-              >
-                {/* Effet de brillance au survol */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            {text.projects.map((project, idx) => {
+              const isDemoAvailable = project.demo !== '#'
+              return (
+                <motion.article
+                  key={idx}
+                  variants={itemVariants}
+                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                  className="group relative rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 overflow-hidden flex flex-col"
+                >
+                  {/* Effet de brillance au survol */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                {/* Badge "Featured" décoratif */}
-                <div className="absolute top-4 right-4 z-10">
-                  <span className="text-xs font-mono px-2 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 backdrop-blur-sm">
-                    featured
-                  </span>
-                </div>
-
-                {/* Contenu */}
-                <div className="p-6 flex-1 flex flex-col gap-4 relative z-0">
-                  {/* Titre */}
-                  <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2">
-                    {project.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
-                    {project.description}
-                  </p>
-
-                  {/* Points forts */}
-                  <ul className="space-y-2 mt-2">
-                    {project.highlights.map((highlight, hidx) => (
-                      <motion.li
-                        key={hidx}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.3 + hidx * 0.05 }}
-                        className="text-xs text-muted-foreground flex items-start gap-2"
-                      >
-                        <span className="text-primary shrink-0 mt-0.5">✦</span>
-                        <span>{highlight}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 pt-4 border-t border-border/50 mt-auto">
-                    {project.tags.map((tag, tidx) => (
-                      <span
-                        key={tidx}
-                        className="text-xs font-medium px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 backdrop-blur-sm"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                  {/* Badge "Featured" décoratif */}
+                  <div className="absolute top-4 right-4 z-10">
+                    <span className="text-xs font-mono px-2 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 backdrop-blur-sm">
+                      featured
+                    </span>
                   </div>
 
-                  {/* Actions (demo / code) */}
-                  <div className="flex gap-3 pt-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="gap-2 text-muted-foreground hover:text-primary hover:bg-primary/10"
-                      asChild
-                    >
-                      <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="w-4 h-4" />
-                        {language === 'en' ? 'Demo' : 'Démo'}
-                      </a>
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="gap-2 text-muted-foreground hover:text-primary hover:bg-primary/10"
-                      asChild
-                    >
-                      <a href={project.code} target="_blank" rel="noopener noreferrer">
-                        <Github className="w-4 h-4" />
-                        Code
-                      </a>
-                    </Button>
+                  {/* Contenu */}
+                  <div className="p-6 flex-1 flex flex-col gap-4 relative z-0">
+                    {/* Titre */}
+                    <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                      {project.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
+                      {project.description}
+                    </p>
+
+                    {/* Points forts */}
+                    <ul className="space-y-2 mt-2">
+                      {project.highlights.map((highlight, hidx) => (
+                        <motion.li
+                          key={hidx}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.3 + hidx * 0.05 }}
+                          className="text-xs text-muted-foreground flex items-start gap-2"
+                        >
+                          <span className="text-primary shrink-0 mt-0.5">✦</span>
+                          <span>{highlight}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 pt-4 border-t border-border/50 mt-auto">
+                      {project.tags.map((tag, tidx) => (
+                        <span
+                          key={tidx}
+                          className="text-xs font-medium px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 backdrop-blur-sm"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Actions (demo / code) */}
+                    <div className="flex gap-3 pt-2">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className={`gap-2 ${
+                          isDemoAvailable
+                            ? 'text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 hover:bg-green-500/10'
+                            : 'text-muted-foreground hover:text-primary hover:bg-primary/10'
+                        }`}
+                        asChild
+                      >
+                        <a
+                          href={project.demo}
+                          onClick={(e) => handleDemoClick(e, project)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          {language === 'en' ? 'Demo' : 'Démo'}
+                        </a>
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="gap-2 text-muted-foreground hover:text-primary hover:bg-primary/10"
+                        asChild
+                      >
+                        <a href={project.code} target="_blank" rel="noopener noreferrer">
+                          <Github className="w-4 h-4" />
+                          Code
+                        </a>
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              </motion.article>
-            ))}
+                </motion.article>
+              )
+            })}
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Notification Toast */}
+      <AnimatePresence>
+        {showNotification && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.9 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+            className="fixed bottom-6 right-6 z-50 max-w-md w-full sm:w-auto"
+          >
+            <div className="bg-background/95 backdrop-blur-md border border-primary/20 rounded-xl shadow-2xl shadow-primary/10 p-4 flex items-start gap-3">
+              <div className="shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                <span className="text-lg">🔔</span>
+              </div>
+              <div className="flex-1">
+                <p className="text-sm text-foreground font-medium">{notificationMessage}</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {language === 'en' ? 'The demo will be available soon.' : 'La démo sera bientôt disponible.'}
+                </p>
+              </div>
+              <button
+                onClick={() => setShowNotification(false)}
+                className="shrink-0 w-6 h-6 rounded-full hover:bg-primary/10 flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }
