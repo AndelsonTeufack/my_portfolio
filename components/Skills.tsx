@@ -14,7 +14,7 @@ import {
   MessageCircle,
   Target,
   Clock,
-  Server // Ajout de l'import manquant
+  Server
 } from 'lucide-react'
 
 interface SkillsProps {
@@ -27,12 +27,12 @@ const content = {
     categories: [
       {
         name: 'Languages',
-        skills: ['Java', 'Python', 'JavaScript', 'Dart', 'PHP', 'C/C++', 'HTML/CSS'],
+        skills: ['Java', 'Python', 'JavaScript', 'TypeScript' , 'Dart', 'PHP', 'C/C++', 'HTML/CSS'],
         icon: Code,
       },
       {
         name: 'Frontend',
-        skills: ['React', 'Next.js', 'Flutter', 'Tailwind CSS', 'Bootstrap', 'Responsive Design'],
+        skills: ['React', 'Next.js', 'Flutter', 'Tailwind CSS', 'Bootstrap', 'Responsive Design', 'Wordpress'],
         icon: Layout,
       },
       {
@@ -238,7 +238,6 @@ export default function Skills({ language }: SkillsProps) {
                         <skill.icon className="w-4 h-4" />
                       </div>
                       <div>
-                        {/* Modification ici : taille du titre augmentée à text-base et font-semibold */}
                         <h4 className="font-semibold text-foreground text-base">{skill.name}</h4>
                         <p className="text-xs text-muted-foreground mt-1">{skill.description}</p>
                       </div>

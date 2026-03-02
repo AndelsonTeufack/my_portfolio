@@ -12,26 +12,26 @@ const content = {
     experiences: [
       {
         company: 'CREDIX.CAM SA',
-        position: 'Stagiaire en Développement Web',
-        period: 'June 2023 - September 2024',
+        position: 'Web Development Intern',
+        period: 'June 2023 - September 2023',
         location: 'Yaoundé, Cameroon',
         type: 'Internship',
         highlights: [
-          'Developed HR management application with Spring Boot and MongoDB featuring JWT authentication and role-based access control',
-          'Migrated microfinance service (MomoKash) from USSD to mobile app, improving UX significantly',
-          'Integrated payment API (Campay) with secure transaction processing',
-          'Implemented REST APIs for internal services including SMS, Redis, and Mongo integration',
+          'Development of an HR management service using Spring Boot and MongoDB with JWT authentication and role-based access control',
+          'Development of a web interface for the HR app communicating with my back-end via HTTP requests',
+          'Implementation of REST APIs for the Momokash reconciliation service',
           'Collaborated with cross-functional team of 15+ professionals on containerized services',
         ],
       },
       {
         company: 'CREDIX.CAM SA',
-        position: 'Stagiaire en Développement Mobile',
+        position: 'Mobile Development Intern',
         period: 'August 2024 - October 2024',
         location: 'Yaoundé, Cameroon',
         type: 'Internship',
         highlights: [
           'Specialized in mobile application development with Flutter framework',
+          'Migration of the money lending service (MomoKash) from USSD to a mobile application',
           'Enhanced mobile application performance and user experience',
           'Implemented responsive UI components and smooth animations',
           'Integrated backend APIs with mobile frontend seamlessly',
@@ -39,7 +39,7 @@ const content = {
       },
       {
         company: 'GREEN POWER CAMEROUN',
-        position: 'Stagiaire en Analyse et Développement de Solutions IT',
+        position: 'IT Solutions Analysis and Development Intern',
         period: 'November 2024 - May 2025',
         location: 'Douala, Cameroon',
         type: 'Internship',
@@ -53,7 +53,7 @@ const content = {
       },
       {
         company: 'GREEN POWER CAMEROUN',
-        position: 'Stagiaire en Analyse et Développement de Solutions IT',
+        position: 'IT Solutions Analysis and Development Intern',
         period: 'May 2025 - November 2025',
         location: 'Douala, Cameroon',
         type: 'Internship',
@@ -66,7 +66,7 @@ const content = {
       },
       {
         company: 'MULEMA',
-        position: 'Développeur Full-Stack',
+        position: 'Full-Stack Developer',
         period: 'December 2025 - February 2026',
         location: 'Remote',
         type: 'Project',
@@ -109,14 +109,13 @@ const content = {
       {
         company: 'CREDIX.CAM SA',
         position: 'Stagiaire en Développement Web',
-        period: 'Juin 2023 - Septembre 2024',
+        period: 'Juin 2023 - Septembre 2023',
         location: 'Yaoundé, Cameroun',
         type: 'Stage',
         highlights: [
-          'Développement d\'application de gestion RH avec Spring Boot et MongoDB avec authentification JWT et contrôle d\'accès par rôle',
-          'Migration du service de microfinance (MomoKash) d\'USSD vers application mobile',
-          'Intégration de l\'API de paiement (Campay) avec traitement sécurisé des transactions',
-          'Implémentation d\'APIs REST pour services internes',
+          'Développement d\'un service de gestion RH avec Spring Boot et MongoDB avec authentification JWT et contrôle d\'accès par rôle',
+          'Développement d\'une interface web de l\app de RH communiquant avec mon back-end via des requetes Http',
+          'Implémentation d\'APIs REST pour le service réconciliation de Momokash',
           'Collaboration avec équipe multidisciplinaire de 15+ professionnels',
         ],
       },
@@ -128,6 +127,7 @@ const content = {
         type: 'Stage',
         highlights: [
           'Spécialisation en développement d\'applications mobiles avec Flutter',
+          'Migration du service de prêt d\'argent (MomoKash) d\'USSD vers application mobile',
           'Amélioration des performances et de l\'expérience utilisateur mobile',
           'Implémentation de composants UI réactifs et animations fluides',
           'Intégration transparente des APIs backend avec le frontend mobile',
@@ -237,7 +237,6 @@ export default function Experience({ language }: ExperienceProps) {
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-background/95 to-background" />
       <div className="absolute top-40 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl -z-10" />
       <div className="absolute bottom-40 right-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl -z-10" />
-
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}

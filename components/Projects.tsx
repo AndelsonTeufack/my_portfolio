@@ -25,11 +25,11 @@ const content = {
       },
       {
         title: 'MomoKash Mobile App',
-        description: 'Microfinance application migrated from USSD to modern mobile platform. Enables users to access loan services seamlessly with improved UI/UX.',
-        tags: ['Flutter', 'Spring Boot', 'REST API', 'Mobile', 'Payment Integration'],
+        description: 'Money lending application migrated from USSD to a modern mobile platform. Allows users to access lending services seamlessly through their Momo account.',
+        tags: ['Flutter', 'Spring Boot', 'REST API', 'Mobile', 'Http'],
         highlights: [
           'USSD to mobile migration',
-          'Integrated payment processing',
+          'Establish HTTP communication',
           'Cross-platform compatibility',
         ],
         demo: '#',
@@ -77,7 +77,7 @@ const content = {
         tags: ['Spring Boot', 'REST API', 'Payment API', 'Backend', 'Security'],
         highlights: [
           'Secure transactions',
-          'Payment integration',
+          'Payment integration (Campay)',
           'Scalable architecture',
         ],
         demo: '#',
@@ -114,11 +114,11 @@ const content = {
       },
       {
         title: 'Application Mobile MomoKash',
-        description: 'Application de microfinance migrée d\'USSD vers plateforme mobile moderne. Permet aux utilisateurs d\'accéder aux services de prêt de manière transparente.',
-        tags: ['Flutter', 'Spring Boot', 'API REST', 'Mobile', 'Paiement'],
+        description: 'Application de prêt d\'argent migrée d\'USSD vers plateforme mobile moderne. Permet aux utilisateurs d\'accéder aux services de prêt de manière transparente via leur compte Momo.',
+        tags: ['Flutter', 'Spring Boot', 'API REST', 'Mobile', 'Http'],
         highlights: [
           'Migration USSD vers mobile',
-          'Traitement de paiement intégré',
+          'Etablir des communication Http',
           'Compatibilité multiplateforme',
         ],
         demo: '#',
@@ -166,7 +166,7 @@ const content = {
         tags: ['Spring Boot', 'API REST', 'API Paiement', 'Backend', 'Sécurité'],
         highlights: [
           'Transactions sécurisées',
-          'Intégration paiement',
+          'Intégration paiement(Campay)',
           'Architecture scalable',
         ],
         demo: '#',

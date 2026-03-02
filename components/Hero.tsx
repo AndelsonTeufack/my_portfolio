@@ -83,7 +83,8 @@ export default function Hero({ language }: HeroProps) {
   })
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
-  const imageParallax = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
+  // L'image n'utilise plus le parallaxe
+  // const imageParallax = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
 
   return (
     <section
@@ -189,12 +190,11 @@ export default function Hero({ language }: HeroProps) {
             </motion.div>
           </motion.div>
 
-          {/* Image avec animation et parallaxe */}
+          {/* Image avec animation fixe (sans parallaxe) */}
           <div className="relative h-96 md:h-[500px] rounded-2xl overflow-hidden border border-border/50 shadow-2xl group">
-            {/* Conteneur pour l'image avec parallaxe */}
+            {/* Conteneur pour l'image (fixe) */}
             <motion.div
               className="absolute inset-0"
-              style={{ y: imageParallax }}
               variants={imageVariants}
               initial="hidden"
               animate="visible"
@@ -216,7 +216,7 @@ export default function Hero({ language }: HeroProps) {
               transition={{ delay: 0.8, duration: 0.8 }}
             />
 
-            {/* Badge flottant (fixe) - CORRIGÉ : placé en dehors du conteneur parallax */}
+            {/* Badge flottant (fixe) */}
             <motion.div
               className="absolute bottom-4 left-4 z-20 bg-background/80 backdrop-blur-sm rounded-full px-3 md:px-4 py-1.5 md:py-2 border border-primary/30 text-xs md:text-sm"
               initial={{ y: 20, opacity: 0 }}
@@ -229,21 +229,8 @@ export default function Hero({ language }: HeroProps) {
         </div>
       </div>
 
-      {/* Indicateur de scroll animé */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
-      >
-        {/* <span className="text-xs uppercase tracking-widest">{text.scrollHint}</span>
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <ArrowDown className="w-4 h-4" />
-        </motion.div> */}
-      </motion.div>
+      {/* Indicateur de scroll animé (commenté) */}
+      {/* <motion.div ... > ... </motion.div> */}
     </section>
   )
 }
