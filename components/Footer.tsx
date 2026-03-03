@@ -212,7 +212,7 @@ export default function Footer({ language }: FooterProps) {
         {/* Bouton retour en haut (flottant) */}
         <motion.button
           onClick={scrollToTop}
-          className="absolute bottom-8 right-8 md:bottom-12 md:right-12 p-3 rounded-full bg-primary/10 hover:bg-primary/20 border border-primary/30 text-primary backdrop-blur-sm transition-colors z-10"
+          className="absolute bottom-8 right-8 md:bottom-21 md:right-12 p-3 rounded-full bg-primary/10 hover:bg-primary/20 border border-primary/30 text-primary backdrop-blur-sm transition-colors z-10"
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 1, type: 'spring' }}

@@ -1,6 +1,6 @@
 import { motion, useInView, Variants } from 'framer-motion'
 import { useRef } from 'react'
-import { Calendar, MapPin, Briefcase, GraduationCap, Award, ChevronRight } from 'lucide-react'
+import { Calendar, MapPin, Sparkles, GraduationCap, Award, ChevronRight } from 'lucide-react'
 
 interface ExperienceProps {
   language: 'en' | 'fr'
@@ -249,7 +249,7 @@ export default function Experience({ language }: ExperienceProps) {
           <motion.div variants={itemVariants} className="space-y-4 text-center md:text-left">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground inline-flex items-center gap-3">
               {text.title}
-              <Briefcase className="w-8 h-8 text-primary/70" />
+              <Sparkles className="w-8 h-8 text-primary/70" />
             </h2>
             <div className="h-1 w-24 bg-gradient-to-r from-primary to-primary/50 rounded-full mx-auto md:mx-0" />
             <p className="text-muted-foreground max-w-2xl mx-auto md:mx-0 text-lg">

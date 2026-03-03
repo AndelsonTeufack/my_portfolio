@@ -34,7 +34,6 @@ export async function POST(request: Request) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Nouveau message de contact</title>
         <style>
-          /* Reset et styles de base */
           * {
             margin: 0;
             padding: 0;
@@ -42,136 +41,172 @@ export async function POST(request: Request) {
           }
           body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f4f4f5;
-            line-height: 1.6;
+            background-color: #f5f7fa;
+            line-height: 1.5;
+            padding: 20px;
           }
           .container {
-            max-width: 600px;
-            margin: 20px auto;
+            max-width: 560px;
+            margin: 0 auto;
             background-color: #ffffff;
-            border-radius: 16px;
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 5px 12px -4px rgba(0, 0, 0, 0.05);
           }
           .header {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            padding: 30px 20px;
+            background: #dc2626; /* Rouge vif */
+            padding: 32px 28px;
             text-align: center;
+            position: relative;
           }
-          .header h1 {
-            color: #ffffff;
-            font-size: 24px;
-            font-weight: 600;
-            margin: 0;
-            letter-spacing: -0.5px;
-          }
-          .header p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 14px;
-            margin-top: 8px;
-          }
-          .content {
-            padding: 30px 25px;
-          }
-          .field {
-            margin-bottom: 20px;
-          }
-          .field-label {
-            font-size: 14px;
-            font-weight: 600;
-            color: #1f2937;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-          }
-          .field-label span {
-            background-color: #6366f1;
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
+          .header-logo {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            width: 56px;
+            height: 56px;
+            background-color: white; /* Fond blanc pour contraster */
+            border-radius: 18px;
+            margin-bottom: 16px;
+            overflow: hidden; /* Pour que l'image garde la forme */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+          }
+          .header-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* ou contain selon la favicon */
+          }
+          .header h1 {
+            color: #000000; /* Noir */
+            font-size: 26px;
+            font-weight: 700;
+            margin: 0 0 6px;
+            letter-spacing: -0.3px;
+          }
+          .header p {
+            color: #1f2937; /* Gris foncé pour le sous-titre */
+            font-size: 15px;
+            font-weight: 400;
+          }
+          .content {
+            padding: 32px 28px;
+          }
+          .field {
+            margin-bottom: 24px;
+          }
+          .field-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e293b;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 8px;
+          }
+          .field-label span {
+            background-color: #eef2ff;
+            color: #4f46e5;
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            line-height: 1; /* Assure le centrage vertical */
           }
           .field-value {
-            background-color: #f9fafb;
-            border-left: 4px solid #6366f1;
-            padding: 12px 16px;
-            border-radius: 8px;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 14px 18px;
             font-size: 15px;
-            color: #1f2937;
+            color: #0f172a;
             word-break: break-word;
+            transition: border 0.2s;
+          }
+          .field-value a {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 500;
+          }
+          .field-value a:hover {
+            text-decoration: underline;
           }
           .message-box {
-            background-color: #f9fafb;
-            border-left: 4px solid #8b5cf6;
-            padding: 16px;
-            border-radius: 8px;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #7c3aed;
+            border-radius: 14px;
+            padding: 16px 18px;
             font-size: 15px;
-            color: #1f2937;
+            color: #0f172a;
             white-space: pre-wrap;
             max-height: 300px;
             overflow-y: auto;
           }
           .footer {
-            background-color: #f3f4f6;
-            padding: 20px;
+            background-color: #f1f4f9;
+            padding: 28px 24px;
             text-align: center;
+            border-top: 1px solid #e2e8f0;
+          }
+          .footer p {
             font-size: 13px;
-            color: #6b7280;
-            border-top: 1px solid #e5e7eb;
-          }
-          .footer a {
-            color: #6366f1;
-            text-decoration: none;
-            font-weight: 500;
-          }
-          .footer a:hover {
-            text-decoration: underline;
+            color: #475569;
+            margin-bottom: 12px;
           }
           .social-links {
-            margin-top: 10px;
             display: flex;
             justify-content: center;
-            gap: 16px;
+            gap: 20px;
+            margin: 16px 0 8px;
           }
           .social-links a {
-            display: inline-block;
-            width: 32px;
-            height: 32px;
-            background-color: #e5e7eb;
-            border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            color: #4b5563;
+            width: 36px;
+            height: 36px;
+            background-color: #e2e8f0;
+            border-radius: 12px;
+            color: #334155;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
             transition: all 0.2s;
           }
           .social-links a:hover {
-            background-color: #6366f1;
+            background-color: #4f46e5;
             color: white;
+            transform: translateY(-2px);
+          }
+          .footer-note {
+            margin-top: 16px;
+            font-size: 12px;
+            color: #64748b;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 16px;
           }
           @media (max-width: 600px) {
-            .container {
-              margin: 10px;
-              border-radius: 12px;
-            }
-            .content {
-              padding: 20px;
-            }
+            body { padding: 10px; }
+            .container { border-radius: 20px; }
+            .header { padding: 24px 20px; }
+            .content { padding: 24px 20px; }
+            .footer { padding: 24px 20px; }
           }
         </style>
       </head>
       <body>
         <div class="container">
           <div class="header">
-            <h1>✨ Nouveau message de contact</h1>
-            <p>Vous avez reçu un message depuis votre portfolio</p>
+            <div class="header-logo">
+              <img src="https://andelson-teufack-portfolio.vercel.app/favicon.ico" alt="AT" width="56" height="56">
+            </div>
+            <h1>✨ Nouveau message</h1>
+            <p>Vous avez reçu un contact depuis votre portfolio</p>
           </div>
           <div class="content">
             <div class="field">
@@ -185,7 +220,7 @@ export async function POST(request: Request) {
                 <span>📧</span> Email
               </div>
               <div class="field-value">
-                <a href="mailto:${escapeHtml(email)}" style="color:#6366f1; text-decoration:none;">${escapeHtml(email)}</a>
+                <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a>
               </div>
             </div>
             <div class="field">
@@ -196,12 +231,14 @@ export async function POST(request: Request) {
             </div>
           </div>
           <div class="footer">
-            <p>Cet email a été envoyé depuis le formulaire de contact de votre portfolio.</p>
+            <p>Cet email a été envoyé via le formulaire de contact</p>
             <div class="social-links">
               <a href="https://linkedin.com/in/andelson-teufack-97a59b279/" target="_blank" rel="noopener">in</a>
               <a href="https://github.com/AndelsonTeufack" target="_blank" rel="noopener">gh</a>
             </div>
-            <p style="margin-top: 12px;">© 2026 Andelson Teufack. Tous droits réservés.</p>
+            <div class="footer-note">
+              © 2026 Andelson Teufack · Tous droits réservés
+            </div>
           </div>
         </div>
       </body>
