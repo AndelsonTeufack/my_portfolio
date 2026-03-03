@@ -7,6 +7,8 @@ import {
   GitBranch, 
   Cpu,
   Monitor,
+  TrendingUp,
+  Headset,
   Users,
   Globe,
   Sparkles,
@@ -61,6 +63,16 @@ const content = {
         skills: ['Linux', 'Windows'],
         icon: Monitor,
       },
+      {
+        name: 'Performance & SEO',
+        skills: ['OpenSSL', 'SEO', 'Site Optimization', 'Core Web Vitals', 'Lighthouse'],
+        icon: TrendingUp,
+      },
+      {
+        name: 'Support & IT Operations',
+        skills: ['Help Desk', 'ITIL', 'Troubleshooting', 'Customer Support'],
+        icon: Headset,
+      }
     ],
     softSkills: [
       { name: 'Adaptability', icon: Zap, description: 'Quickly adjust to new challenges' },
@@ -113,6 +125,16 @@ const content = {
         skills: ['Linux', 'Windows'],
         icon: Monitor,
       },
+      {
+        name: 'Performance & SEO',
+        skills: ['OpenSSL', 'Référencement SEO', 'Optimisation de site', 'Core Web Vitals', 'Lighthouse', 'WebPageTest'],
+        icon: TrendingUp,
+      },
+      {
+        name: 'Support & Opérations IT',
+        skills: ['Help Desk', 'ITIL', 'Troubleshooting', 'Support client'],
+        icon: Headset,
+      }
     ],
     softSkills: [
       { name: 'Adaptabilité', icon: Zap, description: "S'adapter rapidement aux défis" },
