@@ -6,6 +6,7 @@ import {
   Database, 
   GitBranch, 
   Cpu,
+  Monitor,
   Users,
   Globe,
   Sparkles,
@@ -55,6 +56,11 @@ const content = {
         skills: ['Agile/Scrum', 'UML', 'Merise', 'Software Architecture', 'SOLID' , 'System Design'],
         icon: Cpu,
       },
+      {
+        name: 'Operating System',
+        skills: ['Linux', 'Windows'],
+        icon: Monitor,
+      },
     ],
     softSkills: [
       { name: 'Adaptability', icon: Zap, description: 'Quickly adjust to new challenges' },
@@ -101,6 +107,11 @@ const content = {
         name: 'Méthodologies',
         skills: ['Agile/Scrum', 'UML', 'Merise', 'Architecture Logicielle', 'SOLID', 'System Design'],
         icon: Cpu,
+      },
+      {
+        name: 'Systèmes d\'exploitation',
+        skills: ['Linux', 'Windows'],
+        icon: Monitor,
       },
     ],
     softSkills: [
