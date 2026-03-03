@@ -83,8 +83,6 @@ export default function Hero({ language }: HeroProps) {
   })
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
-  // L'image n'utilise plus le parallaxe
-  // const imageParallax = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
 
   return (
     <section
@@ -190,7 +188,7 @@ export default function Hero({ language }: HeroProps) {
             </motion.div>
           </motion.div>
 
-          {/* Image avec animation fixe (sans parallaxe) */}
+          {/* Image avec animation fixe*/}
           <div className="relative h-96 md:h-[500px] rounded-2xl overflow-hidden border border-border/50 shadow-2xl group">
             {/* Conteneur pour l'image (fixe) */}
             <motion.div
@@ -228,9 +226,6 @@ export default function Hero({ language }: HeroProps) {
           </div>
         </div>
       </div>
-
-      {/* Indicateur de scroll animé (commenté) */}
-      {/* <motion.div ... > ... </motion.div> */}
     </section>
   )
 }

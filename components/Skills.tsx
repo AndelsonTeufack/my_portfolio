@@ -52,7 +52,7 @@ const content = {
       },
       {
         name: 'Methodologies',
-        skills: ['Agile/Scrum', 'UML', 'Merise', 'Software Architecture', 'System Design'],
+        skills: ['Agile/Scrum', 'UML', 'Merise', 'Software Architecture', 'SOLID' , 'System Design'],
         icon: Cpu,
       },
     ],
@@ -99,7 +99,7 @@ const content = {
       },
       {
         name: 'Méthodologies',
-        skills: ['Agile/Scrum', 'UML', 'Merise', 'Architecture Logicielle', 'System Design'],
+        skills: ['Agile/Scrum', 'UML', 'Merise', 'Architecture Logicielle', 'SOLID', 'System Design'],
         icon: Cpu,
       },
     ],
