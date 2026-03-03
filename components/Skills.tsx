@@ -109,7 +109,7 @@ const content = {
         icon: Cpu,
       },
       {
-        name: 'Systèmes d\'exploitation',
+        name: 'Systèmes d\'Exploitation',
         skills: ['Linux', 'Windows'],
         icon: Monitor,
       },
