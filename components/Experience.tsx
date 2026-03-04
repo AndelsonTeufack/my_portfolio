@@ -71,7 +71,7 @@ const content = {
         location: 'Remote',
         type: 'Project',
         highlights: [
-          'Developed mobile language learning app for Cameroonian native languages using Flutter',
+          'Developed mobile language learning app for Cameroonian native languages using React Native',
           'Designed REST APIs for translation logic with Spring Boot backend',
           'Created ergonomic, responsive interfaces with smooth animations',
           'Collaborated with multidisciplinary team on international project',
@@ -167,7 +167,7 @@ const content = {
         location: 'Télétravail',
         type: 'Projet',
         highlights: [
-          'Développement d\'application mobile d\'apprentissage des langues camerounaises avec Flutter',
+          'Développement d\'application mobile d\'apprentissage des langues camerounaises avec React Native',
           'Conception d\'APIs REST pour logique de traduction avec backend Spring Boot',
           'Création d\'interfaces ergonomiques et responsives avec animations fluides',
           'Collaboration avec équipe multidisciplinaire sur projet international',
