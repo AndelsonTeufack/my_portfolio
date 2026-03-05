@@ -12,88 +12,93 @@ const content = {
     title: 'Featured Projects',
     projects: [
       {
-        title: 'HR Management System',
-        description: 'Enterprise-grade HR application with employee management, leave tracking, and announcement system. Features JWT authentication and role-based access control.',
-        tags: ['Spring Boot', 'MongoDB', 'React', 'JWT', 'REST API'],
-        highlights: [
-          'Secure authentication with JWT',
-          'Role-based access control',
-          'Real-time notifications',
-        ],
-        demo: '#',
-        code: 'https://github.com/AndelsonTeufack/credix-Hrm',
+      title: 'HR Management System',
+      description: 'Enterprise web application designed to manage employee records, leave requests and internal announcements. The system provides secure authentication and role-based access control to manage administrative workflows.',
+      tags: ['Spring Boot', 'MongoDB', 'React', 'JWT', 'REST API'],
+      highlights: [
+      'Implemented secure authentication using JWT',
+      'Role-based access control for administrators and employees',
+      'REST APIs enabling communication between frontend and backend',
+      ],
+      demo: '#',
+      code: 'https://github.com/AndelsonTeufack/credix-Hrm',
+      },
+
+      {
+      title: 'MomoKash Mobile App',
+      description: 'Mobile lending application developed to modernize the MomoKash service by migrating the existing USSD system to a user-friendly mobile platform.',
+      tags: ['Flutter', 'Spring Boot', 'REST API', 'Mobile', 'HTTP'],
+      highlights: [
+      'Migration of the lending service from USSD to a mobile application',
+      'Integration of backend REST APIs with the Flutter mobile interface',
+      'Cross-platform mobile experience for Android devices',
+      ],
+      demo: 'https://youtu.be/hyJJLx7mCCU',
+      code: 'https://github.com/AndelsonTeufack/MomoKash-Mobile-App',
+      },
+
+      {
+      title: 'Maintenance Tracking System',
+      description: 'Internal web application developed to manage IT maintenance requests and track technical interventions in real time.',
+      tags: ['Web App', 'Automation', 'Database', 'Reporting', 'Python'],
+      highlights: [
+      'Automated maintenance request management workflows',
+      'Improved operational efficiency for technical teams',
+      'Real-time tracking of maintenance tasks and interventions',
+      ],
+      demo: '#',
+      code: 'https://github.com/AndelsonTeufack/Gav-App',
+      },
+
+      {
+      title: 'MULEMA Language Learning App',
+      description: 'Mobile application designed to help users learn Cameroonian native languages through interactive learning features.',
+      tags: ['React Native', 'Spring Boot', 'REST API', 'Education', 'Mobile'],
+      highlights: [
+      'Mobile interfaces designed for interactive learning experiences',
+      'REST APIs supporting language translation logic',
+      'Collaboration with a multidisciplinary development team',
+      ],
+      demo: '#',
+      code: 'https://github.com/noubayou237/mulema',
       },
       {
-        title: 'MomoKash Mobile App',
-        description: 'Money lending application migrated from USSD to a modern mobile platform. Allows users to access lending services seamlessly through their Momo account.',
-        tags: ['Flutter', 'Spring Boot', 'REST API', 'Mobile', 'Http'],
-        highlights: [
-          'USSD to mobile migration',
-          'Establish HTTP communication',
-          'Cross-platform compatibility',
-        ],
-        demo: '#',
-        code: 'https://github.com/AndelsonTeufack/MomoKash-Mobile-App',
+      title: 'Laoshi Consulting',
+      description: 'Professional website developed for an immigration consulting company in China, presenting services for students and professionals.',
+      tags: ['React', 'Next.js', 'NestJS', 'TypeScript', 'Tailwind CSS'],
+      highlights: [
+      'Modern responsive website with optimized performance',
+      'Service presentation and contact system for potential clients',
+      'Multilingual content for international audiences',
+      ],
+      demo: 'https://laoshi-consulting.vercel.app',
+      code: 'https://github.com/AndelsonTeufack/laochi_site',
       },
+
       {
-        title: 'Maintenance Tracking System',
-        description: 'Internal web solution for IT maintenance request management. Reduced processing time by 30% through automated workflows and real-time status tracking.',
-        tags: ['Web App', 'Automation', 'Database', 'Reporting', 'Python'],
-        highlights: [
-          '30% efficiency gain',
-          'Automated workflows',
-          'Real-time tracking',
-        ],
-        demo: '#',
-        code: 'https://github.com/AndelsonTeufack/Gav-App',
+      title: 'Desktop Inventory Manager',
+      description: 'Desktop application developed to automate accommodation and tenant management for university housing.',
+      tags: ['Python', 'PyQt', 'SQLite', 'Desktop', 'Automation'],
+      highlights: [
+      'Automated billing and tenant management system',
+      'Graphical interface built with PyQt',
+      'Centralized management of rooms, tenants and payments',
+      ],
+      demo: '#',
+      code: 'https://github.com/AndelsonTeufack/BuildingManagement',
       },
+
       {
-        title: 'MULEMA Language Learning App',
-        description: 'Mobile application for learning Cameroonian native languages. Features interactive lessons, voice recognition, and progress tracking.',
-        tags: ['React Native', 'Spring Boot', 'REST API', 'Education', 'Mobile'],
-        highlights: [
-          'Interactive lessons',
-          'Voice recognition',
-          'Progress tracking',
-        ],
-        demo: '#',
-        code: 'https://github.com/noubayou237/mulema',
-      },
-      {
-        title: 'Desktop Inventory Manager',
-        description: 'Python-based desktop application for managing university accommodation with automatic billing, room assignment, and tenant tracking.',
-        tags: ['Python', 'PyQt', 'SQLite', 'Desktop', 'Automation'],
-        highlights: [
-          'Automatic billing',
-          'User-friendly interface',
-          'Complete automation',
-        ],
-        demo: '#',
-        code: 'https://github.com/AndelsonTeufack/BuildingManagement',
-      },
-      {
-        title: 'Student Sponsorship System',
-        description: 'Spring Boot backend system implementing student sponsorship logic with secure payment integration via Campay for transaction processing.',
-        tags: ['Spring Boot', 'REST API', 'Payment API', 'Backend', 'Security'],
-        highlights: [
-          'Secure transactions',
-          'Payment integration (Campay)',
-          'Scalable architecture',
-        ],
-        demo: '#',
-        code: 'https://github.com/AndelsonTeufack/sponsorship-IAI-Douala',
-      },
-      {
-        title: 'Laoshi Consulting',
-        description: 'Professional website for an immigration company in China, presenting its services for students and professionals. Modern design and optimal performance.',
-        tags: ['React', 'Next.js', 'NestJS', 'TypeScript', 'Tailwind CSS'],
-        highlights: [
-          'Service presentation',
-          'Contact form',
-          'Multilingual content',
-        ],
-        demo: 'https://laoshi-consulting.vercel.app',
-        code: 'https://github.com/AndelsonTeufack/laochi_site',
+      title: 'Student Sponsorship System',
+      description: 'Backend system implementing a student sponsorship program with secure payment processing through the Campay payment API.',
+      tags: ['Spring Boot', 'REST API', 'Payment API', 'Backend', 'Security'],
+      highlights: [
+      'Integration of Campay payment API for secure transactions',
+      'Implementation of sponsorship business logic',
+      'REST APIs supporting external system integration',
+      ],
+      demo: '#',
+      code: 'https://github.com/AndelsonTeufack/sponsorship-IAI-Douala',
       },
     ],
   },
@@ -101,88 +106,93 @@ const content = {
     title: 'Projets Vedettes',
     projects: [
       {
-        title: 'Système de Gestion RH',
-        description: 'Application RH d\'entreprise avec gestion des employés, suivi des congés et système d\'annonces. Authentification JWT et contrôle d\'accès par rôle.',
-        tags: ['Spring Boot', 'MongoDB', 'React', 'JWT', 'API REST'],
-        highlights: [
-          'Authentification sécurisée JWT',
-          'Contrôle d\'accès par rôle',
-          'Notifications en temps réel',
-        ],
-        demo: '#',
-        code: 'https://github.com/AndelsonTeufack/credix-Hrm',
+      title: 'Système de Gestion RH',
+      description: 'Application web permettant la gestion des employés, des congés et des annonces internes avec authentification sécurisée et gestion des rôles.',
+      tags: ['Spring Boot', 'MongoDB', 'React', 'JWT', 'API REST'],
+      highlights: [
+      'Authentification sécurisée avec JWT',
+      'Contrôle d’accès basé sur les rôles utilisateurs',
+      'APIs REST permettant la communication entre frontend et backend',
+      ],
+      demo: '#',
+      code: 'https://github.com/AndelsonTeufack/credix-Hrm',
+      },
+
+      {
+      title: 'Application Mobile MomoKash',
+      description: 'Application mobile développée pour moderniser le service de prêt MomoKash en migrant la solution existante basée sur USSD vers une plateforme mobile.',
+      tags: ['Flutter', 'Spring Boot', 'API REST', 'Mobile', 'HTTP'],
+      highlights: [
+      'Migration du service de prêt d’un système USSD vers une application mobile',
+      'Intégration des APIs REST backend avec l’interface Flutter',
+      'Application mobile multi-plateforme pour une meilleure expérience utilisateur',
+      ],
+      demo: 'https://youtu.be/hyJJLx7mCCU',
+      code: 'https://github.com/AndelsonTeufack/MomoKash-Mobile-App',
+      },
+
+      {
+      title: 'Système de Suivi de Maintenance',
+      description: 'Application web interne permettant de gérer les demandes de maintenance IT et de suivre les interventions techniques en temps réel.',
+      tags: ['Web App', 'Automatisation', 'Base de Données', 'Rapports', 'Python'],
+      highlights: [
+      'Automatisation du traitement des demandes de maintenance',
+      'Amélioration de l’efficacité des équipes techniques',
+      'Suivi en temps réel des interventions et des tickets',
+      ],
+      demo: '#',
+      code: 'https://github.com/AndelsonTeufack/Gav-App',
+      },
+
+      {
+      title: 'Application MULEMA d’Apprentissage des Langues',
+      description: 'Application mobile permettant l’apprentissage des langues camerounaises à travers des interfaces interactives.',
+      tags: ['React Native', 'Spring Boot', 'API REST', 'Éducation', 'Mobile'],
+      highlights: [
+      'Interfaces mobiles interactives pour faciliter l’apprentissage',
+      'APIs REST pour la gestion de la logique de traduction',
+      'Collaboration avec une équipe multidisciplinaire',
+      ],
+      demo: '#',
+      code: 'https://github.com/noubayou237/mulema',
       },
       {
-        title: 'Application Mobile MomoKash',
-        description: 'Application de prêt d\'argent migrée d\'USSD vers plateforme mobile moderne. Permet aux utilisateurs d\'accéder aux services de prêt de manière transparente via leur compte Momo.',
-        tags: ['Flutter', 'Spring Boot', 'API REST', 'Mobile', 'Http'],
-        highlights: [
-          'Migration USSD vers mobile',
-          'Etablir des communication Http',
-          'Compatibilité multiplateforme',
-        ],
-        demo: '#',
-        code: 'https://github.com/AndelsonTeufack/MomoKash-Mobile-App',
+      title: 'Laoshi Consulting',
+      description: 'Site web professionnel développé pour une entreprise de conseil en immigration en Chine, présentant ses services aux étudiants et professionnels.',
+      tags: ['React', 'Next.js', 'NestJS', 'TypeScript', 'Tailwind CSS'],
+      highlights: [
+      'Site web moderne et responsive',
+      'Présentation des services et formulaire de contact',
+      'Contenu multilingue destiné à un public international',
+      ],
+      demo: 'https://laoshi-consulting.vercel.app',
+      code: 'https://github.com/AndelsonTeufack/laochi_site',
       },
+
       {
-        title: 'Système de Suivi de Maintenance',
-        description: 'Solution web interne pour la gestion des demandes de maintenance IT. A réduit le temps de traitement de 30% grâce aux flux de travail automatisés.',
-        tags: ['Web App', 'Automatisation', 'Base de Données', 'Rapports', 'Python'],
-        highlights: [
-          'Gain d\'efficacité de 30%',
-          'Flux de travail automatisés',
-          'Suivi en temps réel',
-        ],
-        demo: '#',
-        code: 'https://github.com/AndelsonTeufack/Gav-App',
+      title: 'Gestionnaire d’Inventaire Desktop',
+      description: 'Application desktop permettant d’automatiser la gestion des logements universitaires et le suivi des locataires.',
+      tags: ['Python', 'PyQt', 'SQLite', 'Desktop', 'Automatisation'],
+      highlights: [
+      'Système de facturation et de gestion des locataires automatisé',
+      'Interface graphique développée avec PyQt',
+      'Gestion centralisée des chambres et des paiements',
+      ],
+      demo: '#',
+      code: 'https://github.com/AndelsonTeufack/BuildingManagement',
       },
+
       {
-        title: 'Application MULEMA d\'Apprentissage des Langues',
-        description: 'Application mobile pour l\'apprentissage des langues maternelles camerounaises. Leçons interactives, reconnaissance vocale et suivi des progrès.',
-        tags: ['React Native', 'Spring Boot', 'API REST', 'Éducation', 'Mobile'],
-        highlights: [
-          'Leçons interactives',
-          'Reconnaissance vocale',
-          'Suivi des progrès',
-        ],
-        demo: '#',
-        code: 'https://github.com/noubayou237/mulema',
-      },
-      {
-        title: 'Gestionnaire d\'Inventaire Bureau',
-        description: 'Application bureau basée sur Python pour gérer l\'hébergement universitaire avec facturation automatique, attribution de chambres et suivi des résidents.',
-        tags: ['Python', 'PyQt', 'SQLite', 'Bureau', 'Automatisation'],
-        highlights: [
-          'Facturation automatique',
-          'Interface conviviale',
-          'Automatisation complète',
-        ],
-        demo: '#',
-        code: 'https://github.com/AndelsonTeufack/BuildingManagement',
-      },
-      {
-        title: 'Système de Parrainage Étudiant',
-        description: 'Système Spring Boot implémentant la logique de parrainage étudiant avec intégration sécurisée des paiements via Campay.',
-        tags: ['Spring Boot', 'API REST', 'API Paiement', 'Backend', 'Sécurité'],
-        highlights: [
-          'Transactions sécurisées',
-          'Intégration paiement(Campay)',
-          'Architecture scalable',
-        ],
-        demo: '#',
-        code: 'https://github.com/AndelsonTeufack/sponsorship-IAI-Douala',
-      },
-      {
-        title: 'Laoshi Consulting',
-        description: 'Site web professionnel pour une entreprise d\'immigration en Chine, présentant ses services d\'accompagnement aux étudiants et professionnels. Design moderne et performance optimale.',
-        tags: ['React', 'Next.js', 'NestJS', 'TypeScript', 'Tailwind CSS'],
-        highlights: [
-          'Présentation des services',
-          'Formulaire de contact',
-          'Contenu multilingue',
-        ],
-        demo: 'https://laoshi-consulting.vercel.app',
-        code: 'https://github.com/AndelsonTeufack/laochi_site',
+      title: 'Système de Parrainage Étudiant',
+      description: 'Système backend implémentant la logique de parrainage étudiant avec intégration sécurisée de paiements via l’API Campay.',
+      tags: ['Spring Boot', 'API REST', 'API Paiement', 'Backend', 'Sécurité'],
+      highlights: [
+      'Intégration de l’API de paiement Campay',
+      'Implémentation de la logique métier de parrainage',
+      'Architecture backend évolutive basée sur des APIs REST',
+      ],
+      demo: '#',
+      code: 'https://github.com/AndelsonTeufack/sponsorship-IAI-Douala',
       },
     ],
   },
@@ -356,7 +366,7 @@ export default function Projects({ language }: ProjectsProps) {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="gap-2 text-muted-foreground hover:text-primary hover:bg-primary/10"
+                        className="gap-2 text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 hover:bg-green-500/10"
                         asChild
                       >
                         <a href={project.code} target="_blank" rel="noopener noreferrer">
@@ -373,7 +383,7 @@ export default function Projects({ language }: ProjectsProps) {
         </motion.div>
       </div>
 
-      {/* Notification Toast */}
+      {/* Notification Toast améliorée */}
       <AnimatePresence>
         {showNotification && (
           <motion.div
@@ -381,7 +391,7 @@ export default function Projects({ language }: ProjectsProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.9 }}
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-            className="fixed bottom-6 right-6 z-50 max-w-md w-full sm:w-auto"
+            className="fixed bottom-6 left-4 right-4 sm:left-auto sm:right-6 z-50 max-w-md mx-auto sm:mx-0 w-auto"
           >
             <div className="bg-background/95 backdrop-blur-md border border-primary/20 rounded-xl shadow-2xl shadow-primary/10 p-4 flex items-start gap-3">
               <div className="shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">

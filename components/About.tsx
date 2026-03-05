@@ -17,7 +17,7 @@ interface AboutProps {
 const content = {
   en: {
     title: 'About Me',
-    intro: "I'm a 23-year-old full-stack developer and IT solutions analyst from Douala, Cameroon. With a passion for solving complex problems and creating elegant solutions, I specialize in developing robust applications that combine technical excellence with exceptional user experience.",
+    intro: "I am Andelson TEUFACK, a young full-stack developer and IT analyst, 23 years old, residing in Douala, Cameroon. With a passion for solving complex problems and creating elegant solutions, I specialize in developing robust applications that combine technical excellence with exceptional user experience.",
     fullStory: "My journey in tech began with a curiosity to understand how systems work. Over 2+ years, I've evolved from a passionate learner to a professional developer who thrives at the intersection of innovation and problem-solving. I believe that great software isn't just about writing code—it's about understanding user needs, designing thoughtful solutions, and continuously improving.",
     vision: "I envision a future where technology seamlessly solves real-world problems. My approach is methodical yet creative: I analyze challenges deeply, design elegant architectures, and implement solutions that scale. I'm driven by impact—creating systems that not only perform but inspire confidence.",
     methodology: "My methodology combines Agile practices with systematic problem-solving. I start by understanding the business context, design comprehensive solutions, and iterate based on feedback. I believe in code quality, security-first thinking, and maintaining clean architectures.",
@@ -47,7 +47,7 @@ const content = {
   },
   fr: {
     title: 'À Propos',
-    intro: "Je suis un développeur full-stack et analyste IT de 23 ans originaire de Douala, Cameroun. Passionné par la résolution de problèmes complexes et la création de solutions élégantes, je me spécialise dans le développement d'applications robustes combinant excellence technique et expérience utilisateur exceptionnelle.",
+    intro: "Je suis Andelson TEUFACK, un jeune développeur full-stack et analyste IT de 23 ans résident à Douala, Cameroun. Passionné par la résolution de problèmes complexes et la création de solutions élégantes, je me spécialise dans le développement d'applications robustes combinant excellence technique et expérience utilisateur exceptionnelle.",
     fullStory: "Mon parcours dans la technologie a commencé par la curiosité de comprendre comment fonctionnent les systèmes. Au cours de plus de 2 ans, j'ai évolué d'un passionné d'apprentissage à un développeur professionnel qui prospère à l'intersection de l'innovation et de la résolution de problèmes. Je crois que le grand logiciel ne concerne pas seulement l'écriture de code, mais la compréhension des besoins des utilisateurs.",
     vision: "Je vois un avenir où la technologie résout facilement les problèmes du monde réel. Mon approche est méthodique mais créative : j'analyse les défis en profondeur, je conçois des architectures élégantes et j'implémente des solutions qui s'adaptent. Je suis motivé par l'impact.",
     methodology: "Ma méthodologie combine les pratiques Agile avec la résolution systématique de problèmes. Je commence par comprendre le contexte métier, concevoir des solutions complètes et itérer selon les retours. Je crois en la qualité du code et à la sécurité.",
