@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform, Variants } from 'framer-motion'
 import { useRef } from 'react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { ArrowDown, Sparkles } from 'lucide-react'
+import { ArrowDown, Sparkles, Download } from 'lucide-react'
 
 interface HeroProps {
   language: 'en' | 'fr'
@@ -13,19 +13,23 @@ interface HeroProps {
 const content = {
   en: {
     greeting: 'Welcome to my portfolio',
+    name: 'Andelson Teufack',
     title: 'Full-Stack Developer & IT Solutions Analyst',
     description: 'Crafting impactful applications with expertise in Java, Python, JavaScript, React, and Spring Boot. Transforming ideas into elegant, scalable solutions.',
     cta: 'Explore My Work',
     learnMore: 'Learn More',
+    downloadCV: 'Download CV',
     scrollHint: 'Scroll to explore',
     experience: '2+ years experience',
   },
   fr: {
     greeting: 'Bienvenue sur mon portfolio',
+    name: 'Andelson Teufack',
     title: 'Développeur Full-Stack & Analyste IT',
     description: 'Créer des applications impactantes avec expertise en Java, Python, JavaScript, React et Spring Boot. Transformer les idées en solutions élégantes et scalables.',
     cta: 'Découvrez mes projets',
     learnMore: 'En savoir plus',
+    downloadCV: 'Télécharger CV',
     scrollHint: 'Scrollez pour explorer',
     experience: '2+ ans d\'expérience',
   },
@@ -56,7 +60,7 @@ const textItemVariants: Variants = {
   },
 }
 
-// Variant pour l'image
+// Variant pour l'image (sans sur-cadrage)
 const imageVariants: Variants = {
   hidden: { scale: 0.8, opacity: 0, rotate: -5 },
   visible: {
@@ -83,6 +87,18 @@ export default function Hero({ language }: HeroProps) {
   })
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
+
+  // Fonction pour télécharger le CV
+  const handleDownloadCV = () => {
+    // Assurez-vous d'avoir le fichier PDF dans le dossier public
+    const cvUrl = '/CV - Andelson TEUFACK.pdf'
+    const link = document.createElement('a')
+    link.href = cvUrl
+    link.download = 'CV - Andelson TEUFACK.pdf'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
 
   return (
     <section
@@ -140,12 +156,21 @@ export default function Hero({ language }: HeroProps) {
               {text.greeting}
             </motion.p>
 
+            {/* Nom clairement affiché */}
             <motion.h1
               variants={textItemVariants}
-              className="text-5xl md:text-6xl font-bold leading-tight text-foreground"
+              className="text-5xl md:text-7xl font-extrabold leading-tight text-foreground"
+            >
+              {text.name}
+            </motion.h1>
+
+            {/* Titre (rôle) */}
+            <motion.h2
+              variants={textItemVariants}
+              className="text-3xl md:text-4xl font-bold text-primary/90"
             >
               {text.title}
-            </motion.h1>
+            </motion.h2>
 
             <motion.p
               variants={textItemVariants}
@@ -156,7 +181,7 @@ export default function Hero({ language }: HeroProps) {
 
             <motion.div
               variants={textItemVariants}
-              className="flex flex-col sm:flex-row gap-4 pt-4"
+              className="flex flex-col sm:flex-row gap-4 pt-4 flex-wrap"
             >
               <Button
                 size="lg"
@@ -185,14 +210,24 @@ export default function Hero({ language }: HeroProps) {
                 {text.learnMore}
                 <ArrowDown className="ml-2 w-4 h-4 group-hover:translate-y-1 transition-transform" />
               </Button>
+
+              {/* bouton de téléchargement CV */}
+              <Button
+                variant="secondary"
+                size="lg"
+                className="rounded-full group"
+                onClick={handleDownloadCV}
+              >
+                <Download className="mr-2 w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+                {text.downloadCV}
+              </Button>
             </motion.div>
           </motion.div>
 
-          {/* Image avec animation fixe*/}
-          <div className="relative h-96 md:h-[500px] rounded-2xl overflow-hidden border border-border/50 shadow-2xl group">
-            {/* Conteneur pour l'image (fixe) */}
+          {/* Image avec cadrage corrigé (pas de découpage, ni superposition colorée) */}
+          <div className="relative w-full rounded-2xl overflow-hidden border border-border/50 shadow-2xl group bg-muted/30">
             <motion.div
-              className="absolute inset-0"
+              className="relative w-full aspect-[20/20]"
               variants={imageVariants}
               initial="hidden"
               animate="visible"
@@ -201,20 +236,13 @@ export default function Hero({ language }: HeroProps) {
                 src="/hero.jpg"
                 alt="Andelson Teufack - Full Stack Developer"
                 fill
-                className="object-cover object-center transition-transform duration-700 group-hover:scale-110"
+                className="object-cover object-[center_25%] transition-transform duration-700 group-hover:scale-105"
                 priority
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </motion.div>
 
-            {/* Overlay animé */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 z-10"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-            />
-
-            {/* Badge flottant (fixe) */}
+            {/* Badge flottant (expérience) - conservez-le */}
             <motion.div
               className="absolute bottom-4 left-4 z-20 bg-background/80 backdrop-blur-sm rounded-full px-3 md:px-4 py-1.5 md:py-2 border border-primary/30 text-xs md:text-sm"
               initial={{ y: 20, opacity: 0 }}
