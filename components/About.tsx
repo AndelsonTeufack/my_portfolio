@@ -9,6 +9,7 @@ import {
   Search, 
   Quote
 } from 'lucide-react'
+import MacbookAnimation from './MacbookAnimation'
 
 interface AboutProps {
   language: 'en' | 'fr'
@@ -301,28 +302,9 @@ export default function About({ language }: AboutProps) {
               })}
             </motion.div>
 
-            {/* Avatar / Profile avec animation flottante */}
-            <motion.div
-              ref={iconContainerRef}
-              variants={itemVariants}
-              className="flex justify-center md:justify-start"
-            >
-              <div className="relative group">
-                {/* Anneau lumineux avec pulse */}
-                <motion.div
-                  className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-full blur opacity-30 group-hover:opacity-50 transition duration-300"
-                  animate={iconInView ? { scale: [1, 1.08, 1], opacity: [0.3, 0.6, 0.3] } : {}}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                />
-                {/* Cercle principal avec flottement */}
-                <motion.div
-                  className="relative w-24 h-24 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center border-2 border-white/20 backdrop-blur-sm"
-                  animate={iconInView ? { y: [0, -8, 0] } : {}}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <span className="text-4xl">👨‍💻</span>
-                </motion.div>
-              </div>
+            {/* Annimation 3d*/}
+            <motion.div variants={itemVariants} className="flex justify-center md:justify-start">
+              <MacbookAnimation />
             </motion.div>
           </div>
         </motion.div>

@@ -40,7 +40,7 @@ const content = {
       },
       {
         name: 'Backend',
-        skills: ['Spring Boot', 'Django', 'NestJS', 'Node.js', 'REST APIs', 'Microservices'],
+        skills: ['Spring Boot', 'Django', 'NestJS', 'Node.js', 'Laravel','FastApi', 'REST APIs', 'Microservices'],
         icon: Server,
       },
       {
@@ -50,7 +50,7 @@ const content = {
       },
       {
         name: 'Tools & DevOps',
-        skills: ['Git/GitLab', 'Docker', 'Kubernate', 'Kafka' , 'Postman', 'Jira', 'VS Code', 'Android Studio', 'Power BI', 'Swagger'],
+        skills: ['Git/GitLab', 'Docker', 'Kubernate', 'Kafka' , 'Postman', 'Jira', 'VS Code', 'Android Studio', 'Power BI', 'Swagger', 'Office 365'],
         icon: GitBranch,
       },
       {
@@ -60,7 +60,7 @@ const content = {
       },
       {
         name: 'Operating System',
-        skills: ['Linux', 'Windows'],
+        skills: ['Linux', 'Windows', 'MacOs'],
         icon: Monitor,
       },
       {
@@ -102,7 +102,7 @@ const content = {
       },
       {
         name: 'Backend',
-        skills: ['Spring Boot', 'Django', 'NestJS', 'Node.js', 'APIs REST', 'Microservices'],
+        skills: ['Spring Boot', 'Django', 'NestJS', 'Node.js', 'Laravel','FastApi', 'APIs REST', 'Microservices'],
         icon: Server,
       },
       {
@@ -112,7 +112,7 @@ const content = {
       },
       {
         name: 'Outils & DevOps',
-        skills: ['Git/GitLab', 'Docker', 'Kubernate', 'Kafka' , 'Postman', 'Jira', 'VS Code', 'Android Studio', 'Power BI', 'Swagger'],
+        skills: ['Git/GitLab', 'Docker', 'Kubernate', 'Kafka' , 'Postman', 'Jira', 'VS Code', 'Android Studio', 'Power BI', 'Swagger', 'Office 365'],
         icon: GitBranch,
       },
       {
@@ -122,7 +122,7 @@ const content = {
       },
       {
         name: 'Systèmes d\'Exploitation',
-        skills: ['Linux', 'Windows'],
+        skills: ['Linux', 'Windows', 'MacOs'],
         icon: Monitor,
       },
       {
