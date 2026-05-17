@@ -7,8 +7,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 // ─── Constante centrale (un seul endroit à changer) ───────────────────────
-const SITE_URL = 'https://andelson-teufack-portfolio.vercel.app'
-const FULL_NAME = 'Andelson Teufack'
+const SITE_URL = 'https://andelson-teufack.dev'
+const FULL_NAME = 'Andelson Teufack Sontsa'
 const JOB_TITLE = 'Full-Stack Developer & IT Solutions Analyst'
 const OG_IMAGE = `${SITE_URL}/og-image.png`
 
