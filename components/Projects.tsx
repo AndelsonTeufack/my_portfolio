@@ -1,418 +1,424 @@
-import { motion, useInView, Variants, AnimatePresence } from 'framer-motion'
+'use client'
+
 import { useRef, useState } from 'react'
-import { ExternalLink, Github, Sparkles, X } from 'lucide-react'
+import { motion, useInView, Variants } from 'framer-motion'
+import { ExternalLink, Github, Sparkles, Eye, Filter } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import SpotlightCard from '@/components/ui/SpotlightCard'
+import ProjectModal, { ProjectType } from '@/components/ProjectModal'
+import { toast } from 'sonner'
 
 interface ProjectsProps {
   language: 'en' | 'fr'
 }
 
-const content = {
-  en: {
-    title: 'Featured Projects',
-    projects: [
-      {
+const projectsData: { en: ProjectType[]; fr: ProjectType[] } = {
+  en: [
+    {
       title: 'HR Management System',
-      description: 'Enterprise web application designed to manage employee records, leave requests and internal announcements. The system provides secure authentication and role-based access control to manage administrative workflows.',
-      tags: ['Spring Boot', 'MongoDB', 'React', 'JWT', 'REST API'],
+      category: 'backend',
+      description:
+        'Enterprise web application for employee records, leave management, and internal administrative announcements.',
+      tags: ['Spring Boot', 'MongoDB', 'React', 'JWT Auth', 'REST API'],
       highlights: [
-      'Implemented secure authentication using JWT',
-      'Role-based access control for administrators and employees',
-      'REST APIs enabling communication between frontend and backend',
+        'JWT-based secure authentication & Role-Based Access Control (RBAC).',
+        'Spring Boot backend REST APIs integrated with React frontend.',
+        'Employee leave request approval workflows.',
       ],
       demo: '#',
       code: 'https://github.com/AndelsonTeufack/credix-Hrm',
-      },
-
-      {
+    },
+    {
       title: 'MomoKash Mobile App',
-      description: 'Mobile lending application developed to modernize the MomoKash service by migrating the existing USSD system to a user-friendly mobile platform.',
-      tags: ['Flutter', 'Spring Boot', 'REST API', 'Mobile', 'HTTP'],
+      category: 'mobile',
+      description:
+        'Cross-platform mobile lending application migrating legacy USSD service to a intuitive Flutter mobile experience.',
+      tags: ['Flutter', 'Spring Boot', 'REST API', 'Dart', 'Financial Tech'],
       highlights: [
-      'Migration of the lending service from USSD to a mobile application',
-      'Integration of backend REST APIs with the Flutter mobile interface',
-      'Cross-platform mobile experience for Android devices',
+        'Complete UI/UX migration from USSD to Flutter.',
+        'High-performance HTTP state management and REST synchronization.',
+        'Cross-platform deployment on Android devices.',
       ],
       demo: 'https://youtu.be/hyJJLx7mCCU',
       code: 'https://github.com/AndelsonTeufack/MomoKash-Mobile-App',
-      },
-
-      {
+    },
+    {
       title: 'Maintenance Tracking System',
-      description: 'Internal web application developed to manage IT maintenance requests and track technical interventions in real time.',
-      tags: ['Web App', 'Automation', 'Database', 'Reporting', 'Python'],
+      category: 'automation',
+      description:
+        'Internal IT maintenance tracking solution managing technician interventions and equipment request lifecycle.',
+      tags: ['Python', 'Web App', 'Database', 'Reporting', 'Automation'],
       highlights: [
-      'Automated maintenance request management workflows',
-      'Improved operational efficiency for technical teams',
-      'Real-time tracking of maintenance tasks and interventions',
+        'Automated ticket routing and status tracking in real time.',
+        'Python scripts for financial reporting & automated data processing.',
+        'Centralized database for IT maintenance logs.',
       ],
       demo: '#',
       code: 'https://github.com/AndelsonTeufack/Gav-App',
-      },
-
-      {
+    },
+    {
       title: 'MULEMA Language Learning App',
-      description: 'Mobile application designed to help users learn Cameroonian native languages through interactive learning features.',
+      category: 'mobile',
+      description:
+        'Interactive mobile learning application dedicated to preserving Cameroonian native heritage and languages.',
       tags: ['React Native', 'Spring Boot', 'REST API', 'Education', 'Mobile'],
       highlights: [
-      'Mobile interfaces designed for interactive learning experiences',
-      'REST APIs supporting language translation logic',
-      'Collaboration with a multidisciplinary development team',
+        'Gamified language lessons and interactive quiz interfaces.',
+        'Spring Boot REST backend for phrase translation storage.',
+        'Cross-functional Agile team collaboration.',
       ],
       demo: '#',
       code: 'https://github.com/noubayou237/mulema',
-      },
-      {
-      title: 'Laoshi Consulting',
-      description: 'Professional website developed for an immigration consulting company in China, presenting services for students and professionals.',
-      tags: ['React', 'Next.js', 'NestJS', 'TypeScript', 'Tailwind CSS'],
+    },
+    {
+      title: 'Laoshi Consulting Platform',
+      category: 'web',
+      description:
+        'Modern multilingual web portal for an international education and immigration consulting enterprise in China.',
+      tags: ['Next.js', 'React', 'NestJS', 'TypeScript', 'Tailwind CSS'],
       highlights: [
-      'Modern responsive website with optimized performance',
-      'Service presentation and contact system for potential clients',
-      'Multilingual content for international audiences',
+        'Performant Next.js App Router architecture with SSG / ISR.',
+        'Multilingual internationalization for global prospective students.',
+        'Lead generation forms and service booking workflows.',
       ],
       demo: 'https://laoshi-consulting.vercel.app',
       code: 'https://github.com/AndelsonTeufack/laochi_site',
-      },
-
-      {
-      title: 'Desktop Inventory Manager',
-      description: 'Desktop application developed to automate accommodation and tenant management for university housing.',
-      tags: ['Python', 'PyQt', 'SQLite', 'Desktop', 'Automation'],
+    },
+    {
+      title: 'Desktop Inventory & Building Manager',
+      category: 'automation',
+      description:
+        'Desktop software automating student accommodation management, tenant billing, and room availability tracking.',
+      tags: ['Python', 'PyQt', 'SQLite', 'Desktop GUI'],
       highlights: [
-      'Automated billing and tenant management system',
-      'Graphical interface built with PyQt',
-      'Centralized management of rooms, tenants and payments',
+        'Graphical User Interface built with PyQt.',
+        'Automated billing calculation & SQLite database backend.',
+        'Tenant record management & rent tracking.',
       ],
       demo: '#',
       code: 'https://github.com/AndelsonTeufack/BuildingManagement',
-      },
-
-      {
-      title: 'Student Sponsorship System',
-      description: 'Backend system implementing a student sponsorship program with secure payment processing through the Campay payment API.',
-      tags: ['Spring Boot', 'REST API', 'Payment API', 'Backend', 'Security'],
+    },
+    {
+      title: 'Student Sponsorship Engine',
+      category: 'backend',
+      description:
+        'Backend system implementing a student sponsorship program with Campay payment gateway API integration.',
+      tags: ['Spring Boot', 'Campay API', 'REST API', 'Security'],
       highlights: [
-      'Integration of Campay payment API for secure transactions',
-      'Implementation of sponsorship business logic',
-      'REST APIs supporting external system integration',
+        'Secure Campay mobile money payment processing.',
+        'Student sponsorship allocation business rules.',
+        'Scalable Spring Boot REST API architecture.',
       ],
       demo: '#',
       code: 'https://github.com/AndelsonTeufack/sponsorship-IAI-Douala',
-      },
-    ],
-  },
-  fr: {
-    title: 'Projets Vedettes',
-    projects: [
-      {
+    },
+  ],
+  fr: [
+    {
       title: 'Système de Gestion RH',
-      description: 'Application web permettant la gestion des employés, des congés et des annonces internes avec authentification sécurisée et gestion des rôles.',
-      tags: ['Spring Boot', 'MongoDB', 'React', 'JWT', 'API REST'],
+      category: 'backend',
+      description:
+        'Application web d’entreprise pour la gestion des dossiers employés, des congés et des annonces administratives.',
+      tags: ['Spring Boot', 'MongoDB', 'React', 'Authentification JWT', 'API REST'],
       highlights: [
-      'Authentification sécurisée avec JWT',
-      'Contrôle d’accès basé sur les rôles utilisateurs',
-      'APIs REST permettant la communication entre frontend et backend',
+        'Authentification JWT sécurisée et contrôle d’accès par rôles (RBAC).',
+        'APIs REST Spring Boot intégrées au frontend React.',
+        'Flux de validation des demandes de congés.',
       ],
       demo: '#',
       code: 'https://github.com/AndelsonTeufack/credix-Hrm',
-      },
-
-      {
+    },
+    {
       title: 'Application Mobile MomoKash',
-      description: 'Application mobile développée pour moderniser le service de prêt MomoKash en migrant la solution existante basée sur USSD vers une plateforme mobile.',
-      tags: ['Flutter', 'Spring Boot', 'API REST', 'Mobile', 'HTTP'],
+      category: 'mobile',
+      description:
+        'Application mobile multiplateforme modernisant le service de prêt MomoKash en migrant l’ancien système USSD vers Flutter.',
+      tags: ['Flutter', 'Spring Boot', 'API REST', 'Dart', 'Fintech'],
       highlights: [
-      'Migration du service de prêt d’un système USSD vers une application mobile',
-      'Intégration des APIs REST backend avec l’interface Flutter',
-      'Application mobile multi-plateforme pour une meilleure expérience utilisateur',
+        'Migration intégrale de l’USSD vers Flutter.',
+        'Gestion d’état HTTP performante et synchronisation REST.',
+        'Déploiement Android optimisé.',
       ],
       demo: 'https://youtu.be/hyJJLx7mCCU',
       code: 'https://github.com/AndelsonTeufack/MomoKash-Mobile-App',
-      },
-
-      {
+    },
+    {
       title: 'Système de Suivi de Maintenance',
-      description: 'Application web interne permettant de gérer les demandes de maintenance IT et de suivre les interventions techniques en temps réel.',
-      tags: ['Web App', 'Automatisation', 'Base de Données', 'Rapports', 'Python'],
+      category: 'automation',
+      description:
+        'Solution web interne de suivi de maintenance IT gérant les interventions techniques et le cycle des équipements.',
+      tags: ['Python', 'Web App', 'Base de Données', 'Rapports', 'Automatisation'],
       highlights: [
-      'Automatisation du traitement des demandes de maintenance',
-      'Amélioration de l’efficacité des équipes techniques',
-      'Suivi en temps réel des interventions et des tickets',
+        'Routage automatisé des tickets et suivi en temps réel.',
+        'Scripts Python pour les rapports financiers et traitement de données.',
+        'Base de données centralisée d’interventions.',
       ],
       demo: '#',
       code: 'https://github.com/AndelsonTeufack/Gav-App',
-      },
-
-      {
-      title: 'Application MULEMA d’Apprentissage des Langues',
-      description: 'Application mobile permettant l’apprentissage des langues camerounaises à travers des interfaces interactives.',
+    },
+    {
+      title: 'Application MULEMA d’Apprentissage',
+      category: 'mobile',
+      description:
+        'Application mobile interactive d’apprentissage des langues nationales camerounaises.',
       tags: ['React Native', 'Spring Boot', 'API REST', 'Éducation', 'Mobile'],
       highlights: [
-      'Interfaces mobiles interactives pour faciliter l’apprentissage',
-      'APIs REST pour la gestion de la logique de traduction',
-      'Collaboration avec une équipe multidisciplinaire',
+        'Leçons ludifiées et interfaces interactives.',
+        'Backend Spring Boot pour la gestion du dictionnaire de traduction.',
+        'Travail en équipe multidisciplinaire Agile.',
       ],
       demo: '#',
       code: 'https://github.com/noubayou237/mulema',
-      },
-      {
-      title: 'Laoshi Consulting',
-      description: 'Site web professionnel développé pour une entreprise de conseil en immigration en Chine, présentant ses services aux étudiants et professionnels.',
-      tags: ['React', 'Next.js', 'NestJS', 'TypeScript', 'Tailwind CSS'],
+    },
+    {
+      title: 'Plateforme Laoshi Consulting',
+      category: 'web',
+      description:
+        'Portail web multilingue pour un cabinet international de conseil en immigration et études en Chine.',
+      tags: ['Next.js', 'React', 'NestJS', 'TypeScript', 'Tailwind CSS'],
       highlights: [
-      'Site web moderne et responsive',
-      'Présentation des services et formulaire de contact',
-      'Contenu multilingue destiné à un public international',
+        'Architecture Next.js App Router performante.',
+        'Support multilingue international pour candidats.',
+        'Système de génération de leads et prise de rdv.',
       ],
       demo: 'https://laoshi-consulting.vercel.app',
       code: 'https://github.com/AndelsonTeufack/laochi_site',
-      },
-
-      {
+    },
+    {
       title: 'Gestionnaire d’Inventaire Desktop',
-      description: 'Application desktop permettant d’automatiser la gestion des logements universitaires et le suivi des locataires.',
-      tags: ['Python', 'PyQt', 'SQLite', 'Desktop', 'Automatisation'],
+      category: 'automation',
+      description:
+        'Logiciel desktop automatisant la gestion des logements universitaires et le suivi des facturations locataires.',
+      tags: ['Python', 'PyQt', 'SQLite', 'Desktop GUI'],
       highlights: [
-      'Système de facturation et de gestion des locataires automatisé',
-      'Interface graphique développée avec PyQt',
-      'Gestion centralisée des chambres et des paiements',
+        'Interface graphique développée avec PyQt.',
+        'Calcul automatique des factures et base SQLite.',
+        'Gestion centralisée des locataires et chambres.',
       ],
       demo: '#',
       code: 'https://github.com/AndelsonTeufack/BuildingManagement',
-      },
-
-      {
+    },
+    {
       title: 'Système de Parrainage Étudiant',
-      description: 'Système backend implémentant la logique de parrainage étudiant avec intégration sécurisée de paiements via l’API Campay.',
-      tags: ['Spring Boot', 'API REST', 'API Paiement', 'Backend', 'Sécurité'],
+      category: 'backend',
+      description:
+        'Système backend implémentant un programme de parrainage avec intégration de la passerelle de paiement Campay.',
+      tags: ['Spring Boot', 'API Campay', 'API REST', 'Sécurité'],
       highlights: [
-      'Intégration de l’API de paiement Campay',
-      'Implémentation de la logique métier de parrainage',
-      'Architecture backend évolutive basée sur des APIs REST',
+        'Paiements sécurisés Mobile Money via API Campay.',
+        'Règles métiers de répartition des parrainages.',
+        'Architecture API REST évolutive.',
       ],
       demo: '#',
       code: 'https://github.com/AndelsonTeufack/sponsorship-IAI-Douala',
-      },
-    ],
-  },
+    },
+  ],
 }
 
-const containerVariants = {
+const filterCategories = [
+  { id: 'all', label: { en: 'All Projects', fr: 'Tous les projets' } },
+  { id: 'web', label: { en: 'Web Apps', fr: 'Applications Web' } },
+  { id: 'mobile', label: { en: 'Mobile', fr: 'Applications Mobiles' } },
+  { id: 'backend', label: { en: 'Backend APIs', fr: 'APIs & Backend' } },
+  { id: 'automation', label: { en: 'Automation & Desktop', fr: 'Automatisation' } },
+]
+
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    },
+    transition: { staggerChildren: 0.1, delayChildren: 0.15 },
   },
 }
 
 const itemVariants: Variants = {
-  hidden: { y: 30, opacity: 0 },
+  hidden: { y: 25, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
-    transition: {
-      type: 'spring',
-      stiffness: 100,
-      damping: 12,
-    },
+    transition: { type: 'spring', stiffness: 100, damping: 14 },
   },
 }
 
 export default function Projects({ language }: ProjectsProps) {
-  const text = language === 'en' ? content.en : content.fr
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const [activeFilter, setActiveFilter] = useState('all')
+  const [selectedProject, setSelectedProject] = useState<ProjectType | null>(null)
 
-  const [showNotification, setShowNotification] = useState(false)
-  const [notificationMessage, setNotificationMessage] = useState('')
+  const sectionRef = useRef(null)
+  const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
 
-  const handleDemoClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    project: typeof content.en.projects[0]
-  ) => {
+  const rawProjects = language === 'en' ? projectsData.en : projectsData.fr
+  const filteredProjects =
+    activeFilter === 'all'
+      ? rawProjects
+      : rawProjects.filter((p) => p.category === activeFilter)
+
+  const handleDemoClick = (e: React.MouseEvent, project: ProjectType) => {
     if (project.demo === '#') {
       e.preventDefault()
-      const message =
+      toast.info(
         language === 'en'
-          ? `Demo for "${project.title}" is not available online yet.`
-          : `La démo de "${project.title}" n'est pas encore en ligne.`
-      setNotificationMessage(message)
-      setShowNotification(true)
-      setTimeout(() => setShowNotification(false), 4000)
+          ? `Demo for "${project.title}" is available upon enterprise request.`
+          : `La démo pour "${project.title}" est disponible sur demande entreprise.`
+      )
     }
   }
 
   return (
-    <section id="projects" className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Contexte décoratif */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-background/95 to-background" />
-      <div className="absolute top-40 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-40 right-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl -z-10" />
-
-      <div className="max-w-7xl mx-auto">
+    <section id="projects" className="py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto space-y-12">
+        {/* Section Header */}
         <motion.div
-          ref={ref}
+          ref={sectionRef}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={containerVariants}
-          className="space-y-16"
+          className="space-y-4 text-center md:text-left"
         >
-          {/* Header */}
-          <motion.div variants={itemVariants} className="space-y-4 text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start gap-3">
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground inline-flex items-center gap-3">
-                {text.title}
-                <Sparkles className="w-8 h-8 text-primary/70" />
-              </h2>
-            </div>
-            <div className="h-1 w-24 bg-gradient-to-r from-primary to-primary/50 rounded-full mx-auto md:mx-0" />
-            <p className="text-muted-foreground max-w-2xl mx-auto md:mx-0 text-lg">
-              {language === 'en'
-                ? "A selection of projects I've built, combining robust backends with polished interfaces."
-                : 'Une sélection de projets que j\'ai réalisés, alliant backends robustes et interfaces soignées.'}
-            </p>
+          <motion.div variants={itemVariants} className="inline-flex items-center gap-2 text-cyan-400 font-mono text-xs tracking-widest uppercase">
+            <Sparkles className="w-4 h-4 text-cyan-400" />
+            <span>// 04. Featured Showcase</span>
           </motion.div>
 
-          {/* Grille de projets */}
-          <motion.div
-            variants={containerVariants}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr"
-          >
-            {text.projects.map((project, idx) => {
-              const isDemoAvailable = project.demo !== '#'
-              return (
-                <motion.article
-                  key={idx}
-                  variants={itemVariants}
-                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                  className="group relative rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 overflow-hidden flex flex-col"
-                >
-                  {/* Effet de brillance au survol */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+          <motion.h2 variants={itemVariants} className="text-3xl sm:text-5xl font-bold font-display text-foreground">
+            {language === 'en' ? 'Engineered Projects' : 'Projets Récents & Réalisations'}
+          </motion.h2>
 
-                  {/* Badge "Featured" décoratif */}
-                  <div className="absolute top-4 right-4 z-10">
-                    <span className="text-xs font-mono px-2 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 backdrop-blur-sm">
-                      featured
+          <motion.p variants={itemVariants} className="text-muted-foreground text-base sm:text-lg max-w-2xl">
+            {language === 'en'
+              ? 'Selection of full-stack systems, mobile apps, and enterprise APIs designed for performance.'
+              : 'Sélection de systèmes full-stack, applications mobiles et APIs conçus avec rigueur.'}
+          </motion.p>
+        </motion.div>
+
+        {/* Filter Category Pills */}
+        <motion.div
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={containerVariants}
+          className="flex flex-wrap items-center gap-2 pt-2"
+        >
+          {filterCategories.map((cat) => {
+            const isActive = activeFilter === cat.id
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setActiveFilter(cat.id)}
+                className={`px-4 py-2 rounded-full text-xs font-mono font-medium transition-all ${
+                  isActive
+                    ? 'bg-cyan-500 text-slate-950 font-bold glow-cyan shadow-md shadow-cyan-500/20'
+                    : 'bg-white/[0.04] border border-white/10 text-muted-foreground hover:text-foreground hover:border-cyan-500/30'
+                }`}
+              >
+                {language === 'en' ? cat.label.en : cat.label.fr}
+              </button>
+            )
+          })}
+        </motion.div>
+
+        {/* Projects Bento Grid */}
+        <motion.div
+          layout
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={containerVariants}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {filteredProjects.map((project, idx) => (
+            <motion.div key={project.title} layout variants={itemVariants}>
+              <SpotlightCard className="p-6 h-full flex flex-col justify-between glass-card-hover border-white/10 group">
+                <div className="space-y-4">
+                  {/* Top Badge */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-cyan-400 px-2.5 py-1 rounded bg-cyan-500/10 border border-cyan-500/20">
+                      {project.category}
                     </span>
+                    <button
+                      onClick={() => setSelectedProject(project)}
+                      className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-cyan-400 transition-colors"
+                      title={language === 'en' ? 'Quick view' : 'Aperçu rapide'}
+                    >
+                      <Eye className="w-4 h-4" />
+                    </button>
                   </div>
 
-                  {/* Contenu */}
-                  <div className="p-6 flex-1 flex flex-col gap-4 relative z-0">
-                    {/* Titre */}
-                    <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2">
-                      {project.title}
-                    </h3>
+                  {/* Title */}
+                  <h3 className="text-xl font-bold font-display text-foreground group-hover:text-cyan-300 transition-colors line-clamp-1">
+                    {project.title}
+                  </h3>
 
-                    {/* Description */}
-                    <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
-                      {project.description}
-                    </p>
+                  {/* Description */}
+                  <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
+                    {project.description}
+                  </p>
 
-                    {/* Points forts */}
-                    <ul className="space-y-2 mt-2">
-                      {project.highlights.map((highlight, hidx) => (
-                        <motion.li
-                          key={hidx}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.3 + hidx * 0.05 }}
-                          className="text-xs text-muted-foreground flex items-start gap-2"
-                        >
-                          <span className="text-primary shrink-0 mt-0.5">✦</span>
-                          <span>{highlight}</span>
-                        </motion.li>
-                      ))}
-                    </ul>
+                  {/* Highlights Bullet List */}
+                  <ul className="space-y-1.5 pt-2">
+                    {project.highlights.slice(0, 2).map((h, hidx) => (
+                      <li key={hidx} className="text-xs text-slate-300 flex items-start gap-2">
+                        <span className="text-cyan-400 shrink-0">✦</span>
+                        <span className="line-clamp-1">{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2 pt-4 border-t border-border/50 mt-auto">
-                      {project.tags.map((tag, tidx) => (
-                        <span
-                          key={tidx}
-                          className="text-xs font-medium px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 backdrop-blur-sm"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Actions (demo / code) */}
-                    <div className="flex gap-3 pt-2">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className={`gap-2 ${
-                          isDemoAvailable
-                            ? 'text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 hover:bg-green-500/10'
-                            : 'text-muted-foreground hover:text-primary hover:bg-primary/10'
-                        }`}
-                        asChild
+                {/* Bottom Tags & Links */}
+                <div className="pt-6 space-y-4 border-t border-white/10 mt-6">
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.tags.map((tag, tidx) => (
+                      <span
+                        key={tidx}
+                        className="px-2.5 py-0.5 rounded bg-white/[0.03] border border-white/10 text-[10px] font-mono text-cyan-400"
                       >
-                        <a
-                          href={project.demo}
-                          onClick={(e) => handleDemoClick(e, project)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                          {language === 'en' ? 'Demo' : 'Démo'}
-                        </a>
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="gap-2 text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 hover:bg-green-500/10"
-                        asChild
-                      >
-                        <a href={project.code} target="_blank" rel="noopener noreferrer">
-                          <Github className="w-4 h-4" />
-                          Code
-                        </a>
-                      </Button>
-                    </div>
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-                </motion.article>
-              )
-            })}
-          </motion.div>
+
+                  <div className="flex items-center gap-3">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      asChild
+                      className="text-xs text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10 px-3 h-8"
+                    >
+                      <a
+                        href={project.demo}
+                        onClick={(e) => handleDemoClick(e, project)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5 mr-1.5" />
+                        Demo
+                      </a>
+                    </Button>
+
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      asChild
+                      className="text-xs text-muted-foreground hover:text-foreground hover:bg-white/5 px-3 h-8"
+                    >
+                      <a href={project.code} target="_blank" rel="noopener noreferrer">
+                        <Github className="w-3.5 h-3.5 mr-1.5 text-purple-400" />
+                        Code
+                      </a>
+                    </Button>
+                  </div>
+                </div>
+              </SpotlightCard>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
 
-      {/* Notification Toast améliorée */}
-      <AnimatePresence>
-        {showNotification && (
-          <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.9 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-            className="fixed bottom-6 left-4 right-4 sm:left-auto sm:right-6 z-50 max-w-md mx-auto sm:mx-0 w-auto"
-          >
-            <div className="bg-background/95 backdrop-blur-md border border-primary/20 rounded-xl shadow-2xl shadow-primary/10 p-4 flex items-start gap-3">
-              <div className="shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                <span className="text-lg">🔔</span>
-              </div>
-              <div className="flex-1">
-                <p className="text-sm text-foreground font-medium">{notificationMessage}</p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  {language === 'en' ? 'The demo will be available soon.' : 'La démo sera bientôt disponible.'}
-                </p>
-              </div>
-              <button
-                onClick={() => setShowNotification(false)}
-                className="shrink-0 w-6 h-6 rounded-full hover:bg-primary/10 flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Project Detail Modal */}
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+        language={language}
+      />
     </section>
   )
 }

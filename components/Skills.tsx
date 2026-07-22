@@ -1,10 +1,12 @@
-import { motion, useInView, Variants } from 'framer-motion'
+'use client'
+
 import { useRef } from 'react'
-import { 
-  Code, 
-  Layout, 
-  Database, 
-  GitBranch, 
+import { motion, useInView, Variants } from 'framer-motion'
+import {
+  Code,
+  Layout,
+  Database,
+  GitBranch,
   Cpu,
   Monitor,
   TrendingUp,
@@ -17,8 +19,10 @@ import {
   MessageCircle,
   Target,
   Clock,
-  Server
+  Server,
+  Terminal,
 } from 'lucide-react'
+import SpotlightCard from '@/components/ui/SpotlightCard'
 
 interface SkillsProps {
   language: 'en' | 'fr'
@@ -26,292 +30,264 @@ interface SkillsProps {
 
 const content = {
   en: {
-    title: 'Technical Skills',
+    title: 'Technical Arsenal',
+    subtitle: 'Comprehensive toolkit across full-stack software development, IT analysis, and devops.',
     categories: [
       {
-        name: 'Languages',
-        skills: ['Java', 'Python', 'JavaScript', 'TypeScript' , 'Dart', 'PHP', 'C/C++', 'HTML/CSS'],
-        icon: Code,
-      },
-      {
-        name: 'Frontend',
-        skills: ['React', 'Next.js', 'Flutter', 'Tailwind CSS', 'Bootstrap', 'Responsive Design', 'Wordpress'],
-        icon: Layout,
-      },
-      {
-        name: 'Backend',
-        skills: ['Spring Boot', 'Django', 'NestJS', 'Node.js', 'Laravel','FastApi', 'REST APIs', 'Microservices'],
+        name: 'Backend & APIs',
+        skills: ['Spring Boot', 'Java', 'Python', 'Django', 'FastAPI', 'Node.js', 'NestJS', 'REST APIs', 'Microservices'],
         icon: Server,
+        color: 'rgba(0, 240, 255, 0.15)',
       },
       {
-        name: 'Databases',
-        skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'SQL Server', 'Oracle', 'Redis'],
+        name: 'Frontend & Mobile',
+        skills: ['React', 'Next.js', 'Flutter', 'TypeScript', 'Tailwind CSS', 'Dart', 'Responsive UI', 'WordPress'],
+        icon: Layout,
+        color: 'rgba(168, 85, 247, 0.15)',
+      },
+      {
+        name: 'Databases & Storage',
+        skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'SQL Server', 'Oracle SQL'],
         icon: Database,
+        color: 'rgba(16, 185, 129, 0.15)',
       },
       {
-        name: 'Tools & DevOps',
-        skills: ['Git/GitLab', 'Docker', 'Kubernate', 'Kafka' , 'Postman', 'Jira', 'VS Code', 'Android Studio', 'Power BI', 'Swagger', 'Office 365'],
+        name: 'DevOps, Tools & ERP',
+        skills: ['Git/GitLab', 'Docker', 'Kubernetes', 'Kafka', 'Postman', 'Odoo ERP Integration', 'Jira', 'Power BI'],
         icon: GitBranch,
+        color: 'rgba(245, 158, 11, 0.15)',
       },
       {
-        name: 'Methodologies',
-        skills: ['Agile/Scrum', 'UML', 'Merise', 'Software Architecture', 'SOLID' , 'System Design'],
+        name: 'Architecture & Design',
+        skills: ['Agile / Scrum', 'UML / Merise', 'System Design', 'SOLID Principles', 'Design Patterns'],
         icon: Cpu,
+        color: 'rgba(59, 130, 246, 0.15)',
       },
       {
-        name: 'Operating System',
-        skills: ['Linux', 'Windows', 'MacOs'],
-        icon: Monitor,
-      },
-      {
-        name: 'Performance & SEO',
-        skills: ['OpenSSL', 'SEO', 'Site Optimization', 'Core Web Vitals', 'Lighthouse'],
+        name: 'Performance & Security',
+        skills: ['Core Web Vitals', 'Lighthouse', 'SEO Optimization', 'JWT Auth', 'HTTPS / SSL'],
         icon: TrendingUp,
+        color: 'rgba(236, 72, 153, 0.15)',
       },
-      {
-        name: 'Support & IT Operations',
-        skills: ['Help Desk', 'ITIL', 'Troubleshooting', 'Customer Support'],
-        icon: Headset,
-      }
     ],
+    softSkillsTitle: 'Professional Mindset',
     softSkills: [
-      { name: 'Adaptability', icon: Zap, description: 'Quickly adjust to new challenges' },
-      { name: 'Team Collaboration', icon: Users, description: 'Work effectively in groups' },
-      { name: 'Critical Thinking', icon: Brain, description: 'Analytical and logical approach' },
-      { name: 'Communication', icon: MessageCircle, description: 'Clear and concise exchange' },
-      { name: 'Leadership', icon: Target, description: 'Guide and motivate teams' },
-      { name: 'Time Management', icon: Clock, description: 'Efficient prioritization' },
+      { name: 'Adaptability', icon: Zap, description: 'Rapidly learning & adopting emerging frameworks' },
+      { name: 'Team Leadership', icon: Target, description: 'Guiding development sprints & technical reviews' },
+      { name: 'Analytical Thinking', icon: Brain, description: 'Deconstructing complex business logic into code' },
+      { name: 'Communication', icon: MessageCircle, description: 'Clear technical documentation & client syncs' },
     ],
+    languagesTitle: 'Linguistic Competence',
     languages: [
-      { name: 'French', level: 'Native', proficiency: 100, flag: '🇫🇷' },
-      { name: 'English', level: 'Fluent', proficiency: 85, flag: '🇬🇧' },
+      { name: 'French', level: 'Native / Bilingual', proficiency: 100, flag: '🇫🇷' },
+      { name: 'English', level: 'Full Professional Proficiency', proficiency: 85, flag: '🇬🇧' },
     ],
   },
   fr: {
-    title: 'Compétences Techniques',
+    title: 'Arsenal Technique',
+    subtitle: 'Boîte à outils complète en développement full-stack, analyse IT et ingénierie logicielle.',
     categories: [
       {
-        name: 'Langages',
-        skills: ['Java', 'Python', 'JavaScript', 'TypeScript' , 'Dart', 'PHP', 'C/C++', 'HTML/CSS'],
-        icon: Code,
-      },
-      {
-        name: 'Frontend',
-        skills: ['React', 'Next.js', 'Flutter', 'Tailwind CSS', 'Bootstrap', 'Design Responsif', 'Wordpress'],
-        icon: Layout,
-      },
-      {
-        name: 'Backend',
-        skills: ['Spring Boot', 'Django', 'NestJS', 'Node.js', 'Laravel','FastApi', 'APIs REST', 'Microservices'],
+        name: 'Backend & APIs',
+        skills: ['Spring Boot', 'Java', 'Python', 'Django', 'FastAPI', 'Node.js', 'NestJS', 'APIs REST', 'Microservices'],
         icon: Server,
+        color: 'rgba(0, 240, 255, 0.15)',
+      },
+      {
+        name: 'Frontend & Mobile',
+        skills: ['React', 'Next.js', 'Flutter', 'TypeScript', 'Tailwind CSS', 'Dart', 'Design Responsif', 'WordPress'],
+        icon: Layout,
+        color: 'rgba(168, 85, 247, 0.15)',
       },
       {
         name: 'Bases de Données',
-        skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'SQL Server', 'Oracle', 'Redis'],
+        skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'SQL Server', 'Oracle SQL'],
         icon: Database,
+        color: 'rgba(16, 185, 129, 0.15)',
       },
       {
-        name: 'Outils & DevOps',
-        skills: ['Git/GitLab', 'Docker', 'Kubernate', 'Kafka' , 'Postman', 'Jira', 'VS Code', 'Android Studio', 'Power BI', 'Swagger', 'Office 365'],
+        name: 'DevOps, Outils & ERP',
+        skills: ['Git/GitLab', 'Docker', 'Kubernetes', 'Kafka', 'Postman', 'Intégration Odoo', 'Jira', 'Power BI'],
         icon: GitBranch,
+        color: 'rgba(245, 158, 11, 0.15)',
       },
       {
-        name: 'Méthodologies',
-        skills: ['Agile/Scrum', 'UML', 'Merise', 'Architecture Logicielle', 'SOLID', 'System Design'],
+        name: 'Architecture & Conception',
+        skills: ['Agile / Scrum', 'UML / Merise', 'System Design', 'Principes SOLID', 'Design Patterns'],
         icon: Cpu,
+        color: 'rgba(59, 130, 246, 0.15)',
       },
       {
-        name: 'Systèmes d\'Exploitation',
-        skills: ['Linux', 'Windows', 'MacOs'],
-        icon: Monitor,
-      },
-      {
-        name: 'Performance & SEO',
-        skills: ['OpenSSL', 'Référencement SEO', 'Optimisation de site', 'Core Web Vitals', 'Lighthouse', 'WebPageTest'],
+        name: 'Performance & Sécurité',
+        skills: ['Core Web Vitals', 'Lighthouse', 'Référencement SEO', 'Authentification JWT', 'HTTPS / SSL'],
         icon: TrendingUp,
+        color: 'rgba(236, 72, 153, 0.15)',
       },
-      {
-        name: 'Support & Opérations IT',
-        skills: ['Help Desk', 'ITIL', 'Troubleshooting', 'Support client'],
-        icon: Headset,
-      }
     ],
+    softSkillsTitle: 'Compétences Transversales',
     softSkills: [
-      { name: 'Adaptabilité', icon: Zap, description: "S'adapter rapidement aux défis" },
-      { name: 'Travail en Équipe', icon: Users, description: 'Collaborer efficacement' },
-      { name: 'Pensée Critique', icon: Brain, description: 'Approche analytique et logique' },
-      { name: 'Communication', icon: MessageCircle, description: 'Échanges clairs et concis' },
-      { name: 'Leadership', icon: Target, description: 'Guider et motiver les équipes' },
-      { name: 'Gestion du Temps', icon: Clock, description: 'Priorisation efficace' },
+      { name: 'Adaptabilité', icon: Zap, description: 'Assimilation rapide des nouveaux frameworks' },
+      { name: 'Leadership & Équipe', icon: Target, description: 'Pilotage des sprints Agile et revue de code' },
+      { name: 'Pensée Analytique', icon: Brain, description: 'Modélisation et résolution de problèmes complexes' },
+      { name: 'Communication', icon: MessageCircle, description: 'Documentation claire et alignement technique' },
     ],
+    languagesTitle: 'Compétences Linguistiques',
     languages: [
-      { name: 'Français', level: 'Natif', proficiency: 100, flag: '🇫🇷' },
-      { name: 'Anglais', level: 'Courant', proficiency: 85, flag: '🇬🇧' },
+      { name: 'Français', level: 'Langue Maternelle', proficiency: 100, flag: '🇫🇷' },
+      { name: 'Anglais', level: 'Courant / Professionnel', proficiency: 85, flag: '🇬🇧' },
     ],
   },
 }
 
-// Variants pour les animations
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
   },
 }
 
 const itemVariants: Variants = {
-  hidden: { y: 20, opacity: 0 },
+  hidden: { y: 25, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
-    transition: {
-      type: 'spring' as const,
-      stiffness: 100,
-      damping: 12,
-    },
+    transition: { type: 'spring', stiffness: 100, damping: 14 },
   },
 }
 
 export default function Skills({ language }: SkillsProps) {
   const text = language === 'en' ? content.en : content.fr
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const sectionRef = useRef(null)
+  const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
 
   return (
-    <section id="skills" className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Éléments décoratifs */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-background/95 to-background" />
-      <div className="absolute top-20 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-20 left-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl -z-10" />
-
-      <div className="max-w-7xl mx-auto">
+    <section id="skills" className="py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto space-y-16">
+        {/* Section Header */}
         <motion.div
-          ref={ref}
+          ref={sectionRef}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={containerVariants}
-          className="space-y-16"
+          className="space-y-4 text-center md:text-left"
         >
-          {/* Header */}
-          <motion.div variants={itemVariants} className="space-y-4 text-center md:text-left">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground inline-flex items-center gap-3">
-              {text.title}
-              <Sparkles className="w-8 h-8 text-primary/70" />
-            </h2>
-            <div className="h-1 w-24 bg-gradient-to-r from-primary to-primary/50 rounded-full mx-auto md:mx-0" />
-            <p className="text-muted-foreground max-w-2xl mx-auto md:mx-0 text-lg">
-              {language === 'en'
-                ? 'A comprehensive overview of my technical toolkit and soft skills.'
-                : 'Un aperçu complet de ma boîte à outils technique et de mes compétences transversales.'}
-            </p>
+          <motion.div variants={itemVariants} className="inline-flex items-center gap-2 text-cyan-400 font-mono text-xs tracking-widest uppercase">
+            <Sparkles className="w-4 h-4 text-purple-400" />
+            <span>// 02. Skills & Expertise</span>
           </motion.div>
 
-          {/* Grille des catégories techniques */}
-          <motion.div variants={containerVariants} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {text.categories.map((category, idx) => {
-              const Icon = category.icon
-              return (
-                <motion.div
-                  key={idx}
-                  variants={itemVariants}
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  className="group relative rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-6 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300"
+          <motion.h2 variants={itemVariants} className="text-3xl sm:text-5xl font-bold font-display text-foreground">
+            {text.title}
+          </motion.h2>
+
+          <motion.p variants={itemVariants} className="text-muted-foreground text-base sm:text-lg max-w-2xl">
+            {text.subtitle}
+          </motion.p>
+        </motion.div>
+
+        {/* Technical Categories Bento Grid */}
+        <motion.div
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={containerVariants}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {text.categories.map((cat, idx) => {
+            const Icon = cat.icon
+            return (
+              <motion.div key={idx} variants={itemVariants}>
+                <SpotlightCard
+                  spotlightColor={cat.color}
+                  className="p-6 h-full flex flex-col justify-between glass-card-hover border-white/10"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
-                  <div className="flex items-start gap-3 mb-4">
-                    <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                      <Icon className="w-5 h-5" />
+                  <div>
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="p-2.5 rounded-xl bg-white/[0.05] border border-white/10 text-cyan-400">
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-lg font-bold font-display text-foreground">{cat.name}</h3>
                     </div>
-                    <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
-                      {category.name}
-                    </h3>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {category.skills.map((skill, sidx) => (
-                      <motion.span
-                        key={sidx}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.3 + sidx * 0.02 }}
-                        whileHover={{ scale: 1.1 }}
-                        className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 hover:border-primary/40 transition-all cursor-default"
-                      >
-                        {skill}
-                      </motion.span>
-                    ))}
-                  </div>
-                </motion.div>
-              )
-            })}
-          </motion.div>
 
-          {/* Section Soft Skills & Langues */}
-          <motion.div variants={itemVariants} className="grid md:grid-cols-2 gap-8">
-            {/* Soft Skills */}
-            <div className="space-y-6">
-              <h3 className="text-2xl font-bold text-foreground flex items-center gap-2">
-                <Users className="w-6 h-6 text-primary" />
-                {language === 'en' ? 'Soft Skills' : 'Compétences Transversales'}
-              </h3>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {text.softSkills.map((skill, idx) => (
-                  <motion.div
-                    key={idx}
-                    variants={itemVariants}
-                    whileHover={{ y: -3, scale: 1.02 }}
-                    className="group relative rounded-xl border border-border/50 bg-card/50 backdrop-blur-sm p-4 hover:border-primary/30 hover:shadow-md hover:shadow-primary/10 transition-all duration-300"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl" />
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {cat.skills.map((skill, sidx) => (
+                        <span
+                          key={sidx}
+                          className="px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/10 text-xs font-mono font-medium text-slate-300 hover:text-cyan-300 hover:border-cyan-500/40 hover:bg-cyan-500/10 transition-all cursor-default"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </SpotlightCard>
+              </motion.div>
+            )
+          })}
+        </motion.div>
+
+        {/* Soft Skills & Languages Section */}
+        <motion.div
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={containerVariants}
+          className="grid lg:grid-cols-12 gap-8 pt-6"
+        >
+          {/* Soft Skills (7 cols) */}
+          <motion.div variants={itemVariants} className="lg:col-span-7 space-y-6">
+            <h3 className="text-xl font-bold font-display text-foreground flex items-center gap-2">
+              <Users className="w-5 h-5 text-cyan-400" />
+              <span>{text.softSkillsTitle}</span>
+            </h3>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              {text.softSkills.map((soft, idx) => {
+                const Icon = soft.icon
+                return (
+                  <SpotlightCard key={idx} className="p-5 border-white/10">
                     <div className="flex items-start gap-3">
-                      <div className="p-2 rounded-lg bg-primary/10 text-primary shrink-0">
-                        <skill.icon className="w-4 h-4" />
+                      <div className="p-2 rounded-lg bg-purple-500/10 text-purple-400 shrink-0">
+                        <Icon className="w-4 h-4" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-foreground text-base">{skill.name}</h4>
-                        <p className="text-xs text-muted-foreground mt-1">{skill.description}</p>
+                        <h4 className="text-sm font-bold text-foreground">{soft.name}</h4>
+                        <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{soft.description}</p>
                       </div>
                     </div>
-                  </motion.div>
-                ))}
-              </div>
+                  </SpotlightCard>
+                )
+              })}
             </div>
+          </motion.div>
 
-            {/* Langues */}
-            <div className="space-y-6">
-              <h3 className="text-2xl font-bold text-foreground flex items-center gap-2">
-                <Globe className="w-6 h-6 text-primary" />
-                {language === 'en' ? 'Languages' : 'Langues'}
-              </h3>
-              <div className="space-y-4">
-                {text.languages.map((lang, idx) => (
-                  <motion.div
-                    key={idx}
-                    variants={itemVariants}
-                    whileHover={{ x: 5 }}
-                    className="p-5 rounded-xl border border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/30 transition-all"
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <span className="text-2xl">{lang.flag}</span>
-                        <span className="font-semibold text-foreground">{lang.name}</span>
-                      </div>
-                      <span className="text-sm text-primary font-medium">{lang.level}</span>
+          {/* Languages (5 cols) */}
+          <motion.div variants={itemVariants} className="lg:col-span-5 space-y-6">
+            <h3 className="text-xl font-bold font-display text-foreground flex items-center gap-2">
+              <Globe className="w-5 h-5 text-purple-400" />
+              <span>{text.languagesTitle}</span>
+            </h3>
+
+            <div className="space-y-4">
+              {text.languages.map((lang, idx) => (
+                <SpotlightCard key={idx} className="p-5 border-white/10">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl">{lang.flag}</span>
+                      <span className="text-sm font-bold text-foreground">{lang.name}</span>
                     </div>
-                    <div className="w-full h-2 bg-primary/10 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${lang.proficiency}%` }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                        className="h-full bg-gradient-to-r from-primary to-primary/70 rounded-full"
-                      />
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+                    <span className="text-xs font-mono text-cyan-400">{lang.level}</span>
+                  </div>
+
+                  <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={isInView ? { width: `${lang.proficiency}%` } : { width: 0 }}
+                      transition={{ duration: 1.2, delay: 0.4 + idx * 0.2 }}
+                      className="h-full bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full"
+                    />
+                  </div>
+                </SpotlightCard>
+              ))}
             </div>
           </motion.div>
         </motion.div>

@@ -9,24 +9,23 @@ import Experience from '@/components/Experience'
 import Projects from '@/components/Projects'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
+import SmoothScrollProvider from '@/components/ui/SmoothScrollProvider'
+import CustomCursor from '@/components/ui/CustomCursor'
+import ParticleBackground from '@/components/ui/ParticleBackground'
+import { Toaster } from 'sonner'
 
 export default function Home() {
-  const [isDark, setIsDark] = useState(false)
-  const [language, setLanguage] = useState<'en' | 'fr'>('en')
-  const [mounted, setMounted] = useState(false)
+  const [isDark, setIsDark] = useState(true)
+  const [language, setLanguage] = useState<'en' | 'fr'>('fr')
 
-  // Handle theme persistence and initialization
+  // Theme & Language Initialization
   useEffect(() => {
-    setMounted(true)
-    
-    // Check if dark mode preference is stored
     const storedTheme = localStorage.getItem('theme')
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    
-    const isDarkMode = storedTheme === 'dark' || (!storedTheme && prefersDark)
+    const isDarkMode = storedTheme === 'dark' || (!storedTheme && prefersDark) || true // Default to obsidian dark
+
     setIsDark(isDarkMode)
-    
-    // Check if language preference is stored
+
     const storedLanguage = localStorage.getItem('language') as 'en' | 'fr'
     if (storedLanguage) {
       setLanguage(storedLanguage)
@@ -39,12 +38,11 @@ export default function Home() {
     }
   }, [])
 
-  // Update theme
   const handleThemeToggle = () => {
     const newTheme = !isDark
     setIsDark(newTheme)
     localStorage.setItem('theme', newTheme ? 'dark' : 'light')
-    
+
     if (newTheme) {
       document.documentElement.classList.add('dark')
     } else {
@@ -52,34 +50,41 @@ export default function Home() {
     }
   }
 
-  // Update language
   const handleLanguageToggle = () => {
     const newLang = language === 'en' ? 'fr' : 'en'
     setLanguage(newLang)
     localStorage.setItem('language', newLang)
   }
 
-  // Prevent hydration mismatch
-  if (!mounted) {
-    return null
-  }
-
   return (
-    <main className="bg-background text-foreground transition-colors duration-300">
-      <Header
-        isDark={isDark}
-        onThemeToggle={handleThemeToggle}
-        language={language}
-        onLanguageToggle={handleLanguageToggle}
-      />
+    <SmoothScrollProvider>
+      <div className="relative bg-background text-foreground transition-colors duration-500 min-h-screen">
+        {/* Custom Cursor & Particle Field */}
+        <CustomCursor />
+        <ParticleBackground />
+        <Toaster position="bottom-right" theme={isDark ? 'dark' : 'light'} richColors />
 
-      <Hero language={language} />
-      <About language={language} />
-      <Skills language={language} />
-      <Experience language={language} />
-      <Projects language={language} />
-      <Contact language={language} />
-      <Footer language={language} />
-    </main>
+        {/* Navigation Dock Header */}
+        <Header
+          isDark={isDark}
+          onThemeToggle={handleThemeToggle}
+          language={language}
+          onLanguageToggle={handleLanguageToggle}
+        />
+
+        {/* Page Main Content */}
+        <main className="relative z-10">
+          <Hero language={language} />
+          <About language={language} />
+          <Skills language={language} />
+          <Experience language={language} />
+          <Projects language={language} />
+          <Contact language={language} />
+        </main>
+
+        {/* Footer */}
+        <Footer language={language} />
+      </div>
+    </SmoothScrollProvider>
   )
 }

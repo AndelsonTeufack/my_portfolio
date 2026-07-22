@@ -1,14 +1,9 @@
-import { motion, useInView, Variants } from 'framer-motion'
+'use client'
+
 import { useRef, useState, useEffect } from 'react'
-import { 
-  Target, 
-  Lightbulb, 
-  Sparkles, 
-  Code, 
-  Cloud, 
-  Search, 
-  Quote
-} from 'lucide-react'
+import { motion, useInView, Variants } from 'framer-motion'
+import { Target, Lightbulb, Sparkles, Code, Cloud, Search, Quote, Terminal, CheckCircle2 } from 'lucide-react'
+import SpotlightCard from '@/components/ui/SpotlightCard'
 import MacbookAnimation from './MacbookAnimation'
 
 interface AboutProps {
@@ -17,93 +12,49 @@ interface AboutProps {
 
 const content = {
   en: {
-    title: 'About Me',
-    intro: "I am Andelson TEUFACK, a young full-stack developer and IT analyst, 23 years old, residing in Douala, Cameroon. With a passion for solving complex problems and creating elegant solutions, I specialize in developing robust applications that combine technical excellence with exceptional user experience.",
-    fullStory: "My journey in tech began with a curiosity to understand how systems work. Over 2+ years, I've evolved from a passionate learner to a professional developer who thrives at the intersection of innovation and problem-solving. I believe that great software isn't just about writing code—it's about understanding user needs, designing thoughtful solutions, and continuously improving.",
-    vision: "I envision a future where technology seamlessly solves real-world problems. My approach is methodical yet creative: I analyze challenges deeply, design elegant architectures, and implement solutions that scale. I'm driven by impact—creating systems that not only perform but inspire confidence.",
-    methodology: "My methodology combines Agile practices with systematic problem-solving. I start by understanding the business context, design comprehensive solutions, and iterate based on feedback. I believe in code quality, security-first thinking, and maintaining clean architectures.",
-    expertise: [
-      {
-        title: 'Full-Stack Development',
-        desc: 'Building end-to-end applications with modern technologies, from backend APIs to responsive frontends.',
-        icon: Code,
-      },
-      {
-        title: 'IT Solutions',
-        desc: 'Analyzing business needs and designing comprehensive IT solutions with focus on optimization and security.',
-        icon: Cloud,
-      },
-      {
-        title: 'Problem Solving',
-        desc: 'Breaking down complex challenges into manageable solutions with methodical approaches and creative thinking.',
-        icon: Search,
-      },
-    ],
-    mission: "My mission is to create software that doesn't just work, but delights users and solves real-world problems with elegance and reliability.",
+    title: 'About & Vision',
+    subtitle: 'Combining engineering precision, clean architecture, and creative problem solving.',
+    intro:
+      'I am Andelson TEUFACK, a 23-year-old Full-Stack Developer and IT Analyst based in Douala, Cameroon. I bridge complex backend systems with intuitive frontend experiences.',
+    story:
+      'With over 2+ years of professional engineering experience, I specialize in architecting scalable applications, automating business processes, and optimizing IT infrastructures for enterprises and growing startups.',
+    visionTitle: 'Engineering Philosophy',
+    visionDesc:
+      'I believe in building software that scales gracefully. Every line of code should be intentional, secure, maintainable, and aligned with core business objectives.',
+    methodologyTitle: 'Methodology',
+    methodologyDesc:
+      'Agile iteration, continuous integration, domain-driven design, and strict code quality standards.',
+    quote:
+      'Excellence in software development is not an accident; it is the result of continuous learning, architecture discipline, and attention to detail.',
     stats: [
       { value: 2, label: 'Years Experience', suffix: '+' },
-      { value: 10, label: 'Projects Completed', suffix: '+' },
+      { value: 10, label: 'Major Projects', suffix: '+' },
       { value: 20, label: 'Technologies', suffix: '+' },
     ],
   },
   fr: {
-    title: 'À Propos',
-    intro: "Je suis Andelson TEUFACK, un jeune développeur full-stack et analyste IT de 23 ans résident à Douala, Cameroun. Passionné par la résolution de problèmes complexes et la création de solutions élégantes, je me spécialise dans le développement d'applications robustes combinant excellence technique et expérience utilisateur exceptionnelle.",
-    fullStory: "Mon parcours dans la technologie a commencé par la curiosité de comprendre comment fonctionnent les systèmes. Au cours de plus de 2 ans, j'ai évolué d'un passionné d'apprentissage à un développeur professionnel qui prospère à l'intersection de l'innovation et de la résolution de problèmes. Je crois que le grand logiciel ne concerne pas seulement l'écriture de code, mais la compréhension des besoins des utilisateurs.",
-    vision: "Je vois un avenir où la technologie résout facilement les problèmes du monde réel. Mon approche est méthodique mais créative : j'analyse les défis en profondeur, je conçois des architectures élégantes et j'implémente des solutions qui s'adaptent. Je suis motivé par l'impact.",
-    methodology: "Ma méthodologie combine les pratiques Agile avec la résolution systématique de problèmes. Je commence par comprendre le contexte métier, concevoir des solutions complètes et itérer selon les retours. Je crois en la qualité du code et à la sécurité.",
-    expertise: [
-      {
-        title: 'Développement Full-Stack',
-        desc: "Construire des applications end-to-end avec les technologies modernes, des APIs backend aux frontends réactifs.",
-        icon: Code,
-      },
-      {
-        title: 'Solutions IT',
-        desc: "Analyser les besoins commerciaux et concevoir des solutions IT complètes axées sur l'optimisation et la sécurité.",
-        icon: Cloud,
-      },
-      {
-        title: 'Résolution de Problèmes',
-        desc: 'Décomposer les défis complexes en solutions gérables avec des approches méthodiques et une réflexion créative.',
-        icon: Search,
-      },
-    ],
-    mission: "Ma mission est de créer des logiciels qui non seulement fonctionnent, mais ravissent les utilisateurs et résolvent des problèmes réels avec élégance et fiabilité.",
+    title: 'À Propos & Vision',
+    subtitle: 'Allier précision d\'ingénierie, architecture propre et résolution créative de problèmes.',
+    intro:
+      'Je suis Andelson TEUFACK, Développeur Full-Stack et Analyste IT de 23 ans basé à Douala, Cameroun. Je fais le pont entre les architectures backend complexes et les interfaces frontends intuitives.',
+    story:
+      'Avec plus de 2 ans d\'expérience professionnelle, je me spécialise dans la conception d\'applications scalables, l\'automatisation de processus métier et l\'optimisation d\'infrastructures IT.',
+    visionTitle: 'Philosophie d\'Ingénierie',
+    visionDesc:
+      'Je crois en la création de logiciels évolutifs. Chaque ligne de code doit être intentionnelle, sécurisée, maintenable et alignée sur les objectifs métier.',
+    methodologyTitle: 'Méthodologie',
+    methodologyDesc:
+      'Itération Agile, intégration continue, architecture orientée domaine et normes strictes de qualité.',
+    quote:
+      'L\'excellence en développement logiciel n\'est pas un hasard ; c\'est le résultat d\'un apprentissage continu, de la discipline architecturale et du soin apporté aux détails.',
     stats: [
       { value: 2, label: "Années d'Expérience", suffix: '+' },
-      { value: 10, label: 'Projets Réalisés', suffix: '+' },
+      { value: 10, label: 'Projets Majeurs', suffix: '+' },
       { value: 20, label: 'Technologies', suffix: '+' },
     ],
   },
 }
 
-// Variants pour les animations
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    },
-  },
-}
-
-const itemVariants: Variants = {
-  hidden: { y: 30, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: 'spring' as const,
-      stiffness: 100,
-      damping: 12,
-    },
-  },
-}
-
-// Composant pour l'animation des nombres
 function AnimatedNumber({ value, suffix = '' }: { value: number; suffix?: string }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
@@ -117,7 +68,7 @@ function AnimatedNumber({ value, suffix = '' }: { value: number; suffix?: string
     const increment = end / (duration / 16)
     const timer = setInterval(() => {
       start += increment
-      if (start > end) {
+      if (start >= end) {
         setCount(end)
         clearInterval(timer)
       } else {
@@ -128,185 +79,151 @@ function AnimatedNumber({ value, suffix = '' }: { value: number; suffix?: string
   }, [isInView, value])
 
   return (
-    <span ref={ref} className="text-4xl font-bold text-primary">
-      {count}{suffix}
+    <span ref={ref} className="text-4xl sm:text-5xl font-extrabold text-gradient-cyan font-mono">
+      {count}
+      {suffix}
     </span>
   )
 }
 
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.2 },
+  },
+}
+
+const itemVariants: Variants = {
+  hidden: { y: 30, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { type: 'spring', stiffness: 100, damping: 14 },
+  },
+}
+
 export default function About({ language }: AboutProps) {
   const text = language === 'en' ? content.en : content.fr
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
-  // Ref pour l'icône du développeur
-  const iconContainerRef = useRef(null)
-  const iconInView = useInView(iconContainerRef, { once: false, amount: 0.5 })
+  const sectionRef = useRef(null)
+  const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
 
   return (
-    <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Éléments décoratifs de fond */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-background/95 to-background" />
-      <div className="absolute top-20 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-20 right-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl -z-10" />
-      
-      {/* Particules animées */}
-      <motion.div
-        className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary/30 rounded-full"
-        animate={{
-          y: [0, 30, 0],
-          x: [0, 20, 0],
-          opacity: [0.3, 0.6, 0.3],
-        }}
-        transition={{ duration: 8, repeat: Infinity }}
-      />
-      <motion.div
-        className="absolute bottom-1/3 right-1/4 w-3 h-3 bg-accent/30 rounded-full"
-        animate={{
-          y: [0, -40, 0],
-          x: [0, -30, 0],
-          opacity: [0.2, 0.5, 0.2],
-        }}
-        transition={{ duration: 10, repeat: Infinity }}
-      />
-
-      <div className="max-w-7xl mx-auto">
+    <section id="about" className="py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto space-y-16">
+        {/* Section Header */}
         <motion.div
-          ref={ref}
+          ref={sectionRef}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={containerVariants}
-          className="space-y-16"
+          className="space-y-4 text-center md:text-left"
         >
-          {/* Header avec animation */}
-          <motion.div variants={itemVariants} className="space-y-4 text-center md:text-left">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground inline-flex items-center gap-3">
-              {text.title}
-              <Sparkles className="w-8 h-8 text-primary/70" />
-            </h2>
-            <div className="h-1 w-24 bg-gradient-to-r from-primary to-primary/50 rounded-full mx-auto md:mx-0" />
+          <motion.div variants={itemVariants} className="inline-flex items-center gap-2 text-cyan-400 font-mono text-xs tracking-widest uppercase">
+            <Sparkles className="w-4 h-4" />
+            <span>// 01. Profile & Mindset</span>
           </motion.div>
 
-          {/* Contenu principal */}
-          <div className="space-y-12">
-            {/* Introduction et histoire */}
-            <motion.div variants={itemVariants} className="space-y-6">
-              <p className="text-xl md:text-2xl text-foreground font-medium leading-relaxed bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
-                {text.intro}
-              </p>
-              <p className="text-base text-muted-foreground leading-relaxed max-w-3xl">
-                {text.fullStory}
-              </p>
-            </motion.div>
+          <motion.h2 variants={itemVariants} className="text-3xl sm:text-5xl font-bold font-display text-foreground">
+            {text.title}
+          </motion.h2>
 
-            {/* Vision & Méthodologie - cartes améliorées */}
-            <motion.div variants={itemVariants} className="grid md:grid-cols-2 gap-6">
-              {/* Vision */}
-              <motion.div
-                whileHover={{ y: -5, scale: 1.02 }}
-                className="group relative rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-6 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
-                <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-xl bg-primary/10 text-primary">
-                    <Target className="w-6 h-6" />
+          <motion.p variants={itemVariants} className="text-muted-foreground text-base sm:text-lg max-w-2xl">
+            {text.subtitle}
+          </motion.p>
+        </motion.div>
+
+        {/* Bento Grid Layout (4 Cards) */}
+        <motion.div
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={containerVariants}
+          className="grid grid-cols-1 md:grid-cols-12 gap-6"
+        >
+          {/* Card 1: Main Story (8 cols) */}
+          <motion.div variants={itemVariants} className="md:col-span-8">
+            <SpotlightCard className="p-8 h-full flex flex-col justify-between spotlight-bg border-white/10">
+              <div className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                    <Code className="w-5 h-5" />
                   </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-foreground mb-2">
-                      {language === 'en' ? 'My Vision' : 'Ma Vision'}
-                    </h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {text.vision}
-                    </p>
-                  </div>
+                  <h3 className="text-xl font-bold font-display text-foreground">Full-Stack Engineer</h3>
                 </div>
-              </motion.div>
 
-              {/* Méthodologie */}
-              <motion.div
-                whileHover={{ y: -5, scale: 1.02 }}
-                className="group relative rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-6 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
-                <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-xl bg-accent/10 text-accent">
-                    <Lightbulb className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-foreground mb-2">
-                      {language === 'en' ? 'My Methodology' : 'Ma Méthodologie'}
-                    </h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {text.methodology}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-
-            {/* Mission statement amélioré */}
-            <motion.div variants={itemVariants}>
-              <div className="relative p-8 rounded-2xl border border-primary/20 bg-gradient-to-r from-primary/5 via-primary/10 to-accent/5 backdrop-blur-sm">
-                <Quote className="absolute top-4 left-4 w-8 h-8 text-primary/20" />
-                <Quote className="absolute bottom-4 right-4 w-8 h-8 text-primary/20 rotate-180" />
-                <p className="text-lg md:text-xl text-foreground leading-relaxed italic font-medium text-center max-w-3xl mx-auto">
-                  "{text.mission}"
+                <p className="text-lg text-foreground font-medium leading-relaxed">
+                  {text.intro}
                 </p>
-              </div>
-            </motion.div>
 
-            {/* Statistiques animées */}
-            <motion.div variants={itemVariants} className="grid sm:grid-cols-3 gap-6">
-              {text.stats.map((stat, idx) => (
-                <motion.div
-                  key={idx}
-                  whileHover={{ scale: 1.05 }}
-                  className="relative p-6 rounded-xl border border-border/50 bg-card/30 backdrop-blur-sm text-center group"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
-                  <AnimatedNumber value={stat.value} suffix={stat.suffix} />
-                  <p className="text-sm text-muted-foreground mt-2">{stat.label}</p>
-                </motion.div>
-              ))}
-            </motion.div>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {text.story}
+                </p>
 
-            {/* Expertise Grid */}
-            <motion.div variants={containerVariants} className="grid md:grid-cols-3 gap-6">
-              {text.expertise.map((item, idx) => {
-                const Icon = item.icon
-                return (
-                  <motion.div
-                    key={idx}
-                    variants={itemVariants}
-                    whileHover={{ y: -8, scale: 1.02 }}
-                    className="group relative rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-6 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
-                    
-                    <div className="relative z-10">
-                      <div className="w-14 h-14 rounded-xl bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center mb-4 transition-colors text-primary">
-                        <Icon className="w-7 h-7" />
-                      </div>
-                      <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                        {item.title}
-                      </h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
-                        {item.desc}
-                      </p>
+                {/* Key Pillars */}
+                <div className="grid sm:grid-cols-2 gap-4 pt-4 border-t border-white/10">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 className="w-4 h-4 text-cyan-400 mt-1 shrink-0" />
+                    <div>
+                      <h4 className="text-xs font-bold text-foreground">{text.visionTitle}</h4>
+                      <p className="text-xs text-muted-foreground mt-1">{text.visionDesc}</p>
                     </div>
+                  </div>
 
-                    {/* Ligne décorative en bas */}
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary/0 via-primary/50 to-primary/0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-2xl" />
-                  </motion.div>
-                )
-              })}
-            </motion.div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 className="w-4 h-4 text-purple-400 mt-1 shrink-0" />
+                    <div>
+                      <h4 className="text-xs font-bold text-foreground">{text.methodologyTitle}</h4>
+                      <p className="text-xs text-muted-foreground mt-1">{text.methodologyDesc}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </SpotlightCard>
+          </motion.div>
 
-            {/* Annimation 3d*/}
-            <motion.div variants={itemVariants} className="flex justify-center md:justify-start">
+          {/* Card 2: Metrics & Impact (4 cols) */}
+          <motion.div variants={itemVariants} className="md:col-span-4">
+            <SpotlightCard className="p-8 h-full flex flex-col justify-between border-cyan-500/20 bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5">
+              <div className="space-y-8">
+                <span className="text-xs font-mono uppercase tracking-widest text-cyan-400">Impact Metrics</span>
+
+                <div className="space-y-6">
+                  {text.stats.map((stat, idx) => (
+                    <div key={idx} className="border-b border-white/10 pb-4 last:border-0 last:pb-0">
+                      <AnimatedNumber value={stat.value} suffix={stat.suffix} />
+                      <p className="text-xs font-mono text-muted-foreground mt-1">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </SpotlightCard>
+          </motion.div>
+
+          {/* Card 3: Quote (5 cols) */}
+          <motion.div variants={itemVariants} className="md:col-span-5">
+            <SpotlightCard className="p-8 h-full relative flex flex-col justify-center border-purple-500/20">
+              <Quote className="w-10 h-10 text-purple-400/30 mb-4" />
+              <p className="text-base sm:text-lg italic font-medium leading-relaxed text-foreground">
+                "{text.quote}"
+              </p>
+              <div className="mt-6 flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-cyan-400 to-purple-500 flex items-center justify-center font-bold text-xs text-slate-950">
+                  AT
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-foreground">Andelson Teufack</p>
+                  <p className="text-[10px] font-mono text-muted-foreground">Software Engineer</p>
+                </div>
+              </div>
+            </SpotlightCard>
+          </motion.div>
+
+          {/* Card 4: Macbook 3D Terminal Preview (7 cols) */}
+          <motion.div variants={itemVariants} className="md:col-span-7">
+            <SpotlightCard className="p-6 h-full flex flex-col justify-center items-center border-white/10">
               <MacbookAnimation />
-            </motion.div>
-          </div>
+            </SpotlightCard>
+          </motion.div>
         </motion.div>
       </div>
     </section>

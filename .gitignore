@@ -8,3 +8,12 @@ node_modules/
 .next/
 .env*.local
 .DS_Store
+.agents/rules/webform.md
+.agents/rules/webfont.md
+.agents/rules/webexpert.md
+.agents/rules/webcross.md
+.agents/rules/nextseo.md
+.agents/rules/nextperform.md
+.agents/rules/motionexpert.md
+.agents/rules/expertoptimisation.md
+.agents/rules/taiwind.md

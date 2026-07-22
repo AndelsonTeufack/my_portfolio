@@ -1,20 +1,22 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import { motion, useInView, Variants } from 'framer-motion'
 import { Button } from '@/components/ui/button'
-import { 
-  FaEnvelope, 
-  FaWhatsapp, 
-  FaMapMarkerAlt, 
-  FaLinkedin, 
-  FaGithub, 
+import {
+  FaEnvelope,
+  FaWhatsapp,
+  FaMapMarkerAlt,
+  FaLinkedin,
+  FaGithub,
   FaPaperPlane,
   FaCheckCircle,
-  FaTimesCircle,
-  FaPhone // Ajout de l'icône téléphone
+  FaPhone,
+  FaCopy,
 } from 'react-icons/fa'
-import { Sparkles, Send } from 'lucide-react'
+import { Sparkles, Send, Check } from 'lucide-react'
+import SpotlightCard from '@/components/ui/SpotlightCard'
+import { toast } from 'sonner'
 
 interface ContactProps {
   language: 'en' | 'fr'
@@ -22,101 +24,83 @@ interface ContactProps {
 
 const content = {
   en: {
-    title: 'Get In Touch',
-    subtitle: 'Have a project in mind? Let\'s collaborate and create something amazing together.',
+    title: 'Initiate Contact',
+    subtitle: 'Have a project, engineering inquiry, or consulting opportunity? Send a message below.',
     email: 'teufackandelson123@gmail.com',
     phoneTel: '+237 651 489 468',
     phoneWhatsapp: '+237 690 819 035',
-    location: 'Douala, Cameroon',
-    formTitle: 'Send me a message',
+    location: 'Douala, Cameroon (GMT+1)',
+    formTitle: 'Send a Direct Message',
     namePlaceholder: 'Your Name',
-    emailPlaceholder: 'Your Email',
-    messagePlaceholder: 'Your Message...',
+    emailPlaceholder: 'Your Email Address',
+    messagePlaceholder: 'Describe your project or inquiry...',
     sendButton: 'Send Message',
-    sending: 'Sending...',
-    successMessage: 'Message sent successfully!',
-    errorMessage: 'Failed to send message. Please try again.',
+    sending: 'Encrypting & Sending...',
+    successMessage: 'Message sent successfully! I will respond within 24 hours.',
+    errorMessage: 'Failed to send message. Please try emailing directly.',
     socials: [
       { name: 'LinkedIn', icon: FaLinkedin, href: 'https://www.linkedin.com/in/andelson-teufack-97a59b279/' },
       { name: 'GitHub', icon: FaGithub, href: 'https://github.com/AndelsonTeufack' },
     ],
-    connectTitle: 'Connect With Me',
-    connectDesc: 'Follow my work and stay updated on new projects and insights.',
-    ctaTitle: 'Ready for a Challenge?',
-    ctaDesc: 'I\'m always interested in hearing about new projects and opportunities. Feel free to reach out!',
   },
   fr: {
-    title: 'Parlons-nous',
-    subtitle: 'Vous avez un projet en tête? Collaborons et créons quelque chose d\'extraordinaire ensemble.',
+    title: 'Initier un Contact',
+    subtitle: 'Vous avez un projet, une question d\'ingénierie ou une opportunité de consulting ? Laissez un message.',
     email: 'teufackandelson123@gmail.com',
-    phoneTel: '+237 651 489 468',     
+    phoneTel: '+237 651 489 468',
     phoneWhatsapp: '+237 690 819 035',
-    location: 'Douala, Cameroun',
-    formTitle: 'Envoyez-moi un message',
+    location: 'Douala, Cameroun (GMT+1)',
+    formTitle: 'Envoyer un message direct',
     namePlaceholder: 'Votre Nom',
-    emailPlaceholder: 'Votre Email',
-    messagePlaceholder: 'Votre Message...',
+    emailPlaceholder: 'Votre Adresse Email',
+    messagePlaceholder: 'Décrivez votre projet ou besoin...',
     sendButton: 'Envoyer le message',
-    sending: 'Envoi...',
-    successMessage: 'Message envoyé avec succès !',
-    errorMessage: 'Échec de l\'envoi. Veuillez réessayer.',
+    sending: 'Envoi sécurisé...',
+    successMessage: 'Message envoyé avec succès ! Je répondrai sous 24 heures.',
+    errorMessage: 'Échec de l\'envoi. Veuillez utiliser l\'email direct.',
     socials: [
       { name: 'LinkedIn', icon: FaLinkedin, href: 'https://www.linkedin.com/in/andelson-teufack-97a59b279/' },
       { name: 'GitHub', icon: FaGithub, href: 'https://github.com/AndelsonTeufack' },
     ],
-    connectTitle: 'Connectez-vous Avec Moi',
-    connectDesc: 'Suivez mon travail et restez informé des nouveaux projets et perspectives.',
-    ctaTitle: 'Prêt pour un Défi?',
-    ctaDesc: 'Je suis toujours intéressé par les nouveaux projets et opportunités. N\'hésitez pas à me contacter!',
   },
 }
 
-// Variants pour les animations
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
   },
 }
 
 const itemVariants: Variants = {
-  hidden: { y: 20, opacity: 0 },
+  hidden: { y: 25, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
-    transition: {
-      type: 'spring' as const,
-      stiffness: 100,
-      damping: 12,
-    },
+    transition: { type: 'spring', stiffness: 100, damping: 14 },
   },
 }
 
 export default function Contact({ language }: ContactProps) {
   const [isLoading, setIsLoading] = useState(false)
+  const [copiedField, setCopiedField] = useState<string | null>(null)
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-  const [notification, setNotification] = useState<{ type: 'success' | 'error', message: string } | null>(null)
 
   const text = language === 'en' ? content.en : content.fr
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const sectionRef = useRef(null)
+  const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
 
-  // Auto-hide notification after 5 seconds
-  useEffect(() => {
-    if (notification) {
-      const timer = setTimeout(() => setNotification(null), 5000)
-      return () => clearTimeout(timer)
-    }
-  }, [notification])
+  const handleCopy = (val: string, label: string) => {
+    navigator.clipboard.writeText(val)
+    setCopiedField(label)
+    toast.success(`${label} ${language === 'en' ? 'copied to clipboard!' : 'copié dans le presse-papier !'}`)
+    setTimeout(() => setCopiedField(null), 2500)
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
-    setNotification(null)
 
     try {
       const response = await fetch('/api/contact', {
@@ -128,300 +112,232 @@ export default function Contact({ language }: ContactProps) {
       if (!response.ok) throw new Error('Failed to send message')
 
       setFormData({ name: '', email: '', message: '' })
-      setNotification({ type: 'success', message: text.successMessage })
+      toast.success(text.successMessage)
     } catch (error) {
       console.error('Error sending message:', error)
-      setNotification({ type: 'error', message: text.errorMessage })
+      toast.error(text.errorMessage)
     } finally {
       setIsLoading(false)
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-  }
-
   return (
-    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Éléments de fond décoratifs */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-background/95 to-background" />
-      <div className="absolute top-40 right-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-40 left-0 w-80 h-80 bg-primary/10 rounded-full blur-3xl -z-10" />
-
-      {/* Particules flottantes */}
-      <div className="absolute inset-0 -z-5 pointer-events-none">
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-primary/20 rounded-full"
-            initial={{
-              x: Math.random() * 100 + '%',
-              y: Math.random() * 100 + '%',
-            }}
-            animate={{
-              y: [null, '-20%', '20%', '-20%'],
-              x: [null, '10%', '-10%', '10%'],
-              opacity: [0.2, 0.5, 0.2],
-            }}
-            transition={{
-              duration: 10 + i * 2,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="max-w-7xl mx-auto">
+    <section id="contact" className="py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto space-y-16">
+        {/* Section Header */}
         <motion.div
-          ref={ref}
+          ref={sectionRef}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={containerVariants}
-          className="space-y-16"
+          className="space-y-4 text-center md:text-left"
         >
-          {/* Header */}
-          <motion.div variants={itemVariants} className="text-center space-y-4 max-w-2xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground inline-flex items-center gap-3 justify-center">
-              {text.title}
-              <Sparkles className="w-8 h-8 text-primary/70" />
-            </h2>
-            <div className="h-1 w-24 bg-gradient-to-r from-primary to-primary/50 rounded-full mx-auto" />
-            <p className="text-lg text-muted-foreground">{text.subtitle}</p>
+          <motion.div variants={itemVariants} className="inline-flex items-center gap-2 text-cyan-400 font-mono text-xs tracking-widest uppercase">
+            <Sparkles className="w-4 h-4 text-purple-400" />
+            <span>// 05. Direct Connect</span>
           </motion.div>
 
-          {/* Contact Methods Cards - 4 cartes */}
-          <motion.div variants={containerVariants} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Email */}
-            <motion.div
-              variants={itemVariants}
-              whileHover={{ y: -5, scale: 1.02 }}
-              className="group relative rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-6 text-center hover:border-primary/30 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
-              <div className="relative">
-                <div className="w-14 h-14 rounded-xl bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center mx-auto mb-4 transition-colors">
-                  <FaEnvelope className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">Email</h3>
-                <a
-                  href={`mailto:${text.email}`}
-                  className="text-primary hover:text-primary/80 transition-colors text-sm break-all"
-                >
-                  {text.email}
-                </a>
-              </div>
-            </motion.div>
+          <motion.h2 variants={itemVariants} className="text-3xl sm:text-5xl font-bold font-display text-foreground">
+            {text.title}
+          </motion.h2>
 
-            {/* Téléphone*/}
-            <motion.div
-              variants={itemVariants}
-              whileHover={{ y: -5, scale: 1.02 }}
-              className="group relative rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-6 text-center hover:border-primary/30 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
-              <div className="relative">
-                <div className="w-14 h-14 rounded-xl bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center mx-auto mb-4 transition-colors">
-                  <FaPhone className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">
-                  {language === 'en' ? 'Phone' : 'Téléphone'}
-                </h3>
-                <a
-                  href={`tel:${text.phoneTel.replace(/\s/g, '')}`}
-                  className="text-primary hover:text-primary/80 transition-colors text-sm block"
-                >
-                  {text.phoneTel}
-                </a>
-              </div>
-            </motion.div>
+          <motion.p variants={itemVariants} className="text-muted-foreground text-base sm:text-lg max-w-2xl">
+            {text.subtitle}
+          </motion.p>
+        </motion.div>
 
-            {/* WhatsApp*/}
-            <motion.div
-              variants={itemVariants}
-              whileHover={{ y: -5, scale: 1.02 }}
-              className="group relative rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-6 text-center hover:border-primary/30 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
-              <div className="relative">
-                <div className="w-14 h-14 rounded-xl bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center mx-auto mb-4 transition-colors">
-                  <FaWhatsapp className="w-6 h-6 text-primary" />
+        {/* Quick Contact Cards Row */}
+        <motion.div
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={containerVariants}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
+          {/* Email */}
+          <motion.div variants={itemVariants}>
+            <SpotlightCard className="p-6 border-white/10 glass-card-hover group">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400">
+                  <FaEnvelope className="w-5 h-5" />
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">WhatsApp</h3>
-                <a
-                  href={`https://wa.me/${text.phoneWhatsapp.replace(/\s/g, '')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:text-primary/80 transition-colors text-sm block"
+                <button
+                  onClick={() => handleCopy(text.email, 'Email')}
+                  className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-cyan-400 transition-colors"
+                  title="Copy email"
                 >
-                  {text.phoneWhatsapp}
-                </a>
+                  {copiedField === 'Email' ? <Check className="w-4 h-4 text-emerald-400" /> : <FaCopy className="w-3.5 h-3.5" />}
+                </button>
               </div>
-            </motion.div>
-
-            {/* Localisation */}
-            <motion.div
-              variants={itemVariants}
-              whileHover={{ y: -5, scale: 1.02 }}
-              className="group relative rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-6 text-center hover:border-primary/30 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
-              <div className="relative">
-                <div className="w-14 h-14 rounded-xl bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center mx-auto mb-4 transition-colors">
-                  <FaMapMarkerAlt className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">
-                  {language === 'en' ? 'Location' : 'Localisation'}
-                </h3>
-                <p className="text-muted-foreground text-sm">{text.location}</p>
-              </div>
-            </motion.div>
+              <h3 className="text-xs font-mono uppercase text-muted-foreground">Email</h3>
+              <a href={`mailto:${text.email}`} className="text-sm font-semibold text-foreground hover:text-cyan-400 transition-colors break-all mt-1 block">
+                {text.email}
+              </a>
+            </SpotlightCard>
           </motion.div>
 
-          {/* Contact Form & Social Links (inchangé) */}
-          <motion.div variants={containerVariants} className="grid md:grid-cols-2 gap-12">
-            {/* Form */}
-            <motion.form
-              variants={itemVariants}
-              onSubmit={handleSubmit}
-              className="space-y-5 relative"
-            >
-              <h3 className="text-2xl font-bold text-foreground mb-6 inline-flex items-center gap-2">
-                {text.formTitle}
-              </h3>
+          {/* Phone */}
+          <motion.div variants={itemVariants}>
+            <SpotlightCard className="p-6 border-white/10 glass-card-hover group">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 rounded-xl bg-purple-500/10 text-purple-400">
+                  <FaPhone className="w-5 h-5" />
+                </div>
+                <button
+                  onClick={() => handleCopy(text.phoneTel, 'Téléphone')}
+                  className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-purple-400 transition-colors"
+                  title="Copy phone"
+                >
+                  {copiedField === 'Téléphone' ? <Check className="w-4 h-4 text-emerald-400" /> : <FaCopy className="w-3.5 h-3.5" />}
+                </button>
+              </div>
+              <h3 className="text-xs font-mono uppercase text-muted-foreground">Phone / Call</h3>
+              <a href={`tel:${text.phoneTel.replace(/\s/g, '')}`} className="text-sm font-semibold text-foreground hover:text-purple-400 transition-colors mt-1 block">
+                {text.phoneTel}
+              </a>
+            </SpotlightCard>
+          </motion.div>
 
-              {/* Champs avec animation au focus */}
-              <motion.div variants={itemVariants}>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder={text.namePlaceholder}
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-5 py-4 rounded-xl border border-border/50 bg-card/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                />
-              </motion.div>
+          {/* WhatsApp */}
+          <motion.div variants={itemVariants}>
+            <SpotlightCard className="p-6 border-white/10 glass-card-hover group">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-400">
+                  <FaWhatsapp className="w-5 h-5" />
+                </div>
+                <button
+                  onClick={() => handleCopy(text.phoneWhatsapp, 'WhatsApp')}
+                  className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-emerald-400 transition-colors"
+                  title="Copy WhatsApp"
+                >
+                  {copiedField === 'WhatsApp' ? <Check className="w-4 h-4 text-emerald-400" /> : <FaCopy className="w-3.5 h-3.5" />}
+                </button>
+              </div>
+              <h3 className="text-xs font-mono uppercase text-muted-foreground">WhatsApp Direct</h3>
+              <a
+                href={`https://wa.me/${text.phoneWhatsapp.replace(/\s/g, '')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-semibold text-foreground hover:text-emerald-400 transition-colors mt-1 block"
+              >
+                {text.phoneWhatsapp}
+              </a>
+            </SpotlightCard>
+          </motion.div>
 
-              <motion.div variants={itemVariants}>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder={text.emailPlaceholder}
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-5 py-4 rounded-xl border border-border/50 bg-card/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                />
-              </motion.div>
+          {/* Location */}
+          <motion.div variants={itemVariants}>
+            <SpotlightCard className="p-6 border-white/10 glass-card-hover group">
+              <div className="p-3 rounded-xl bg-blue-500/10 text-blue-400 w-fit mb-4">
+                <FaMapMarkerAlt className="w-5 h-5" />
+              </div>
+              <h3 className="text-xs font-mono uppercase text-muted-foreground">Location</h3>
+              <p className="text-sm font-semibold text-foreground mt-1">{text.location}</p>
+            </SpotlightCard>
+          </motion.div>
+        </motion.div>
 
-              <motion.div variants={itemVariants}>
-                <textarea
-                  name="message"
-                  placeholder={text.messagePlaceholder}
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className="w-full px-5 py-4 rounded-xl border border-border/50 bg-card/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none"
-                />
-              </motion.div>
+        {/* Contact Form & Social Section */}
+        <motion.div
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={containerVariants}
+          className="grid lg:grid-cols-12 gap-8"
+        >
+          {/* Form (7 cols) */}
+          <motion.div variants={itemVariants} className="lg:col-span-7">
+            <SpotlightCard className="p-8 border-cyan-500/20 spotlight-bg">
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <h3 className="text-xl font-bold font-display text-foreground mb-4">{text.formTitle}</h3>
 
-              <motion.div variants={itemVariants}>
+                <div>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    placeholder={text.namePlaceholder}
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-4 py-3.5 rounded-xl bg-white/[0.03] border border-white/10 text-foreground placeholder:text-muted-foreground/60 text-sm focus:border-cyan-400 focus:bg-cyan-500/5 focus:ring-1 focus:ring-cyan-400 transition-all outline-none font-sans"
+                  />
+                </div>
+
+                <div>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder={text.emailPlaceholder}
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full px-4 py-3.5 rounded-xl bg-white/[0.03] border border-white/10 text-foreground placeholder:text-muted-foreground/60 text-sm focus:border-cyan-400 focus:bg-cyan-500/5 focus:ring-1 focus:ring-cyan-400 transition-all outline-none font-sans"
+                  />
+                </div>
+
+                <div>
+                  <textarea
+                    name="message"
+                    required
+                    rows={5}
+                    placeholder={text.messagePlaceholder}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full px-4 py-3.5 rounded-xl bg-white/[0.03] border border-white/10 text-foreground placeholder:text-muted-foreground/60 text-sm focus:border-cyan-400 focus:bg-cyan-500/5 focus:ring-1 focus:ring-cyan-400 transition-all outline-none font-sans resize-none"
+                  />
+                </div>
+
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl font-semibold flex items-center justify-center gap-2 h-14 text-base relative overflow-hidden group"
+                  className="w-full h-12 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-slate-950 font-bold rounded-xl shadow-lg shadow-cyan-500/20 transition-all hover:scale-[1.01]"
                 >
-                  <span className="relative z-10 flex items-center gap-2">
-                    {isLoading ? (
-                      <>
-                        <motion.span
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                          className="inline-block"
-                        >
-                          ⚙️
-                        </motion.span>
-                        {text.sending}
-                      </>
-                    ) : (
-                      <>
-                        <FaPaperPlane className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                        {text.sendButton}
-                      </>
-                    )}
-                  </span>
-                  <motion.div
-                    className="absolute inset-0 bg-white/20"
-                    initial={{ x: '-100%' }}
-                    whileHover={{ x: '100%' }}
-                    transition={{ duration: 0.5 }}
-                  />
+                  {isLoading ? (
+                    <span>{text.sending}</span>
+                  ) : (
+                    <span className="flex items-center gap-2">
+                      <FaPaperPlane className="w-4 h-4" />
+                      {text.sendButton}
+                    </span>
+                  )}
                 </Button>
-              </motion.div>
+              </form>
+            </SpotlightCard>
+          </motion.div>
 
-              {/* Notification */}
-              {notification && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  className={`flex items-center gap-2 p-4 rounded-xl ${
-                    notification.type === 'success' ? 'bg-green-500/10 text-green-500 border border-green-500/20' : 'bg-red-500/10 text-red-500 border border-red-500/20'
-                  }`}
-                >
-                  {notification.type === 'success' ? <FaCheckCircle className="w-5 h-5 shrink-0" /> : <FaTimesCircle className="w-5 h-5 shrink-0" />}
-                  <p className="text-sm">{notification.message}</p>
-                </motion.div>
-              )}
-            </motion.form>
-
-            {/* Social Links & CTA */}
-            <motion.div variants={itemVariants} className="space-y-8 flex flex-col justify-between">
-              <div>
-                <h3 className="text-2xl font-bold text-foreground mb-6 inline-flex items-center gap-2">
-                  {text.connectTitle}
-                </h3>
-                <p className="text-muted-foreground mb-6">
-                  {text.connectDesc}
+          {/* Socials & Callout (5 cols) */}
+          <motion.div variants={itemVariants} className="lg:col-span-5 flex flex-col justify-between space-y-6">
+            <SpotlightCard className="p-8 border-purple-500/20 flex-1 flex flex-col justify-between">
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold font-display text-foreground">Social & Code Networks</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Follow my technical updates, open-source repositories, and professional network.
                 </p>
 
-                <motion.div variants={containerVariants} className="flex gap-4">
-                  {text.socials.map((social, idx) => {
-                    const Icon = social.icon
+                <div className="flex gap-4 pt-2">
+                  {text.socials.map((s, idx) => {
+                    const Icon = s.icon
                     return (
-                      <motion.a
+                      <a
                         key={idx}
-                        variants={itemVariants}
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        whileTap={{ scale: 0.9 }}
-                        href={social.href}
+                        href={s.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-14 h-14 rounded-xl bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary flex items-center justify-center transition-all duration-300"
-                        title={social.name}
+                        className="p-3.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-cyan-400/50 hover:bg-cyan-500/10 text-cyan-400 transition-all hover:scale-110"
+                        title={s.name}
                       >
-                        <Icon className="w-6 h-6" />
-                      </motion.a>
+                        <Icon className="w-5 h-5" />
+                      </a>
                     )
                   })}
-                </motion.div>
+                </div>
               </div>
 
-              {/* Ready to Collaborate */}
-              <motion.div
-                variants={itemVariants}
-                whileHover={{ y: -5 }}
-                className="bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 backdrop-blur-sm border border-primary/20 rounded-2xl p-8 space-y-3 relative overflow-hidden group"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <p className="font-semibold text-foreground text-lg">{text.ctaTitle}</p>
-                <p className="text-sm text-muted-foreground">{text.ctaDesc}</p>
-                <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-primary/10 rounded-full blur-2xl" />
-              </motion.div>
-            </motion.div>
+              <div className="pt-6 border-t border-white/10 mt-6">
+                <p className="text-xs font-mono text-cyan-400 uppercase tracking-widest">// Response guarantee</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Inquiries answered within 24 hours. Confidential NDA options available for corporate software projects.
+                </p>
+              </div>
+            </SpotlightCard>
           </motion.div>
         </motion.div>
       </div>
