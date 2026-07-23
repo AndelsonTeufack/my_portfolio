@@ -26,7 +26,7 @@ const projectsData: { en: ProjectType[]; fr: ProjectType[] } = {
         'Multi-language support (i18n) & dynamic Light/Dark theme switching.',
       ],
       demo: '#',
-      code: 'https://github.com/AndelsonTeufack',
+      code: 'https://github.com/AndelsonTeufack/tailor_pro_app',
     },
     {
       title: 'HR Management System',

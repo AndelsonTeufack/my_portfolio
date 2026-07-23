@@ -192,6 +192,7 @@ const jsonLdGraph = {
         'MongoDB', 'Redis', 'Firebase', 'APIs REST',
         'Microservices', 'System Design', 'KoboCollect',
         'SIG / GeoJSON', 'Docker', 'Git', 'Agile / Scrum',
+        'Technical Instruction', 'Pedagogy & Mentorship', 'Software Engineering Education',
       ],
       knowsLanguage: [
         { '@type': 'Language', name: 'French' },
@@ -239,6 +240,14 @@ const jsonLdGraph = {
           acceptedAnswer: {
             '@type': 'Answer',
             text: 'TEUFACK SONTSA Andelson (aussi connu sous le nom d\'Andelson Teufack) est un Développeur Full-Stack et Analyste IT basé à Douala, Cameroun. Diplômé d\'une Licence en Génie Logiciel à l\'IAI et certifié Google IT Support, il conçoit des applications web, mobiles et architectures backend robustes.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Andelson Teufack a-t-il une expérience d\'enseignement ou de formation ?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Oui, TEUFACK SONTSA Andelson a été Formateur & Mentor en Développement Web (React.js, JS) et Mobile (Flutter, Dart) à l\'Institut Africain d\'Informatique (IAI) de janvier à mai 2025, où il a encadré et formé plus de 100 étudiants en génie logiciel.',
           },
         },
         {

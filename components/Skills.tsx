@@ -73,6 +73,7 @@ const content = {
     softSkillsTitle: 'Professional Mindset',
     softSkills: [
       { name: 'Adaptability', icon: Zap, description: 'Rapidly learning & adopting emerging frameworks' },
+      { name: 'Pedagogy & Mentorship', icon: Users, description: 'Technical training, student coaching & knowledge transfer at IAI' },
       { name: 'Team Leadership', icon: Target, description: 'Guiding development sprints & technical reviews' },
       { name: 'Analytical Thinking', icon: Brain, description: 'Deconstructing complex business logic into code' },
       { name: 'Communication', icon: MessageCircle, description: 'Clear technical documentation & client syncs' },
@@ -127,6 +128,7 @@ const content = {
     softSkillsTitle: 'Compétences Transversales',
     softSkills: [
       { name: 'Adaptabilité', icon: Zap, description: 'Assimilation rapide des nouveaux frameworks' },
+      { name: 'Pédagogie & Mentorat', icon: Users, description: 'Formation technique, accompagnement & transmission de savoir à l\'IAI' },
       { name: 'Leadership & Équipe', icon: Target, description: 'Pilotage des sprints Agile et revue de code' },
       { name: 'Pensée Analytique', icon: Brain, description: 'Modélisation et résolution de problèmes complexes' },
       { name: 'Communication', icon: MessageCircle, description: 'Documentation claire et alignement technique' },

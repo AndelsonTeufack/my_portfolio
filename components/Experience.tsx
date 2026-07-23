@@ -44,6 +44,19 @@ const content = {
         ],
       },
       {
+        company: 'INSTITUT AFRICAIN D\'INFORMATIQUE (IAI)',
+        position: 'Technical Instructor & Mentor (Web & Mobile Engineering)',
+        period: 'January 2025 - May 2025',
+        location: 'Yaoundé Cameroon',
+        type: 'Mentorship & Pedagogy',
+        highlights: [
+          'Conducted intensive practical workshops in Web Engineering (React.js, JS, HTML5/CSS3) and Mobile Development (Flutter, Dart) for 1st & 2nd-year students.',
+          'Mentored 100+ software engineering students, accelerating their technical proficiency and practical problem-solving skills.',
+          'Prepared students for corporate software engineering internships, capstone projects, and international professional certifications.',
+          'Fostered engineering best practices, clean code architecture, Git workflows, and API integration methods.',
+        ],
+      },
+      {
         company: 'GREEN POWER CAMEROUN',
         position: 'IT Solutions Analysis & Development Intern',
         period: 'November 2024 - May 2025',
@@ -132,6 +145,19 @@ const content = {
           'Réalisation de tests unitaires et fonctionnels pour assurer la disponibilité des applications.',
           'Automatisation de la génération de rapports via scripts Python.',
           'Contribution à la maintenance et à l’amélioration des systèmes internes.',
+        ],
+      },
+      {
+        company: 'INSTITUT AFRICAIN D\'INFORMATIQUE (IAI)',
+        position: 'Formateur & Mentor en Développement Web & Mobile',
+        period: 'Janvier 2025 - Mai 2025',
+        location: 'Yaoundé, Cameroun',
+        type: 'Mentorat & Enseignement',
+        highlights: [
+          'Animation de cours et travaux pratiques intensifs en Développement Web (React.js, JS, HTML5/CSS3) et Mobile (Flutter, Dart) pour les étudiants de 1ère et 2ème année.',
+          'Mentorat et encadrement technique de +100 étudiants en génie logiciel, favorisant la montée en compétences et la maîtrise des architectures logicielles.',
+          'Préparation accélérée des étudiants aux stages en entreprise, projets professionnels de fin d’études et certifications internationales.',
+          'Sensibilisation aux bonnes pratiques de développement, au clean code, à la gestion de versions Git et à l’intégration d’APIs REST.',
         ],
       },
       {
