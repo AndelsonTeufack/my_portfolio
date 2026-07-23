@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform, Variants } from 'framer-motion'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { ArrowDown, Download, Sparkles, Code2, Terminal, Cpu } from 'lucide-react'
+import { ArrowDown, Download, Sparkles, Code2 } from 'lucide-react'
 import SpotlightCard from '@/components/ui/SpotlightCard'
 
 interface HeroProps {
@@ -77,10 +77,10 @@ export default function Hero({ language }: HeroProps) {
   const translateY = useTransform(scrollYProgress, [0, 0.8], [0, 80])
 
   const handleDownloadCV = () => {
-    const cvUrl = '/CV - Andelson TEUFACK .pdf'
+    const cvUrl = '/CV - Andelson TEUFACK.pdf'
     const link = document.createElement('a')
     link.href = cvUrl
-    link.download = 'CV - Andelson TEUFACK .pdf'
+    link.download = 'CV - Andelson TEUFACK.pdf'
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
@@ -92,8 +92,8 @@ export default function Hero({ language }: HeroProps) {
       className="relative min-h-screen pt-32 pb-20 px-4 sm:px-6 lg:px-8 flex items-center justify-center overflow-hidden"
     >
       {/* Glow backgrounds */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none -z-10" />
-      <div className="absolute top-1/3 right-10 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none -z-10" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-sky-500/10 dark:bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none -z-10" />
+      <div className="absolute top-1/3 right-10 w-[400px] h-[400px] bg-purple-500/10 dark:bg-purple-600/10 rounded-full blur-[120px] pointer-events-none -z-10" />
 
       <motion.div style={{ opacity: opacityY, y: translateY }} className="max-w-7xl w-full mx-auto">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -106,10 +106,10 @@ export default function Hero({ language }: HeroProps) {
           >
             {/* Live Status Badge */}
             <motion.div variants={itemVariants} className="inline-block">
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-card border-emerald-500/30 text-xs font-mono font-medium text-emerald-400">
-                <span className="relative flex h-2 w-2">
+              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-card border-emerald-500/40 text-xs font-mono font-bold text-emerald-700 dark:text-emerald-400">
+                <span className="relative flex h-2.5 w-2.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
                 </span>
                 {text.badge}
               </div>
@@ -118,7 +118,7 @@ export default function Hero({ language }: HeroProps) {
             {/* Name Title */}
             <motion.div variants={itemVariants} className="space-y-2">
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight font-display">
-                <span className="text-foreground">{text.name.split(' ')[0]} </span>
+                <span className="text-slate-900 dark:text-foreground">{text.name.split(' ')[0]} </span>
                 <span className="text-gradient-cyan">{text.name.split(' ')[1]}</span>
               </h1>
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gradient-purple font-display">
@@ -129,21 +129,21 @@ export default function Hero({ language }: HeroProps) {
             {/* Description */}
             <motion.p
               variants={itemVariants}
-              className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl"
+              className="text-base sm:text-lg text-slate-600 dark:text-muted-foreground leading-relaxed max-w-2xl font-medium"
             >
               {text.description}
             </motion.p>
 
             {/* Core Tech Stack Badges */}
             <motion.div variants={itemVariants} className="pt-2">
-              <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground/80 block mb-3">
+              <span className="text-xs font-mono uppercase tracking-widest text-slate-500 dark:text-muted-foreground/80 block mb-3 font-semibold">
                 {text.stackTitle}
               </span>
               <div className="flex flex-wrap gap-2">
                 {['Spring Boot', 'React / Next.js', 'Flutter', 'Python', 'Odoo ERP', 'PostgreSQL'].map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-cyan-300 hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-all cursor-default"
+                    className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/[0.04] border border-slate-200/90 dark:border-white/10 text-xs font-mono font-semibold text-slate-800 dark:text-cyan-300 hover:border-sky-500 dark:hover:border-cyan-500/50 hover:bg-sky-500/10 dark:hover:bg-cyan-500/10 transition-all cursor-default shadow-2xs"
                   >
                     {tech}
                   </span>
@@ -156,7 +156,7 @@ export default function Hero({ language }: HeroProps) {
               <Button
                 size="lg"
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                className="rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold px-7 shadow-lg shadow-cyan-500/25 transition-all hover:scale-105"
+                className="rounded-full bg-gradient-to-r from-sky-600 to-blue-600 dark:from-cyan-500 dark:to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white dark:text-slate-950 font-bold px-7 shadow-lg shadow-sky-500/25 dark:shadow-cyan-500/25 transition-all hover:scale-105"
               >
                 <Sparkles className="w-4 h-4 mr-2" />
                 {text.ctaProjects}
@@ -166,9 +166,9 @@ export default function Hero({ language }: HeroProps) {
                 variant="outline"
                 size="lg"
                 onClick={handleDownloadCV}
-                className="rounded-full border-white/15 bg-white/[0.03] hover:bg-white/[0.08] hover:border-cyan-400/50 text-foreground font-semibold px-6 transition-all hover:scale-105"
+                className="rounded-full border-slate-300 dark:border-white/15 bg-white/90 dark:bg-white/[0.03] hover:bg-slate-100 dark:hover:bg-white/[0.08] hover:border-sky-500 dark:hover:border-cyan-400/50 text-slate-900 dark:text-foreground font-bold px-6 transition-all hover:scale-105 shadow-xs"
               >
-                <Download className="w-4 h-4 mr-2 text-cyan-400" />
+                <Download className="w-4 h-4 mr-2 text-sky-600 dark:text-cyan-400" />
                 {text.downloadCV}
               </Button>
 
@@ -176,7 +176,7 @@ export default function Hero({ language }: HeroProps) {
                 variant="ghost"
                 size="lg"
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="rounded-full text-muted-foreground hover:text-cyan-400 hover:bg-cyan-500/10 transition-all"
+                className="rounded-full text-slate-600 dark:text-muted-foreground hover:text-sky-600 dark:hover:text-cyan-400 hover:bg-sky-500/10 dark:hover:bg-cyan-500/10 font-semibold transition-all"
               >
                 {text.ctaContact}
                 <ArrowDown className="w-4 h-4 ml-1" />
@@ -191,7 +191,7 @@ export default function Hero({ language }: HeroProps) {
             transition={{ type: 'spring', stiffness: 100, damping: 18, delay: 0.3 }}
             className="lg:col-span-5 flex justify-center"
           >
-            <SpotlightCard className="w-full max-w-md p-4 spotlight-bg border-cyan-500/30">
+            <SpotlightCard className="w-full max-w-md p-4 spotlight-bg border-slate-300/80 dark:border-cyan-500/30 shadow-xl dark:shadow-none">
               <div className="relative aspect-[4/5] rounded-xl overflow-hidden group">
                 <Image
                   src="/hero.jpg"
@@ -202,21 +202,21 @@ export default function Hero({ language }: HeroProps) {
                   sizes="(max-width: 768px) 100vw, 40vw"
                 />
 
-                {/* Cyber Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-70 dark:opacity-80" />
 
                 {/* Floating Experience Badge */}
-                <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl glass-card border-white/10 flex items-center justify-between">
+                <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl glass-card border-slate-200/80 dark:border-white/10 flex items-center justify-between shadow-md dark:shadow-none">
                   <div className="flex items-center gap-2.5">
-                    <div className="p-2 rounded-lg bg-cyan-500/20 text-cyan-400">
+                    <div className="p-2 rounded-lg bg-sky-500/20 dark:bg-cyan-500/20 text-sky-600 dark:text-cyan-400">
                       <Code2 className="w-4 h-4" />
                     </div>
                     <div>
-                      <p className="text-xs font-bold text-foreground">{text.experienceBadge}</p>
-                      <p className="text-[10px] font-mono text-muted-foreground">{text.locationBadge}</p>
+                      <p className="text-xs font-bold text-slate-900 dark:text-foreground">{text.experienceBadge}</p>
+                      <p className="text-[10px] font-mono text-slate-500 dark:text-muted-foreground">{text.locationBadge}</p>
                     </div>
                   </div>
-                  <span className="text-xs font-mono text-cyan-400 bg-cyan-500/10 px-2 py-1 rounded border border-cyan-500/20">
+                  <span className="text-xs font-mono text-sky-700 dark:text-cyan-400 bg-sky-500/10 dark:bg-cyan-500/10 px-2 py-1 rounded border border-sky-400/30 dark:border-cyan-500/20 font-semibold">
                     Full-Stack
                   </span>
                 </div>

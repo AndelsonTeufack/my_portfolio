@@ -16,6 +16,13 @@ export default function ParticleBackground() {
     let width = (canvas.width = window.innerWidth)
     let height = (canvas.height = window.innerHeight)
 
+    const isDark = document.documentElement.classList.contains('dark')
+
+    const darkColors = ['rgba(0, 240, 255, ', 'rgba(168, 85, 247, ', 'rgba(255, 255, 255, ']
+    const lightColors = ['rgba(2, 132, 199, ', 'rgba(124, 58, 237, ', 'rgba(15, 23, 42, ']
+
+    const colors = isDark ? darkColors : lightColors
+
     const particles: Array<{
       x: number
       y: number
@@ -26,8 +33,7 @@ export default function ParticleBackground() {
       color: string
     }> = []
 
-    const colors = ['rgba(0, 240, 255, ', 'rgba(168, 85, 247, ', 'rgba(255, 255, 255, ']
-    const particleCount = Math.min(Math.floor((width * height) / 20000), 60)
+    const particleCount = Math.min(Math.floor((width * height) / 20000), 55)
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
@@ -36,7 +42,7 @@ export default function ParticleBackground() {
         size: Math.random() * 1.8 + 0.5,
         speedX: (Math.random() - 0.5) * 0.3,
         speedY: (Math.random() - 0.5) * 0.3,
-        opacity: Math.random() * 0.4 + 0.1,
+        opacity: Math.random() * 0.35 + 0.1,
         color: colors[Math.floor(Math.random() * colors.length)],
       })
     }
@@ -103,7 +109,7 @@ export default function ParticleBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-0 opacity-60"
+      className="pointer-events-none fixed inset-0 z-0 opacity-70"
     />
   )
 }

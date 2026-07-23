@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView, Variants } from 'framer-motion'
-import { Calendar, MapPin, Sparkles, GraduationCap, Award, ChevronRight, Briefcase, ExternalLink } from 'lucide-react'
+import { MapPin, Sparkles, GraduationCap, Award, ChevronRight, Briefcase } from 'lucide-react'
 import SpotlightCard from '@/components/ui/SpotlightCard'
 
 interface ExperienceProps {
@@ -47,7 +47,7 @@ const content = {
         company: 'INSTITUT AFRICAIN D\'INFORMATIQUE (IAI)',
         position: 'Technical Instructor & Mentor (Web & Mobile Engineering)',
         period: 'January 2025 - May 2025',
-        location: 'Yaoundé Cameroon',
+        location: 'Yaoundé, Cameroon',
         type: 'Mentorship & Pedagogy',
         highlights: [
           'Conducted intensive practical workshops in Web Engineering (React.js, JS, HTML5/CSS3) and Mobile Development (Flutter, Dart) for 1st & 2nd-year students.',
@@ -253,16 +253,16 @@ export default function Experience({ language }: ExperienceProps) {
           variants={containerVariants}
           className="space-y-4 text-center md:text-left"
         >
-          <motion.div variants={itemVariants} className="inline-flex items-center gap-2 text-cyan-400 font-mono text-xs tracking-widest uppercase">
-            <Sparkles className="w-4 h-4 text-cyan-400" />
+          <motion.div variants={itemVariants} className="inline-flex items-center gap-2 text-sky-600 dark:text-cyan-400 font-mono text-xs tracking-widest uppercase font-bold">
+            <Sparkles className="w-4 h-4 text-sky-600 dark:text-cyan-400" />
             <span>// 03. Experience Timeline</span>
           </motion.div>
 
-          <motion.h2 variants={itemVariants} className="text-3xl sm:text-5xl font-bold font-display text-foreground">
+          <motion.h2 variants={itemVariants} className="text-3xl sm:text-5xl font-bold font-display text-slate-900 dark:text-foreground">
             {text.title}
           </motion.h2>
 
-          <motion.p variants={itemVariants} className="text-muted-foreground text-base sm:text-lg max-w-2xl">
+          <motion.p variants={itemVariants} className="text-slate-600 dark:text-muted-foreground text-base sm:text-lg max-w-2xl font-medium">
             {text.subtitle}
           </motion.p>
         </motion.div>
@@ -272,31 +272,31 @@ export default function Experience({ language }: ExperienceProps) {
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={containerVariants}
-          className="relative pl-6 md:pl-8 space-y-12 border-l-2 border-cyan-500/30"
+          className="relative pl-6 md:pl-8 space-y-12 border-l-2 border-sky-400/40 dark:border-cyan-500/30"
         >
           {text.experiences.map((exp, idx) => (
             <motion.div key={idx} variants={itemVariants} className="relative group">
               {/* Timeline Glowing Node */}
-              <div className="absolute -left-[31px] md:-left-[39px] top-6 w-4 h-4 rounded-full bg-slate-950 border-2 border-cyan-400 group-hover:bg-cyan-400 group-hover:shadow-[0_0_15px_#00f0ff] transition-all" />
+              <div className="absolute -left-[31px] md:-left-[39px] top-6 w-4 h-4 rounded-full bg-white dark:bg-slate-950 border-2 border-sky-600 dark:border-cyan-400 group-hover:bg-sky-600 dark:group-hover:bg-cyan-400 group-hover:shadow-[0_0_15px_#0284c7] dark:group-hover:shadow-[0_0_15px_#00f0ff] transition-all" />
 
-              <SpotlightCard className="p-6 sm:p-8 border-white/10 glass-card-hover">
+              <SpotlightCard className="p-6 sm:p-8 border-slate-200/80 dark:border-white/10 shadow-sm dark:shadow-none glass-card-hover">
                 <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                   <div>
-                    <h3 className="text-xl font-bold font-display text-foreground group-hover:text-cyan-300 transition-colors">
+                    <h3 className="text-xl font-bold font-display text-slate-900 dark:text-foreground group-hover:text-sky-600 dark:group-hover:text-cyan-300 transition-colors">
                       {exp.position}
                     </h3>
-                    <p className="text-sm font-semibold text-cyan-400 flex items-center gap-2 mt-1">
+                    <p className="text-sm font-bold text-sky-700 dark:text-cyan-400 flex items-center gap-2 mt-1">
                       <Briefcase className="w-4 h-4" />
                       <span>{exp.company}</span>
                     </p>
                   </div>
 
                   <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-xs font-mono text-cyan-300">
+                    <span className="px-3 py-1 rounded-full bg-sky-500/10 dark:bg-cyan-500/10 border border-sky-400/40 dark:border-cyan-500/30 text-xs font-mono font-bold text-sky-800 dark:text-cyan-300">
                       {exp.period}
                     </span>
-                    <span className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-muted-foreground flex items-center gap-1">
-                      <MapPin className="w-3 h-3 text-purple-400" />
+                    <span className="px-3 py-1 rounded-full bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 text-xs font-mono font-semibold text-slate-600 dark:text-muted-foreground flex items-center gap-1">
+                      <MapPin className="w-3 h-3 text-purple-600 dark:text-purple-400" />
                       {exp.location}
                     </span>
                   </div>
@@ -305,8 +305,8 @@ export default function Experience({ language }: ExperienceProps) {
                 {/* Highlights List */}
                 <ul className="space-y-2.5 pt-2">
                   {exp.highlights.map((item, hidx) => (
-                    <li key={hidx} className="text-sm text-muted-foreground flex items-start gap-2.5">
-                      <ChevronRight className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                    <li key={hidx} className="text-sm text-slate-700 dark:text-muted-foreground flex items-start gap-2.5 font-medium">
+                      <ChevronRight className="w-4 h-4 text-sky-600 dark:text-cyan-400 shrink-0 mt-0.5" />
                       <span className="leading-relaxed">{item}</span>
                     </li>
                   ))}
@@ -325,32 +325,32 @@ export default function Experience({ language }: ExperienceProps) {
         >
           {/* Academic Education */}
           <motion.div variants={itemVariants} className="space-y-4">
-            <h3 className="text-xl font-bold font-display text-foreground flex items-center gap-2">
-              <GraduationCap className="w-5 h-5 text-cyan-400" />
+            <h3 className="text-xl font-bold font-display text-slate-900 dark:text-foreground flex items-center gap-2">
+              <GraduationCap className="w-5 h-5 text-sky-600 dark:text-cyan-400" />
               <span>{text.education.academicTitle}</span>
             </h3>
 
             {text.education.academicItems.map((item, idx) => (
-              <SpotlightCard key={idx} className="p-6 border-white/10">
-                <h4 className="text-base font-bold text-foreground">{item.degree}</h4>
-                <p className="text-sm text-cyan-400 font-mono mt-1">{item.school}</p>
-                <p className="text-xs text-muted-foreground mt-2">{item.year}</p>
+              <SpotlightCard key={idx} className="p-6 border-slate-200/80 dark:border-white/10 shadow-sm dark:shadow-none">
+                <h4 className="text-base font-bold text-slate-900 dark:text-foreground">{item.degree}</h4>
+                <p className="text-sm text-sky-700 dark:text-cyan-400 font-mono font-bold mt-1">{item.school}</p>
+                <p className="text-xs text-slate-500 dark:text-muted-foreground font-semibold mt-2">{item.year}</p>
               </SpotlightCard>
             ))}
           </motion.div>
 
           {/* Certifications */}
           <motion.div variants={itemVariants} className="space-y-4">
-            <h3 className="text-xl font-bold font-display text-foreground flex items-center gap-2">
-              <Award className="w-5 h-5 text-purple-400" />
+            <h3 className="text-xl font-bold font-display text-slate-900 dark:text-foreground flex items-center gap-2">
+              <Award className="w-5 h-5 text-purple-600 dark:text-purple-400" />
               <span>{text.education.certificationsTitle}</span>
             </h3>
 
             {text.education.certifications.map((item, idx) => (
-              <SpotlightCard key={idx} spotlightColor="rgba(168, 85, 247, 0.15)" className="p-6 border-purple-500/20">
-                <h4 className="text-base font-bold text-foreground">{item.name}</h4>
-                <p className="text-sm text-purple-400 font-mono mt-1">{item.issuer}</p>
-                <p className="text-xs text-muted-foreground mt-2">{item.year}</p>
+              <SpotlightCard key={idx} spotlightColor="rgba(124, 58, 237, 0.15)" className="p-6 border-purple-400/30 dark:border-purple-500/20 shadow-sm dark:shadow-none">
+                <h4 className="text-base font-bold text-slate-900 dark:text-foreground">{item.name}</h4>
+                <p className="text-sm text-purple-700 dark:text-purple-400 font-mono font-bold mt-1">{item.issuer}</p>
+                <p className="text-xs text-slate-500 dark:text-muted-foreground font-semibold mt-2">{item.year}</p>
               </SpotlightCard>
             ))}
           </motion.div>

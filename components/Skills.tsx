@@ -8,9 +8,7 @@ import {
   Database,
   GitBranch,
   Cpu,
-  Monitor,
   TrendingUp,
-  Headset,
   Users,
   Globe,
   Sparkles,
@@ -18,9 +16,7 @@ import {
   Brain,
   MessageCircle,
   Target,
-  Clock,
   Server,
-  Terminal,
 } from 'lucide-react'
 import SpotlightCard from '@/components/ui/SpotlightCard'
 
@@ -37,37 +33,37 @@ const content = {
         name: 'Backend & APIs',
         skills: ['Spring Boot', 'Java', 'Python', 'Django', 'FastAPI', 'Flask', 'Node.js', 'NestJS', 'REST APIs', 'Microservices'],
         icon: Server,
-        color: 'rgba(0, 240, 255, 0.15)',
+        color: 'rgba(2, 132, 199, 0.15)',
       },
       {
         name: 'Frontend & Mobile',
         skills: ['React.js', 'Next.js', 'Flutter', 'Java/Kotlin (Android)', 'TypeScript', 'Tailwind CSS', 'Bootstrap', 'Dart', 'HTML5/CSS3'],
         icon: Layout,
-        color: 'rgba(168, 85, 247, 0.15)',
+        color: 'rgba(124, 58, 237, 0.15)',
       },
       {
         name: 'Databases & Storage',
         skills: ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Firebase', 'SQL Server', 'Oracle SQL'],
         icon: Database,
-        color: 'rgba(16, 185, 129, 0.15)',
+        color: 'rgba(5, 150, 105, 0.15)',
       },
       {
         name: 'DevOps, Tools & ERP',
         skills: ['Git', 'GitHub', 'GitLab', 'Docker', 'Postman', 'Odoo ERP', 'Jira', 'Power BI', 'MS 365', 'KoboCollect / SIG'],
         icon: GitBranch,
-        color: 'rgba(245, 158, 11, 0.15)',
+        color: 'rgba(217, 119, 6, 0.15)',
       },
       {
         name: 'Architecture & Design',
         skills: ['Agile / Scrum', 'UML / Merise', 'System Design', 'SOLID Principles', 'Design Patterns'],
         icon: Cpu,
-        color: 'rgba(59, 130, 246, 0.15)',
+        color: 'rgba(37, 99, 235, 0.15)',
       },
       {
         name: 'Performance & Security',
         skills: ['Core Web Vitals', 'Lighthouse', 'SEO Optimization', 'JWT Auth & Spring Security', 'HTTPS / SSL'],
         icon: TrendingUp,
-        color: 'rgba(236, 72, 153, 0.15)',
+        color: 'rgba(219, 39, 119, 0.15)',
       },
     ],
     softSkillsTitle: 'Professional Mindset',
@@ -92,37 +88,37 @@ const content = {
         name: 'Backend & APIs',
         skills: ['Spring Boot', 'Java', 'Python', 'Django', 'FastAPI', 'Flask', 'Node.js', 'NestJS', 'APIs REST', 'Microservices'],
         icon: Server,
-        color: 'rgba(0, 240, 255, 0.15)',
+        color: 'rgba(2, 132, 199, 0.15)',
       },
       {
         name: 'Frontend & Mobile',
         skills: ['React.js', 'Next.js', 'Flutter', 'Java/Kotlin (Android natif)', 'TypeScript', 'Tailwind CSS', 'Bootstrap', 'Dart', 'HTML5/CSS3'],
         icon: Layout,
-        color: 'rgba(168, 85, 247, 0.15)',
+        color: 'rgba(124, 58, 237, 0.15)',
       },
       {
         name: 'Bases de Données',
         skills: ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Firebase', 'SQL Server', 'Oracle SQL'],
         icon: Database,
-        color: 'rgba(16, 185, 129, 0.15)',
+        color: 'rgba(5, 150, 105, 0.15)',
       },
       {
         name: 'DevOps, Outils & ERP',
         skills: ['Git', 'GitHub', 'GitLab', 'Docker', 'Postman', 'Odoo ERP', 'Jira', 'Power BI', 'MS 365', 'KoboCollect / SIG'],
         icon: GitBranch,
-        color: 'rgba(245, 158, 11, 0.15)',
+        color: 'rgba(217, 119, 6, 0.15)',
       },
       {
         name: 'Architecture & Conception',
         skills: ['Agile / Scrum', 'UML / Merise', 'System Design', 'Principes SOLID', 'Design Patterns'],
         icon: Cpu,
-        color: 'rgba(59, 130, 246, 0.15)',
+        color: 'rgba(37, 99, 235, 0.15)',
       },
       {
         name: 'Performance & Sécurité',
         skills: ['Core Web Vitals', 'Lighthouse', 'Référencement SEO', 'Authentification JWT & Spring Security', 'HTTPS / SSL'],
         icon: TrendingUp,
-        color: 'rgba(236, 72, 153, 0.15)',
+        color: 'rgba(219, 39, 119, 0.15)',
       },
     ],
     softSkillsTitle: 'Compétences Transversales',
@@ -174,16 +170,16 @@ export default function Skills({ language }: SkillsProps) {
           variants={containerVariants}
           className="space-y-4 text-center md:text-left"
         >
-          <motion.div variants={itemVariants} className="inline-flex items-center gap-2 text-cyan-400 font-mono text-xs tracking-widest uppercase">
-            <Sparkles className="w-4 h-4 text-purple-400" />
+          <motion.div variants={itemVariants} className="inline-flex items-center gap-2 text-sky-600 dark:text-cyan-400 font-mono text-xs tracking-widest uppercase font-bold">
+            <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400" />
             <span>// 02. Skills & Expertise</span>
           </motion.div>
 
-          <motion.h2 variants={itemVariants} className="text-3xl sm:text-5xl font-bold font-display text-foreground">
+          <motion.h2 variants={itemVariants} className="text-3xl sm:text-5xl font-bold font-display text-slate-900 dark:text-foreground">
             {text.title}
           </motion.h2>
 
-          <motion.p variants={itemVariants} className="text-muted-foreground text-base sm:text-lg max-w-2xl">
+          <motion.p variants={itemVariants} className="text-slate-600 dark:text-muted-foreground text-base sm:text-lg max-w-2xl font-medium">
             {text.subtitle}
           </motion.p>
         </motion.div>
@@ -201,21 +197,21 @@ export default function Skills({ language }: SkillsProps) {
               <motion.div key={idx} variants={itemVariants}>
                 <SpotlightCard
                   spotlightColor={cat.color}
-                  className="p-6 h-full flex flex-col justify-between glass-card-hover border-white/10"
+                  className="p-6 h-full flex flex-col justify-between glass-card-hover border-slate-200/80 dark:border-white/10 shadow-sm dark:shadow-none"
                 >
                   <div>
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="p-2.5 rounded-xl bg-white/[0.05] border border-white/10 text-cyan-400">
+                      <div className="p-2.5 rounded-xl bg-sky-500/10 dark:bg-white/[0.05] border border-sky-400/30 dark:border-white/10 text-sky-600 dark:text-cyan-400">
                         <Icon className="w-5 h-5" />
                       </div>
-                      <h3 className="text-lg font-bold font-display text-foreground">{cat.name}</h3>
+                      <h3 className="text-lg font-bold font-display text-slate-900 dark:text-foreground">{cat.name}</h3>
                     </div>
 
                     <div className="flex flex-wrap gap-2 pt-2">
                       {cat.skills.map((skill, sidx) => (
                         <span
                           key={sidx}
-                          className="px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/10 text-xs font-mono font-medium text-slate-300 hover:text-cyan-300 hover:border-cyan-500/40 hover:bg-cyan-500/10 transition-all cursor-default"
+                          className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 text-xs font-mono font-semibold text-slate-800 dark:text-slate-300 hover:text-sky-700 dark:hover:text-cyan-300 hover:border-sky-500/50 dark:hover:border-cyan-500/40 hover:bg-sky-500/10 dark:hover:bg-cyan-500/10 transition-all cursor-default shadow-2xs"
                         >
                           {skill}
                         </span>
@@ -237,8 +233,8 @@ export default function Skills({ language }: SkillsProps) {
         >
           {/* Soft Skills (7 cols) */}
           <motion.div variants={itemVariants} className="lg:col-span-7 space-y-6">
-            <h3 className="text-xl font-bold font-display text-foreground flex items-center gap-2">
-              <Users className="w-5 h-5 text-cyan-400" />
+            <h3 className="text-xl font-bold font-display text-slate-900 dark:text-foreground flex items-center gap-2">
+              <Users className="w-5 h-5 text-sky-600 dark:text-cyan-400" />
               <span>{text.softSkillsTitle}</span>
             </h3>
 
@@ -246,14 +242,14 @@ export default function Skills({ language }: SkillsProps) {
               {text.softSkills.map((soft, idx) => {
                 const Icon = soft.icon
                 return (
-                  <SpotlightCard key={idx} className="p-5 border-white/10">
+                  <SpotlightCard key={idx} className="p-5 border-slate-200/80 dark:border-white/10 shadow-sm dark:shadow-none">
                     <div className="flex items-start gap-3">
-                      <div className="p-2 rounded-lg bg-purple-500/10 text-purple-400 shrink-0">
+                      <div className="p-2 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 shrink-0">
                         <Icon className="w-4 h-4" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-bold text-foreground">{soft.name}</h4>
-                        <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{soft.description}</p>
+                        <h4 className="text-sm font-bold text-slate-900 dark:text-foreground">{soft.name}</h4>
+                        <p className="text-xs text-slate-600 dark:text-muted-foreground mt-1 leading-relaxed font-medium">{soft.description}</p>
                       </div>
                     </div>
                   </SpotlightCard>
@@ -264,28 +260,28 @@ export default function Skills({ language }: SkillsProps) {
 
           {/* Languages (5 cols) */}
           <motion.div variants={itemVariants} className="lg:col-span-5 space-y-6">
-            <h3 className="text-xl font-bold font-display text-foreground flex items-center gap-2">
-              <Globe className="w-5 h-5 text-purple-400" />
+            <h3 className="text-xl font-bold font-display text-slate-900 dark:text-foreground flex items-center gap-2">
+              <Globe className="w-5 h-5 text-purple-600 dark:text-purple-400" />
               <span>{text.languagesTitle}</span>
             </h3>
 
             <div className="space-y-4">
               {text.languages.map((lang, idx) => (
-                <SpotlightCard key={idx} className="p-5 border-white/10">
+                <SpotlightCard key={idx} className="p-5 border-slate-200/80 dark:border-white/10 shadow-sm dark:shadow-none">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-3">
                       <span className="text-2xl">{lang.flag}</span>
-                      <span className="text-sm font-bold text-foreground">{lang.name}</span>
+                      <span className="text-sm font-bold text-slate-900 dark:text-foreground">{lang.name}</span>
                     </div>
-                    <span className="text-xs font-mono text-cyan-400">{lang.level}</span>
+                    <span className="text-xs font-mono font-bold text-sky-700 dark:text-cyan-400">{lang.level}</span>
                   </div>
 
-                  <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                  <div className="w-full h-2 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={isInView ? { width: `${lang.proficiency}%` } : { width: 0 }}
                       transition={{ duration: 1.2, delay: 0.4 + idx * 0.2 }}
-                      className="h-full bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full"
+                      className="h-full bg-gradient-to-r from-sky-600 to-purple-600 dark:from-cyan-500 dark:to-purple-500 rounded-full"
                     />
                   </div>
                 </SpotlightCard>

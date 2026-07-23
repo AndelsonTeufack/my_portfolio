@@ -12,7 +12,7 @@ interface SpotlightCardProps {
 export default function SpotlightCard({
   children,
   className = '',
-  spotlightColor = 'rgba(0, 240, 255, 0.12)',
+  spotlightColor,
   onClick,
 }: SpotlightCardProps) {
   const divRef = useRef<HTMLDivElement>(null)
@@ -35,14 +35,16 @@ export default function SpotlightCard({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
-      className={`relative overflow-hidden rounded-2xl border border-white/10 bg-card/60 backdrop-blur-xl transition-all duration-300 ${className}`}
+      className={`relative overflow-hidden rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white/85 dark:bg-card/60 backdrop-blur-xl shadow-sm dark:shadow-none transition-all duration-300 ${className}`}
     >
       {/* Spotlight Effect Layer */}
       <div
         className="pointer-events-none absolute -inset-px transition-opacity duration-500 rounded-2xl"
         style={{
           opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 40%)`,
+          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${
+            spotlightColor || 'rgba(2, 132, 199, 0.14)'
+          }, transparent 40%)`,
         }}
       />
       {children}
