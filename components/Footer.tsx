@@ -74,7 +74,7 @@ export default function Footer({ language }: FooterProps) {
 
         {/* Bottom Bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground font-mono">
-          <p>© 2026 Andelson Teufack. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Andelson Teufack. All rights reserved.</p>
           <p className="text-slate-400">
             {language === 'en'
               ? 'Built with Next.js 16, React 19, Tailwind CSS v4 & Lenis Motion.'

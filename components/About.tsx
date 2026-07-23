@@ -3,56 +3,12 @@
 import { useRef, useState, useEffect } from 'react'
 import { motion, useInView, Variants } from 'framer-motion'
 import { Target, Lightbulb, Sparkles, Code, Cloud, Search, Quote, Terminal, CheckCircle2 } from 'lucide-react'
+import { calculateAge } from '@/lib/utils'
 import SpotlightCard from '@/components/ui/SpotlightCard'
 import MacbookAnimation from './MacbookAnimation'
 
 interface AboutProps {
   language: 'en' | 'fr'
-}
-
-const content = {
-  en: {
-    title: 'About & Vision',
-    subtitle: 'Combining engineering precision, clean architecture, and creative problem solving.',
-    intro:
-      'I am Andelson TEUFACK, a 23-year-old Full-Stack Developer and IT Analyst based in Douala, Cameroon. I bridge complex backend systems with intuitive frontend experiences.',
-    story:
-      'With over 2+ years of professional engineering experience, I specialize in architecting scalable applications, automating business processes, and optimizing IT infrastructures for enterprises and growing startups.',
-    visionTitle: 'Engineering Philosophy',
-    visionDesc:
-      'I believe in building software that scales gracefully. Every line of code should be intentional, secure, maintainable, and aligned with core business objectives.',
-    methodologyTitle: 'Methodology',
-    methodologyDesc:
-      'Agile iteration, continuous integration, domain-driven design, and strict code quality standards.',
-    quote:
-      'Excellence in software development is not an accident; it is the result of continuous learning, architecture discipline, and attention to detail.',
-    stats: [
-      { value: 2, label: 'Years Experience', suffix: '+' },
-      { value: 10, label: 'Major Projects', suffix: '+' },
-      { value: 20, label: 'Technologies', suffix: '+' },
-    ],
-  },
-  fr: {
-    title: 'À Propos & Vision',
-    subtitle: 'Allier précision d\'ingénierie, architecture propre et résolution créative de problèmes.',
-    intro:
-      'Je suis Andelson TEUFACK, Développeur Full-Stack et Analyste IT de 23 ans basé à Douala, Cameroun. Je fais le pont entre les architectures backend complexes et les interfaces frontends intuitives.',
-    story:
-      'Avec plus de 2 ans d\'expérience professionnelle, je me spécialise dans la conception d\'applications scalables, l\'automatisation de processus métier et l\'optimisation d\'infrastructures IT.',
-    visionTitle: 'Philosophie d\'Ingénierie',
-    visionDesc:
-      'Je crois en la création de logiciels évolutifs. Chaque ligne de code doit être intentionnelle, sécurisée, maintenable et alignée sur les objectifs métier.',
-    methodologyTitle: 'Méthodologie',
-    methodologyDesc:
-      'Itération Agile, intégration continue, architecture orientée domaine et normes strictes de qualité.',
-    quote:
-      'L\'excellence en développement logiciel n\'est pas un hasard ; c\'est le résultat d\'un apprentissage continu, de la discipline architecturale et du soin apporté aux détails.',
-    stats: [
-      { value: 2, label: "Années d'Expérience", suffix: '+' },
-      { value: 10, label: 'Projets Majeurs', suffix: '+' },
-      { value: 20, label: 'Technologies', suffix: '+' },
-    ],
-  },
 }
 
 function AnimatedNumber({ value, suffix = '' }: { value: number; suffix?: string }) {
@@ -104,9 +60,56 @@ const itemVariants: Variants = {
 }
 
 export default function About({ language }: AboutProps) {
-  const text = language === 'en' ? content.en : content.fr
+  const age = calculateAge('2003-12-14')
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
+
+  const content = {
+    en: {
+      title: 'About & Vision',
+      subtitle: 'Combining engineering precision, clean architecture, and creative problem solving.',
+      intro:
+        `I am Andelson TEUFACK, a ${age}-year-old Full-Stack Developer and IT Analyst based in Douala, Cameroon. I bridge complex backend systems with intuitive frontend experiences.`,
+      story:
+        'With over 2+ years of professional engineering experience, I specialize in architecting scalable applications, automating business processes, and optimizing IT infrastructures for enterprises and growing startups.',
+      visionTitle: 'Engineering Philosophy',
+      visionDesc:
+        'I believe in building software that scales gracefully. Every line of code should be intentional, secure, maintainable, and aligned with core business objectives.',
+      methodologyTitle: 'Methodology',
+      methodologyDesc:
+        'Agile iteration, continuous integration, domain-driven design, and strict code quality standards.',
+      quote:
+        'Excellence in software development is not an accident; it is the result of continuous learning, architecture discipline, and attention to detail.',
+      stats: [
+        { value: 2, label: 'Years Experience', suffix: '+' },
+        { value: 10, label: 'Major Projects', suffix: '+' },
+        { value: 20, label: 'Technologies', suffix: '+' },
+      ],
+    },
+    fr: {
+      title: 'À Propos & Vision',
+      subtitle: 'Allier précision d\'ingénierie, architecture propre et résolution créative de problèmes.',
+      intro:
+        `Je suis Andelson TEUFACK, Développeur Full-Stack et Analyste IT de ${age} ans basé à Douala, Cameroun. Je fais le pont entre les architectures backend complexes et les interfaces frontends intuitives.`,
+      story:
+        'Avec plus de 2 ans d\'expérience professionnelle, je me spécialise dans la conception d\'applications scalables, l\'automatisation de processus métier et l\'optimisation d\'infrastructures IT.',
+      visionTitle: 'Philosophie d\'Ingénierie',
+      visionDesc:
+        'Je crois en la création de logiciels évolutifs. Chaque ligne de code doit être intentionnelle, sécurisée, maintenable et alignée sur les objectifs métier.',
+      methodologyTitle: 'Méthodologie',
+      methodologyDesc:
+        'Itération Agile, intégration continue, architecture orientée domaine et normes strictes de qualité.',
+      quote:
+        'L\'excellence en développement logiciel n\'est pas un hasard ; c\'est le résultat d\'un apprentissage continu, de la discipline architecturale et du soin apporté aux détails.',
+      stats: [
+        { value: 2, label: "Années d'Expérience", suffix: '+' },
+        { value: 10, label: 'Projets Majeurs', suffix: '+' },
+        { value: 20, label: 'Technologies', suffix: '+' },
+      ],
+    },
+  }
+
+  const text = language === 'en' ? content.en : content.fr
 
   return (
     <section id="about" className="py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
