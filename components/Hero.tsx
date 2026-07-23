@@ -77,10 +77,10 @@ export default function Hero({ language }: HeroProps) {
   const translateY = useTransform(scrollYProgress, [0, 0.8], [0, 80])
 
   const handleDownloadCV = () => {
-    const cvUrl = '/CV - Andelson TEUFACK.pdf'
+    const cvUrl = '/CV - Andelson TEUFACK .pdf'
     const link = document.createElement('a')
     link.href = cvUrl
-    link.download = 'CV - Andelson TEUFACK.pdf'
+    link.download = 'CV - Andelson TEUFACK .pdf'
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
