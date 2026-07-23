@@ -5,7 +5,7 @@ export async function POST(request: Request) {
   try {
     const { name, email, message } = await request.json();
 
-    // Validation basique des champs
+    // Validation des champs obligatoires
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: 'Tous les champs sont requis.' },
@@ -13,7 +13,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Configuration du transporteur
+    // Configuration du transporteur SMTP
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       host: 'smtp.gmail.com',
@@ -25,219 +25,255 @@ export async function POST(request: Request) {
       },
     });
 
-    // Template HTML moderne et responsive
+    const formattedTime = new Date().toLocaleString('fr-FR', {
+      timeZone: 'Africa/Douala',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    });
+
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safeMessage = escapeHtml(message).replace(/\n/g, '<br/>');
+
+    // Template HTML Cyber-Minimalist Obsidian (compatible Gmail, Outlook, Apple Mail)
     const htmlTemplate = `
       <!DOCTYPE html>
       <html lang="fr">
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Nouveau message de contact</title>
+        <title>Nouveau Message — Portfolio TEUFACK SONTSA Andelson</title>
         <style>
-          * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-          }
+          * { margin: 0; padding: 0; box-sizing: border-box; }
           body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f5f7fa;
-            line-height: 1.5;
-            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #030305;
+            color: #f1f5f9;
+            padding: 24px 12px;
+            -webkit-font-smoothing: antialiased;
           }
-          .container {
-            max-width: 560px;
+          .email-wrapper {
+            max-width: 600px;
             margin: 0 auto;
-            background-color: #ffffff;
-            border-radius: 24px;
+            background-color: #08080d;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 5px 12px -4px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 240, 255, 0.08);
+          }
+          .gradient-bar {
+            height: 4px;
+            background: linear-gradient(90deg, #00f0ff 0%, #a855f7 50%, #10b981 100%);
           }
           .header {
-            background: #dc2626; /* Rouge vif */
-            padding: 32px 28px;
+            padding: 36px 32px 28px;
+            background: radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.12) 0%, transparent 70%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             text-align: center;
-            position: relative;
           }
-          .header-logo {
+          .logo-badge {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 56px;
-            height: 56px;
-            background-color: white; /* Fond blanc pour contraster */
-            border-radius: 18px;
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            background: #030305;
+            border: 1.5px solid #00f0ff;
+            color: #00f0ff;
+            font-weight: 800;
+            font-size: 20px;
+            font-family: monospace;
             margin-bottom: 16px;
-            overflow: hidden; /* Pour que l'image garde la forme */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
           }
-          .header-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* ou contain selon la favicon */
+          .status-pill {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 9999px;
+            background-color: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34d399;
+            font-size: 11px;
+            font-weight: 700;
+            font-family: monospace;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
           }
           .header h1 {
-            color: #000000; /* Noir */
-            font-size: 26px;
-            font-weight: 700;
-            margin: 0 0 6px;
-            letter-spacing: -0.3px;
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
           }
           .header p {
-            color: #1f2937; /* Gris foncé pour le sous-titre */
-            font-size: 15px;
-            font-weight: 400;
+            color: #94a3b8;
+            font-size: 14px;
           }
-          .content {
-            padding: 32px 28px;
+          .body-content {
+            padding: 32px;
           }
-          .field {
+          .section-tag {
+            font-family: monospace;
+            font-size: 11px;
+            color: #00f0ff;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            display: block;
+          }
+          .info-card {
+            background-color: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 18px 20px;
             margin-bottom: 24px;
           }
-          .field-label {
+          .info-row {
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          }
+          .info-row:last-child { border-bottom: none; }
+          .info-label {
             font-size: 13px;
-            font-weight: 600;
-            color: #1e293b;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            margin-bottom: 8px;
-          }
-          .field-label span {
-            background-color: #eef2ff;
-            color: #4f46e5;
-            width: 26px;
-            height: 26px;
-            border-radius: 8px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            line-height: 1; /* Assure le centrage vertical */
-          }
-          .field-value {
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 14px 18px;
-            font-size: 15px;
-            color: #0f172a;
-            word-break: break-word;
-            transition: border 0.2s;
-          }
-          .field-value a {
-            color: #4f46e5;
-            text-decoration: none;
+            color: #94a3b8;
             font-weight: 500;
           }
-          .field-value a:hover {
-            text-decoration: underline;
+          .info-val {
+            font-size: 14px;
+            color: #f8fafc;
+            font-weight: 600;
           }
-          .message-box {
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-left: 4px solid #7c3aed;
+          .info-val a {
+            color: #00f0ff;
+            text-decoration: none;
+          }
+          .message-card {
+            background-color: rgba(3, 3, 5, 0.8);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-left: 4px solid #00f0ff;
             border-radius: 14px;
-            padding: 16px 18px;
+            padding: 22px;
+            margin-bottom: 28px;
+          }
+          .message-text {
             font-size: 15px;
-            color: #0f172a;
+            line-height: 1.65;
+            color: #e2e8f0;
             white-space: pre-wrap;
-            max-height: 300px;
-            overflow-y: auto;
+            word-break: break-word;
+          }
+          .cta-wrapper {
+            text-align: center;
+            margin: 28px 0 12px;
+          }
+          .reply-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #00f0ff 0%, #a855f7 100%);
+            color: #030305;
+            font-weight: 800;
+            font-size: 14px;
+            padding: 14px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.25);
+            transition: all 0.2s ease;
           }
           .footer {
-            background-color: #f1f4f9;
-            padding: 28px 24px;
+            padding: 24px 32px;
+            background-color: #030305;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             text-align: center;
-            border-top: 1px solid #e2e8f0;
           }
           .footer p {
-            font-size: 13px;
-            color: #475569;
-            margin-bottom: 12px;
-          }
-          .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 16px 0 8px;
-          }
-          .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            background-color: #e2e8f0;
-            border-radius: 12px;
-            color: #334155;
-            font-weight: 600;
-            font-size: 16px;
-            text-decoration: none;
-            transition: all 0.2s;
-          }
-          .social-links a:hover {
-            background-color: #4f46e5;
-            color: white;
-            transform: translateY(-2px);
-          }
-          .footer-note {
-            margin-top: 16px;
             font-size: 12px;
             color: #64748b;
-            border-top: 1px dashed #cbd5e1;
-            padding-top: 16px;
+            margin-bottom: 12px;
+          }
+          .footer-links {
+            margin-bottom: 14px;
+          }
+          .footer-links a {
+            color: #00f0ff;
+            text-decoration: none;
+            font-size: 12px;
+            font-family: monospace;
+            margin: 0 10px;
+          }
+          .copyright {
+            font-size: 11px;
+            color: #475569;
+            font-family: monospace;
           }
           @media (max-width: 600px) {
-            body { padding: 10px; }
-            .container { border-radius: 20px; }
+            body { padding: 8px; }
             .header { padding: 24px 20px; }
-            .content { padding: 24px 20px; }
-            .footer { padding: 24px 20px; }
+            .body-content { padding: 20px 16px; }
+            .footer { padding: 20px 16px; }
           }
         </style>
       </head>
       <body>
-        <div class="container">
+        <div class="email-wrapper">
+          <div class="gradient-bar"></div>
+          
           <div class="header">
-            <div class="header-logo">
-              <img src="https://andelson-teufack-portfolio.vercel.app/favicon.ico" alt="AT" width="56" height="56">
-            </div>
-            <h1>✨ Nouveau message</h1>
-            <p>Vous avez reçu un contact depuis votre portfolio</p>
+            <div class="logo-badge">AT</div>
+            <br/>
+            <div class="status-pill">● Message Direct Portfolio</div>
+            <h1>Nouveau Message Reçu</h1>
+            <p>Formulaire de contact · TEUFACK SONTSA Andelson</p>
           </div>
-          <div class="content">
-            <div class="field">
-              <div class="field-label">
-                <span>👤</span> Nom
+
+          <div class="body-content">
+            <span class="section-tag">// 01. EXPÉDITEUR</span>
+            <div class="info-card">
+              <div class="info-row">
+                <span class="info-label">Nom complet :</span>
+                <span class="info-val">${safeName}</span>
               </div>
-              <div class="field-value">${escapeHtml(name)}</div>
+              <div class="info-row">
+                <span class="info-label">Adresse email :</span>
+                <span class="info-val">
+                  <a href="mailto:${safeEmail}">${safeEmail}</a>
+                </span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Horodatage (Douala CM) :</span>
+                <span class="info-val" style="font-family: monospace; font-size: 12px; color: #cbd5e1;">${formattedTime}</span>
+              </div>
             </div>
-            <div class="field">
-              <div class="field-label">
-                <span>📧</span> Email
-              </div>
-              <div class="field-value">
-                <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a>
-              </div>
+
+            <span class="section-tag">// 02. CONTENU DU MESSAGE</span>
+            <div class="message-card">
+              <div class="message-text">${safeMessage}</div>
             </div>
-            <div class="field">
-              <div class="field-label">
-                <span>💬</span> Message
-              </div>
-              <div class="message-box">${escapeHtml(message).replace(/\n/g, '<br/>')}</div>
+
+            <div class="cta-wrapper">
+              <a href="mailto:${safeEmail}?subject=Re:%20Votre%20message%20sur%20mon%20portfolio" class="reply-btn">
+                ⚡ Répondre à ${safeName}
+              </a>
             </div>
           </div>
+
           <div class="footer">
-            <p>Cet email a été envoyé via le formulaire de contact</p>
-            <div class="social-links">
-              <a href="https://linkedin.com/in/andelson-teufack-97a59b279/" target="_blank" rel="noopener">in</a>
-              <a href="https://github.com/AndelsonTeufack" target="_blank" rel="noopener">gh</a>
+            <p>Ce message a été envoyé de manière sécurisée via le formulaire de contact de votre portfolio.</p>
+            <div class="footer-links">
+              <a href="https://www.linkedin.com/in/andelson-teufack-97a59b279/" target="_blank">LinkedIn</a> • 
+              <a href="https://github.com/AndelsonTeufack" target="_blank">GitHub</a> • 
+              <a href="https://andelson-teufack.dev" target="_blank">Site Web</a>
             </div>
-            <div class="footer-note">
-              © 2026 Andelson Teufack · Tous droits réservés
+            <div class="copyright">
+              © ${new Date().getFullYear()} TEUFACK SONTSA Andelson · Full-Stack Developer & IT Analyst
             </div>
           </div>
         </div>
@@ -245,18 +281,26 @@ export async function POST(request: Request) {
       </html>
     `;
 
-    // Version texte simple (fallback)
     const textTemplate = `
-      Nouveau message de ${name}
+      ======================================================
+      NOUVEAU MESSAGE CLIENT / RECRUTEUR (PORTFOLIO)
+      ======================================================
+      Nom: ${name}
       Email: ${email}
-      Message: ${message}
+      Date: ${formattedTime}
+      
+      ------------------------------------------------------
+      MESSAGE:
+      ------------------------------------------------------
+      ${message}
+      ======================================================
     `;
 
     const mailOptions = {
-      from: `"Andelson Teufack Portfolio" <${process.env.EMAIL_USER}>`,
+      from: `"Portfolio TEUFACK SONTSA Andelson" <${process.env.EMAIL_USER}>`,
       to: 'teufackandelson123@gmail.com',
       replyTo: email,
-      subject: `📬 Nouveau message de ${name} (via portfolio)`,
+      subject: `📬 [PORTFOLIO] Nouveau message de ${name}`,
       text: textTemplate,
       html: htmlTemplate,
     };
@@ -276,7 +320,6 @@ export async function POST(request: Request) {
   }
 }
 
-// Fonction utilitaire pour échapper les caractères HTML et éviter les injections XSS
 function escapeHtml(unsafe: string): string {
   return unsafe
     .replace(/&/g, '&amp;')
