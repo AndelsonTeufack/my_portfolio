@@ -15,6 +15,20 @@ interface ProjectsProps {
 const projectsData: { en: ProjectType[]; fr: ProjectType[] } = {
   en: [
     {
+      title: 'TaillorPro - Tailor Workshop Management',
+      category: 'mobile',
+      description:
+        'Cross-platform mobile application dedicated to managing tailoring workshops, client orders, and garment fitting records.',
+      tags: ['Flutter', 'Firebase', 'Mobile', 'i18n', 'Dark/Light Theme'],
+      highlights: [
+        'Complete mobile app development with Flutter.',
+        'Firebase backend integration for authentication and real-time database.',
+        'Multi-language support (i18n) & dynamic Light/Dark theme switching.',
+      ],
+      demo: '#',
+      code: 'https://github.com/AndelsonTeufack',
+    },
+    {
       title: 'HR Management System',
       category: 'backend',
       description:
@@ -114,6 +128,20 @@ const projectsData: { en: ProjectType[]; fr: ProjectType[] } = {
     },
   ],
   fr: [
+    {
+      title: 'TaillorPro - Gestion d’Ateliers de Couture',
+      category: 'mobile',
+      description:
+        'Application mobile multiplateforme dédiée à la gestion complète des ateliers de couture, des commandes clients et des mesures.',
+      tags: ['Flutter', 'Firebase', 'Mobile', 'i18n', 'Thème Clair/Sombre'],
+      highlights: [
+        'Développement complet d’une application mobile avec Flutter.',
+        'Intégration de Firebase pour la gestion des données et authentification.',
+        'Prise en charge du multilingue (i18n) et gestion dynamique des thèmes Light/Dark.',
+      ],
+      demo: '#',
+      code: 'https://github.com/AndelsonTeufack',
+    },
     {
       title: 'Système de Gestion RH',
       category: 'backend',

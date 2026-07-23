@@ -35,25 +35,25 @@ const content = {
     categories: [
       {
         name: 'Backend & APIs',
-        skills: ['Spring Boot', 'Java', 'Python', 'Django', 'FastAPI', 'Node.js', 'NestJS', 'REST APIs', 'Microservices'],
+        skills: ['Spring Boot', 'Java', 'Python', 'Django', 'FastAPI', 'Flask', 'Node.js', 'NestJS', 'REST APIs', 'Microservices'],
         icon: Server,
         color: 'rgba(0, 240, 255, 0.15)',
       },
       {
         name: 'Frontend & Mobile',
-        skills: ['React', 'Next.js', 'Flutter', 'TypeScript', 'Tailwind CSS', 'Dart', 'Responsive UI', 'WordPress'],
+        skills: ['React.js', 'Next.js', 'Flutter', 'Java/Kotlin (Android)', 'TypeScript', 'Tailwind CSS', 'Bootstrap', 'Dart', 'HTML5/CSS3'],
         icon: Layout,
         color: 'rgba(168, 85, 247, 0.15)',
       },
       {
         name: 'Databases & Storage',
-        skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'SQL Server', 'Oracle SQL'],
+        skills: ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Firebase', 'SQL Server', 'Oracle SQL'],
         icon: Database,
         color: 'rgba(16, 185, 129, 0.15)',
       },
       {
         name: 'DevOps, Tools & ERP',
-        skills: ['Git/GitLab', 'Docker', 'Kubernetes', 'Kafka', 'Postman', 'Odoo ERP Integration', 'Jira', 'Power BI'],
+        skills: ['Git', 'GitHub', 'GitLab', 'Docker', 'Postman', 'Odoo ERP', 'Jira', 'Power BI', 'MS 365', 'KoboCollect / SIG'],
         icon: GitBranch,
         color: 'rgba(245, 158, 11, 0.15)',
       },
@@ -65,7 +65,7 @@ const content = {
       },
       {
         name: 'Performance & Security',
-        skills: ['Core Web Vitals', 'Lighthouse', 'SEO Optimization', 'JWT Auth', 'HTTPS / SSL'],
+        skills: ['Core Web Vitals', 'Lighthouse', 'SEO Optimization', 'JWT Auth & Spring Security', 'HTTPS / SSL'],
         icon: TrendingUp,
         color: 'rgba(236, 72, 153, 0.15)',
       },
@@ -79,8 +79,8 @@ const content = {
     ],
     languagesTitle: 'Linguistic Competence',
     languages: [
-      { name: 'French', level: 'Native / Bilingual', proficiency: 100, flag: '🇫🇷' },
-      { name: 'English', level: 'Full Professional Proficiency', proficiency: 85, flag: '🇬🇧' },
+      { name: 'French', level: 'Native Language', proficiency: 100, flag: '🇫🇷' },
+      { name: 'English', level: 'Level B1', proficiency: 80, flag: '🇬🇧' },
     ],
   },
   fr: {
@@ -89,25 +89,25 @@ const content = {
     categories: [
       {
         name: 'Backend & APIs',
-        skills: ['Spring Boot', 'Java', 'Python', 'Django', 'FastAPI', 'Node.js', 'NestJS', 'APIs REST', 'Microservices'],
+        skills: ['Spring Boot', 'Java', 'Python', 'Django', 'FastAPI', 'Flask', 'Node.js', 'NestJS', 'APIs REST', 'Microservices'],
         icon: Server,
         color: 'rgba(0, 240, 255, 0.15)',
       },
       {
         name: 'Frontend & Mobile',
-        skills: ['React', 'Next.js', 'Flutter', 'TypeScript', 'Tailwind CSS', 'Dart', 'Design Responsif', 'WordPress'],
+        skills: ['React.js', 'Next.js', 'Flutter', 'Java/Kotlin (Android natif)', 'TypeScript', 'Tailwind CSS', 'Bootstrap', 'Dart', 'HTML5/CSS3'],
         icon: Layout,
         color: 'rgba(168, 85, 247, 0.15)',
       },
       {
         name: 'Bases de Données',
-        skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'SQL Server', 'Oracle SQL'],
+        skills: ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Firebase', 'SQL Server', 'Oracle SQL'],
         icon: Database,
         color: 'rgba(16, 185, 129, 0.15)',
       },
       {
         name: 'DevOps, Outils & ERP',
-        skills: ['Git/GitLab', 'Docker', 'Kubernetes', 'Kafka', 'Postman', 'Intégration Odoo', 'Jira', 'Power BI'],
+        skills: ['Git', 'GitHub', 'GitLab', 'Docker', 'Postman', 'Odoo ERP', 'Jira', 'Power BI', 'MS 365', 'KoboCollect / SIG'],
         icon: GitBranch,
         color: 'rgba(245, 158, 11, 0.15)',
       },
@@ -119,7 +119,7 @@ const content = {
       },
       {
         name: 'Performance & Sécurité',
-        skills: ['Core Web Vitals', 'Lighthouse', 'Référencement SEO', 'Authentification JWT', 'HTTPS / SSL'],
+        skills: ['Core Web Vitals', 'Lighthouse', 'Référencement SEO', 'Authentification JWT & Spring Security', 'HTTPS / SSL'],
         icon: TrendingUp,
         color: 'rgba(236, 72, 153, 0.15)',
       },
@@ -134,7 +134,7 @@ const content = {
     languagesTitle: 'Compétences Linguistiques',
     languages: [
       { name: 'Français', level: 'Langue Maternelle', proficiency: 100, flag: '🇫🇷' },
-      { name: 'Anglais', level: 'Courant / Professionnel', proficiency: 85, flag: '🇬🇧' },
+      { name: 'Anglais', level: 'Niveau B1', proficiency: 80, flag: '🇬🇧' },
     ],
   },
 }
