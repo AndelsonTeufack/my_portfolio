@@ -48,8 +48,8 @@ export default function Footer({ language }: FooterProps) {
               </div>
             </div>
             <div>
-              <p className="text-sm font-bold text-foreground">Andelson Teufack</p>
-              <p className="text-xs font-mono text-muted-foreground">Full-Stack Developer & IT Analyst</p>
+              <p className="text-sm font-bold text-foreground">TEUFACK SONTSA Andelson</p>
+              <p className="text-xs font-mono text-muted-foreground">Développeur Full-Stack & Analyste IT (Douala, CM)</p>
             </div>
           </div>
 

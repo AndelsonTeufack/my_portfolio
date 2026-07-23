@@ -195,7 +195,7 @@ export default function Hero({ language }: HeroProps) {
               <div className="relative aspect-[4/5] rounded-xl overflow-hidden group">
                 <Image
                   src="/hero.jpg"
-                  alt="Andelson Teufack"
+                  alt="TEUFACK SONTSA Andelson (Andelson Teufack) — Développeur Full-Stack & Analyste IT à Douala, Cameroun"
                   fill
                   className="object-cover object-[center_25%] transition-transform duration-700 group-hover:scale-105"
                   priority
