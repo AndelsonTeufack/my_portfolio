@@ -29,6 +29,20 @@ const projectsData: { en: ProjectType[]; fr: ProjectType[] } = {
       code: 'https://github.com/AndelsonTeufack/tailor_pro_app',
     },
     {
+      title: 'Shikaku - Mobile Game App',
+      category: 'mobile',
+      description:
+        'Online and local multiplayer mobile puzzle game application deployed on the Google Play Store.',
+      tags: ['Flutter', 'Dart', 'Firebase', 'Play Store', 'Mobile Game'],
+      highlights: [
+        'Participation in developing online & local multiplayer game features.',
+        'Successful application deployment on the Google Play Store.',
+        'Interactive UI/UX mobile game design and logic.',
+      ],
+      demo: '#',
+      code: 'https://github.com/AndelsonTeufack/shikaku',
+    },
+    {
       title: 'HR Management System',
       category: 'backend',
       description:
@@ -37,7 +51,7 @@ const projectsData: { en: ProjectType[]; fr: ProjectType[] } = {
       highlights: [
         'JWT-based secure authentication & Role-Based Access Control (RBAC).',
         'Spring Boot backend REST APIs integrated with React frontend.',
-        'Employee leave request approval workflows.',
+        'Employee leave request approval workflows & scheduled transaction audit.',
       ],
       demo: '#',
       code: 'https://github.com/AndelsonTeufack/credix-Hrm',
@@ -46,26 +60,26 @@ const projectsData: { en: ProjectType[]; fr: ProjectType[] } = {
       title: 'MomoKash Mobile App',
       category: 'mobile',
       description:
-        'Cross-platform mobile lending application migrating legacy USSD service to a intuitive Flutter mobile experience.',
-      tags: ['Flutter', 'Spring Boot', 'REST API', 'Dart', 'Financial Tech'],
+        'Cross-platform mobile lending application migrating legacy USSD service to an intuitive Flutter mobile experience with Redis session caching.',
+      tags: ['Flutter', 'Spring Boot', 'Redis Cache', 'REST API', 'Dart', 'Fintech'],
       highlights: [
-        'Complete UI/UX migration from USSD to Flutter.',
-        'High-performance HTTP state management and REST synchronization.',
+        'Complete UI/UX migration from USSD to Flutter native experience.',
+        'Redis cache backend orchestration for high-performance session & temporary data management.',
         'Cross-platform deployment on Android devices.',
       ],
       demo: 'https://youtu.be/hyJJLx7mCCU',
       code: 'https://github.com/AndelsonTeufack/MomoKash-Mobile-App',
     },
     {
-      title: 'Maintenance Tracking System',
+      title: 'Maintenance Tracking System (GMAO)',
       category: 'automation',
       description:
-        'Internal IT maintenance tracking solution managing technician interventions and equipment request lifecycle.',
-      tags: ['Python', 'Web App', 'Database', 'Reporting', 'Automation'],
+        'Internal web application for Computer-Aided Maintenance Management (GMAO) tracking technical interventions and reporting data.',
+      tags: ['Python', 'MySQL', 'GMAO', 'Reporting', 'Automation'],
       highlights: [
-        'Automated ticket routing and status tracking in real time.',
-        'Python scripts for financial reporting & automated data processing.',
-        'Centralized database for IT maintenance logs.',
+        'Relational MySQL database modeling & custom business modules.',
+        'Python scripts for automated reporting data extraction & aggregation.',
+        'Unit and non-regression testing for service continuity.',
       ],
       demo: '#',
       code: 'https://github.com/AndelsonTeufack/Gav-App',
@@ -74,11 +88,11 @@ const projectsData: { en: ProjectType[]; fr: ProjectType[] } = {
       title: 'MULEMA Language Learning App',
       category: 'mobile',
       description:
-        'Interactive mobile learning application dedicated to preserving Cameroonian native heritage and languages.',
-      tags: ['React Native', 'Spring Boot', 'REST API', 'Education', 'Mobile'],
+        'Interactive mobile learning application dedicated to preserving Cameroonian native heritage, featuring Node.js pedagogical backend management.',
+      tags: ['React Native', 'Node.js', 'Spring Boot', 'REST API', 'Education'],
       highlights: [
+        'Implementation of user management & pedagogical content features via Node.js backend.',
         'Gamified language lessons and interactive quiz interfaces.',
-        'Spring Boot REST backend for phrase translation storage.',
         'Cross-functional Agile team collaboration.',
       ],
       demo: '#',
@@ -99,29 +113,29 @@ const projectsData: { en: ProjectType[]; fr: ProjectType[] } = {
       code: 'https://github.com/AndelsonTeufack/laochi_site',
     },
     {
-      title: 'Desktop Inventory & Building Manager',
+      title: 'Desktop Rental Property Manager',
       category: 'automation',
       description:
-        'Desktop software automating student accommodation management, tenant billing, and room availability tracking.',
-      tags: ['Python', 'PyQt', 'SQLite', 'Desktop GUI'],
+        'Desktop software automating rental property management, tenant billing, room tracking, and MongoDB/SQLite database storage.',
+      tags: ['Python', 'PyQt', 'MongoDB', 'SQLite', 'Desktop GUI'],
       highlights: [
         'Graphical User Interface built with PyQt.',
-        'Automated billing calculation & SQLite database backend.',
+        'MongoDB data management & automated billing calculation.',
         'Tenant record management & rent tracking.',
       ],
       demo: '#',
       code: 'https://github.com/AndelsonTeufack/BuildingManagement',
     },
     {
-      title: 'Student Sponsorship Engine',
+      title: 'REST API & Campay Payment Integration',
       category: 'backend',
       description:
-        'Backend system implementing a student sponsorship program with Campay payment gateway API integration.',
-      tags: ['Spring Boot', 'Campay API', 'REST API', 'Security'],
+        'Backend system implementing REST APIs and Campay electronic payment gateway solution integration for student sponsorship.',
+      tags: ['Spring Boot', 'Campay API', 'REST API', 'Security', 'Fintech'],
       highlights: [
-        'Secure Campay mobile money payment processing.',
-        'Student sponsorship allocation business rules.',
-        'Scalable Spring Boot REST API architecture.',
+        'Secure Campay electronic payment solution integration.',
+        'REST API development & student sponsorship allocation business rules.',
+        'Scalable Spring Boot backend architecture.',
       ],
       demo: '#',
       code: 'https://github.com/AndelsonTeufack/sponsorship-IAI-Douala',
@@ -143,6 +157,20 @@ const projectsData: { en: ProjectType[]; fr: ProjectType[] } = {
       code: 'https://github.com/AndelsonTeufack/tailor_pro_app',
     },
     {
+      title: 'Shikaku - Application Mobile de Jeu',
+      category: 'mobile',
+      description:
+        'Application de jeu mobile de réflexion multijoueur en ligne et local, déployée sur le Google Play Store.',
+      tags: ['Flutter', 'Dart', 'Firebase', 'Play Store', 'Jeu Mobile'],
+      highlights: [
+        'Participation au développement d’un jeu multijoueur en ligne et local.',
+        'Déploiement réussi de l’application sur le Google Play Store.',
+        'Interface utilisateur et logique de jeu mobile interactives.',
+      ],
+      demo: '#',
+      code: 'https://github.com/AndelsonTeufack/shikaku',
+    },
+    {
       title: 'Système de Gestion RH',
       category: 'backend',
       description:
@@ -151,7 +179,7 @@ const projectsData: { en: ProjectType[]; fr: ProjectType[] } = {
       highlights: [
         'Authentification JWT sécurisée et contrôle d’accès par rôles (RBAC).',
         'APIs REST Spring Boot intégrées au frontend React.',
-        'Flux de validation des demandes de congés.',
+        'Flux de validation des demandes de congés et audit planifié.',
       ],
       demo: '#',
       code: 'https://github.com/AndelsonTeufack/credix-Hrm',
@@ -160,26 +188,26 @@ const projectsData: { en: ProjectType[]; fr: ProjectType[] } = {
       title: 'Application Mobile MomoKash',
       category: 'mobile',
       description:
-        'Application mobile multiplateforme modernisant le service de prêt MomoKash en migrant l’ancien système USSD vers Flutter.',
-      tags: ['Flutter', 'Spring Boot', 'API REST', 'Dart', 'Fintech'],
+        'Application mobile multiplateforme modernisant le service de prêt MomoKash en migrant l’USSD vers Flutter avec cache Redis backend.',
+      tags: ['Flutter', 'Spring Boot', 'Cache Redis', 'API REST', 'Dart', 'Fintech'],
       highlights: [
-        'Migration intégrale de l’USSD vers Flutter.',
-        'Gestion d’état HTTP performante et synchronisation REST.',
+        'Migration intégrale de l’USSD vers une expérience Flutter native.',
+        'Orchestration backend avec cache Redis pour la gestion des sessions et données temporaires.',
         'Déploiement Android optimisé.',
       ],
       demo: 'https://youtu.be/hyJJLx7mCCU',
       code: 'https://github.com/AndelsonTeufack/MomoKash-Mobile-App',
     },
     {
-      title: 'Système de Suivi de Maintenance',
+      title: 'Système de Suivi de Maintenance (GMAO)',
       category: 'automation',
       description:
-        'Solution web interne de suivi de maintenance IT gérant les interventions techniques et le cycle des équipements.',
-      tags: ['Python', 'Web App', 'Base de Données', 'Rapports', 'Automatisation'],
+        'Solution web interne de gestion des opérations de maintenance (GMAO) gérant les interventions techniques et le reporting.',
+      tags: ['Python', 'MySQL', 'GMAO', 'Rapports', 'Automatisation'],
       highlights: [
-        'Routage automatisé des tickets et suivi en temps réel.',
-        'Scripts Python pour les rapports financiers et traitement de données.',
-        'Base de données centralisée d’interventions.',
+        'Modélisation de base de données relationnelle MySQL & briques fonctionnelles.',
+        'Scripts Python pour l’extraction et l’agrégation automatique de données de reporting.',
+        'Tests unitaires et de non-régression pour la continuité de service.',
       ],
       demo: '#',
       code: 'https://github.com/AndelsonTeufack/Gav-App',
@@ -188,11 +216,11 @@ const projectsData: { en: ProjectType[]; fr: ProjectType[] } = {
       title: 'Application MULEMA d’Apprentissage',
       category: 'mobile',
       description:
-        'Application mobile interactive d’apprentissage des langues nationales camerounaises.',
-      tags: ['React Native', 'Spring Boot', 'API REST', 'Éducation', 'Mobile'],
+        'Application mobile interactive d’apprentissage des langues nationales camerounaises avec gestion du contenu pédagogique via backend Node.js.',
+      tags: ['React Native', 'Node.js', 'Spring Boot', 'API REST', 'Éducation', 'Mobile'],
       highlights: [
+        'Implémentation de la gestion utilisateurs et contenus pédagogiques via un backend Node.js.',
         'Leçons ludifiées et interfaces interactives.',
-        'Backend Spring Boot pour la gestion du dictionnaire de traduction.',
         'Travail en équipe multidisciplinaire Agile.',
       ],
       demo: '#',
@@ -213,29 +241,29 @@ const projectsData: { en: ProjectType[]; fr: ProjectType[] } = {
       code: 'https://github.com/AndelsonTeufack/laochi_site',
     },
     {
-      title: 'Gestionnaire d’Inventaire Desktop',
+      title: 'Application Desktop de Gestion Locative',
       category: 'automation',
       description:
-        'Logiciel desktop automatisant la gestion des logements universitaires et le suivi des facturations locataires.',
-      tags: ['Python', 'PyQt', 'SQLite', 'Desktop GUI'],
+        'Logiciel desktop de gestion locative automatisant les logements, les facturations locataires et le stockage MongoDB/SQLite.',
+      tags: ['Python', 'PyQt', 'MongoDB', 'SQLite', 'Desktop GUI'],
       highlights: [
         'Interface graphique développée avec PyQt.',
-        'Calcul automatique des factures et base SQLite.',
+        'Gestion des données avec MongoDB et calcul automatique des factures.',
         'Gestion centralisée des locataires et chambres.',
       ],
       demo: '#',
       code: 'https://github.com/AndelsonTeufack/BuildingManagement',
     },
     {
-      title: 'Système de Parrainage Étudiant',
+      title: 'Développement d’API & Intégration Campay',
       category: 'backend',
       description:
-        'Système backend implémentant un programme de parrainage avec intégration de la passerelle de paiement Campay.',
-      tags: ['Spring Boot', 'API Campay', 'API REST', 'Sécurité'],
+        'Système backend développant des APIs REST avec intégration de la solution de paiement électronique Campay.',
+      tags: ['Spring Boot', 'API Campay', 'API REST', 'Sécurité', 'Fintech'],
       highlights: [
-        'Paiements sécurisés Mobile Money via API Campay.',
-        'Règles métiers de répartition des parrainages.',
-        'Architecture API REST évolutive.',
+        'Intégration de la solution de paiement électronique Campay.',
+        'Développement d’APIs REST et règles métiers de parrainage.',
+        'Architecture API REST Spring Boot évolutive.',
       ],
       demo: '#',
       code: 'https://github.com/AndelsonTeufack/sponsorship-IAI-Douala',

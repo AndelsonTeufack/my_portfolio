@@ -31,7 +31,7 @@ const content = {
     categories: [
       {
         name: 'Backend & APIs',
-        skills: ['Spring Boot', 'Java', 'Python', 'Django', 'FastAPI', 'Flask', 'Node.js', 'NestJS', 'REST APIs', 'Microservices'],
+        skills: ['Spring Boot', 'Java', 'Python', 'C/C++', 'Django', 'FastAPI', 'Flask', 'Node.js', 'NestJS', 'REST APIs'],
         icon: Server,
         color: 'rgba(2, 132, 199, 0.15)',
       },
@@ -49,7 +49,7 @@ const content = {
       },
       {
         name: 'DevOps, Tools & ERP',
-        skills: ['Git', 'GitHub', 'GitLab', 'Docker', 'Postman', 'Odoo ERP', 'Jira', 'Power BI', 'MS 365', 'KoboCollect / SIG'],
+        skills: ['Git', 'GitHub', 'GitLab', 'Docker', 'n8n', 'Postman', 'Odoo ERP', 'Jira', 'Power BI', 'MS 365', 'KoboCollect / SIG'],
         icon: GitBranch,
         color: 'rgba(217, 119, 6, 0.15)',
       },
@@ -86,7 +86,7 @@ const content = {
     categories: [
       {
         name: 'Backend & APIs',
-        skills: ['Spring Boot', 'Java', 'Python', 'Django', 'FastAPI', 'Flask', 'Node.js', 'NestJS', 'APIs REST', 'Microservices'],
+        skills: ['Spring Boot', 'Java', 'Python', 'C/C++', 'Django', 'FastAPI', 'Flask', 'Node.js', 'NestJS', 'APIs REST'],
         icon: Server,
         color: 'rgba(2, 132, 199, 0.15)',
       },
@@ -104,7 +104,7 @@ const content = {
       },
       {
         name: 'DevOps, Outils & ERP',
-        skills: ['Git', 'GitHub', 'GitLab', 'Docker', 'Postman', 'Odoo ERP', 'Jira', 'Power BI', 'MS 365', 'KoboCollect / SIG'],
+        skills: ['Git', 'GitHub', 'GitLab', 'Docker', 'n8n', 'Postman', 'Odoo ERP', 'Jira', 'Power BI', 'MS 365', 'KoboCollect / SIG'],
         icon: GitBranch,
         color: 'rgba(217, 119, 6, 0.15)',
       },

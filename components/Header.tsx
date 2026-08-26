@@ -142,7 +142,7 @@ export default function Header({ isDark, onThemeToggle, language, onLanguageTogg
               className="px-3 py-1.5 rounded-full bg-slate-100 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/10 hover:border-sky-400 dark:hover:border-cyan-500/40 text-xs font-mono font-bold text-sky-700 dark:text-cyan-400 flex items-center gap-1.5 transition-all shadow-xs"
               title={language === 'en' ? 'Changer en Français' : 'Switch to English'}
             >
-              <Sparkles className="w-3 h-3 text-purple-600 dark:text-purple-400" />
+              <span className="text-sm leading-none">🇨🇲</span>
               <span>{language.toUpperCase()}</span>
             </motion.button>
 
