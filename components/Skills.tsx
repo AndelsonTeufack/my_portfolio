@@ -77,8 +77,8 @@ const content = {
     languagesTitle: 'Linguistic Competence',
     languages: [
       { name: 'Yemba', level: 'Native Language', proficiency: 100, flag: '🇨🇲' },
-      { name: 'French', level: 'Native', proficiency: 100, flag: '🇨🇲' },
-      { name: 'English', level: 'Level B1', proficiency: 80, flag: '🇨🇲' },
+      { name: 'French', level: 'Native', proficiency: 100, flag: '🇫🇷' },
+      { name: 'English', level: 'Level B1', proficiency: 80, flag: '🇬🇧' },
     ],
   },
   fr: {
@@ -133,8 +133,8 @@ const content = {
     languagesTitle: 'Compétences Linguistiques',
     languages: [
       { name: 'Yemba', level: 'Langue Maternelle', proficiency: 100, flag: '🇨🇲' },
-      { name: 'Français', level: 'Natif', proficiency: 100, flag: '🇨🇲' },
-      { name: 'Anglais', level: 'Niveau B1', proficiency: 80, flag: '🇨🇲' },
+      { name: 'Français', level: 'Natif', proficiency: 100, flag: '🇫🇷' },
+      { name: 'Anglais', level: 'Niveau B1', proficiency: 80, flag: '🇬🇧' },
     ],
   },
 }
