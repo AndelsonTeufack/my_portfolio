@@ -51,7 +51,7 @@ const content = {
         type: 'Mentorship & Pedagogy',
         highlights: [
           'Conducted intensive practical workshops in Web Engineering (React.js, JS, HTML5/CSS3) and Mobile Development (Flutter, Dart) for 1st & 2nd-year students.',
-          'Mentored 100+ software engineering students, accelerating their technical proficiency and practical problem-solving skills.',
+          'Mentored 15+ software engineering students, accelerating their technical proficiency and practical problem-solving skills.',
           'Prepared students for corporate software engineering internships, capstone projects, and international professional certifications.',
           'Fostered engineering best practices, clean code architecture, Git workflows, and API integration methods.',
         ],
@@ -155,7 +155,7 @@ const content = {
         type: 'Mentorat & Enseignement',
         highlights: [
           'Animation de cours et travaux pratiques intensifs en Développement Web (React.js, JS, HTML5/CSS3) et Mobile (Flutter, Dart) pour les étudiants de 1ère et 2ème année.',
-          'Mentorat et encadrement technique de +100 étudiants en génie logiciel, favorisant la montée en compétences et la maîtrise des architectures logicielles.',
+          'Mentorat et encadrement technique de +15 étudiants en génie logiciel, favorisant la montée en compétences et la maîtrise des architectures logicielles.',
           'Préparation accélérée des étudiants aux stages en entreprise, projets professionnels de fin d’études et certifications internationales.',
           'Sensibilisation aux bonnes pratiques de développement, au clean code, à la gestion de versions Git et à l’intégration d’APIs REST.',
         ],

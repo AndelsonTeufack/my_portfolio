@@ -292,7 +292,7 @@ export const ANDELSON_KNOWLEDGE: KnowledgeBase = {
           'Interactive UI/UX mobile game design and logic.',
         ],
       },
-      demoUrl: '#',
+      demoUrl: 'https://shikaku-site.vercel.app/',
       codeUrl: 'https://github.com/AndelsonTeufack/shikaku',
     },
     {

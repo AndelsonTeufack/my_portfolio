@@ -39,7 +39,7 @@ const projectsData: { en: ProjectType[]; fr: ProjectType[] } = {
         'Successful application deployment on the Google Play Store.',
         'Interactive UI/UX mobile game design and logic.',
       ],
-      demo: '#',
+      demo: 'https://shikaku-site.vercel.app/',
       code: 'https://github.com/AndelsonTeufack/shikaku',
     },
     {
@@ -167,7 +167,7 @@ const projectsData: { en: ProjectType[]; fr: ProjectType[] } = {
         'Déploiement réussi de l’application sur le Google Play Store.',
         'Interface utilisateur et logique de jeu mobile interactives.',
       ],
-      demo: '#',
+      demo: 'https://shikaku-site.vercel.app/',
       code: 'https://github.com/AndelsonTeufack/shikaku',
     },
     {
