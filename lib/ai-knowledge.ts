@@ -744,7 +744,28 @@ export function queryAndelsonKnowledge(userQuery: string, lang: 'fr' | 'en' = 'f
           `• **Certification :** Certificat Google IT Support Professional (Google, 2025) couvrant le support technique, les réseaux, la sécurité et l'administration système.`
   }
 
-  // 7. Contact Info
+  // 7. Languages
+  if (
+    q.includes('langue') ||
+    q.includes('language') ||
+    q.includes('yemba') ||
+    q.includes('anglais') ||
+    q.includes('français') ||
+    q.includes('english') ||
+    q.includes('french')
+  ) {
+    return isEn
+      ? `🗣️ **Linguistic Competence:**\n\n` +
+          `• **Yemba:** Native Language 🇨🇲\n` +
+          `• **French:** Native Language 🇨🇲\n` +
+          `• **English:** Level B1 🇨🇲`
+      : `🗣️ **Compétences Linguistiques :**\n\n` +
+          `• **Yemba :** Langue Maternelle 🇨🇲\n` +
+          `• **Français :** Langue Maternelle 🇨🇲\n` +
+          `• **Anglais :** Niveau B1 🇨🇲`
+  }
+
+  // 8. Contact Info
   if (
     q.includes('contact') ||
     q.includes('email') ||
