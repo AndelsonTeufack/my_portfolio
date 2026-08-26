@@ -757,11 +757,11 @@ export function queryAndelsonKnowledge(userQuery: string, lang: 'fr' | 'en' = 'f
     return isEn
       ? `🗣️ **Linguistic Competence:**\n\n` +
           `• **Yemba:** Native Language 🇨🇲\n` +
-          `• **French:** Native Language 🇨🇲\n` +
+          `• **French:** Native 🇨🇲\n` +
           `• **English:** Level B1 🇨🇲`
       : `🗣️ **Compétences Linguistiques :**\n\n` +
           `• **Yemba :** Langue Maternelle 🇨🇲\n` +
-          `• **Français :** Langue Maternelle 🇨🇲\n` +
+          `• **Français :** Natif 🇨🇲\n` +
           `• **Anglais :** Niveau B1 🇨🇲`
   }
 
