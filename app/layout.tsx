@@ -141,7 +141,7 @@ const jsonLdGraph = {
       description:
         'TEUFACK SONTSA Andelson est un Développeur Full-Stack et Analyste IT basé à Douala, Cameroun. Spécialiste Spring Boot, React, Flutter, Next.js, Python et Odoo ERP.',
       email: 'mailto:teufackandelson123@gmail.com',
-      telephone: ['+237690819035', '+237651489468'],
+      telephone: '+237690819035',
       birthDate: '2003-12-14',
       gender: 'Male',
       nationality: {
@@ -271,7 +271,7 @@ const jsonLdGraph = {
           name: 'Comment contacter TEUFACK SONTSA Andelson ?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Vous pouvez contacter Andelson Teufack par email à teufackandelson123@gmail.com, par téléphone / WhatsApp au +237 690 819 035 ou +237 651 489 468, ou via son profil LinkedIn.',
+            text: 'Vous pouvez contacter Andelson Teufack par email à teufackandelson123@gmail.com, par téléphone / WhatsApp au +237 690 819 035, ou via son profil LinkedIn.',
           },
         },
       ],

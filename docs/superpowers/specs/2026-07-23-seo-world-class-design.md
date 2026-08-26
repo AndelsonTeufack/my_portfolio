@@ -25,7 +25,7 @@ Injection d'un graphe JSON-LD `@graph` ultra-complet dans `app/layout.tsx` conte
    - `name`: "TEUFACK SONTSA Andelson"
    - `alternateName`: `["Teufack Sontsa Andelson", "Andelson Sontsa Teufack", "Andelson Teufack", "Anderson Teufack", "Teufac Andelson"]`
    - `email`: "teufackandelson123@gmail.com"
-   - `telephone`: `["+237690819035", "+237651489468"]`
+   - `telephone`: `"+237690819035"`
    - `jobTitle`: "Full-Stack Developer & IT Solutions Analyst"
    - `birthDate`: "2003-12-14"
    - `address`: Douala, Cameroun (GeoRegion `CM-LT`)

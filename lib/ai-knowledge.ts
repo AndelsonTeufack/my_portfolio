@@ -486,7 +486,7 @@ export const ANDELSON_KNOWLEDGE: KnowledgeBase = {
 
   contact: {
     email: 'teufackandelson123@gmail.com',
-    phoneCalls: '+237 651 489 468',
+    phoneCalls: '+237 690 819 035',
     phoneWhatsapp: '+237 690 819 035',
     location: 'Douala, Cameroun (GMT+1)',
     linkedin: 'https://www.linkedin.com/in/andelson-teufack-97a59b279/',
@@ -779,15 +779,13 @@ export function queryAndelsonKnowledge(userQuery: string, lang: 'fr' | 'en' = 'f
     return isEn
       ? `📬 **Contact Information:**\n\n` +
           `• **Email:** teufackandelson123@gmail.com\n` +
-          `• **Phone:** +237 651 489 468\n` +
-          `• **WhatsApp:** +237 690 819 035\n` +
+          `• **Phone / WhatsApp:** +237 690 819 035\n` +
           `• **Location:** Douala, Cameroon (GMT+1)\n` +
           `• **LinkedIn:** https://www.linkedin.com/in/andelson-teufack-97a59b279/\n` +
           `• **GitHub:** https://github.com/AndelsonTeufack`
       : `📬 **Coordonnées de Contact :**\n\n` +
           `• **Email :** teufackandelson123@gmail.com\n` +
-          `• **Téléphone :** +237 651 489 468\n` +
-          `• **WhatsApp :** +237 690 819 035\n` +
+          `• **Téléphone / WhatsApp :** +237 690 819 035\n` +
           `• **Localisation :** Douala, Cameroun (GMT+1)\n` +
           `• **LinkedIn :** https://www.linkedin.com/in/andelson-teufack-97a59b279/\n` +
           `• **GitHub :** https://github.com/AndelsonTeufack`

@@ -12,7 +12,7 @@
 
 - Nom complet d'entité : `TEUFACK SONTSA Andelson`.
 - Déclinaisons et variantes orthographiques gérées : `Teufack Sontsa Andelson`, `Andelson Sontsa Teufack`, `Andelson Teufack`, `Anderson Teufack`, `Teufac Andelson`.
-- Email : `teufackandelson123@gmail.com` | Téléphones : `+237 690 819 035`, `+237 651 489 468` | Localisation : `Douala, Cameroun`.
+- Email : `teufackandelson123@gmail.com` | Téléphone / WhatsApp : `+237 690 819 035` | Localisation : `Douala, Cameroun`.
 - Règle de commit obligatoire : `[CREATE]`, `[UPD]`, `[DLT]` en français.
 
 ---

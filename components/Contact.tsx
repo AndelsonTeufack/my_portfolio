@@ -26,7 +26,7 @@ const content = {
     title: 'Initiate Contact',
     subtitle: 'Have a project, engineering inquiry, or consulting opportunity? Send a message below.',
     email: 'teufackandelson123@gmail.com',
-    phoneTel: '+237 651 489 468',
+    phoneTel: '+237 690 819 035',
     phoneWhatsapp: '+237 690 819 035',
     location: 'Douala, Cameroon (GMT+1)',
     formTitle: 'Send a Direct Message',
@@ -46,7 +46,7 @@ const content = {
     title: 'Initier un Contact',
     subtitle: 'Vous avez un projet, une question d\'ingénierie ou une opportunité de consulting ? Laissez un message.',
     email: 'teufackandelson123@gmail.com',
-    phoneTel: '+237 651 489 468',
+    phoneTel: '+237 690 819 035',
     phoneWhatsapp: '+237 690 819 035',
     location: 'Douala, Cameroun (GMT+1)',
     formTitle: 'Envoyer un message direct',
@@ -178,9 +178,13 @@ export default function Contact({ language }: ContactProps) {
           <motion.div variants={itemVariants}>
             <SpotlightCard className="p-6 border-slate-200/80 dark:border-white/10 shadow-sm dark:shadow-none glass-card-hover group">
               <div className="flex items-center justify-between mb-4">
-                <div className="p-3 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400">
+                <a
+                  href={`tel:${text.phoneTel.replace(/[\s]/g, '')}`}
+                  className="p-3 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 hover:scale-105 transition-transform"
+                  title={language === 'en' ? 'Call Andelson' : 'Appeler Andelson'}
+                >
                   <FaPhone className="w-5 h-5" />
-                </div>
+                </a>
                 <button
                   onClick={() => handleCopy(text.phoneTel, 'Téléphone')}
                   className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-600 dark:text-muted-foreground hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
@@ -190,7 +194,7 @@ export default function Contact({ language }: ContactProps) {
                 </button>
               </div>
               <h3 className="text-xs font-mono uppercase font-bold text-slate-500 dark:text-muted-foreground">Phone / Call</h3>
-              <a href={`tel:${text.phoneTel.replace(/\s/g, '')}`} className="text-sm font-bold text-slate-900 dark:text-foreground hover:text-purple-600 dark:hover:text-purple-400 transition-colors mt-1 block">
+              <a href={`tel:${text.phoneTel.replace(/[\s]/g, '')}`} className="text-sm font-bold text-slate-900 dark:text-foreground hover:text-purple-600 dark:hover:text-purple-400 transition-colors mt-1 block">
                 {text.phoneTel}
               </a>
             </SpotlightCard>
@@ -200,9 +204,15 @@ export default function Contact({ language }: ContactProps) {
           <motion.div variants={itemVariants}>
             <SpotlightCard className="p-6 border-slate-200/80 dark:border-white/10 shadow-sm dark:shadow-none glass-card-hover group">
               <div className="flex items-center justify-between mb-4">
-                <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                <a
+                  href={`https://wa.me/${text.phoneWhatsapp.replace(/[\s+]/g, '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:scale-105 transition-transform"
+                  title={language === 'en' ? 'Chat on WhatsApp' : 'Discuter sur WhatsApp'}
+                >
                   <FaWhatsapp className="w-5 h-5" />
-                </div>
+                </a>
                 <button
                   onClick={() => handleCopy(text.phoneWhatsapp, 'WhatsApp')}
                   className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-600 dark:text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
@@ -213,7 +223,7 @@ export default function Contact({ language }: ContactProps) {
               </div>
               <h3 className="text-xs font-mono uppercase font-bold text-slate-500 dark:text-muted-foreground">WhatsApp Direct</h3>
               <a
-                href={`https://wa.me/${text.phoneWhatsapp.replace(/\s/g, '')}`}
+                href={`https://wa.me/${text.phoneWhatsapp.replace(/[\s+]/g, '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm font-bold text-slate-900 dark:text-foreground hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors mt-1 block"
