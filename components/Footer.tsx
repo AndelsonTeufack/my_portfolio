@@ -1,85 +1,169 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
-import { ArrowUp, Clock } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { ArrowUp, Clock, Mail } from 'lucide-react'
+import { FaGithub, FaLinkedin } from 'react-icons/fa'
+import { PORTFOLIO_PROFILE, type Language } from '@/lib/portfolio-data'
+import { getCurrentYear } from '@/lib/utils'
 
 interface FooterProps {
-  language: 'en' | 'fr'
+  language: Language
 }
 
 export default function Footer({ language }: FooterProps) {
-  const [time, setTime] = useState<string>('')
+  const [doualaTime, setDoualaTime] = useState<string>('--:--:--')
+  const currentYear = getCurrentYear()
 
   useEffect(() => {
-    const updateTime = () => {
-      const now = new Date()
-      const options: Intl.DateTimeFormatOptions = {
-        timeZone: 'Africa/Douala',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false,
+    const formatTime = () => {
+      try {
+        return new Intl.DateTimeFormat('fr-FR', {
+          timeZone: 'Africa/Douala',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+        }).format(new Date())
+      } catch {
+        return '--:--:--'
       }
-      setTime(new Intl.DateTimeFormat('fr-FR', options).format(now))
     }
 
-    updateTime()
-    const timer = setInterval(updateTime, 1000)
-    return () => clearInterval(timer)
+    setDoualaTime(formatTime())
+    const interval = setInterval(() => {
+      setDoualaTime(formatTime())
+    }, 1000)
+
+    return () => clearInterval(interval)
   }, [])
+
+  const copy = {
+    fr: {
+      tagline:
+        'Ingénieur des Travaux Informatiques · Architecture Logicielle, Full-Stack & Mobile',
+      backToTop: 'Haut de page',
+      rights: 'Tous droits réservés.',
+      localTimeLabel: 'Douala (GMT+1)',
+      nav: [
+        { href: '#about', label: 'Profil' },
+        { href: '#experience', label: 'Expériences' },
+        { href: '#projects', label: 'Projets' },
+        { href: '#skills', label: 'Compétences' },
+        { href: '#contact', label: 'Contact' },
+      ],
+    },
+    en: {
+      tagline:
+        'Software & IT Engineer · Software Architecture, Full-Stack & Mobile Systems',
+      backToTop: 'Back to top',
+      rights: 'All rights reserved.',
+      localTimeLabel: 'Douala (GMT+1)',
+      nav: [
+        { href: '#about', label: 'Profile' },
+        { href: '#experience', label: 'Experience' },
+        { href: '#projects', label: 'Projects' },
+        { href: '#skills', label: 'Skills' },
+        { href: '#contact', label: 'Contact' },
+      ],
+    },
+  }
+
+  const t = copy[language]
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
-    <footer className="relative border-t border-slate-200/90 dark:border-white/10 bg-slate-100/90 dark:bg-slate-950/80 backdrop-blur-2xl py-12 px-4 sm:px-6 lg:px-8 overflow-hidden transition-colors duration-500">
-      {/* Background glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-32 bg-sky-500/10 dark:bg-cyan-500/5 blur-3xl pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto space-y-8 relative z-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-200 dark:border-white/10">
-          {/* Brand & Tagline */}
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-sky-500 to-purple-600 dark:from-cyan-400 dark:to-purple-600 p-[1px] shadow-sm">
-              <div className="w-full h-full bg-slate-900 dark:bg-slate-950 rounded-full flex items-center justify-center font-extrabold text-cyan-400 text-sm">
+    <footer className="border-t border-border bg-card/70">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+        {/* Top Editorial Row */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="space-y-2 max-w-md">
+            <div className="flex items-center gap-3">
+              <span className="w-8 h-8 rounded-lg bg-sky-600 dark:bg-sky-400 text-white dark:text-slate-950 font-mono font-bold text-xs flex items-center justify-center">
                 AT
-              </div>
+              </span>
+              <span className="font-display font-bold text-base text-foreground">
+                {PORTFOLIO_PROFILE.fullName}
+              </span>
             </div>
-            <div>
-              <p className="text-sm font-bold text-slate-900 dark:text-foreground">TEUFACK SONTSA Andelson</p>
-              <p className="text-xs font-mono font-semibold text-slate-600 dark:text-muted-foreground">Développeur Full-Stack & Analyste IT (Douala, CM)</p>
-            </div>
+            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+              {t.tagline}
+            </p>
           </div>
 
-          {/* Real Time Clock Douala */}
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 font-mono text-xs text-sky-700 dark:text-cyan-400 font-bold shadow-xs">
-            <Clock className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400 animate-pulse" />
-            <span>Douala, CM (GMT+1):</span>
-            <span className="font-extrabold text-slate-900 dark:text-foreground">{time || '18:30:00'}</span>
-          </div>
-
-          {/* Back to top magnetic button */}
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={scrollToTop}
-            className="p-3 rounded-full bg-sky-500/10 dark:bg-cyan-500/10 border border-sky-400/40 dark:border-cyan-500/30 text-sky-700 dark:text-cyan-400 hover:bg-sky-600 dark:hover:bg-cyan-500 hover:text-white dark:hover:text-slate-950 transition-all shadow-lg glow-cyan"
-            aria-label="Back to top"
+          {/* Section Links */}
+          <nav
+            aria-label="Footer navigation"
+            className="flex flex-wrap items-center gap-x-6 gap-y-2"
           >
-            <ArrowUp className="w-4 h-4" />
-          </motion.button>
+            {t.nav.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-xs sm:text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Back to Top */}
+          <button
+            type="button"
+            onClick={scrollToTop}
+            aria-label={t.backToTop}
+            className="self-start md:self-auto inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-border bg-secondary hover:bg-muted text-xs font-mono font-medium text-foreground transition-colors"
+          >
+            <span>{t.backToTop}</span>
+            <ArrowUp className="w-3.5 h-3.5" />
+          </button>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600 dark:text-muted-foreground font-mono font-medium">
-          <p>© {new Date().getFullYear()} TEUFACK SONTSA Andelson. All rights reserved.</p>
-          <p className="text-slate-600 dark:text-slate-400">
-            {language === 'en'
-              ? 'Built with Next.js 16, React 19, Tailwind CSS v4 & Lenis Motion.'
-              : 'Conçu avec Next.js 16, React 19, Tailwind CSS v4 & Lenis Motion.'}
+        {/* Bottom Metadata Row */}
+        <div className="pt-6 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-muted-foreground">
+          <p>
+            © {currentYear} {PORTFOLIO_PROFILE.fullName}. {t.rights}
           </p>
+
+          <div className="flex flex-wrap items-center gap-4">
+            <span className="inline-flex items-center gap-1.5 font-mono">
+              <Clock className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
+              <span>{t.localTimeLabel}:</span>
+              <span className="text-foreground font-semibold tabular-nums">
+                {doualaTime}
+              </span>
+            </span>
+
+            <div className="flex items-center gap-2">
+              <a
+                href={`mailto:${PORTFOLIO_PROFILE.contact.email}`}
+                aria-label="Email"
+                className="p-2 rounded-lg border border-border bg-secondary hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <Mail className="w-3.5 h-3.5" />
+              </a>
+              <a
+                href={PORTFOLIO_PROFILE.contact.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="p-2 rounded-lg border border-border bg-secondary hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <FaGithub className="w-3.5 h-3.5" />
+              </a>
+              <a
+                href={PORTFOLIO_PROFILE.contact.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="p-2 rounded-lg border border-border bg-secondary hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <FaLinkedin className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,233 +1,240 @@
 'use client'
 
-import { useRef, useState, useEffect } from 'react'
-import { motion, useInView, Variants } from 'framer-motion'
-import { Target, Lightbulb, Sparkles, Code, Cloud, Search, Quote, Terminal, CheckCircle2 } from 'lucide-react'
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { GraduationCap, Award, Cpu, Layers, ShieldCheck, Globe2 } from 'lucide-react'
+import {
+  ENGINEERING_PILLARS,
+  EDUCATION,
+  CERTIFICATIONS,
+  type Language,
+} from '@/lib/portfolio-data'
 import { calculateAge } from '@/lib/utils'
-import SpotlightCard from '@/components/ui/SpotlightCard'
-import MacbookAnimation from './MacbookAnimation'
 
 interface AboutProps {
-  language: 'en' | 'fr'
+  language: Language
 }
 
-function AnimatedNumber({ value, suffix = '' }: { value: number; suffix?: string }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
-  const [count, setCount] = useState(0)
-
-  useEffect(() => {
-    if (!isInView) return
-    let start = 0
-    const end = value
-    const duration = 1500
-    const increment = end / (duration / 16)
-    const timer = setInterval(() => {
-      start += increment
-      if (start >= end) {
-        setCount(end)
-        clearInterval(timer)
-      } else {
-        setCount(Math.floor(start))
-      }
-    }, 16)
-    return () => clearInterval(timer)
-  }, [isInView, value])
-
-  return (
-    <span ref={ref} className="text-4xl sm:text-5xl font-extrabold text-gradient-cyan font-mono">
-      {count}
-      {suffix}
-    </span>
-  )
-}
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.2 },
-  },
-}
-
-const itemVariants: Variants = {
-  hidden: { y: 30, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: { type: 'spring', stiffness: 100, damping: 14 },
-  },
-}
+const pillarIcons = [Cpu, Layers, ShieldCheck, Globe2]
 
 export default function About({ language }: AboutProps) {
   const age = calculateAge('2003-12-14')
-  const sectionRef = useRef(null)
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
+  const sectionRef = useRef<HTMLElement>(null)
+  const isInView = useInView(sectionRef, { once: true, margin: '-80px' })
 
-  const content = {
-    en: {
-      title: 'About & Vision',
-      subtitle: 'Combining engineering precision, clean architecture, and creative problem solving.',
-      intro:
-        `I am Andelson TEUFACK, a ${age}-year-old Full-Stack Developer and IT Analyst based in Douala, Cameroon. I bridge complex backend systems with intuitive frontend experiences.`,
-      story:
-        'With over 2+ years of professional engineering experience, I specialize in architecting scalable applications, automating business processes, and optimizing IT infrastructures for enterprises and growing startups.',
-      visionTitle: 'Engineering Philosophy',
-      visionDesc:
-        'I believe in building software that scales gracefully. Every line of code should be intentional, secure, maintainable, and aligned with core business objectives.',
-      methodologyTitle: 'Methodology',
-      methodologyDesc:
-        'Agile iteration, continuous integration, domain-driven design, and strict code quality standards.',
-      quote:
-        'Excellence in software development is not an accident; it is the result of continuous learning, architecture discipline, and attention to detail.',
-      stats: [
-        { value: 2, label: 'Years Experience', suffix: '+' },
-        { value: 10, label: 'Major Projects', suffix: '+' },
-        { value: 20, label: 'Technologies', suffix: '+' },
-      ],
-    },
+  const copy = {
     fr: {
-      title: 'À Propos & Vision',
-      subtitle: 'Allier précision d\'ingénierie, architecture propre et résolution créative de problèmes.',
-      intro:
-        `Je suis Andelson TEUFACK, Développeur Full-Stack et Analyste IT de ${age} ans basé à Douala, Cameroun. Je fais le pont entre les architectures backend complexes et les interfaces frontends intuitives.`,
-      story:
-        'Avec plus de 2 ans d\'expérience professionnelle, je me spécialise dans la conception d\'applications scalables, l\'automatisation de processus métier et l\'optimisation d\'infrastructures IT.',
-      visionTitle: 'Philosophie d\'Ingénierie',
-      visionDesc:
-        'Je crois en la création de logiciels évolutifs. Chaque ligne de code doit être intentionnelle, sécurisée, maintenable et alignée sur les objectifs métier.',
-      methodologyTitle: 'Méthodologie',
-      methodologyDesc:
-        'Itération Agile, intégration continue, architecture orientée domaine et normes strictes de qualité.',
-      quote:
-        'L\'excellence en développement logiciel n\'est pas un hasard ; c\'est le résultat d\'un apprentissage continu, de la discipline architecturale et du soin apporté aux détails.',
-      stats: [
-        { value: 2, label: "Années d'Expérience", suffix: '+' },
-        { value: 10, label: 'Projets Majeurs', suffix: '+' },
-        { value: 20, label: 'Technologies', suffix: '+' },
+      eyebrow: '01 — PROFIL & ARCHITECTURE',
+      title: 'Positionnement d’Ingénierie & Formation',
+      subtitle:
+        'Transformer des contraintes métier et terrain complexes en systèmes logiciels fiables, maintenables et déployés en production.',
+      bioTitle: 'Parcours & approche',
+      bioLead: `Ingénieur des Travaux Informatiques de ${age} ans basé à Douala, je pilote aujourd’hui la digitalisation des inspections chez Kamer Engineering Solution tout en préparant un Master Professionnel en Génie Logiciel à l’ENSPD.`,
+      bioBody:
+        'Mon parcours couvre l’ensemble du cycle de vie logiciel : recueil des besoins et cahiers des charges, modélisation de bases de données, architecture d’APIs sécurisées, applications mobiles offline-first assistées par IA, télémétrie matérielle Bluetooth, intégration ERP Odoo et systèmes d’information géographique (SIG).',
+      metricsTitle: 'Repères vérifiables',
+      metrics: [
+        { value: '7', label: 'Missions & postes en entreprise / enseignement' },
+        { value: '2', label: 'Applications mobiles sur Google Play Store' },
+        { value: 'C1', label: 'Maîtrise professionnelle de l’anglais' },
+        { value: 'Offline + IA', label: 'Spécialité systèmes terrain résilients' },
       ],
+      pillarsTitle: 'Domaines d’architecture maîtrisés',
+      educationTitle: 'Formation Académique',
+      certTitle: 'Certification Professionnelle',
+    },
+    en: {
+      eyebrow: '01 — PROFILE & ARCHITECTURE',
+      title: 'Engineering Positioning & Academic Track',
+      subtitle:
+        'Turning complex industrial and field constraints into resilient, maintainable software systems shipped to production.',
+      bioTitle: 'Background & approach',
+      bioLead: `I am a ${age}-year-old Software & IT Engineer based in Douala, currently serving as Head of Inspection Digitalization at Kamer Engineering Solution while completing a Professional Master’s Degree in Software Engineering at ENSPD.`,
+      bioBody:
+        'My engineering scope spans the full software lifecycle: technical specification drafting, relational and spatial database modeling, secure backend APIs, AI-assisted offline-first mobile apps, Bluetooth hardware telemetry, Odoo ERP integration, and GIS pipelines.',
+      metricsTitle: 'Verified benchmarks',
+      metrics: [
+        { value: '7', label: 'Industry engineering & teaching roles' },
+        { value: '2', label: 'Mobile apps shipped on Google Play Store' },
+        { value: 'C1', label: 'Professional English proficiency' },
+        { value: 'Offline + AI', label: 'Core specialty in resilient field systems' },
+      ],
+      pillarsTitle: 'Core Engineering Pillars',
+      educationTitle: 'Academic Background',
+      certTitle: 'Professional Certification',
     },
   }
 
-  const text = language === 'en' ? content.en : content.fr
+  const t = copy[language]
 
   return (
-    <section id="about" className="py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto space-y-16">
+    <section
+      id="about"
+      ref={sectionRef}
+      className="py-24 px-4 sm:px-6 lg:px-8 border-b border-slate-200/80 dark:border-white/6"
+    >
+      <div className="max-w-7xl mx-auto space-y-12">
         {/* Section Header */}
         <motion.div
-          ref={sectionRef}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={containerVariants}
-          className="space-y-4 text-center md:text-left"
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.4 }}
+          className="space-y-3 max-w-3xl"
         >
-          <motion.div variants={itemVariants} className="inline-flex items-center gap-2 text-sky-600 dark:text-cyan-400 font-mono text-xs tracking-widest uppercase font-bold">
-            <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-            <span>// 01. Profile & Mindset</span>
-          </motion.div>
-
-          <motion.h2 variants={itemVariants} className="text-3xl sm:text-5xl font-bold font-display text-slate-900 dark:text-foreground">
-            {text.title}
-          </motion.h2>
-
-          <motion.p variants={itemVariants} className="text-slate-600 dark:text-muted-foreground text-base sm:text-lg max-w-2xl font-medium">
-            {text.subtitle}
-          </motion.p>
+          <p className="text-xs font-mono font-semibold uppercase tracking-widest text-sky-700 dark:text-sky-400">
+            {t.eyebrow}
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-bold font-display tracking-tight text-slate-900 dark:text-white">
+            {t.title}
+          </h2>
+          <p className="text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+            {t.subtitle}
+          </p>
         </motion.div>
 
-        {/* Bento Grid Layout (4 Cards) */}
-        <motion.div
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={containerVariants}
-          className="grid grid-cols-1 md:grid-cols-12 gap-6"
-        >
-          {/* Card 1: Main Story (8 cols) */}
-          <motion.div variants={itemVariants} className="md:col-span-8">
-            <SpotlightCard className="p-8 h-full flex flex-col justify-between spotlight-bg border-slate-200/80 dark:border-white/10 shadow-sm dark:shadow-none">
-              <div className="space-y-6">
-                <div className="flex items-center gap-3">
-                  <div className="p-2.5 rounded-xl bg-sky-500/10 dark:bg-cyan-500/10 text-sky-600 dark:text-cyan-400 border border-sky-400/30 dark:border-cyan-500/20">
-                    <Code className="w-5 h-5" />
-                  </div>
-                  <h3 className="text-xl font-bold font-display text-slate-900 dark:text-foreground">Full-Stack Engineer</h3>
+        {/* Top Row: Narrative + Verified Benchmarks */}
+        <div className="grid lg:grid-cols-12 gap-6">
+          <div className="lg:col-span-7 p-7 sm:p-8 rounded-2xl editorial-surface space-y-4">
+            <h3 className="text-sm font-mono uppercase tracking-wider font-semibold text-sky-700 dark:text-sky-400">
+              {t.bioTitle}
+            </h3>
+            <p className="text-lg font-semibold text-slate-900 dark:text-slate-100 leading-relaxed">
+              {t.bioLead}
+            </p>
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+              {t.bioBody}
+            </p>
+          </div>
+
+          <div className="lg:col-span-5 p-7 sm:p-8 rounded-2xl editorial-surface flex flex-col justify-between space-y-6">
+            <h3 className="text-sm font-mono uppercase tracking-wider font-semibold text-sky-700 dark:text-sky-400">
+              {t.metricsTitle}
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
+              {t.metrics.map((metric) => (
+                <div
+                  key={metric.label}
+                  className="p-4 rounded-xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/8"
+                >
+                  <p className="text-xl sm:text-2xl font-bold font-mono text-slate-900 dark:text-white">
+                    {metric.value}
+                  </p>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-snug">
+                    {metric.label}
+                  </p>
                 </div>
+              ))}
+            </div>
+          </div>
+        </div>
 
-                <p className="text-lg text-slate-900 dark:text-foreground font-semibold leading-relaxed">
-                  {text.intro}
-                </p>
+        {/* Middle Row: 4 Architecture Pillars + Education & Certification */}
+        <div className="grid lg:grid-cols-12 gap-6">
+          {/* 4 Engineering Pillars (7 cols) */}
+          <div className="lg:col-span-7 space-y-4">
+            <h3 className="text-sm font-mono uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400">
+              {t.pillarsTitle}
+            </h3>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {ENGINEERING_PILLARS.map((pillar, index) => {
+                const Icon = pillarIcons[index] || Cpu
+                return (
+                  <div
+                    key={pillar.id}
+                    className="p-5 rounded-xl editorial-surface flex flex-col justify-between space-y-4"
+                  >
+                    <div className="space-y-2.5">
+                      <div className="flex items-center gap-2.5">
+                        <div className="p-2 rounded-lg bg-sky-50 dark:bg-sky-500/10 text-sky-700 dark:text-sky-400 border border-sky-200/80 dark:border-sky-400/20">
+                          <Icon className="w-4 h-4" />
+                        </div>
+                        <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100 leading-snug">
+                          {pillar.title[language]}
+                        </h4>
+                      </div>
+                      <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                        {pillar.description[language]}
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5 pt-2 border-t border-slate-100 dark:border-white/6">
+                      {pillar.stack.map((item) => (
+                        <span
+                          key={item}
+                          className="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
 
-                <p className="text-sm text-slate-600 dark:text-muted-foreground leading-relaxed font-medium">
-                  {text.story}
-                </p>
+          {/* Education & Certifications (5 cols) */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="space-y-3">
+              <h3 className="text-sm font-mono uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-2">
+                <GraduationCap className="w-4 h-4 text-sky-600 dark:text-sky-400" />
+                <span>{t.educationTitle}</span>
+              </h3>
+              <div className="space-y-3">
+                {EDUCATION.map((edu) => (
+                  <div
+                    key={edu.id}
+                    className="p-4 rounded-xl editorial-surface flex items-start justify-between gap-3"
+                  >
+                    <div className="space-y-1">
+                      <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">
+                        {edu.degree[language]}
+                      </h4>
+                      <p className="text-xs font-medium text-slate-600 dark:text-slate-400">
+                        {edu.institution}
+                      </p>
+                    </div>
+                    <div className="text-right shrink-0">
+                      <span className="inline-block px-2.5 py-0.5 rounded-md bg-sky-50 dark:bg-sky-500/10 border border-sky-200 dark:border-sky-400/20 text-[11px] font-mono font-semibold text-sky-700 dark:text-sky-300">
+                        {edu.period[language]}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-                {/* Key Pillars */}
-                <div className="grid sm:grid-cols-2 gap-4 pt-4 border-t border-slate-200 dark:border-white/10">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-4 h-4 text-sky-600 dark:text-cyan-400 mt-1 shrink-0" />
+            <div className="space-y-3">
+              <h3 className="text-sm font-mono uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-2">
+                <Award className="w-4 h-4 text-sky-600 dark:text-sky-400" />
+                <span>{t.certTitle}</span>
+              </h3>
+              {CERTIFICATIONS.map((cert) => (
+                <div key={cert.id} className="p-4 rounded-xl editorial-surface space-y-2.5">
+                  <div className="flex items-start justify-between gap-2">
                     <div>
-                      <h4 className="text-xs font-bold text-slate-900 dark:text-foreground">{text.visionTitle}</h4>
-                      <p className="text-xs text-slate-600 dark:text-muted-foreground mt-1 font-medium">{text.visionDesc}</p>
+                      <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">
+                        {cert.title}
+                      </h4>
+                      <p className="text-xs font-mono text-sky-700 dark:text-sky-400 mt-0.5">
+                        {cert.issuer}
+                      </p>
                     </div>
                   </div>
-
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-4 h-4 text-purple-600 dark:text-purple-400 mt-1 shrink-0" />
-                    <div>
-                      <h4 className="text-xs font-bold text-slate-900 dark:text-foreground">{text.methodologyTitle}</h4>
-                      <p className="text-xs text-slate-600 dark:text-muted-foreground mt-1 font-medium">{text.methodologyDesc}</p>
-                    </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {cert.domains[language].map((domain) => (
+                      <span
+                        key={domain}
+                        className="px-2 py-0.5 rounded text-[11px] bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300"
+                      >
+                        {domain}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              </div>
-            </SpotlightCard>
-          </motion.div>
-
-          {/* Card 2: Metrics & Impact (4 cols) */}
-          <motion.div variants={itemVariants} className="md:col-span-4">
-            <SpotlightCard className="p-8 h-full flex flex-col justify-between border-sky-400/30 dark:border-cyan-500/20 bg-gradient-to-br from-sky-500/10 via-transparent to-purple-500/10 dark:from-cyan-500/5 dark:to-purple-500/5 shadow-sm dark:shadow-none">
-              <div className="space-y-8">
-                <span className="text-xs font-mono uppercase tracking-widest text-sky-700 dark:text-cyan-400 font-bold">Impact Metrics</span>
-
-                <div className="space-y-6">
-                  {text.stats.map((stat, idx) => (
-                    <div key={idx} className="border-b border-slate-200 dark:border-white/10 pb-4 last:border-0 last:pb-0">
-                      <AnimatedNumber value={stat.value} suffix={stat.suffix} />
-                      <p className="text-xs font-mono text-slate-600 dark:text-muted-foreground mt-1 font-semibold">{stat.label}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </SpotlightCard>
-          </motion.div>
-
-          {/* Card 3: Quote (5 cols) */}
-          <motion.div variants={itemVariants} className="md:col-span-5">
-            <SpotlightCard className="p-8 h-full relative flex flex-col justify-center border-purple-400/30 dark:border-purple-500/20 shadow-sm dark:shadow-none">
-              <Quote className="w-10 h-10 text-purple-600/30 dark:text-purple-400/30 mb-4" />
-              <p className="text-base sm:text-lg italic font-medium leading-relaxed text-slate-900 dark:text-foreground">
-                "{text.quote}"
-              </p>
-              <div className="mt-6 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-sky-500 to-purple-600 dark:from-cyan-400 dark:to-purple-500 flex items-center justify-center font-bold text-xs text-white dark:text-slate-950 shadow-sm">
-                  AT
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-slate-900 dark:text-foreground">Andelson Teufack</p>
-                  <p className="text-[10px] font-mono text-slate-500 dark:text-muted-foreground">Software Engineer</p>
-                </div>
-              </div>
-            </SpotlightCard>
-          </motion.div>
-
-          {/* Card 4: Macbook 3D Terminal Preview (7 cols) */}
-          <motion.div variants={itemVariants} className="md:col-span-7">
-            <SpotlightCard className="p-6 h-full flex flex-col justify-center items-center border-slate-200/80 dark:border-white/10 shadow-sm dark:shadow-none">
-              <MacbookAnimation />
-            </SpotlightCard>
-          </motion.div>
-        </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )

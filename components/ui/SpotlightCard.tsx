@@ -1,12 +1,13 @@
 'use client'
 
-import { useRef, useState, ReactNode, MouseEvent } from 'react'
+import { useRef, useState, ReactNode, MouseEvent, KeyboardEvent } from 'react'
 
 interface SpotlightCardProps {
   children: ReactNode
   className?: string
   spotlightColor?: string
   onClick?: () => void
+  interactive?: boolean
 }
 
 export default function SpotlightCard({
@@ -14,6 +15,7 @@ export default function SpotlightCard({
   className = '',
   spotlightColor,
   onClick,
+  interactive = false,
 }: SpotlightCardProps) {
   const divRef = useRef<HTMLDivElement>(null)
   const [position, setPosition] = useState({ x: 0, y: 0 })
@@ -25,29 +27,38 @@ export default function SpotlightCard({
     setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top })
   }
 
-  const handleMouseEnter = () => setOpacity(1)
-  const handleMouseLeave = () => setOpacity(0)
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (onClick && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault()
+      onClick()
+    }
+  }
 
   return (
     <div
       ref={divRef}
       onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={() => setOpacity(1)}
+      onMouseLeave={() => setOpacity(0)}
       onClick={onClick}
-      className={`relative overflow-hidden rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white/85 dark:bg-card/60 backdrop-blur-xl shadow-sm dark:shadow-none transition-all duration-300 ${className}`}
+      onKeyDown={onClick ? handleKeyDown : undefined}
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      className={`relative overflow-hidden rounded-xl editorial-surface ${
+        interactive || onClick ? 'editorial-surface-hover cursor-pointer' : ''
+      } ${className}`}
     >
-      {/* Spotlight Effect Layer */}
+      {/* Subtle architectural specular highlight */}
       <div
-        className="pointer-events-none absolute -inset-px transition-opacity duration-500 rounded-2xl"
+        className="pointer-events-none absolute -inset-px transition-opacity duration-300 rounded-xl"
         style={{
           opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${
-            spotlightColor || 'rgba(2, 132, 199, 0.14)'
-          }, transparent 40%)`,
+          background: `radial-gradient(420px circle at ${position.x}px ${position.y}px, ${
+            spotlightColor || 'rgba(56, 189, 248, 0.06)'
+          }, transparent 45%)`,
         }}
       />
-      {children}
+      <div className="relative z-10 h-full">{children}</div>
     </div>
   )
 }

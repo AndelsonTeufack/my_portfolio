@@ -19,22 +19,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${SITE_URL}/#skills`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
       url: `${SITE_URL}/#experience`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
-      priority: 0.9,
+      priority: 0.95,
     },
     {
       url: `${SITE_URL}/#projects`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.95,
+    },
+    {
+      url: `${SITE_URL}/#skills`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.9,
     },
     {
       url: `${SITE_URL}/#contact`,

@@ -1,42 +1,39 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useScroll, useTransform, Variants } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { ArrowDown, Download, Sparkles, Code2 } from 'lucide-react'
-import SpotlightCard from '@/components/ui/SpotlightCard'
+import { ArrowRight, Download, MapPin, Briefcase, GraduationCap } from 'lucide-react'
+import { PORTFOLIO_PROFILE, type Language } from '@/lib/portfolio-data'
 
 interface HeroProps {
-  language: 'en' | 'fr'
+  language: Language
 }
 
 const content = {
   en: {
-    badge: 'Available for innovative projects & consulting',
-    name: 'Andelson Teufack',
-    title: 'Full-Stack Developer & IT Solutions Analyst',
-    description:
-      'Designing and engineering high-impact web and mobile solutions. Specialized in Java, Spring Boot, Python, React, Next.js, and Flutter with an obsession for performance and clean code.',
-    ctaProjects: 'Explore My Work',
-    ctaContact: 'Get In Touch',
+    eyebrow: 'SOFTWARE & IT ENGINEER',
+    ctaProjects: 'Explore Case Studies',
+    ctaExperiences: 'Experience Track',
     downloadCV: 'Download CV',
-    experienceBadge: '2+ Years Experience',
-    locationBadge: 'Based in Douala, CM',
-    stackTitle: 'Core Stack',
+    stackLabel: 'Production Stack',
+    proofCompany: 'Kamer Engineering Solution',
+    proofCompanyRole: 'Head of Inspection Digitalization',
+    proofEducation: 'Master in Software Engineering (ENSPD)',
+    locationShort: 'Douala, Cameroon',
+    roleTag: 'Full-Stack & Mobile',
   },
   fr: {
-    badge: 'Disponible pour projets innovants & consulting',
-    name: 'Andelson Teufack',
-    title: 'Développeur Full-Stack & Analyste IT',
-    description:
-      'Conception et ingénierie de solutions web et mobiles à fort impact. Spécialisé en Java, Spring Boot, Python, React, Next.js et Flutter avec une obsession pour la performance et le code propre.',
-    ctaProjects: 'Découvrir mes projets',
-    ctaContact: 'Me contacter',
-    downloadCV: 'Télécharger CV',
-    experienceBadge: '2+ Ans d\'Expérience',
-    locationBadge: 'Basé à Douala, CM',
-    stackTitle: 'Technologies Clés',
+    eyebrow: 'INGÉNIEUR DES TRAVAUX INFORMATIQUES',
+    ctaProjects: 'Découvrir mes réalisations',
+    ctaExperiences: 'Parcours professionnel',
+    downloadCV: 'Télécharger le CV',
+    stackLabel: 'Technologies de production',
+    proofCompany: 'Kamer Engineering Solution',
+    proofCompanyRole: 'Responsable de la digitalisation des inspections',
+    proofEducation: 'Master Pro Génie Logiciel (ENSPD)',
+    locationShort: 'Douala, Cameroun',
+    roleTag: 'Full-Stack & Mobile',
   },
 }
 
@@ -45,36 +42,23 @@ const containerVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
     },
   },
 }
 
 const itemVariants: Variants = {
-  hidden: { y: 25, opacity: 0 },
+  hidden: { y: 16, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
-    transition: {
-      type: 'spring',
-      stiffness: 120,
-      damping: 14,
-    },
+    transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
   },
 }
 
 export default function Hero({ language }: HeroProps) {
-  const text = language === 'en' ? content.en : content.fr
-  const sectionRef = useRef<HTMLElement>(null)
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end start'],
-  })
-
-  const opacityY = useTransform(scrollYProgress, [0, 0.8], [1, 0])
-  const translateY = useTransform(scrollYProgress, [0, 0.8], [0, 80])
+  const t = content[language]
 
   const handleDownloadCV = () => {
     const cvUrl = '/CV - Andelson TEUFACK.pdf'
@@ -87,63 +71,94 @@ export default function Hero({ language }: HeroProps) {
   }
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative min-h-screen pt-32 pb-20 px-4 sm:px-6 lg:px-8 flex items-center justify-center overflow-hidden"
-    >
-      {/* Glow backgrounds */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-sky-500/10 dark:bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none -z-10" />
-      <div className="absolute top-1/3 right-10 w-[400px] h-[400px] bg-purple-500/10 dark:bg-purple-600/10 rounded-full blur-[120px] pointer-events-none -z-10" />
-
-      <motion.div style={{ opacity: opacityY, y: translateY }} className="max-w-7xl w-full mx-auto">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Main Text Section (7 cols) */}
+    <section className="relative pt-32 pb-20 sm:pt-36 sm:pb-24 px-4 sm:px-6 lg:px-8 border-b border-slate-200/80 dark:border-white/6">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+          {/* Editorial Main Column (7 cols) */}
           <motion.div
             initial="hidden"
             animate="visible"
             variants={containerVariants}
             className="lg:col-span-7 space-y-6 text-left"
           >
-            {/* Live Status Badge */}
-            <motion.div variants={itemVariants} className="inline-block">
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-card border-emerald-500/40 text-xs font-mono font-bold text-emerald-700 dark:text-emerald-400">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-                </span>
-                {text.badge}
-              </div>
+            {/* Availability Status */}
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-xs font-mono font-medium text-emerald-700 dark:text-emerald-400">
+                <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                {PORTFOLIO_PROFILE.availabilityBadge[language]}
+              </span>
+              <span className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                {t.eyebrow}
+              </span>
             </motion.div>
 
-            {/* Name Title */}
-            <motion.div variants={itemVariants} className="space-y-2">
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight font-display">
-                <span className="text-slate-900 dark:text-foreground">{text.name.split(' ')[0]} </span>
-                <span className="text-gradient-cyan">{text.name.split(' ')[1]}</span>
+            {/* Name & Title */}
+            <motion.div variants={itemVariants} className="space-y-3">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight font-display text-slate-900 dark:text-white leading-[1.08]">
+                {PORTFOLIO_PROFILE.fullName}
               </h1>
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gradient-purple font-display">
-                {text.title}
+              <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold text-sky-700 dark:text-sky-400 leading-snug">
+                {PORTFOLIO_PROFILE.currentRoleHeadline[language]}
               </h2>
             </motion.div>
 
-            {/* Description */}
+            {/* Value Proposition */}
             <motion.p
               variants={itemVariants}
-              className="text-base sm:text-lg text-slate-600 dark:text-muted-foreground leading-relaxed max-w-2xl font-medium"
+              className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl"
             >
-              {text.description}
+              {PORTFOLIO_PROFILE.heroDescription[language]}
             </motion.p>
 
-            {/* Core Tech Stack Badges */}
-            <motion.div variants={itemVariants} className="pt-2">
-              <span className="text-xs font-mono uppercase tracking-widest text-slate-500 dark:text-muted-foreground/80 block mb-3 font-semibold">
-                {text.stackTitle}
+            {/* Proof Bar */}
+            <motion.div
+              variants={itemVariants}
+              className="grid sm:grid-cols-2 gap-3 pt-1 max-w-2xl"
+            >
+              <div className="flex items-start gap-3 p-3.5 rounded-xl editorial-surface">
+                <Briefcase className="w-4 h-4 text-sky-600 dark:text-sky-400 mt-0.5 shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold text-slate-900 dark:text-slate-100 truncate">
+                    {t.proofCompany}
+                  </p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
+                    {t.proofCompanyRole}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3 p-3.5 rounded-xl editorial-surface">
+                <GraduationCap className="w-4 h-4 text-sky-600 dark:text-sky-400 mt-0.5 shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold text-slate-900 dark:text-slate-100 truncate">
+                    {t.proofEducation}
+                  </p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 mt-0.5">
+                    <MapPin className="w-3 h-3 shrink-0" />
+                    <span>{t.locationShort}</span>
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Core Stack */}
+            <motion.div variants={itemVariants} className="pt-1">
+              <span className="text-[11px] font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 block mb-2.5">
+                {t.stackLabel}
               </span>
               <div className="flex flex-wrap gap-2">
-                {['Spring Boot', 'React / Next.js', 'Flutter', 'Python', 'Odoo ERP', 'PostgreSQL'].map((tech) => (
+                {[
+                  'Spring Boot',
+                  'Flutter Offline-First',
+                  'React / Next.js',
+                  'Python / FastAPI',
+                  'Odoo ERP',
+                  'PostgreSQL / PostGIS',
+                  'BluetoothSockets',
+                ].map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/[0.04] border border-slate-200/90 dark:border-white/10 text-xs font-mono font-semibold text-slate-800 dark:text-cyan-300 hover:border-sky-500 dark:hover:border-cyan-500/50 hover:bg-sky-500/10 dark:hover:bg-cyan-500/10 transition-all cursor-default shadow-2xs"
+                    className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 text-xs font-mono font-medium text-slate-700 dark:text-slate-300"
                   >
                     {tech}
                   </span>
@@ -151,80 +166,76 @@ export default function Hero({ language }: HeroProps) {
               </div>
             </motion.div>
 
-            {/* CTA Buttons */}
-            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4 pt-4">
+            {/* CTAs */}
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3 pt-2">
               <Button
                 size="lg"
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                className="rounded-full bg-gradient-to-r from-sky-600 to-blue-600 dark:from-cyan-500 dark:to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white dark:text-slate-950 font-bold px-7 shadow-lg shadow-sky-500/25 dark:shadow-cyan-500/25 transition-all hover:scale-105"
+                onClick={() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' })}
+                className="rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-sky-500 dark:hover:bg-sky-400 text-white dark:text-slate-950 font-semibold px-6 cursor-pointer"
               >
-                <Sparkles className="w-4 h-4 mr-2" />
-                {text.ctaProjects}
+                {t.ctaExperiences}
+                <ArrowRight className="w-4 h-4 ml-1.5" />
               </Button>
 
               <Button
                 variant="outline"
                 size="lg"
                 onClick={handleDownloadCV}
-                className="rounded-full border-slate-300 dark:border-white/15 bg-white/90 dark:bg-white/[0.03] hover:bg-slate-100 dark:hover:bg-white/[0.08] hover:border-sky-500 dark:hover:border-cyan-400/50 text-slate-900 dark:text-foreground font-bold px-6 transition-all hover:scale-105 shadow-xs"
+                className="rounded-xl border-slate-300 dark:border-white/15 bg-white dark:bg-[#11131a] hover:bg-slate-50 dark:hover:bg-white/[0.06] text-slate-900 dark:text-slate-100 font-semibold px-5 cursor-pointer"
               >
-                <Download className="w-4 h-4 mr-2 text-sky-600 dark:text-cyan-400" />
-                {text.downloadCV}
+                <Download className="w-4 h-4 mr-2 text-sky-600 dark:text-sky-400" />
+                {t.downloadCV}
               </Button>
 
               <Button
                 variant="ghost"
                 size="lg"
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="rounded-full text-slate-600 dark:text-muted-foreground hover:text-sky-600 dark:hover:text-cyan-400 hover:bg-sky-500/10 dark:hover:bg-cyan-500/10 font-semibold transition-all"
+                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                className="rounded-xl text-slate-600 dark:text-slate-300 hover:text-sky-700 dark:hover:text-sky-300 font-semibold cursor-pointer"
               >
-                {text.ctaContact}
-                <ArrowDown className="w-4 h-4 ml-1" />
+                {t.ctaProjects}
               </Button>
             </motion.div>
           </motion.div>
 
-          {/* Profile Card Section 3D (5 cols) */}
+          {/* Portrait Column (5 cols) */}
           <motion.div
-            initial={{ scale: 0.9, opacity: 0, y: 30 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            transition={{ type: 'spring', stiffness: 100, damping: 18, delay: 0.3 }}
-            className="lg:col-span-5 flex justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="lg:col-span-5 flex justify-center lg:justify-end"
           >
-            <SpotlightCard className="w-full max-w-md p-4 spotlight-bg border-slate-300/80 dark:border-cyan-500/30 shadow-xl dark:shadow-none">
-              <div className="relative aspect-[4/5] rounded-xl overflow-hidden group">
+            <div className="w-full max-w-md rounded-2xl editorial-surface p-3">
+              <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-slate-900">
                 <Image
                   src="/hero.jpg"
-                  alt="TEUFACK SONTSA Andelson (Andelson Teufack) — Développeur Full-Stack & Analyste IT à Douala, Cameroun"
+                  alt="TEUFACK SONTSA Andelson — Ingénieur des Travaux Informatiques à Douala, Cameroun"
                   fill
-                  className="object-cover object-[center_25%] transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover object-[center_20%]"
                   priority
                   sizes="(max-width: 768px) 100vw, 40vw"
                 />
 
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-70 dark:opacity-80" />
+                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950/90 via-slate-950/45 to-transparent" />
 
-                {/* Floating Experience Badge */}
-                <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl glass-card border-slate-200/80 dark:border-white/10 flex items-center justify-between shadow-md dark:shadow-none">
-                  <div className="flex items-center gap-2.5">
-                    <div className="p-2 rounded-lg bg-sky-500/20 dark:bg-cyan-500/20 text-sky-600 dark:text-cyan-400">
-                      <Code2 className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <p className="text-xs font-bold text-slate-900 dark:text-foreground">{text.experienceBadge}</p>
-                      <p className="text-[10px] font-mono text-slate-500 dark:text-muted-foreground">{text.locationBadge}</p>
-                    </div>
+                <div className="absolute bottom-3.5 left-3.5 right-3.5 p-3.5 rounded-xl bg-slate-950/85 backdrop-blur-md border border-white/12 flex items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="text-xs font-semibold text-white truncate">
+                      {t.proofCompany}
+                    </p>
+                    <p className="text-[11px] font-mono text-slate-300 truncate">
+                      {t.locationShort}
+                    </p>
                   </div>
-                  <span className="text-xs font-mono text-sky-700 dark:text-cyan-400 bg-sky-500/10 dark:bg-cyan-500/10 px-2 py-1 rounded border border-sky-400/30 dark:border-cyan-500/20 font-semibold">
-                    Full-Stack
+                  <span className="shrink-0 text-[11px] font-mono font-semibold text-sky-300 bg-sky-500/15 px-2.5 py-1 rounded-md border border-sky-400/25">
+                    {t.roleTag}
                   </span>
                 </div>
               </div>
-            </SpotlightCard>
+            </div>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
     </section>
   )
 }

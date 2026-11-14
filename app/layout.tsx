@@ -7,8 +7,8 @@ import './globals.css'
 const SITE_URL = 'https://andelson-teufack.dev'
 const CANONICAL_URL = 'https://andelson-teufack.dev'
 const FULL_NAME = 'TEUFACK SONTSA Andelson'
-const JOB_TITLE = 'Développeur Full-Stack & Analyste IT'
-const OG_IMAGE = `${SITE_URL}/og-image.png`
+const JOB_TITLE = 'Ingénieur des Travaux Informatiques · Développeur Full-Stack & Mobile'
+const OG_IMAGE = `${SITE_URL}/opengraph-image`
 
 export const metadata: Metadata = {
   metadataBase: new URL(CANONICAL_URL),
@@ -17,25 +17,24 @@ export const metadata: Metadata = {
     template: `%s | ${FULL_NAME}`,
   },
   description:
-    'TEUFACK SONTSA Andelson (Andelson Teufack) — Développeur Full-Stack & Analyste IT basé à Douala, Cameroun. '
-    + 'Expert Spring Boot, Java, Python, React.js, Next.js, Flutter & Odoo ERP. '
-    + 'Création d’applications web, mobiles & APIs sécurisées haute performance.',
+    'TEUFACK SONTSA Andelson (Andelson Teufack) — Ingénieur des Travaux Informatiques & Développeur Full-Stack/Mobile basé à Douala, Cameroun. '
+    + 'Spécialiste Flutter Offline-First, Spring Boot, Python (FastAPI, Django), React/Next.js, Odoo ERP & SIG PostGIS.',
   keywords: [
     'TEUFACK SONTSA Andelson',
     'Teufack Sontsa Andelson',
     'Andelson Teufack',
     'Teufack Andelson',
-    'Anderson Teufack',
+    'Ingénieur des Travaux Informatiques Douala',
     'Full-Stack Developer Cameroon',
     'Développeur Full-Stack Douala',
-    'Ingénieur Logiciel Cameroun',
+    'Développeur Flutter Offline-First',
     'Spring Boot React Flutter',
     'Next.js Developer Africa',
     'Développeur Python Django FastAPI',
     'Odoo ERP Integration Cameroon',
-    'Java Backend Engineer Douala',
-    'Mobile App Developer Flutter',
-    'Analyste IT Douala',
+    'Kamer Engineering Solution',
+    'ENSPD Douala Génie Logiciel',
+    'PostGIS KoboCollect Cameroun',
     'Portfolio développeur Cameroun',
   ],
   authors: [{ name: FULL_NAME, url: CANONICAL_URL }],
@@ -52,9 +51,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${FULL_NAME} | ${JOB_TITLE} — Douala`,
     description:
-      'TEUFACK SONTSA Andelson — Développeur Full-Stack & Analyste IT à Douala. '
-      + 'Spring Boot · React · Flutter · Next.js · Python · Odoo ERP. '
-      + 'Ingénierie d’applications web & mobiles scalables.',
+      'TEUFACK SONTSA Andelson — Ingénieur des Travaux Informatiques & Développeur Full-Stack/Mobile à Douala. '
+      + 'Flutter Offline-First · Spring Boot · Python (FastAPI/Django) · React/Next.js · Odoo ERP · SIG.',
     url: CANONICAL_URL,
     siteName: `${FULL_NAME} Portfolio`,
     locale: 'fr_CM',
@@ -66,16 +64,16 @@ export const metadata: Metadata = {
         secureUrl: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: `${FULL_NAME} — Full-Stack Developer & IT Analyst Portfolio`,
+        alt: `${FULL_NAME} — Ingénieur des Travaux Informatiques & Développeur Full-Stack`,
         type: 'image/png',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${FULL_NAME} | Full-Stack Developer`,
+    title: `${FULL_NAME} | Ingénieur Logiciel & Développeur Full-Stack`,
     description:
-      'TEUFACK SONTSA Andelson — Développeur Full-Stack, Douala · Spring Boot · React · Flutter · Next.js',
+      'TEUFACK SONTSA Andelson — Douala · Flutter Offline-First · Spring Boot · FastAPI · React/Next.js · Odoo ERP',
     images: [{ url: OG_IMAGE, alt: `${FULL_NAME} Portfolio` }],
   },
   robots: {
@@ -106,8 +104,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#030305' },
-    { media: '(prefers-color-scheme: dark)', color: '#030305' },
+    { media: '(prefers-color-scheme: light)', color: '#f8fafc' },
+    { media: '(prefers-color-scheme: dark)', color: '#090a0f' },
   ],
   width: 'device-width',
   initialScale: 1,
@@ -135,11 +133,11 @@ const jsonLdGraph = {
       image: {
         '@type': 'ImageObject',
         url: `${CANONICAL_URL}/hero.jpg`,
-        caption: `${FULL_NAME} — Développeur Full-Stack & Analyste IT à Douala`,
+        caption: `${FULL_NAME} — ${JOB_TITLE}`,
       },
       jobTitle: JOB_TITLE,
       description:
-        'TEUFACK SONTSA Andelson est un Développeur Full-Stack et Analyste IT basé à Douala, Cameroun. Spécialiste Spring Boot, React, Flutter, Next.js, Python et Odoo ERP.',
+        'TEUFACK SONTSA Andelson est Ingénieur des Travaux Informatiques et Développeur Full-Stack & Mobile basé à Douala, Cameroun. Spécialiste Flutter Offline-First, Gemini LLM, BluetoothSockets, Spring Boot, Python (FastAPI/Django), React/Next.js et Odoo ERP.',
       email: 'mailto:teufackandelson123@gmail.com',
       telephone: '+237690819035',
       birthDate: '2003-12-14',
@@ -154,15 +152,20 @@ const jsonLdGraph = {
         addressRegion: 'Littoral',
         addressCountry: 'CM',
       },
-      alumniOf: {
-        '@type': 'EducationalOrganization',
-        name: 'Institut Africain d\'Informatique (IAI)',
-        url: 'https://www.iai-cameroon.org/',
-      },
+      alumniOf: [
+        {
+          '@type': 'EducationalOrganization',
+          name: 'ENSPD (École Nationale Supérieure Polytechnique de Douala)',
+        },
+        {
+          '@type': 'EducationalOrganization',
+          name: 'Institut Africain d’Informatique (IAI-Cameroun)',
+          url: 'https://www.iai-cameroon.org/',
+        },
+      ],
       worksFor: {
         '@type': 'Organization',
-        name: 'KES IP',
-        url: 'https://www.kes-africa.com/',
+        name: 'Kamer Engineering Solution',
       },
       hasCredential: [
         {
@@ -176,27 +179,27 @@ const jsonLdGraph = {
         },
         {
           '@type': 'EducationalOccupationalCredential',
-          name: 'Licence en Génie Logiciel',
+          name: 'Licence en Génie Logiciel (2024)',
           credentialCategory: 'Degree',
           recognizedBy: {
             '@type': 'EducationalOrganization',
-            name: 'Institut Africain d\'Informatique (IAI)',
+            name: 'Institut Africain d’Informatique (IAI-Cameroun)',
           },
         },
       ],
       knowsAbout: [
-        'Java', 'Spring Boot', 'React.js', 'Next.js',
-        'Flutter', 'Python', 'Django', 'FastAPI', 'Flask',
-        'Node.js', 'NestJS', 'TypeScript', 'JavaScript',
-        'Dart', 'C/C++', 'Odoo ERP', 'PostgreSQL', 'MySQL',
-        'MongoDB', 'Redis', 'Firebase', 'APIs REST',
-        'Microservices', 'System Design', 'KoboCollect',
-        'SIG / GeoJSON', 'Docker', 'Git', 'Agile / Scrum',
-        'Technical Instruction', 'Pedagogy & Mentorship', 'Software Engineering Education',
+        'Java', 'Spring Boot', 'Python', 'FastAPI', 'Django', 'Flask',
+        'Flutter', 'Offline-First Mobile Architecture', 'Android (Java, Kotlin)',
+        'BluetoothSockets', 'Gemini LLM API', 'React.js', 'Next.js',
+        'TypeScript', 'Node.js', 'NestJS', 'Odoo ERP', 'n8n',
+        'PostgreSQL', 'PostGIS', 'MySQL', 'Redis', 'Hive', 'Firebase',
+        'JWT', 'OAuth2', 'Spring Security', 'RBAC',
+        'Cloudflare R2', 'Docker', 'GitHub Actions', 'KoboCollect', 'SIG / GeoJSON',
       ],
       knowsLanguage: [
         { '@type': 'Language', name: 'French' },
         { '@type': 'Language', name: 'English' },
+        { '@type': 'Language', name: 'Yemba' },
       ],
       sameAs: [
         'https://www.linkedin.com/in/andelson-teufack-97a59b279/',
@@ -218,7 +221,7 @@ const jsonLdGraph = {
       '@id': `${CANONICAL_URL}/#website`,
       url: CANONICAL_URL,
       name: `${FULL_NAME} Portfolio`,
-      description: `Site web et portfolio officiel de ${FULL_NAME}, Développeur Full-Stack à Douala.`,
+      description: `Site web et portfolio officiel de ${FULL_NAME}, Ingénieur des Travaux Informatiques et Développeur Full-Stack & Mobile à Douala.`,
       publisher: { '@id': `${CANONICAL_URL}/#person` },
       inLanguage: ['fr', 'en'],
       potentialAction: {
@@ -239,31 +242,31 @@ const jsonLdGraph = {
           name: 'Qui est TEUFACK SONTSA Andelson ?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'TEUFACK SONTSA Andelson (aussi connu sous le nom d\'Andelson Teufack) est un Développeur Full-Stack et Analyste IT basé à Douala, Cameroun. Diplômé d\'une Licence en Génie Logiciel à l\'IAI et certifié Google IT Support, il conçoit des applications web, mobiles et architectures backend robustes.',
+            text: 'TEUFACK SONTSA Andelson (Andelson Teufack) est Ingénieur des Travaux Informatiques et Développeur Full-Stack & Mobile basé à Douala, Cameroun. Responsable de la digitalisation des inspections chez Kamer Engineering Solution, diplômé d’une Licence en Génie Logiciel à l’IAI-Cameroun (2024), étudiant en Master Professionnel à l’ENSPD et certifié Google IT Support.',
           },
         },
         {
           '@type': 'Question',
-          name: 'Andelson Teufack a-t-il une expérience d\'enseignement ou de formation ?',
+          name: 'Andelson Teufack a-t-il une expérience d’enseignement ou de mentorat ?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Oui, TEUFACK SONTSA Andelson a été Formateur & Mentor en Développement Web (React.js, JS) et Mobile (Flutter, Dart) à l\'Institut Africain d\'Informatique (IAI) de janvier à mai 2025, où il a encadré et formé plus de 100 étudiants en génie logiciel.',
+            text: 'Oui, TEUFACK SONTSA Andelson a été Formateur & Mentor en Développement Web & Mobile à l’IAI (Centre de Douala) de janvier à mai 2025, où il a dispensé des formations React/JS et Flutter et accompagné plus de 15 étudiants sur des projets applicatifs concrets.',
           },
         },
         {
           '@type': 'Question',
-          name: 'Quelles sont les compétences techniques d\'Andelson Teufack ?',
+          name: 'Quelles sont les compétences techniques d’Andelson Teufack ?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Andelson Teufack maîtrise Spring Boot, Java, Python (Django, FastAPI, Flask), React.js, Next.js, Flutter, Node.js, NestJS, PostgreSQL, MySQL, MongoDB, Redis, Firebase ainsi que l\'intégration de systèmes Odoo ERP.',
+            text: 'Andelson Teufack maîtrise Flutter (Clean Architecture, Offline-First, BluetoothSockets), Java / Spring Boot, Python (FastAPI, Django, Flask), React.js / Next.js, NestJS, PostgreSQL / PostGIS, Redis, Firebase, Hive, la sécurité JWT/OAuth2/RBAC, l’intégration Odoo ERP et Cloudflare R2.',
           },
         },
         {
           '@type': 'Question',
-          name: 'Quels projets ont été réalisés par TEUFACK SONTSA Andelson ?',
+          name: 'Quels projets marquants ont été réalisés par TEUFACK SONTSA Andelson ?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Parmi ses projets figurent MomoKash (application mobile Flutter), un Système de Gestion RH Spring Boot/MongoDB, TaillorPro (application mobile Flutter/Firebase), un Système de Suivi de Maintenance Python, l\'application MULEMA, et la plateforme Laoshi Consulting.',
+            text: 'Parmi ses réalisations figurent la suite digitale d’inspections industrielles (mobile offline-first + IA Gemini + BluetoothSockets + web collaboratif) et l’ERP interne connecté à Odoo chez Kamer Engineering Solution, les applications MULEMA et Shikaku publiées sur Google Play Store, la plateforme SIG KoboCollect/ESRI et le module de réconciliation financière MomoKash.',
           },
         },
         {
@@ -289,26 +292,26 @@ const jsonLdGraph = {
         {
           '@type': 'ListItem',
           position: 2,
-          name: 'À Propos',
+          name: 'Profil',
           item: `${CANONICAL_URL}/#about`,
         },
         {
           '@type': 'ListItem',
           position: 3,
-          name: 'Compétences',
-          item: `${CANONICAL_URL}/#skills`,
-        },
-        {
-          '@type': 'ListItem',
-          position: 4,
           name: 'Expériences',
           item: `${CANONICAL_URL}/#experience`,
         },
         {
           '@type': 'ListItem',
-          position: 5,
+          position: 4,
           name: 'Projets',
           item: `${CANONICAL_URL}/#projects`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 5,
+          name: 'Compétences',
+          item: `${CANONICAL_URL}/#skills`,
         },
         {
           '@type': 'ListItem',
@@ -334,7 +337,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//vercel.com" />
       </head>
       <body
-        className={`${fontSans.variable} ${fontDisplay.variable} ${fontMono.variable} font-sans antialiased bg-slate-950 text-slate-100`}
+        className={`${fontSans.variable} ${fontDisplay.variable} ${fontMono.variable} font-sans antialiased bg-background text-foreground`}
       >
         {children}
 

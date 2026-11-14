@@ -1,125 +1,361 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, ExternalLink, Github, CheckCircle2, Sparkles } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-
-export interface ProjectType {
-  title: string
-  category: 'web' | 'mobile' | 'backend' | 'automation'
-  description: string
-  fullDetails?: string
-  tags: string[]
-  highlights: string[]
-  demo: string
-  code: string
-}
+import {
+  X,
+  ArrowLeft,
+  ChevronLeft,
+  ChevronRight,
+  ExternalLink,
+  Smartphone,
+  Play,
+  Code2,
+  CheckCircle2,
+  Target,
+  Cpu,
+  Lock,
+} from 'lucide-react'
+import type { ProjectItem, Language } from '@/lib/portfolio-data'
 
 interface ProjectModalProps {
-  project: ProjectType | null
+  project: ProjectItem | null
+  projects: ProjectItem[]
+  onSelectProject: (project: ProjectItem) => void
   onClose: () => void
-  language: 'en' | 'fr'
+  language: Language
 }
 
-export default function ProjectModal({ project, onClose, language }: ProjectModalProps) {
-  if (!project) return null
+export default function ProjectModal({
+  project,
+  projects,
+  onSelectProject,
+  onClose,
+  language,
+}: ProjectModalProps) {
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+
+  const currentIndex = project
+    ? projects.findIndex((item) => item.id === project.id)
+    : -1
+  const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null
+  const nextProject =
+    currentIndex >= 0 && currentIndex < projects.length - 1
+      ? projects[currentIndex + 1]
+      : null
+
+  useEffect(() => {
+    if (!project) return
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose()
+      } else if (e.key === 'ArrowLeft' && prevProject) {
+        onSelectProject(prevProject)
+      } else if (e.key === 'ArrowRight' && nextProject) {
+        onSelectProject(nextProject)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [project, prevProject, nextProject, onClose, onSelectProject])
+
+  useEffect(() => {
+    if (project?.id && scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }, [project?.id])
+
+  const copy = {
+    fr: {
+      back: 'Retour',
+      previous: 'Précédent',
+      next: 'Suivant',
+      closeLabel: 'Fermer l’étude de cas',
+      problemTitle: 'Problématique & Contexte',
+      architectureTitle: 'Architecture & Choix Techniques',
+      highlightsTitle: 'Contributions & Points Clés',
+      stackTitle: 'Technologies Mobilisées',
+      linksTitle: 'Accès Directs & Livrables',
+      playStore: 'Google Play Store',
+      liveDemo: 'Accéder à la plateforme',
+      videoDemo: 'Voir la démo vidéo',
+      sourceCode: 'Code source GitHub',
+      confidentialNote:
+        'Application interne ou déployée sous confidentialité client — architecture et choix techniques détaillés ci-dessous.',
+    },
+    en: {
+      back: 'Back',
+      previous: 'Previous',
+      next: 'Next',
+      closeLabel: 'Close case study',
+      problemTitle: 'Problem Statement & Context',
+      architectureTitle: 'Architecture & Technical Choices',
+      highlightsTitle: 'Key Contributions & Capabilities',
+      stackTitle: 'Technology Stack',
+      linksTitle: 'Live Releases & Source Links',
+      playStore: 'Google Play Store',
+      liveDemo: 'Open Live Platform',
+      videoDemo: 'Watch Video Demo',
+      sourceCode: 'GitHub Source Code',
+      confidentialNote:
+        'Enterprise or client-confidential production system — architectural decisions and delivered scope documented below.',
+    },
+  }
+
+  const t = copy[language]
+
+  const hasAnyLink = Boolean(
+    project?.playStoreUrl ||
+      project?.liveUrl ||
+      project?.videoUrl ||
+      project?.codeUrl
+  )
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-        {/* Backdrop */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onClose}
-          className="fixed inset-0 bg-slate-950/80 backdrop-blur-md"
-        />
-
-        {/* Modal Container */}
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0, y: 20 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.9, opacity: 0, y: 20 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-          className="relative w-full max-w-2xl bg-card border border-cyan-500/30 rounded-2xl shadow-2xl p-6 sm:p-8 z-10 glass-card"
+      {project && (
+        <div
+          className="fixed inset-0 z-50 flex justify-end"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="project-drawer-title"
         >
-          {/* Close button */}
-          <button
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
             onClick={onClose}
-            className="absolute top-4 right-4 p-2 rounded-full bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-foreground transition-all"
-            aria-label="Close"
+            className="fixed inset-0 bg-slate-950/60 dark:bg-black/75 backdrop-blur-xs"
+            aria-hidden="true"
+          />
+
+          {/* Slide-over Case Study Panel */}
+          <motion.aside
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', stiffness: 320, damping: 34 }}
+            className="relative z-10 w-full max-w-2xl h-dvh bg-background border-l border-border shadow-2xl flex flex-col overflow-hidden"
           >
-            <X className="w-5 h-5" />
-          </button>
-
-          {/* Header */}
-          <div className="space-y-3">
-            <span className="text-xs font-mono uppercase tracking-widest text-cyan-400 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 inline-block">
-              {project.category}
-            </span>
-            <h3 className="text-2xl font-bold font-display text-foreground">{project.title}</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
-          </div>
-
-          {/* Highlights */}
-          <div className="space-y-3 my-6 pt-4 border-t border-white/10">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-slate-300">
-              {language === 'en' ? 'Key Technical Highlights' : 'Réalisations Techniques Majeures'}
-            </h4>
-            <div className="space-y-2">
-              {project.highlights.map((h, i) => (
-                <div key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-                  <span>{h}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Tech Stack Tags */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {project.tags.map((tag, i) => (
-              <span
-                key={i}
-                className="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-cyan-300"
+            {/* Sticky Header Bar */}
+            <header className="shrink-0 h-16 px-4 sm:px-6 border-b border-border bg-card/95 backdrop-blur-md flex items-center justify-between gap-3">
+              <button
+                type="button"
+                onClick={onClose}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
               >
-                {tag}
-              </span>
-            ))}
-          </div>
+                <ArrowLeft className="w-3.5 h-3.5" />
+                <span>{t.back}</span>
+              </button>
 
-          {/* Actions */}
-          <div className="flex items-center gap-3 pt-4 border-t border-white/10">
-            {project.demo !== '#' ? (
-              <Button
-                asChild
-                className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl gap-2"
-              >
-                <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="w-4 h-4" />
-                  {language === 'en' ? 'Live Demo' : 'Démo en ligne'}
-                </a>
-              </Button>
-            ) : (
-              <span className="text-xs font-mono text-muted-foreground italic">
-                {language === 'en' ? 'Demo upon enterprise request' : 'Démo sur demande entreprise'}
-              </span>
-            )}
+              <div className="flex items-center gap-2">
+                <span className="hidden sm:inline font-mono text-xs text-muted-foreground mr-1">
+                  {String(currentIndex + 1).padStart(2, '0')} /{' '}
+                  {String(projects.length).padStart(2, '0')}
+                </span>
 
-            <Button
-              variant="outline"
-              asChild
-              className="border-white/15 bg-white/[0.03] hover:bg-white/[0.08] text-foreground rounded-xl gap-2"
+                <button
+                  type="button"
+                  onClick={() => prevProject && onSelectProject(prevProject)}
+                  disabled={!prevProject}
+                  aria-label={t.previous}
+                  className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-border text-xs font-medium text-foreground hover:bg-muted disabled:opacity-35 disabled:pointer-events-none transition-colors"
+                >
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">{t.previous}</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => nextProject && onSelectProject(nextProject)}
+                  disabled={!nextProject}
+                  aria-label={t.next}
+                  className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-border text-xs font-medium text-foreground hover:bg-muted disabled:opacity-35 disabled:pointer-events-none transition-colors"
+                >
+                  <span className="hidden sm:inline">{t.next}</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={onClose}
+                  aria-label={t.closeLabel}
+                  className="ml-1 p-2 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </header>
+
+            {/* Scrollable Body */}
+            <div
+              ref={scrollContainerRef}
+              className="flex-1 overflow-y-auto px-5 sm:px-8 py-6 sm:py-8 space-y-8"
             >
-              <a href={project.code} target="_blank" rel="noopener noreferrer">
-                <Github className="w-4 h-4 text-cyan-400" />
-                Code Source
-              </a>
-            </Button>
-          </div>
-        </motion.div>
-      </div>
+              {/* Title & Context */}
+              <div className="space-y-4 pb-6 border-b border-border">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="px-2.5 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-700 dark:text-sky-300 text-[11px] font-mono font-semibold">
+                    {project.categoryLabel[language]}
+                  </span>
+                  <span className="text-xs font-mono text-muted-foreground">
+                    {project.roleContext[language]}
+                  </span>
+                </div>
+
+                <h2
+                  id="project-drawer-title"
+                  className="text-2xl sm:text-3xl font-bold font-display text-foreground leading-tight"
+                >
+                  {project.title[language]}
+                </h2>
+
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                  {project.summary[language]}
+                </p>
+              </div>
+
+              {/* Action Links or Confidentiality Note */}
+              <section className="space-y-3">
+                <h3 className="text-xs font-mono font-semibold uppercase tracking-widest text-muted-foreground">
+                  {t.linksTitle}
+                </h3>
+
+                {hasAnyLink ? (
+                  <div className="flex flex-wrap gap-3">
+                    {project.playStoreUrl && (
+                      <a
+                        href={project.playStoreUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-400 text-white dark:text-slate-950 font-semibold text-xs sm:text-sm transition-colors"
+                      >
+                        <Smartphone className="w-4 h-4" />
+                        <span>{t.playStore}</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 dark:bg-sky-400 dark:hover:bg-sky-300 text-white dark:text-slate-950 font-semibold text-xs sm:text-sm transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        <span>{t.liveDemo}</span>
+                      </a>
+                    )}
+
+                    {project.videoUrl && (
+                      <a
+                        href={project.videoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-secondary hover:bg-muted border border-border text-foreground font-semibold text-xs sm:text-sm transition-colors"
+                      >
+                        <Play className="w-4 h-4 text-sky-600 dark:text-sky-400" />
+                        <span>{t.videoDemo}</span>
+                        <ExternalLink className="w-3.5 h-3.5 text-muted-foreground" />
+                      </a>
+                    )}
+
+                    {project.codeUrl && (
+                      <a
+                        href={project.codeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-secondary hover:bg-muted border border-border text-foreground font-semibold text-xs sm:text-sm transition-colors"
+                      >
+                        <Code2 className="w-4 h-4 text-sky-600 dark:text-sky-400" />
+                        <span>{t.sourceCode}</span>
+                        <ExternalLink className="w-3.5 h-3.5 text-muted-foreground" />
+                      </a>
+                    )}
+                  </div>
+                ) : (
+                  <div className="flex items-start gap-2.5 p-3.5 rounded-xl bg-muted/60 border border-border text-xs sm:text-sm text-muted-foreground">
+                    <Lock className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0 mt-0.5" />
+                    <span>{t.confidentialNote}</span>
+                  </div>
+                )}
+              </section>
+
+              {/* Problem Statement */}
+              <section className="editorial-surface rounded-xl p-5 space-y-2.5">
+                <div className="flex items-center gap-2 text-sky-700 dark:text-sky-400">
+                  <Target className="w-4 h-4" />
+                  <h3 className="text-xs font-mono font-semibold uppercase tracking-widest">
+                    {t.problemTitle}
+                  </h3>
+                </div>
+                <p className="text-sm sm:text-base leading-relaxed text-foreground/90">
+                  {project.problemStatement[language]}
+                </p>
+              </section>
+
+              {/* Architecture Notes */}
+              <section className="editorial-surface rounded-xl p-5 space-y-2.5">
+                <div className="flex items-center gap-2 text-sky-700 dark:text-sky-400">
+                  <Cpu className="w-4 h-4" />
+                  <h3 className="text-xs font-mono font-semibold uppercase tracking-widest">
+                    {t.architectureTitle}
+                  </h3>
+                </div>
+                <p className="text-sm sm:text-base leading-relaxed text-foreground/90">
+                  {project.architectureNotes[language]}
+                </p>
+              </section>
+
+              {/* Highlights */}
+              <section className="space-y-3">
+                <h3 className="text-xs font-mono font-semibold uppercase tracking-widest text-muted-foreground">
+                  {t.highlightsTitle}
+                </h3>
+                <ul className="space-y-2.5">
+                  {project.highlights[language].map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2.5 text-sm leading-relaxed text-foreground/90"
+                    >
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+
+              {/* Tech Stack */}
+              <section className="space-y-3 pb-4">
+                <h3 className="text-xs font-mono font-semibold uppercase tracking-widest text-muted-foreground">
+                  {t.stackTitle}
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 rounded-lg bg-secondary border border-border text-xs font-mono text-secondary-foreground"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </section>
+            </div>
+          </motion.aside>
+        </div>
+      )}
     </AnimatePresence>
   )
 }
