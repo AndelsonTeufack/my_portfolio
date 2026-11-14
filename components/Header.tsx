@@ -46,36 +46,54 @@ export default function Header({
   )
 
   useEffect(() => {
-    const handleScroll = () => {
+    const updateScrollState = () => {
       setScrolled(window.scrollY > 36)
+
+      const sections = currentNav
+        .map((item) => ({
+          href: item.href,
+          el: document.querySelector(item.href),
+        }))
+        .filter((item): item is { href: string; el: Element } => Boolean(item.el))
+
+      if (sections.length === 0) return
+
+      const atBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 40
+
+      if (atBottom) {
+        const lastHref = sections[sections.length - 1].href
+        setActiveSection((prev) => (prev === lastHref ? prev : lastHref))
+        return
+      }
+
+      const triggerLine = Math.min(220, window.innerHeight * 0.35)
+      let currentActive = sections[0].href
+
+      for (const section of sections) {
+        const rect = section.el.getBoundingClientRect()
+        if (rect.top <= triggerLine) {
+          currentActive = section.href
+        }
+      }
+
+      setActiveSection((prev) => (prev === currentActive ? prev : currentActive))
     }
 
-    const sections = currentNav
-      .map((item) => document.querySelector(item.href))
-      .filter((el): el is Element => Boolean(el))
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(`#${entry.target.id}`)
-          }
-        })
-      },
-      { threshold: 0.2, rootMargin: '-96px 0px -45% 0px' }
-    )
-
-    sections.forEach((section) => observer.observe(section))
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    updateScrollState()
+    window.addEventListener('scroll', updateScrollState, { passive: true })
+    window.addEventListener('resize', updateScrollState, { passive: true })
 
     return () => {
-      observer.disconnect()
-      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('scroll', updateScrollState)
+      window.removeEventListener('resize', updateScrollState)
     }
   }, [currentNav])
 
   const handleNavClick = (href: string) => {
     setIsOpen(false)
+    setActiveSection(href)
     const element = document.querySelector(href)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
