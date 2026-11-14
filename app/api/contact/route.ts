@@ -6,6 +6,9 @@ const RATE_LIMIT_MAX_REQUESTS = 5;
 const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PROD_CONTACT_API_URL =
+  process.env.PROD_CONTACT_API_URL ||
+  'https://andelson-teufack-portfolio.vercel.app/api/contact';
 
 function getClientIp(request: Request): string {
   const forwarded = request.headers.get('x-forwarded-for');
@@ -90,14 +93,55 @@ export async function POST(request: Request) {
 
     const emailUser = process.env.EMAIL_USER?.trim();
     const emailPass = process.env.EMAIL_PASS?.replace(/\s+/g, '');
+    const isMissingCredentials =
+      !emailUser ||
+      !emailPass ||
+      emailPass === 'votre_mot_de_passe_application_gmail_16_caracteres';
 
-    if (!emailUser || !emailPass) {
-      console.error('Configuration SMTP manquante (EMAIL_USER / EMAIL_PASS).');
-      const errorMessage =
-        process.env.NODE_ENV !== 'production'
-          ? 'Configuration SMTP manquante : ajoutez EMAIL_USER et EMAIL_PASS (mot de passe d’application Gmail) dans votre fichier .env.local puis redémarrez le serveur.'
-          : 'Le service d’envoi est temporairement indisponible.';
-      return NextResponse.json({ error: errorMessage }, { status: 503 });
+    if (isMissingCredentials) {
+      if (!request.headers.get('x-portfolio-relay')) {
+        try {
+          const prodResponse = await fetch(PROD_CONTACT_API_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-portfolio-relay': '1',
+            },
+            body: JSON.stringify({
+              name: `${rawName} · ${rawInquiryType}`,
+              email: rawEmail,
+              inquiryType: rawInquiryType,
+              message: `[Type de demande : ${rawInquiryType}]\n\n${rawMessage}`,
+            }),
+          });
+
+          const prodData = await prodResponse.json().catch(() => null);
+          if (prodResponse.ok && prodData?.success === true) {
+            recordRateLimitHit(clientIp);
+            return NextResponse.json({
+              success: true,
+              message: 'Email envoyé avec succès !',
+            });
+          }
+
+          return NextResponse.json(
+            {
+              error:
+                prodData?.error ||
+                'Erreur du relais SMTP de production. Veuillez réessayer plus tard.',
+            },
+            { status: prodResponse.ok ? 502 : prodResponse.status }
+          );
+        } catch (relayError) {
+          console.warn('Échec du relais SMTP vers la production:', relayError);
+        }
+      }
+
+      console.warn('Configuration SMTP manquante (EMAIL_USER / EMAIL_PASS).');
+      return NextResponse.json(
+        { error: 'Le service d’envoi est temporairement indisponible.' },
+        { status: 503 }
+      );
     }
 
     // Configuration du transporteur SMTP
@@ -413,7 +457,7 @@ export async function POST(request: Request) {
       message: 'Email envoyé avec succès !',
     });
   } catch (error) {
-    console.error('Erreur lors de l\'envoi:', error);
+    console.warn('Erreur lors de l\'envoi:', error);
     const err = error as { code?: string; responseCode?: number; message?: string };
     let errorMessage = 'Erreur lors de l\'envoi du message. Veuillez réessayer plus tard.';
 

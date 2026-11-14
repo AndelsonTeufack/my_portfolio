@@ -173,13 +173,11 @@ export default function Contact({ language }: ContactProps) {
 
     if (!trimmedEmail || !EMAIL_PATTERN.test(trimmedEmail)) {
       setFormError(t.validationEmail)
-      toast.error(t.validationEmail)
       return
     }
 
     if (trimmedName.length < 2 || trimmedMessage.length < 5) {
       setFormError(t.validationRequired)
-      toast.error(t.validationRequired)
       return
     }
 
@@ -200,10 +198,9 @@ export default function Contact({ language }: ContactProps) {
 
       const data = await response.json().catch(() => null)
 
-      if (!response.ok || data?.success !== true || !data?.messageId) {
+      if (!response.ok || data?.success !== true) {
         const message = data?.error || t.errorToast
         setFormError(message)
-        toast.error(message)
         return
       }
 
@@ -218,7 +215,6 @@ export default function Contact({ language }: ContactProps) {
       toast.success(t.successToast)
     } catch {
       setFormError(t.errorToast)
-      toast.error(t.errorToast)
     } finally {
       setIsSubmitting(false)
     }
@@ -257,114 +253,118 @@ export default function Contact({ language }: ContactProps) {
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4, delay: 0.08 }}
-          className="lg:col-span-5 flex flex-col justify-between gap-6"
+          className="lg:col-span-5 flex flex-col gap-6"
         >
           {/* Card 1: Direct Coordinates + Discreet Meta Line */}
-          <SpotlightCard className="p-6 rounded-2xl space-y-4">
-            <h3 className="text-sm font-mono font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-200">
-              {t.directTitle}
-            </h3>
+          <SpotlightCard className="p-6 rounded-2xl flex-1">
+            <div className="h-full flex flex-col justify-between gap-4">
+              <div className="space-y-4">
+                <h3 className="text-sm font-mono font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-200">
+                  {t.directTitle}
+                </h3>
 
-            <div className="space-y-3">
-              {/* Email */}
-              <div className="p-3.5 rounded-xl bg-secondary/70 border border-border flex items-center justify-between gap-3">
-                <a
-                  href={`mailto:${PORTFOLIO_PROFILE.contact.email}`}
-                  className="flex items-center gap-3 min-w-0 group"
-                >
-                  <div className="w-9 h-9 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-700 dark:text-sky-400 flex items-center justify-center shrink-0">
-                    <Mail className="w-4 h-4" />
+                <div className="space-y-3">
+                  {/* Email */}
+                  <div className="p-3.5 rounded-xl bg-secondary/70 border border-border flex items-center justify-between gap-3">
+                    <a
+                      href={`mailto:${PORTFOLIO_PROFILE.contact.email}`}
+                      className="flex items-center gap-3 min-w-0 group"
+                    >
+                      <div className="w-9 h-9 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-700 dark:text-sky-400 flex items-center justify-center shrink-0">
+                        <Mail className="w-4 h-4" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs font-mono text-slate-600 dark:text-slate-300">
+                          {t.emailLabel}
+                        </p>
+                        <p className="text-sm font-medium text-foreground group-hover:text-sky-700 dark:group-hover:text-sky-400 truncate transition-colors">
+                          {PORTFOLIO_PROFILE.contact.email}
+                        </p>
+                      </div>
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleCopy(PORTFOLIO_PROFILE.contact.email, 'email')
+                      }
+                      aria-label={`${t.copyLabel} ${PORTFOLIO_PROFILE.contact.email}`}
+                      className="shrink-0 p-2 rounded-lg border border-border bg-card hover:bg-muted text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                    >
+                      {copiedField === 'email' ? (
+                        <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                      ) : (
+                        <Copy className="w-4 h-4" />
+                      )}
+                    </button>
                   </div>
-                  <div className="min-w-0">
-                    <p className="text-xs font-mono text-slate-600 dark:text-slate-300">
-                      {t.emailLabel}
-                    </p>
-                    <p className="text-sm font-medium text-foreground group-hover:text-sky-700 dark:group-hover:text-sky-400 truncate transition-colors">
-                      {PORTFOLIO_PROFILE.contact.email}
-                    </p>
-                  </div>
-                </a>
-                <button
-                  type="button"
-                  onClick={() =>
-                    handleCopy(PORTFOLIO_PROFILE.contact.email, 'email')
-                  }
-                  aria-label={`${t.copyLabel} ${PORTFOLIO_PROFILE.contact.email}`}
-                  className="shrink-0 p-2 rounded-lg border border-border bg-card hover:bg-muted text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-                >
-                  {copiedField === 'email' ? (
-                    <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                  ) : (
-                    <Copy className="w-4 h-4" />
-                  )}
-                </button>
-              </div>
 
-              {/* Phone */}
-              <div className="p-3.5 rounded-xl bg-secondary/70 border border-border flex items-center justify-between gap-3">
-                <a
-                  href={`tel:${telDigits}`}
-                  className="flex items-center gap-3 min-w-0 group"
-                >
-                  <div className="w-9 h-9 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-700 dark:text-sky-400 flex items-center justify-center shrink-0">
-                    <Phone className="w-4 h-4" />
+                  {/* Phone */}
+                  <div className="p-3.5 rounded-xl bg-secondary/70 border border-border flex items-center justify-between gap-3">
+                    <a
+                      href={`tel:${telDigits}`}
+                      className="flex items-center gap-3 min-w-0 group"
+                    >
+                      <div className="w-9 h-9 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-700 dark:text-sky-400 flex items-center justify-center shrink-0">
+                        <Phone className="w-4 h-4" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs font-mono text-slate-600 dark:text-slate-300">
+                          {t.phoneLabel}
+                        </p>
+                        <p className="text-sm font-medium text-foreground group-hover:text-sky-700 dark:group-hover:text-sky-400 truncate transition-colors">
+                          {PORTFOLIO_PROFILE.contact.phone}
+                        </p>
+                      </div>
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleCopy(PORTFOLIO_PROFILE.contact.phone, 'phone')
+                      }
+                      aria-label={`${t.copyLabel} ${PORTFOLIO_PROFILE.contact.phone}`}
+                      className="shrink-0 p-2 rounded-lg border border-border bg-card hover:bg-muted text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                    >
+                      {copiedField === 'phone' ? (
+                        <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                      ) : (
+                        <Copy className="w-4 h-4" />
+                      )}
+                    </button>
                   </div>
-                  <div className="min-w-0">
-                    <p className="text-xs font-mono text-slate-600 dark:text-slate-300">
-                      {t.phoneLabel}
-                    </p>
-                    <p className="text-sm font-medium text-foreground group-hover:text-sky-700 dark:group-hover:text-sky-400 truncate transition-colors">
-                      {PORTFOLIO_PROFILE.contact.phone}
-                    </p>
-                  </div>
-                </a>
-                <button
-                  type="button"
-                  onClick={() =>
-                    handleCopy(PORTFOLIO_PROFILE.contact.phone, 'phone')
-                  }
-                  aria-label={`${t.copyLabel} ${PORTFOLIO_PROFILE.contact.phone}`}
-                  className="shrink-0 p-2 rounded-lg border border-border bg-card hover:bg-muted text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-                >
-                  {copiedField === 'phone' ? (
-                    <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                  ) : (
-                    <Copy className="w-4 h-4" />
-                  )}
-                </button>
-              </div>
 
-              {/* WhatsApp */}
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3.5 rounded-xl bg-secondary/70 border border-border hover:border-emerald-500/40 flex items-center justify-between gap-3 group transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                    <FaWhatsapp className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-mono text-slate-600 dark:text-slate-300">
-                      {t.whatsappLabel}
-                    </p>
-                    <p className="text-sm font-medium text-foreground group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
-                      {t.whatsappAction}
-                    </p>
-                  </div>
+                  {/* WhatsApp */}
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3.5 rounded-xl bg-secondary/70 border border-border hover:border-emerald-500/40 flex items-center justify-between gap-3 group transition-colors"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                        <FaWhatsapp className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-mono text-slate-600 dark:text-slate-300">
+                          {t.whatsappLabel}
+                        </p>
+                        <p className="text-sm font-medium text-foreground group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
+                          {t.whatsappAction}
+                        </p>
+                      </div>
+                    </div>
+                    <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors" />
+                  </a>
                 </div>
-                <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors" />
-              </a>
-            </div>
+              </div>
 
-            <p className="pt-2 border-t border-border text-xs font-mono text-slate-600 dark:text-slate-300">
-              {t.metaNote}
-            </p>
+              <p className="pt-3 border-t border-border text-xs font-mono text-slate-600 dark:text-slate-300">
+                {t.metaNote}
+              </p>
+            </div>
           </SpotlightCard>
 
           {/* Card 2: Links + Secondary CV Button */}
-          <SpotlightCard className="p-6 rounded-2xl flex-1 flex flex-col justify-between gap-5">
+          <SpotlightCard className="p-6 rounded-2xl">
             <div className="space-y-4">
               <h3 className="text-sm font-mono font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-200">
                 {t.linksTitle}
@@ -397,9 +397,7 @@ export default function Contact({ language }: ContactProps) {
                   <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground" />
                 </a>
               </div>
-            </div>
 
-            <div className="pt-1">
               <a
                 href="/CV - Andelson TEUFACK.pdf"
                 download="CV - Andelson TEUFACK.pdf"
@@ -419,34 +417,35 @@ export default function Contact({ language }: ContactProps) {
           transition={{ duration: 0.4, delay: 0.14 }}
           className="lg:col-span-7 flex"
         >
-          <SpotlightCard className="w-full h-full p-6 sm:p-8 rounded-2xl flex flex-col justify-between">
-            {isSent ? (
-              <div className="my-auto py-12 text-center space-y-5">
-                <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
-                  <CheckCircle2 className="w-6 h-6" />
+          <SpotlightCard className="w-full h-full p-6 sm:p-8 rounded-2xl">
+            <div className="h-full flex flex-col justify-between">
+              {isSent ? (
+                <div className="my-auto py-12 text-center space-y-5">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
+                    <CheckCircle2 className="w-6 h-6" />
+                  </div>
+                  <div className="space-y-2 max-w-md mx-auto">
+                    <h3 className="text-xl font-bold font-display text-foreground">
+                      {t.successTitle}
+                    </h3>
+                    <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                      {t.successBody}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setIsSent(false)}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-secondary hover:bg-muted border border-border text-sm font-medium text-foreground transition-colors cursor-pointer"
+                  >
+                    {t.sendAnother}
+                  </button>
                 </div>
-                <div className="space-y-2 max-w-md mx-auto">
-                  <h3 className="text-xl font-bold font-display text-foreground">
-                    {t.successTitle}
-                  </h3>
-                  <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                    {t.successBody}
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setIsSent(false)}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-secondary hover:bg-muted border border-border text-sm font-medium text-foreground transition-colors cursor-pointer"
+              ) : (
+                <form
+                  onSubmit={handleSubmit}
+                  className="h-full flex-1 flex flex-col justify-between gap-5"
+                  noValidate
                 >
-                  {t.sendAnother}
-                </button>
-              </div>
-            ) : (
-              <form
-                onSubmit={handleSubmit}
-                className="flex-1 flex flex-col justify-between gap-5"
-                noValidate
-              >
                 <div className="space-y-5 flex-1 flex flex-col">
                   <h3 className="text-xl font-bold font-display text-slate-900 dark:text-white pb-3 border-b border-border">
                     {t.formTitle}
@@ -564,7 +563,7 @@ export default function Contact({ language }: ContactProps) {
                     <textarea
                       id="contact-message"
                       name="message"
-                      rows={5}
+                      rows={4}
                       required
                       value={formData.message}
                       onChange={(e) =>
@@ -574,7 +573,7 @@ export default function Contact({ language }: ContactProps) {
                         }))
                       }
                       placeholder={t.messagePlaceholder}
-                      className={`${inputClassName} flex-1 min-h-[140px] resize-y`}
+                      className={`${inputClassName} flex-1 min-h-[116px] resize-y`}
                     />
                   </div>
 
@@ -613,7 +612,8 @@ export default function Contact({ language }: ContactProps) {
                   </p>
                 </div>
               </form>
-            )}
+              )}
+            </div>
           </SpotlightCard>
         </motion.div>
       </div>
