@@ -16,6 +16,7 @@ import {
   Cpu,
   Lock,
 } from 'lucide-react'
+import ProjectPreview from '@/components/ui/ProjectPreview'
 import type { ProjectItem, Language } from '@/lib/portfolio-data'
 
 interface ProjectModalProps {
@@ -82,34 +83,34 @@ export default function ProjectModal({
       previous: 'Précédent',
       next: 'Suivant',
       closeLabel: 'Fermer l’étude de cas',
-      problemTitle: 'Problématique & Contexte',
-      architectureTitle: 'Architecture & Choix Techniques',
-      highlightsTitle: 'Contributions & Points Clés',
-      stackTitle: 'Technologies Mobilisées',
-      linksTitle: 'Accès Directs & Livrables',
+      problemTitle: 'Problématique & contexte',
+      architectureTitle: 'Architecture & choix techniques',
+      highlightsTitle: 'Réalisations & résultats',
+      stackTitle: 'Technologies utilisées',
+      linksTitle: 'Accès & livrables',
       playStore: 'Google Play Store',
-      liveDemo: 'Accéder à la plateforme',
+      liveDemo: 'Voir le site',
       videoDemo: 'Voir la démo vidéo',
-      sourceCode: 'Code source GitHub',
+      sourceCode: 'Code GitHub',
       confidentialNote:
-        'Application interne ou déployée sous confidentialité client - architecture et choix techniques détaillés ci-dessous.',
+        'Application d’entreprise ou soumise à confidentialité client : les noms de sites et données sensibles sont masqués ; l’architecture et le périmètre technique restent détaillés ci-dessous.',
     },
     en: {
       back: 'Back',
       previous: 'Previous',
       next: 'Next',
       closeLabel: 'Close case study',
-      problemTitle: 'Problem Statement & Context',
-      architectureTitle: 'Architecture & Technical Choices',
-      highlightsTitle: 'Key Contributions & Capabilities',
-      stackTitle: 'Technology Stack',
-      linksTitle: 'Live Releases & Source Links',
+      problemTitle: 'Problem statement & context',
+      architectureTitle: 'Architecture & technical choices',
+      highlightsTitle: 'Deliverables & outcomes',
+      stackTitle: 'Technologies used',
+      linksTitle: 'Links & deliverables',
       playStore: 'Google Play Store',
-      liveDemo: 'Open Live Platform',
-      videoDemo: 'Watch Video Demo',
-      sourceCode: 'GitHub Source Code',
+      liveDemo: 'Visit site',
+      videoDemo: 'Watch video demo',
+      sourceCode: 'GitHub code',
       confidentialNote:
-        'Enterprise or client-confidential production system - architectural decisions and delivered scope documented below.',
+        'Enterprise or client-confidential system: site identifiers and sensitive client details are redacted while architectural decisions and workflows are documented below.',
     },
   }
 
@@ -207,11 +208,22 @@ export default function ProjectModal({
               data-lenis-prevent
               className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-5 sm:px-8 py-6 sm:py-8 space-y-8"
             >
-              {/* Title & Context */}
+              {/* Preview & Title Context */}
               <div className="space-y-4 pb-6 border-b border-border">
+                {project.previewType && (
+                  <ProjectPreview
+                    previewType={project.previewType}
+                    variant="modal"
+                    language={language}
+                  />
+                )}
+
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="px-2.5 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-700 dark:text-sky-300 text-[11px] font-mono font-semibold">
-                    {project.categoryLabel[language]}
+                  <span className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/15 text-xs font-mono font-medium text-foreground">
+                    {project.roleBadge[language]}
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-700 dark:text-sky-300 text-xs font-mono font-semibold">
+                    {project.statusBadge[language]}
                   </span>
                   <span className="text-xs font-mono text-muted-foreground">
                     {project.roleContext[language]}

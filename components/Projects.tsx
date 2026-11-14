@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useMemo } from 'react'
+import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import {
   ArrowUpRight,
@@ -10,6 +10,7 @@ import {
   Code2,
 } from 'lucide-react'
 import SpotlightCard from '@/components/ui/SpotlightCard'
+import ProjectPreview from '@/components/ui/ProjectPreview'
 import ProjectModal from '@/components/ProjectModal'
 import {
   PROJECTS,
@@ -21,292 +22,552 @@ interface ProjectsProps {
   language: Language
 }
 
-type FilterCategory = 'all' | ProjectItem['category']
+function getStatusBadgeClasses(tone: ProjectItem['statusTone']): string {
+  switch (tone) {
+    case 'live':
+    case 'playstore':
+      return 'bg-emerald-500/10 border-emerald-500/30 text-emerald-700 dark:text-emerald-300'
+    case 'production':
+      return 'bg-sky-500/10 border-sky-500/30 text-sky-700 dark:text-sky-300'
+    case 'prototype':
+    default:
+      return 'bg-slate-100 dark:bg-white/[0.06] border-slate-200 dark:border-white/15 text-slate-700 dark:text-slate-300'
+  }
+}
 
 export default function Projects({ language }: ProjectsProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-80px' })
-  const [selectedCategory, setSelectedCategory] =
-    useState<FilterCategory>('all')
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(
     null
   )
 
+  const featuredProjects = PROJECTS.filter((p) => p.tier === 'featured')
+  const leadProject = featuredProjects[0]
+  const secondaryFeatured = featuredProjects.slice(1)
+  const compactProjects = PROJECTS.filter((p) => p.tier === 'compact')
+  const publishedProjects = PROJECTS.filter((p) => p.tier === 'published')
+  const otherProjects = PROJECTS.filter((p) => p.tier === 'other')
+  const caseStudyProjects = PROJECTS.filter((p) => p.hasCaseStudy)
+
   const copy = {
     fr: {
-      eyebrow: '03 - PROJETS & ÉTUDES DE CAS',
-      title: 'Systèmes Conçus & Applications Déployées',
-      subtitle:
-        'Sélection de réalisations terrain, applications mobiles publiées sur Google Play, APIs backend et plateformes collaboratives web.',
-      caseStudyCta: 'Étude de cas',
-      playStoreBadge: 'Play Store',
-      playStoreTitle: 'Voir sur Google Play Store',
-      liveTitle: 'Ouvrir la plateforme',
-      videoTitle: 'Voir la démo vidéo',
-      codeTitle: 'Voir le code source sur GitHub',
-      categories: {
-        all: 'Tous',
-        mobile: 'Mobile & Terrain',
-        web: 'Web & ERP',
-        backend: 'Backend & APIs',
-        automation: 'Automatisation & IA',
-      },
+      eyebrow: '03 — Projets',
+      title: 'Projets',
+      problemSolutionLabel: 'Problème → Solution :',
+      resultLabel: 'Résultat :',
+      visitSite: 'Voir le site',
+      caseStudy: 'Étude de cas',
+      videoDemo: 'Démo vidéo',
+      githubCode: 'Code GitHub',
+      playStore: 'Play Store',
+      publishedTitle: 'Applications publiées sur Google Play',
+      contributorSharedBadge: 'Contributeur',
+      otherTitle: 'Autres projets',
     },
     en: {
-      eyebrow: '03 - PROJECTS & CASE STUDIES',
-      title: 'Engineered Systems & Shipped Applications',
-      subtitle:
-        'Selected production deliveries across industrial inspection platforms, Google Play mobile apps, secure backend APIs, and full-stack tools.',
-      caseStudyCta: 'Case study',
-      playStoreBadge: 'Play Store',
-      playStoreTitle: 'View on Google Play Store',
-      liveTitle: 'Open live platform',
-      videoTitle: 'Watch video demo',
-      codeTitle: 'View source on GitHub',
-      categories: {
-        all: 'All',
-        mobile: 'Mobile & Field',
-        web: 'Web & ERP',
-        backend: 'Backend & APIs',
-        automation: 'Automation & AI',
-      },
+      eyebrow: '03 — Projects',
+      title: 'Projects',
+      problemSolutionLabel: 'Problem → Solution:',
+      resultLabel: 'Result:',
+      visitSite: 'Visit site',
+      caseStudy: 'Case study',
+      videoDemo: 'Video demo',
+      githubCode: 'GitHub code',
+      playStore: 'Play Store',
+      publishedTitle: 'Published on Google Play',
+      contributorSharedBadge: 'Contributor',
+      otherTitle: 'Other projects',
     },
   }
 
   const t = copy[language]
 
-  const categoryTabs = useMemo(() => {
-    const keys: FilterCategory[] = [
-      'all',
-      'mobile',
-      'web',
-      'backend',
-      'automation',
-    ]
-    return keys
-      .map((key) => ({
-        key,
-        label: t.categories[key],
-        count:
-          key === 'all'
-            ? PROJECTS.length
-            : PROJECTS.filter((p) => p.category === key).length,
-      }))
-      .filter((tab) => tab.count > 0)
-  }, [t.categories])
+  const renderActionButtons = (project: ProjectItem) => (
+    <div className="flex flex-wrap items-center gap-2.5 pt-1">
+      {project.liveUrl && (
+        <a
+          href={project.liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 dark:bg-sky-400 dark:hover:bg-sky-300 text-white dark:text-slate-950 text-xs font-semibold transition-colors"
+        >
+          <ExternalLink className="w-3.5 h-3.5" />
+          <span>{t.visitSite}</span>
+        </a>
+      )}
 
-  const filteredProjects = useMemo(() => {
-    if (selectedCategory === 'all') return PROJECTS
-    return PROJECTS.filter((project) => project.category === selectedCategory)
-  }, [selectedCategory])
+      {project.playStoreUrl && (
+        <a
+          href={project.playStoreUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-400 text-white dark:text-slate-950 text-xs font-semibold transition-colors"
+        >
+          <Smartphone className="w-3.5 h-3.5" />
+          <span>{t.playStore}</span>
+        </a>
+      )}
+
+      {project.videoUrl && (
+        <a
+          href={project.videoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary hover:bg-muted border border-border text-xs font-medium text-foreground transition-colors"
+        >
+          <Play className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
+          <span>{t.videoDemo}</span>
+        </a>
+      )}
+
+      {project.codeUrl && (
+        <a
+          href={project.codeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary hover:bg-muted border border-border text-xs font-medium text-foreground transition-colors"
+        >
+          <Code2 className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
+          <span>{t.githubCode}</span>
+        </a>
+      )}
+
+      {project.hasCaseStudy && (
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation()
+            setSelectedProject(project)
+          }}
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-border bg-card hover:bg-muted text-xs font-mono font-semibold text-sky-700 dark:text-sky-300 transition-colors cursor-pointer"
+        >
+          <span>{t.caseStudy}</span>
+          <ArrowUpRight className="w-3.5 h-3.5" />
+        </button>
+      )}
+    </div>
+  )
 
   return (
     <section
       id="projects"
       ref={sectionRef}
-      className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto"
+      className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto"
     >
-      {/* Header + Filter Row */}
+      {/* Section Header */}
       <motion.div
-        initial={{ opacity: 0, y: 18 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.45 }}
-        className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12"
+        transition={{ duration: 0.4 }}
+        className="mb-10 sm:mb-12 space-y-2.5"
       >
-        <div className="max-w-2xl space-y-3">
-          <p className="text-xs font-mono font-semibold uppercase tracking-[0.18em] text-sky-700 dark:text-sky-400">
-            {t.eyebrow}
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold font-display text-foreground tracking-tight">
-            {t.title}
-          </h2>
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-            {t.subtitle}
-          </p>
-        </div>
-
-        {/* Category Filter Tabs */}
-        <div
-          className="flex flex-wrap items-center gap-2"
-          role="tablist"
-          aria-label={t.title}
-        >
-          {categoryTabs.map((tab) => {
-            const isActive = selectedCategory === tab.key
-            return (
-              <button
-                key={tab.key}
-                type="button"
-                role="tab"
-                aria-selected={isActive}
-                onClick={() => setSelectedCategory(tab.key)}
-                className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-mono font-medium transition-colors border ${isActive
-                    ? 'bg-sky-600 dark:bg-sky-400 text-white dark:text-slate-950 border-transparent'
-                    : 'bg-card text-muted-foreground border-border hover:text-foreground hover:bg-muted'
-                  }`}
-              >
-                <span>{tab.label}</span>
-                <span
-                  className={`px-1.5 py-0.5 rounded-md text-[10px] ${isActive
-                      ? 'bg-white/20 dark:bg-slate-950/15 text-current'
-                      : 'bg-muted text-muted-foreground'
-                    }`}
-                >
-                  {tab.count}
-                </span>
-              </button>
-            )
-          })}
-        </div>
+        <p className="text-xs font-mono font-semibold tracking-wider text-sky-700 dark:text-sky-300">
+          {t.eyebrow}
+        </p>
+        <h2 className="text-3xl sm:text-4xl font-bold font-display text-slate-900 dark:text-white tracking-tight">
+          {t.title}
+        </h2>
       </motion.div>
 
-      {/* Editorial Project Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredProjects.map((project, index) => {
-          const visibleTags = project.tags.slice(0, 4)
-          const hiddenTagCount = Math.max(
-            0,
-            project.tags.length - visibleTags.length
-          )
-
-          return (
-            <motion.article
-              key={project.id}
-              initial={{ opacity: 0, y: 18 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{
-                duration: 0.38,
-                delay: Math.min(index * 0.05, 0.3),
-              }}
-              className="flex"
+      <div className="space-y-8">
+        {/* #1 Featured Lead Project: Full-width editorial split */}
+        {leadProject && (
+          <motion.article
+            initial={{ opacity: 0, y: 16 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4 }}
+          >
+            <SpotlightCard
+              interactive={Boolean(leadProject.hasCaseStudy)}
+              onClick={
+                leadProject.hasCaseStudy
+                  ? () => setSelectedProject(leadProject)
+                  : undefined
+              }
+              className="p-6 sm:p-8 rounded-2xl border-sky-500/35 dark:border-sky-400/30 cursor-pointer group"
             >
-              <SpotlightCard
-                interactive
-                onClick={() => setSelectedProject(project)}
-                className="w-full p-6 rounded-2xl flex flex-col justify-between gap-5 cursor-pointer group"
-              >
-                <div className="space-y-4">
-                  {/* Top Badges */}
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="px-2.5 py-1 rounded-md bg-sky-500/10 border border-sky-500/20 text-sky-700 dark:text-sky-300 text-[11px] font-mono font-medium">
-                      {project.categoryLabel[language]}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+                {leadProject.previewType && (
+                  <div className="lg:col-span-5">
+                    <ProjectPreview
+                      previewType={leadProject.previewType}
+                      variant="featured"
+                      language={language}
+                    />
+                  </div>
+                )}
+
+                <div className="lg:col-span-7 space-y-4">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/15 text-[11px] font-mono font-medium text-slate-800 dark:text-slate-200">
+                      {leadProject.roleBadge[language]}
                     </span>
-
-                    {project.playStoreUrl && (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-500/10 border border-emerald-500/25 text-emerald-700 dark:text-emerald-300 text-[11px] font-mono font-medium">
-                        <Smartphone className="w-3 h-3" />
-                        {t.playStoreBadge}
-                      </span>
-                    )}
+                    <span
+                      className={`px-2.5 py-0.5 rounded-full border text-[11px] font-mono font-semibold ${getStatusBadgeClasses(
+                        leadProject.statusTone
+                      )}`}
+                    >
+                      {leadProject.statusBadge[language]}
+                    </span>
                   </div>
 
-                  {/* Role Context + Title */}
                   <div className="space-y-1.5">
-                    <p className="text-xs font-mono text-muted-foreground">
-                      {project.roleContext[language]}
-                    </p>
-                    <h3 className="text-lg sm:text-xl font-bold font-display text-foreground group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors leading-snug">
-                      {project.title[language]}
+                    <h3 className="text-2xl sm:text-3xl font-bold font-display text-slate-900 dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors">
+                      {leadProject.title[language]}
                     </h3>
+                    <p className="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed">
+                      {leadProject.summary[language]}
+                    </p>
                   </div>
 
-                  {/* Summary */}
-                  <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
-                    {project.summary[language]}
-                  </p>
-                </div>
+                  {(leadProject.problemSolution || leadProject.resultSummary) && (
+                    <div className="space-y-2 text-sm leading-relaxed border-l-2 border-sky-500/40 pl-3.5 py-0.5">
+                      {leadProject.problemSolution && (
+                        <p className="text-slate-700 dark:text-slate-200">
+                          <span className="font-semibold text-slate-900 dark:text-white">
+                            {t.problemSolutionLabel}{' '}
+                          </span>
+                          {leadProject.problemSolution[language]}
+                        </p>
+                      )}
+                      {leadProject.resultSummary && (
+                        <p className="text-slate-700 dark:text-slate-300">
+                          <span className="font-semibold text-slate-900 dark:text-white">
+                            {t.resultLabel}{' '}
+                          </span>
+                          {leadProject.resultSummary[language]}
+                        </p>
+                      )}
+                    </div>
+                  )}
 
-                {/* Bottom Tags + Direct Verified Links + Case Study CTA */}
-                <div className="space-y-4 pt-2">
                   <div className="flex flex-wrap gap-1.5">
-                    {visibleTags.map((tag) => (
+                    {leadProject.tags.slice(0, 4).map((tag) => (
                       <span
                         key={tag}
-                        className="px-2.5 py-1 rounded-md bg-secondary border border-border text-[11px] font-mono text-secondary-foreground"
+                        className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/12 text-xs font-mono font-medium text-slate-800 dark:text-slate-200"
                       >
                         {tag}
                       </span>
                     ))}
-                    {hiddenTagCount > 0 && (
-                      <span className="px-2 py-1 rounded-md bg-muted text-[11px] font-mono text-muted-foreground">
-                        +{hiddenTagCount}
-                      </span>
-                    )}
                   </div>
 
-                  <div className="pt-3.5 border-t border-border flex items-center justify-between gap-3">
-                    {/* Verified External Links (stopPropagation so card drawer doesn't trigger) */}
-                    <div className="flex items-center gap-2">
-                      {project.playStoreUrl && (
-                        <a
-                          href={project.playStoreUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          title={t.playStoreTitle}
-                          aria-label={`${project.title[language]} - ${t.playStoreTitle}`}
-                          className="p-2 rounded-lg bg-secondary hover:bg-muted border border-border text-emerald-700 dark:text-emerald-400 transition-colors"
-                        >
-                          <Smartphone className="w-3.5 h-3.5" />
-                        </a>
-                      )}
-                      {project.liveUrl && (
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          title={t.liveTitle}
-                          aria-label={`${project.title[language]} - ${t.liveTitle}`}
-                          className="p-2 rounded-lg bg-secondary hover:bg-muted border border-border text-sky-700 dark:text-sky-400 transition-colors"
-                        >
-                          <ExternalLink className="w-3.5 h-3.5" />
-                        </a>
-                      )}
-                      {project.videoUrl && (
-                        <a
-                          href={project.videoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          title={t.videoTitle}
-                          aria-label={`${project.title[language]} - ${t.videoTitle}`}
-                          className="p-2 rounded-lg bg-secondary hover:bg-muted border border-border text-foreground transition-colors"
-                        >
-                          <Play className="w-3.5 h-3.5" />
-                        </a>
-                      )}
-                      {project.codeUrl && (
-                        <a
-                          href={project.codeUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          title={t.codeTitle}
-                          aria-label={`${project.title[language]} - ${t.codeTitle}`}
-                          className="p-2 rounded-lg bg-secondary hover:bg-muted border border-border text-foreground transition-colors"
-                        >
-                          <Code2 className="w-3.5 h-3.5" />
-                        </a>
-                      )}
-                    </div>
+                  {renderActionButtons(leadProject)}
+                </div>
+              </div>
+            </SpotlightCard>
+          </motion.article>
+        )}
 
-                    <span className="inline-flex items-center gap-1 text-xs font-mono font-semibold text-sky-700 dark:text-sky-400 group-hover:translate-x-0.5 transition-transform ml-auto">
-                      <span>{t.caseStudyCta}</span>
-                      <ArrowUpRight className="w-4 h-4" />
+        {/* #2 & #3 Featured Projects */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {secondaryFeatured.map((project, index) => (
+            <motion.article
+              key={project.id}
+              initial={{ opacity: 0, y: 16 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: 0.08 + index * 0.06 }}
+              className="flex"
+            >
+              <SpotlightCard
+                interactive={Boolean(project.hasCaseStudy)}
+                onClick={
+                  project.hasCaseStudy
+                    ? () => setSelectedProject(project)
+                    : undefined
+                }
+                className="w-full p-6 rounded-2xl flex flex-col justify-between gap-5 cursor-pointer group"
+              >
+                <div className="space-y-4">
+                  {project.previewType && (
+                    <ProjectPreview
+                      previewType={project.previewType}
+                      variant="featured"
+                      language={language}
+                    />
+                  )}
+
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/15 text-[11px] font-mono font-medium text-slate-800 dark:text-slate-200">
+                      {project.roleBadge[language]}
+                    </span>
+                    <span
+                      className={`px-2.5 py-0.5 rounded-full border text-[11px] font-mono font-semibold ${getStatusBadgeClasses(
+                        project.statusTone
+                      )}`}
+                    >
+                      {project.statusBadge[language]}
                     </span>
                   </div>
+
+                  <div className="space-y-1.5">
+                    <h3 className="text-xl font-bold font-display text-slate-900 dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors">
+                      {project.title[language]}
+                    </h3>
+                    <p className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
+                      {project.summary[language]}
+                    </p>
+                  </div>
+
+                  {(project.problemSolution || project.resultSummary) && (
+                    <div className="space-y-1.5 text-sm leading-relaxed border-l-2 border-sky-500/40 pl-3 py-0.5">
+                      {project.problemSolution && (
+                        <p className="text-slate-700 dark:text-slate-200">
+                          <span className="font-semibold text-slate-900 dark:text-white">
+                            {t.problemSolutionLabel}{' '}
+                          </span>
+                          {project.problemSolution[language]}
+                        </p>
+                      )}
+                      {project.resultSummary && (
+                        <p className="text-slate-600 dark:text-slate-300">
+                          <span className="font-semibold text-slate-900 dark:text-white">
+                            {t.resultLabel}{' '}
+                          </span>
+                          {project.resultSummary[language]}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                <div className="space-y-3 pt-2 border-t border-slate-200/80 dark:border-white/10">
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.tags.slice(0, 4).map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/12 text-xs font-mono font-medium text-slate-800 dark:text-slate-200"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {renderActionButtons(project)}
                 </div>
               </SpotlightCard>
             </motion.article>
-          )
-        })}
+          ))}
+        </div>
+
+        {/* #4 & #5 Compact Row: MomoKash & TaillorPro */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {compactProjects.map((project, index) => (
+            <motion.article
+              key={project.id}
+              initial={{ opacity: 0, y: 16 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.38, delay: 0.14 + index * 0.05 }}
+              className="flex"
+            >
+              <SpotlightCard
+                interactive={Boolean(project.hasCaseStudy)}
+                onClick={
+                  project.hasCaseStudy
+                    ? () => setSelectedProject(project)
+                    : undefined
+                }
+                className={`w-full p-5 sm:p-6 rounded-2xl flex flex-col justify-between gap-4 ${
+                  project.hasCaseStudy ? 'cursor-pointer group' : ''
+                }`}
+              >
+                <div className="space-y-3.5">
+                  {project.previewType && (
+                    <ProjectPreview
+                      previewType={project.previewType}
+                      variant="compact"
+                      language={language}
+                    />
+                  )}
+
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/15 text-[11px] font-mono font-medium text-slate-800 dark:text-slate-200">
+                      {project.roleBadge[language]}
+                    </span>
+                    <span
+                      className={`px-2.5 py-0.5 rounded-full border text-[11px] font-mono font-semibold ${getStatusBadgeClasses(
+                        project.statusTone
+                      )}`}
+                    >
+                      {project.statusBadge[language]}
+                    </span>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <h3 className="text-lg sm:text-xl font-bold font-display text-slate-900 dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors">
+                      {project.title[language]}
+                    </h3>
+                    <p className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
+                      {project.summary[language]}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 pt-2 border-t border-slate-200/80 dark:border-white/10">
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.tags.slice(0, 4).map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/12 text-xs font-mono font-medium text-slate-800 dark:text-slate-200"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {renderActionButtons(project)}
+                </div>
+              </SpotlightCard>
+            </motion.article>
+          ))}
+        </div>
+
+        {/* #6 Published Google Play Group (MULEMA + Shikaku) */}
+        {publishedProjects.length > 0 && (
+          <div className="space-y-4 pt-2">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h3 className="text-lg sm:text-xl font-bold font-display text-slate-900 dark:text-white">
+                {t.publishedTitle}
+              </h3>
+              <span className="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/15 text-xs font-mono font-medium text-slate-800 dark:text-slate-200">
+                {t.contributorSharedBadge}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {publishedProjects.map((project) => (
+                <article key={project.id} className="flex">
+                  <SpotlightCard className="w-full p-5 sm:p-6 rounded-2xl flex flex-col justify-between gap-4">
+                    <div className="space-y-3.5">
+                      {project.previewType && (
+                        <ProjectPreview
+                          previewType={project.previewType}
+                          variant="compact"
+                          language={language}
+                        />
+                      )}
+
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/15 text-[11px] font-mono font-medium text-slate-800 dark:text-slate-200">
+                          {project.roleBadge[language]}
+                        </span>
+                        <span
+                          className={`px-2.5 py-0.5 rounded-full border text-[11px] font-mono font-semibold ${getStatusBadgeClasses(
+                            project.statusTone
+                          )}`}
+                        >
+                          {project.statusBadge[language]}
+                        </span>
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <h4 className="text-lg sm:text-xl font-bold font-display text-slate-900 dark:text-white">
+                          {project.title[language]}
+                        </h4>
+                        <p className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
+                          {project.summary[language]}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3 pt-2 border-t border-slate-200/80 dark:border-white/10">
+                      <div className="flex flex-wrap gap-1.5">
+                        {project.tags.slice(0, 4).map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/12 text-xs font-mono font-medium text-slate-800 dark:text-slate-200"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {renderActionButtons(project)}
+                    </div>
+                  </SpotlightCard>
+                </article>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Discreet Other Projects Row (Vote IAI, Gestion locative) */}
+        {otherProjects.length > 0 && (
+          <div className="space-y-3 pt-2">
+            <h3 className="text-sm font-mono font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-300">
+              {t.otherTitle}
+            </h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {otherProjects.map((project) => (
+                <div
+                  key={project.id}
+                  className="editorial-surface rounded-xl p-4 sm:p-5 flex flex-col justify-between gap-3"
+                >
+                  <div className="space-y-2">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <h4 className="text-base font-bold font-display text-slate-900 dark:text-white">
+                        {project.title[language]}
+                      </h4>
+                      <div className="flex items-center gap-1.5">
+                        <span className="px-2 py-0.5 rounded-full bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/15 text-[11px] font-mono text-slate-700 dark:text-slate-300">
+                          {project.roleBadge[language]}
+                        </span>
+                        <span
+                          className={`px-2 py-0.5 rounded-full border text-[11px] font-mono ${getStatusBadgeClasses(
+                            project.statusTone
+                          )}`}
+                        >
+                          {project.statusBadge[language]}
+                        </span>
+                      </div>
+                    </div>
+
+                    <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                      {project.summary[language]}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-200/80 dark:border-white/10">
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.tags.slice(0, 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/12 text-xs font-mono text-slate-800 dark:text-slate-200"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    {project.codeUrl && (
+                      <a
+                        href={project.codeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-sky-700 dark:text-sky-300 hover:underline"
+                      >
+                        <Code2 className="w-3.5 h-3.5" />
+                        <span>{t.githubCode}</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Case Study Slide-Over Drawer */}
       <ProjectModal
         project={selectedProject}
-        projects={filteredProjects}
+        projects={caseStudyProjects}
         onSelectProject={setSelectedProject}
         onClose={() => setSelectedProject(null)}
         language={language}

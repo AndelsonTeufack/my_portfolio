@@ -146,11 +146,12 @@ export function queryAndelsonKnowledge(userQuery: string, lang: 'fr' | 'en' = 'f
     q.includes('vote') ||
     q.includes('campay') ||
     q.includes('laoshi') ||
+    q.includes('socadel') ||
     q.includes('locative')
   ) {
     return isEn
-      ? `Notable Projects:\n• MULEMA (Google Play Store): V1 corrective maintenance & volunteer V2 launch.\n• Shikaku (Google Play Store & Web): Online & local multiplayer puzzle game.\n• TaillorPro: Offline-first Flutter app for tailoring workshops.\n• MomoKash Mobile: USSD-to-Flutter migration with Spring Boot & Redis.\n• Vote - IAI: Paid electronic voting web platform with Campay payment integration.\n• Desktop Rental Manager: PyQt & MongoDB property management app.\n• Also: HR Management System (Spring Boot/React/JWT), GMAO Maintenance System (Python/MySQL), and Laoshi Consulting (Next.js/NestJS).`
-      : `Projets notables :\n• MULEMA (Google Play Store) : Maintenance corrective V1 et participation bénévole au lancement V2.\n• Shikaku (Google Play Store & Web) : Jeu mobile multijoueur en ligne et local.\n• TaillorPro : Application mobile offline-first de gestion d’ateliers de couture.\n• MomoKash Mobile : Migration USSD vers Flutter avec cache Redis.\n• Vote - IAI : Plateforme web de vote par paiement avec intégration Campay.\n• Application Desktop de Gestion Locative : Interface moderne PyQt & MongoDB.\n• Également : Système RH (Spring Boot/React/JWT), GMAO (Python/MySQL) et Laoshi Consulting (Next.js/NestJS).`
+      ? `Notable Projects:\n• Laoshi Consulting (Live client portal): Multilingual Next.js / NestJS web platform.\n• Offline-First Inspection Platform (KES, anonymized case study): Flutter offline app (Gemini AI), FastAPI web platform (QR Code sync), PDF/Word/Excel reports (JSA, Q18, Q19), Cloudflare R2.\n• SOCAD’EL GIS Pipeline (KES): KoboCollect, ESRI, GeoJSON, and PostgreSQL/PostGIS.\n• MomoKash Mobile (Credix.cam SA): USSD-to-Flutter migration with Spring Boot and Redis.\n• TaillorPro: Offline-first Flutter app for tailoring workshops.\n• Published Google Play apps (Contributor): MULEMA and Shikaku.`
+      : `Projets notables :\n• Laoshi Consulting (site client en ligne) : Portail web multilingue Next.js / NestJS.\n• Application d’inspection offline-first (KES, étude de cas anonymisée) : App Flutter (IA Gemini), plateforme web FastAPI (synchro QR Code), génération PDF/Word/Excel (JSA, Q18, Q19) et Cloudflare R2.\n• Chaîne SIG SOCAD’EL (KES) : KoboCollect, ESRI, GeoJSON et PostgreSQL/PostGIS.\n• MomoKash Mobile (Credix.cam SA) : Migration USSD vers Flutter avec Spring Boot et Redis.\n• TaillorPro : App mobile offline-first pour ateliers de couture.\n• Applications publiées sur Google Play (Contributeur) : MULEMA et Shikaku.`
   }
 
   if (
@@ -177,8 +178,8 @@ export function queryAndelsonKnowledge(userQuery: string, lang: 'fr' | 'en' = 'f
     q.includes('yemba')
   ) {
     return isEn
-      ? `Languages:\n• Yemba: Native\n• French: Fluent\n• English: C1 Level (Professional business communication)`
-      : `Langues :\n• Yemba : Langue maternelle\n• Français : Courant\n• Anglais : Niveau C1 (Communication professionnelle)`
+      ? `Languages:\n• French: Native (primary working language)\n• English: C1 Level (professional working proficiency)\n• Yemba: Native (Cameroonian national language)`
+      : `Langues :\n• Français : Natif (langue de travail principale)\n• Anglais : Niveau C1 (communication professionnelle)\n• Yemba : Natif (langue nationale)`
   }
 
   if (

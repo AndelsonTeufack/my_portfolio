@@ -37,17 +37,34 @@ export interface ExperienceItem {
   technologies: string[]
 }
 
+export type ProjectPreviewType =
+  | 'laoshi'
+  | 'kes-inspection'
+  | 'socadel-gis'
+  | 'momokash'
+  | 'taillorpro'
+  | 'mulema'
+  | 'shikaku'
+
 export interface ProjectItem {
   id: string
   title: BilingualText
   category: 'web' | 'mobile' | 'backend' | 'automation'
   categoryLabel: BilingualText
   roleContext: BilingualText
+  tier: 'featured' | 'compact' | 'published' | 'other'
+  previewType?: ProjectPreviewType
+  roleBadge: BilingualText
+  statusBadge: BilingualText
+  statusTone: 'live' | 'production' | 'playstore' | 'prototype'
   summary: BilingualText
+  problemSolution?: BilingualText
+  resultSummary?: BilingualText
   problemStatement: BilingualText
   architectureNotes: BilingualText
   highlights: BilingualList
   tags: string[]
+  hasCaseStudy?: boolean
   playStoreUrl?: string
   liveUrl?: string
   videoUrl?: string
@@ -57,7 +74,6 @@ export interface ProjectItem {
 export interface SkillCategory {
   id: string
   title: BilingualText
-  description: BilingualText
   primary: string[]
   secondary: string[]
 }
@@ -915,97 +931,246 @@ export const EXPERIENCES: ExperienceItem[] = [
 
 export const PROJECTS: ProjectItem[] = [
   {
-    id: 'mulema',
+    id: 'laoshi-consulting',
     title: {
-      fr: 'MULEMA - Apprentissage des Langues Nationales',
-      en: 'MULEMA - Native Language Learning Mobile App',
+      fr: 'Laoshi Consulting',
+      en: 'Laoshi Consulting',
     },
-    category: 'mobile',
+    category: 'web',
     categoryLabel: {
-      fr: 'Mobile · Play Store',
-      en: 'Mobile · Play Store',
+      fr: 'Web · En ligne',
+      en: 'Web · Live',
     },
     roleContext: {
-      fr: 'Maintenance corrective V1 & Participation bénévole V2 · Publié sur Google Play Store',
-      en: 'V1 Corrective Maintenance & Volunteer V2 Development · Published on Google Play Store',
+      fr: 'Client réel · Portail Next.js / NestJS en production',
+      en: 'Client delivery · Production Next.js / NestJS portal',
     },
+    tier: 'featured',
+    previewType: 'laoshi',
+    roleBadge: {
+      fr: 'Auteur',
+      en: 'Author',
+    },
+    statusBadge: {
+      fr: 'En ligne',
+      en: 'Live',
+    },
+    statusTone: 'live',
     summary: {
-      fr: 'Application mobile dédiée à l’apprentissage des langues nationales camerounaises : stabilisation de la V1 et contribution active au développement et lancement de la V2.',
-      en: 'Mobile application preserving and teaching Cameroonian native languages: bug-fixing on V1 and volunteer engineering contribution through the launch of V2.',
+      fr: 'Portail web multilingue pour un cabinet d’accompagnement aux études et à l’immigration en Chine.',
+      en: 'Multilingual web portal for an international study-abroad and immigration consultancy in China.',
+    },
+    problemSolution: {
+      fr: 'Structurer l’offre de bourses et qualifier les demandes d’étudiants internationaux via un portail Next.js et une API NestJS.',
+      en: 'Structure scholarship programs and qualify international student inquiries through a Next.js portal and NestJS API.',
+    },
+    resultSummary: {
+      fr: 'Déployé en production avec interface multilingue, référencement SEO technique et prise de rendez-vous en ligne.',
+      en: 'Live in production with multilingual routing, technical SEO, and online consultation booking.',
     },
     problemStatement: {
-      fr: 'Garantir la stabilité de la première version en production auprès des apprenants tout en participant à la refonte et au lancement de la V2 sur Google Play Store.',
-      en: 'Stabilize an active production mobile app for learners while co-developing and shipping a major V2 release on Google Play Store.',
+      fr: 'Le cabinet avait besoin d’une plateforme rapide et multilingue pour présenter ses programmes d’admission en Chine et centraliser les demandes de rendez-vous de candidats internationaux.',
+      en: 'The consultancy needed a fast, multilingual web platform to present university admission programs in China and capture qualified consultation requests.',
     },
     architectureNotes: {
-      fr: 'Diagnostic et résolution de bugs critiques sur la V1, puis développement de nouvelles briques applicatives et préparation de la mise en production V2.',
-      en: 'Root-cause bug resolution across V1 production flows, followed by collaborative feature engineering and release stabilization for V2.',
+      fr: 'Frontend Next.js App Router (TypeScript, Tailwind CSS) optimisé pour le SEO, couplé à un backend NestJS structurant la validation des formulaires de qualification et les notifications de rendez-vous.',
+      en: 'SEO-focused Next.js App Router frontend (TypeScript, Tailwind CSS) paired with a NestJS backend managing lead qualification workflows and booking notifications.',
     },
     highlights: {
       fr: [
-        'Contribution à la maintenance corrective de la première version (V1), notamment par l’identification et la correction de bugs.',
-        'Participation bénévole au développement et au lancement de la deuxième version (V2) de l’application.',
-        'Application publiquement disponible et téléchargeable sur le Google Play Store.',
+        'Interface multilingue complète adaptée aux étudiants francophones, anglophones et internationaux.',
+        'Parcours de qualification des dossiers (bourses, filières, niveau d’étude) connecté au backend NestJS.',
+        'En ligne et accessible publiquement en production.',
       ],
       en: [
-        'Performed corrective maintenance on V1 through systematic bug identification and resolution.',
-        'Contributed voluntarily to the engineering and public launch of V2.',
-        'Live and publicly distributed on Google Play Store.',
+        'Multilingual navigation tailored for French-speaking, English-speaking, and international applicants.',
+        'Structured applicant qualification and consultation scheduling powered by NestJS.',
+        'Deployed and publicly live in production.',
       ],
     },
-    tags: ['Mobile', 'Google Play Store', 'Maintenance V1', 'Lancement V2', 'Clean Code'],
-    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.mulema.app&hl=fr',
-    codeUrl: 'https://github.com/noubayou237/mulema',
+    tags: ['Next.js', 'NestJS', 'TypeScript', 'Tailwind CSS'],
+    hasCaseStudy: true,
+    liveUrl: 'https://laoshi-consulting.vercel.app',
   },
   {
-    id: 'shikaku',
+    id: 'kes-inspection',
     title: {
-      fr: 'Shikaku - Jeu Mobile Multijoueur en Ligne & Local',
-      en: 'Shikaku - Online & Local Multiplayer Mobile Game',
+      fr: 'Application d’inspection offline-first',
+      en: 'Offline-First Inspection Platform',
     },
     category: 'mobile',
     categoryLabel: {
-      fr: 'Mobile · Play Store',
-      en: 'Mobile · Play Store',
+      fr: 'Mobile & Web · Terrain',
+      en: 'Mobile & Web · Field',
     },
     roleContext: {
-      fr: 'Analyse, conception, tests & déploiement Play Store',
-      en: 'Analysis, Design, QA & Play Store Release',
+      fr: 'Étude de cas anonymisée · Kamer Engineering Solution',
+      en: 'Anonymized case study · Kamer Engineering Solution',
     },
+    tier: 'featured',
+    previewType: 'kes-inspection',
+    roleBadge: {
+      fr: 'Projet d’entreprise',
+      en: 'Company project',
+    },
+    statusBadge: {
+      fr: 'En production',
+      en: 'In production',
+    },
+    statusTone: 'production',
     summary: {
-      fr: 'Jeu mobile de réflexion et stratégie proposant des modes multijoueurs en ligne et en local, testé et déployé sur le Google Play Store avec site vitrine dédié.',
-      en: 'Multiplayer mobile puzzle game supporting both online and local play modes, tested and deployed to Google Play Store alongside a web showcase.',
+      fr: 'Suite mobile et web d’inspection technique pour un bureau d’études électriques et industrielles (Kamer Engineering Solution).',
+      en: 'Mobile and web technical inspection suite for an electrical and industrial engineering firm (Kamer Engineering Solution).',
+    },
+    problemSolution: {
+      fr: 'Saisir des inspections sur sites sans réseau via une app Flutter offline-first (IA Gemini) et une plateforme web synchronisée par QR Code et Cloudflare R2.',
+      en: 'Capture inspections on offline industrial sites via a Flutter app (Gemini AI) and a multi-inspector web platform synced via QR Code and Cloudflare R2.',
+    },
+    resultSummary: {
+      fr: 'Génération automatisée des rapports réglementaires PDF, Word et Excel (JSA, Q18, Q19) et mises à jour OTA terrain.',
+      en: 'Automated generation of regulatory PDF, Word, and Excel reports (JSA, Q18, Q19) with OTA field updates.',
     },
     problemStatement: {
-      fr: 'Concevoir un jeu fluide capable de synchroniser des parties multijoueurs en temps réel en ligne tout en restant jouable localement à deux sur le terrain.',
-      en: 'Design a responsive mobile game supporting synchronized online multiplayer sessions as well as frictionless local play.',
+      fr: 'Les inspecteurs interviennent sur des installations électriques sans couverture réseau et devaient saisir leurs relevés sur papier avant de les ressaisir manuellement en rapports JSA, Q18 ou Q19.',
+      en: 'Field inspectors operate on industrial electrical sites without internet connectivity and previously transcribed paper checklists manually into JSA, Q18, and Q19 reports.',
     },
     architectureNotes: {
-      fr: 'Architecture Flutter/Dart couplée à Firebase pour l’état multijoueur en ligne, accompagnée d’une phase rigoureuse de tests avant publication sur Google Play Store.',
-      en: 'Flutter/Dart game engine integrated with Firebase for online multiplayer synchronization, followed by structured QA and Google Play Store deployment.',
+      fr: 'Application Flutter offline-first avec persistance locale Hive, intégration de l’API Gemini pour l’assistance à la rédaction des anomalies, et plateforme web FastAPI/PostgreSQL gérant la synchronisation multi-inspecteurs par QR Code et le stockage Cloudflare R2 pour les livrables et mises à jour OTA.',
+      en: 'Offline-first Flutter client using Hive local storage and Gemini API assistance for anomaly drafting, synced with a FastAPI/PostgreSQL web platform via QR Code workflows and Cloudflare R2 for reports and OTA distribution.',
     },
     highlights: {
       fr: [
-        'Participation à l’analyse et à la conception d’un jeu mobile multijoueur proposant des modes en ligne et en local.',
-        'Contribution aux phases de test et au déploiement de l’application sur Google Play Store.',
-        'Site de présentation et d’accès rapide déployé en ligne.',
+        'Saisie terrain 100 % hors connexion avec synchronisation différée dès le retour réseau.',
+        'Génération directe de rapports conformes aux trames PDF, Word et Excel (JSA, Q18, Q19).',
+        'Architecture anonymisée : noms de sites clients et données sensibles volontairement masqués.',
       ],
       en: [
-        'Contributed to the analysis and design of online and local multiplayer game modes.',
-        'Executed testing phases and managed deployment on Google Play Store.',
-        'Accompanied by a live web landing page.',
+        'Full offline field capture with deferred synchronization once connectivity resumes.',
+        'Automated PDF, Word, and Excel report export matching JSA, Q18, and Q19 templates.',
+        'Anonymized showcase: client facility names and confidential data intentionally masked.',
       ],
     },
-    tags: ['Flutter', 'Dart', 'Firebase', 'Multijoueur', 'Google Play Store'],
-    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.shikaku.jeu_carre',
-    liveUrl: 'https://shikaku-site.vercel.app/',
-    codeUrl: 'https://github.com/AndelsonTeufack/shikaku',
+    tags: ['Flutter', 'FastAPI', 'Gemini API', 'Cloudflare R2'],
+    hasCaseStudy: true,
+  },
+  {
+    id: 'socadel-gis',
+    title: {
+      fr: 'Chaîne SIG SOCAD’EL',
+      en: 'SOCAD’EL GIS Pipeline',
+    },
+    category: 'web',
+    categoryLabel: {
+      fr: 'Web · SIG',
+      en: 'Web · GIS',
+    },
+    roleContext: {
+      fr: 'Projet d’entreprise · Kamer Engineering Solution',
+      en: 'Company project · Kamer Engineering Solution',
+    },
+    tier: 'featured',
+    previewType: 'socadel-gis',
+    roleBadge: {
+      fr: 'Projet d’entreprise',
+      en: 'Company project',
+    },
+    statusBadge: {
+      fr: 'En production',
+      en: 'In production',
+    },
+    statusTone: 'production',
+    summary: {
+      fr: 'Chaîne de collecte et d’intégration géospatiale pour le suivi de réseaux électriques sur le projet SOCAD’EL.',
+      en: 'Geospatial data collection and integration pipeline for electrical network monitoring on the SOCAD’EL project.',
+    },
+    problemSolution: {
+      fr: 'Relier les relevés terrain KoboCollect aux couches cartographiques ESRI et GeoJSON avec validation et stockage spatial PostGIS.',
+      en: 'Connect KoboCollect field surveys to ESRI and GeoJSON map layers with validation and PostGIS spatial storage.',
+    },
+    resultSummary: {
+      fr: 'Centralisation des données géolocalisées terrain pour les équipes d’ingénierie et de contrôle.',
+      en: 'Centralized geolocated field data for engineering and supervision teams.',
+    },
+    problemStatement: {
+      fr: 'Les relevés collectés sur le terrain devaient être contrôlés, nettoyés et convertis pour alimenter les couches cartographiques de suivi des réseaux électriques.',
+      en: 'Survey points collected in the field needed validation, cleansing, and conversion to feed electrical network monitoring map layers.',
+    },
+    architectureNotes: {
+      fr: 'Composants web et scripts de traitement reliant les formulaires mobiles KoboCollect aux bases PostgreSQL/PostGIS, avec export et affichage compatibles ESRI et GeoJSON.',
+      en: 'Web components and spatial processing modules linking KoboCollect mobile forms to PostgreSQL/PostGIS tables with ESRI and GeoJSON interoperability.',
+    },
+    highlights: {
+      fr: [
+        'Intégration de bout en bout entre collecte mobile KoboCollect et base géospatiale PostGIS.',
+        'Compatibilité avec les formats SIG standards ESRI et GeoJSON.',
+        'Fiabilisation et centralisation des coordonnées et attributs techniques relevés sur site.',
+      ],
+      en: [
+        'End-to-end integration from KoboCollect mobile surveys to PostgreSQL/PostGIS.',
+        'Interoperability with standard ESRI and GeoJSON spatial layers.',
+        'Centralized validation of coordinates and electrical equipment attributes.',
+      ],
+    },
+    tags: ['PostGIS', 'KoboCollect', 'ESRI', 'GeoJSON'],
+    hasCaseStudy: true,
+  },
+  {
+    id: 'momokash',
+    title: {
+      fr: 'MomoKash Mobile',
+      en: 'MomoKash Mobile',
+    },
+    category: 'mobile',
+    categoryLabel: {
+      fr: 'Mobile · Fintech',
+      en: 'Mobile · Fintech',
+    },
+    roleContext: {
+      fr: 'Projet d’entreprise · Credix.cam SA',
+      en: 'Company project · Credix.cam SA',
+    },
+    tier: 'compact',
+    previewType: 'momokash',
+    roleBadge: {
+      fr: 'Projet d’entreprise',
+      en: 'Company project',
+    },
+    statusBadge: {
+      fr: 'Prototype',
+      en: 'Prototype',
+    },
+    statusTone: 'prototype',
+    summary: {
+      fr: 'Application mobile de micro-crédit remplaçant le parcours USSD de Credix.cam SA, avec gestion des sessions sous Redis.',
+      en: 'Mobile micro-lending application replacing Credix.cam SA’s legacy USSD channel, with Redis session management.',
+    },
+    problemStatement: {
+      fr: 'Les parcours USSD créaient des coupures fréquentes et une expérience limitée lors des demandes de micro-crédit.',
+      en: 'Legacy USSD menus caused session timeouts and constrained mobile micro-lending workflows.',
+    },
+    architectureNotes: {
+      fr: 'Application mobile cross-platform Flutter reliée à un service backend Spring Boot utilisant Redis pour stocker l’état temporaire des sessions et validations.',
+      en: 'Cross-platform Flutter client backed by a Spring Boot service using Redis for temporary session state and validation flows.',
+    },
+    highlights: {
+      fr: [
+        'Migration complète des écrans USSD vers une interface mobile Flutter.',
+        'Stockage des sessions temporaires dans Redis et tests unitaires/d’intégration.',
+      ],
+      en: [
+        'Full migration of legacy USSD menus into a cross-platform Flutter app.',
+        'Redis session management paired with unit and integration tests.',
+      ],
+    },
+    tags: ['Flutter', 'Spring Boot', 'Redis', 'REST'],
+    hasCaseStudy: true,
+    videoUrl: 'https://youtu.be/hyJJLx7mCCU',
   },
   {
     id: 'taillorpro',
     title: {
-      fr: 'TaillorPro - Gestion Offline-First d’Ateliers de Couture',
-      en: 'TaillorPro - Offline-First Tailoring Workshop App',
+      fr: 'TaillorPro',
+      en: 'TaillorPro',
     },
     category: 'mobile',
     categoryLabel: {
@@ -1013,400 +1178,332 @@ export const PROJECTS: ProjectItem[] = [
       en: 'Mobile · Offline-First',
     },
     roleContext: {
-      fr: 'Analyse & conception complète d’application multiplateforme',
-      en: 'End-to-End Cross-Platform Analysis & Engineering',
+      fr: 'Projet personnel · Flutter & Firebase',
+      en: 'Personal project · Flutter & Firebase',
     },
+    tier: 'compact',
+    previewType: 'taillorpro',
+    roleBadge: {
+      fr: 'Auteur',
+      en: 'Author',
+    },
+    statusBadge: {
+      fr: 'Prototype',
+      en: 'Prototype',
+    },
+    statusTone: 'prototype',
     summary: {
-      fr: 'Application mobile multiplateforme fonctionnant hors connexion (offline-first), dédiée à la digitalisation des ateliers de couture : commandes, clients, paiements et notifications instantanées.',
-      en: 'Offline-first cross-platform mobile application built to digitalize tailoring workshops: orders, client measurements, payments, and instant notifications.',
+      fr: 'Application mobile offline-first pour ateliers de couture : mesures clients, commandes, paiements et rappels.',
+      en: 'Offline-first mobile app for tailoring workshops: client measurements, orders, payments, and reminders.',
     },
     problemStatement: {
-      fr: 'Permettre aux ateliers de couture d’enregistrer mesures, commandes et paiements même sans connexion Internet permanente, sans perte de données.',
-      en: 'Enable tailoring workshops to track orders, client records, and payments reliably without permanent internet connectivity.',
+      fr: 'Permettre aux ateliers de couture d’enregistrer mesures, commandes et paiements même sans connexion Internet permanente.',
+      en: 'Enable tailoring workshops to record measurements, orders, and payments reliably without constant connectivity.',
     },
     architectureNotes: {
-      fr: 'Architecture offline-first sous Flutter avec synchronisation Firebase, support multilingue (i18n), thèmes clair/sombre et système de notifications instantanées.',
-      en: 'Offline-first Flutter architecture paired with Firebase synchronization, i18n localization, dynamic theming, and instant notifications.',
+      fr: 'Application Flutter conçue autour d’un fonctionnement hors ligne avec synchronisation Firebase, support multilingue et notifications instantanées.',
+      en: 'Flutter app built for offline usage with Firebase sync, localization support, and instant reminders.',
     },
     highlights: {
       fr: [
-        'Analyse et conception d’une application multiplateforme fonctionnant en mode hors connexion (offline-first).',
-        'Gestion complète des commandes, fiches clients/mesures et suivi des paiements.',
-        'Intégration de notifications instantanées et support multilingue.',
+        'Gestion hors connexion des fiches clients, mesures, commandes et paiements.',
+        'Notifications instantanées de rappel et support multilingue.',
       ],
       en: [
-        'Architected a cross-platform mobile app designed around an offline-first workflow.',
-        'Full management of client measurements, garment orders, and payment tracking.',
-        'Integrated instant notifications and multi-language support.',
+        'Offline management of customer measurements, orders, and payment balances.',
+        'Instant deadline notifications and multilingual UI.',
       ],
     },
-    tags: ['Flutter', 'Dart', 'Offline-First', 'Firebase', 'Notifications'],
+    tags: ['Flutter', 'Dart', 'Firebase'],
+    hasCaseStudy: true,
     codeUrl: 'https://github.com/AndelsonTeufack/tailor_pro_app',
   },
   {
-    id: 'momokash',
+    id: 'mulema',
     title: {
-      fr: 'MomoKash Mobile - Migration USSD vers Flutter & Redis',
-      en: 'MomoKash Mobile - USSD-to-Flutter Fintech & Redis',
+      fr: 'MULEMA',
+      en: 'MULEMA',
     },
     category: 'mobile',
     categoryLabel: {
-      fr: 'Fintech · Mobile & Backend',
-      en: 'Fintech · Mobile & Backend',
+      fr: 'Play Store · Contributeur',
+      en: 'Play Store · Contributor',
     },
     roleContext: {
-      fr: 'Projet Entreprise (CREDIX.CAM SA) · Démo vidéo disponible',
-      en: 'Enterprise Project (CREDIX.CAM SA) · Video Demo Available',
+      fr: 'Contributeur bénévole V1 & V2 · Google Play Store',
+      en: 'Volunteer contributor V1 & V2 · Google Play Store',
     },
+    tier: 'published',
+    previewType: 'mulema',
+    roleBadge: {
+      fr: 'Contributeur',
+      en: 'Contributor',
+    },
+    statusBadge: {
+      fr: 'Play Store',
+      en: 'Play Store',
+    },
+    statusTone: 'playstore',
     summary: {
-      fr: 'Modernisation du service de micro-crédit MomoKash par migration du canal USSD vers une application mobile cross-platform Flutter orchestrée via cache Redis.',
-      en: 'Modernized the MomoKash lending platform by migrating users from legacy USSD menus to a cross-platform Flutter app orchestrated through Redis session caching.',
+      fr: 'Application d’apprentissage des langues nationales camerounaises : corrections de bugs sur la V1 et participation bénévole à la V2.',
+      en: 'Cameroonian national language learning app: V1 bug fixes and volunteer contribution to the V2 launch.',
     },
     problemStatement: {
-      fr: 'Les parcours USSD limitaient l’expérience utilisateur et générant des interruptions de session lors des demandes de micro-crédit.',
-      en: 'Legacy USSD channels created rigid UX constraints and session timeouts during mobile lending operations.',
+      fr: 'Stabiliser l’application en production sur Play Store et appuyer la sortie de la deuxième version.',
+      en: 'Stabilize the live Play Store application and support the engineering delivery of V2.',
     },
     architectureNotes: {
-      fr: 'Frontend mobile Flutter communiqué via APIs REST à un service backend Spring Boot dédié, s’appuyant sur Redis pour les données temporaires et sessions haute performance.',
-      en: 'Flutter cross-platform client communicating over REST with a dedicated Spring Boot orchestration layer backed by Redis for low-latency session caching.',
+      fr: 'Maintenance corrective sur la V1 puis implémentation de fonctionnalités dans le cadre du lancement de la V2.',
+      en: 'Corrective bug resolution on V1 followed by collaborative feature contributions for the V2 release.',
     },
     highlights: {
       fr: [
-        'Migration intégrale des parcours USSD vers une application mobile native cross-platform.',
-        'Orchestration backend avec cache Redis pour les sessions et données temporaires.',
-        'Tests unitaires et d’intégration couvrant la fiabilité des échanges.',
+        'Correction de bugs sur la V1 en production.',
+        'Participation bénévole au développement et lancement de la V2 sur Google Play Store.',
       ],
       en: [
-        'Full UX migration from legacy USSD menus to native cross-platform Flutter.',
-        'Dedicated backend orchestration layer utilizing Redis cache for session state.',
-        'Unit and integration tests validating transactional reliability.',
+        'Resolved production bugs on V1.',
+        'Volunteer engineering contribution to the V2 Google Play Store launch.',
       ],
     },
-    tags: ['Flutter', 'Spring Boot', 'Redis', 'REST API', 'Fintech'],
-    videoUrl: 'https://youtu.be/hyJJLx7mCCU',
-    codeUrl: 'https://github.com/AndelsonTeufack/MomoKash-Mobile-App',
+    tags: ['Flutter', 'Dart', 'REST'],
+    hasCaseStudy: false,
+    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.mulema.app&hl=fr',
+  },
+  {
+    id: 'shikaku',
+    title: {
+      fr: 'Shikaku',
+      en: 'Shikaku',
+    },
+    category: 'mobile',
+    categoryLabel: {
+      fr: 'Play Store · Contributeur',
+      en: 'Play Store · Contributor',
+    },
+    roleContext: {
+      fr: 'Contributeur analyse, tests & déploiement · Google Play Store',
+      en: 'Contributor (analysis, QA & release) · Google Play Store',
+    },
+    tier: 'published',
+    previewType: 'shikaku',
+    roleBadge: {
+      fr: 'Contributeur',
+      en: 'Contributor',
+    },
+    statusBadge: {
+      fr: 'Play Store',
+      en: 'Play Store',
+    },
+    statusTone: 'playstore',
+    summary: {
+      fr: 'Jeu mobile de logique multijoueur en ligne et en local : participation à l’analyse, aux tests et à la publication Play Store.',
+      en: 'Online and local multiplayer logic game: contributed to analysis, QA testing, and Play Store release.',
+    },
+    problemStatement: {
+      fr: 'Proposer un jeu de puzzle fluide jouable à deux en local comme en ligne sur mobile.',
+      en: 'Deliver a responsive puzzle game supporting both online and local two-player sessions.',
+    },
+    architectureNotes: {
+      fr: 'Client Flutter/Dart avec synchronisation multijoueur via Firebase et phases de tests avant mise en ligne.',
+      en: 'Flutter/Dart client using Firebase for multiplayer sync, tested prior to Play Store deployment.',
+    },
+    highlights: {
+      fr: [
+        'Participation à l’analyse et à la conception des modes multijoueurs.',
+        'Contribution aux phases de test, au site de présentation et au déploiement sur Google Play Store.',
+      ],
+      en: [
+        'Participated in game mode analysis and design.',
+        'Contributed to QA testing, showcase landing page, and Google Play Store release.',
+      ],
+    },
+    tags: ['Flutter', 'Dart', 'Firebase'],
+    hasCaseStudy: false,
+    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.shikaku.jeu_carre',
+    liveUrl: 'https://shikaku-site.vercel.app/',
   },
   {
     id: 'vote-iai',
     title: {
-      fr: 'Vote - IAI - Plateforme Web de Vote & Paiement Campay',
-      en: 'Vote - IAI - Paid Voting Web Platform & Campay API',
+      fr: 'Vote IAI',
+      en: 'Vote IAI',
     },
     category: 'backend',
     categoryLabel: {
-      fr: 'Backend & Fintech · Campay',
-      en: 'Backend & Fintech · Campay',
+      fr: 'Académique · Backend',
+      en: 'Academic · Backend',
     },
     roleContext: {
-      fr: 'Analyse, conception API & intégration paiement mobile',
-      en: 'Backend Analysis, API Design & Mobile Payment Integration',
+      fr: 'Auteur · Spring Boot & Campay',
+      en: 'Author · Spring Boot & Campay',
     },
+    tier: 'other',
+    roleBadge: {
+      fr: 'Auteur',
+      en: 'Author',
+    },
+    statusBadge: {
+      fr: 'Académique',
+      en: 'Academic',
+    },
+    statusTone: 'prototype',
     summary: {
-      fr: 'Plateforme web de vote par paiement électronique intégrant la solution de paiement mobile Campay avec validation sécurisée des transactions et comptabilisation des votes.',
-      en: 'Electronic paid-voting web platform integrating the Campay payment gateway with secure transaction callbacks and vote validation.',
+      fr: 'Plateforme web de vote par paiement électronique intégrant l’API Mobile Money Campay.',
+      en: 'Electronic paid-voting web platform integrating the Campay Mobile Money API.',
     },
     problemStatement: {
-      fr: 'Permettre aux étudiants et votants de participer en ligne via Mobile Money (Orange Money / MTN MoMo) tout en garantissant l’unicité et la traçabilité chaque vote payé.',
-      en: 'Enable online voting via Mobile Money payments while guaranteeing atomic transaction verification and accurate vote tallying.',
+      fr: 'Enregistrer des votes payants via Mobile Money avec validation des paiements côté serveur.',
+      en: 'Process paid votes via Mobile Money with server-side payment callback validation.',
     },
     architectureNotes: {
-      fr: 'APIs REST Spring Boot intégrant les webhooks et appels sécurisés vers la passerelle Campay avec règles métiers d’allocation et de vérification transactionnelle.',
-      en: 'Spring Boot REST APIs integrating Campay payment initiation and webhook verification with strict business rules for vote validation.',
+      fr: 'API REST Spring Boot connectée à la passerelle de paiement Campay.',
+      en: 'Spring Boot REST backend integrated with the Campay payment gateway.',
     },
     highlights: {
       fr: [
-        'Analyse et conception d’une plateforme web de vote par paiement.',
-        'Intégration complète de la solution de paiement électronique Campay.',
-        'Architecture API REST robuste et sécurisée sous Spring Boot.',
+        'Conception de la plateforme web de vote par paiement.',
+        'Intégration de la solution Campay sous Spring Boot.',
       ],
       en: [
-        'End-to-end analysis and engineering of an electronic paid-voting platform.',
-        'Integrated the Campay electronic payment gateway.',
-        'Scalable Spring Boot REST API architecture.',
+        'Built the paid electronic voting web platform.',
+        'Integrated Campay Mobile Money callbacks in Spring Boot.',
       ],
     },
-    tags: ['Spring Boot', 'Java', 'API Campay', 'REST API', 'Sécurité'],
+    tags: ['Spring Boot', 'Java', 'API Campay'],
+    hasCaseStudy: false,
     codeUrl: 'https://github.com/AndelsonTeufack/sponsorship-IAI-Douala',
   },
   {
     id: 'rental-desktop',
     title: {
-      fr: 'Gestion Locative Desktop - Suivi Immobilier PyQt',
-      en: 'Desktop Rental Property Manager - PyQt & MongoDB',
+      fr: 'Gestion locative',
+      en: 'Rental Property Manager',
     },
     category: 'automation',
     categoryLabel: {
-      fr: 'Desktop · Python / PyQt',
-      en: 'Desktop · Python / PyQt',
+      fr: 'Desktop · Python',
+      en: 'Desktop · Python',
     },
     roleContext: {
-      fr: 'Développement logiciel desktop complet',
-      en: 'Full Desktop Application Engineering',
+      fr: 'Auteur · Application desktop PyQt',
+      en: 'Author · PyQt desktop app',
     },
+    tier: 'other',
+    roleBadge: {
+      fr: 'Auteur',
+      en: 'Author',
+    },
+    statusBadge: {
+      fr: 'Prototype',
+      en: 'Prototype',
+    },
+    statusTone: 'prototype',
     summary: {
-      fr: 'Application desktop de gestion locative intégrant le suivi des disponibilités, des états de paiement, des logements et occupants, ainsi que des notifications automatiques.',
-      en: 'Desktop property management software tracking unit availability, rent payment status, tenants, and automated notifications through a modern PyQt interface.',
+      fr: 'Application desktop de suivi des logements, disponibilités, états de paiement et relances automatiques.',
+      en: 'Desktop application tracking housing availability, rent payments, and automated reminders.',
     },
     problemStatement: {
-      fr: 'Centraliser la gestion des loyers, disponibilités de chambres/logements et relances locataires dans un outil desktop rapide utilisable hors ligne.',
-      en: 'Centralize unit availability, tenant records, payment statuses, and automated reminders inside a responsive offline desktop tool.',
+      fr: 'Centraliser le suivi des loyers, occupants et alertes de paiement dans une interface desktop locale.',
+      en: 'Centralize unit availability, tenant payment statuses, and automated alerts in a local desktop UI.',
     },
     architectureNotes: {
-      fr: 'Interface graphique ergonomique conçue avec Python et PyQt, couplée à une couche de persistance MongoDB/SQLite et un module d’alertes automatisées.',
-      en: 'Ergonomic GUI engineered with Python and PyQt, connected to MongoDB/SQLite persistence and automated notification triggers.',
+      fr: 'Interface graphique développée en Python avec PyQt.',
+      en: 'Graphical desktop interface built in Python with PyQt.',
     },
     highlights: {
       fr: [
-        'Suivi en temps réel des disponibilités, états de paiement, logements et occupants.',
-        'Système intégré de notifications et alertes automatiques.',
-        'Interfaces graphiques modernes et ergonomiques développées avec PyQt.',
+        'Suivi des disponibilités, logements, occupants et états de paiement.',
+        'Notifications et relances automatiques via interface PyQt.',
       ],
       en: [
-        'Real-time tracking of unit availability, payment statuses, and tenant profiles.',
-        'Automated notification engine for rent due dates and status changes.',
-        'Modern, ergonomic desktop interfaces crafted with PyQt.',
+        'Tracking of units, occupancy, and rent payment status.',
+        'Automated alerts built inside a Python PyQt interface.',
       ],
     },
-    tags: ['Python', 'PyQt', 'MongoDB', 'SQLite', 'Desktop GUI'],
+    tags: ['Python', 'PyQt'],
+    hasCaseStudy: false,
     codeUrl: 'https://github.com/AndelsonTeufack/BuildingManagement',
-  },
-  {
-    id: 'credix-hrm',
-    title: {
-      fr: 'Système de Gestion RH - Spring Boot, React & JWT',
-      en: 'Enterprise HR Management System - Spring Boot & React',
-    },
-    category: 'backend',
-    categoryLabel: {
-      fr: 'Full-Stack · Sécurité RBAC',
-      en: 'Full-Stack · RBAC Security',
-    },
-    roleContext: {
-      fr: 'Projet Entreprise (CREDIX.CAM SA)',
-      en: 'Enterprise Project (CREDIX.CAM SA)',
-    },
-    summary: {
-      fr: 'Application web fullstack dédiée à la gestion interne des ressources humaines, avec sécurisation des endpoints REST via JWT et gestion des rôles/permissions sous Spring Security.',
-      en: 'Full-stack internal HR management web application featuring JWT-secured REST endpoints and role/permission access control via Spring Security.',
-    },
-    problemStatement: {
-      fr: 'Digitaliser la gestion des dossiers employés, des demandes de congés et des communications internes avec séparation stricte des droits d’accès.',
-      en: 'Digitalize employee records, leave workflows, and internal announcements under strict role-based access controls.',
-    },
-    architectureNotes: {
-      fr: 'Backend Java Spring Boot + Spring Security (JWT + RBAC) connecté à MongoDB et consommé par une interface SPA React JS.',
-      en: 'Java Spring Boot + Spring Security (JWT + RBAC) backend backed by MongoDB, paired with a React JS frontend.',
-    },
-    highlights: {
-      fr: [
-        'Sécurisation complète des endpoints REST via JWT.',
-        'Configuration fine des autorisations (rôles et permissions RBAC) avec Spring Security.',
-        'Interface React JS intégrée pour la gestion des ressources humaines.',
-      ],
-      en: [
-        'Secured all REST endpoints with stateless JWT authentication.',
-        'Configured fine-grained RBAC roles and permissions using Spring Security.',
-        'Built responsive React JS workflows for internal HR teams.',
-      ],
-    },
-    tags: ['Spring Boot', 'React.js', 'Spring Security', 'JWT', 'MongoDB', 'RBAC'],
-    codeUrl: 'https://github.com/AndelsonTeufack/credix-Hrm',
-  },
-  {
-    id: 'gav-gmao',
-    title: {
-      fr: 'Plateforme GMAO & Automatisation Reporting (Gav-App)',
-      en: 'Internal CMMS (GMAO) & Python Reporting Automation',
-    },
-    category: 'automation',
-    categoryLabel: {
-      fr: 'Web & Automatisation · Python',
-      en: 'Web & Automation · Python',
-    },
-    roleContext: {
-      fr: 'Projet Entreprise (GREEN POWER CAMEROON)',
-      en: 'Enterprise Project (GREEN POWER CAMEROON)',
-    },
-    summary: {
-      fr: 'Application web interne de gestion des opérations de maintenance (GMAO) adossée à MySQL, tests unitaires/non-régression et scripts Python d’agrégation de reporting.',
-      en: 'Internal web CMMS application tracking maintenance operations on MySQL, reinforced by unit/regression tests and Python ETL reporting automation.',
-    },
-    problemStatement: {
-      fr: 'Structurer la traçabilité des opérations de maintenance et éliminer la compilation manuelle des indicateurs de reporting.',
-      en: 'Standardize operational maintenance tracking and eliminate manual aggregation of weekly/monthly reporting KPIs.',
-    },
-    architectureNotes: {
-      fr: 'Modélisation relationnelle MySQL, logique applicative modulaire couverte par tests unitaires et scripts Python automatisant l’extraction et l’agrégation des données.',
-      en: 'Normalized MySQL database, modular application logic protected by unit/non-regression tests, and Python reporting scripts.',
-    },
-    highlights: {
-      fr: [
-        'Modélisation et implémentation d’une base de données relationnelle MySQL.',
-        'Scripts Python d’extraction, traitement et agrégation automatique de reporting.',
-        'Tests unitaires et de non-régression pour garantir la continuité de service.',
-      ],
-      en: [
-        'Modeled and implemented the relational MySQL database.',
-        'Automated data extraction, transformation, and reporting aggregation in Python.',
-        'Wrote unit and non-regression tests ensuring service reliability.',
-      ],
-    },
-    tags: ['Python', 'MySQL', 'GMAO', 'Tests Unitaires', 'Automatisation'],
-    codeUrl: 'https://github.com/AndelsonTeufack/Gav-App',
-  },
-  {
-    id: 'laoshi-consulting',
-    title: {
-      fr: 'Portail Web Multilingue Laoshi Consulting',
-      en: 'Laoshi Consulting Multilingual Web Platform',
-    },
-    category: 'web',
-    categoryLabel: {
-      fr: 'Web App · Production Live',
-      en: 'Web App · Live Production',
-    },
-    roleContext: {
-      fr: 'Architecture Next.js / NestJS · Déployé en production',
-      en: 'Next.js / NestJS Architecture · Live in Production',
-    },
-    summary: {
-      fr: 'Portail web multilingue conçu pour un cabinet international de conseil en études et immigration en Chine, optimisé pour le SEO et la qualification de prospects.',
-      en: 'Multilingual web portal engineered for an international study-abroad and immigration consultancy in China, built for SEO and lead qualification.',
-    },
-    problemStatement: {
-      fr: 'Offrir une vitrine institutionnelle crédible et multilingue capable de convertir les demandes d’accompagnement international.',
-      en: 'Provide a credible, fast, multilingual portal capturing and qualifying international student and client leads.',
-    },
-    architectureNotes: {
-      fr: 'Architecture Next.js App Router avec TypeScript et Tailwind CSS, couplée à un backend NestJS pour les workflows de contact et prise de rendez-vous.',
-      en: 'Next.js App Router frontend in TypeScript and Tailwind CSS, supported by NestJS backend workflows.',
-    },
-    highlights: {
-      fr: [
-        'Architecture Next.js performante avec rendu optimisé et SEO technique.',
-        'Interface multilingue adaptée à une audience internationale.',
-        'Formulaires de qualification et prise de rendez-vous en ligne.',
-      ],
-      en: [
-        'High-performance Next.js App Router architecture with technical SEO.',
-        'Multilingual experience tailored to international applicants.',
-        'Lead qualification and consultation booking workflows.',
-      ],
-    },
-    tags: ['Next.js', 'React', 'NestJS', 'TypeScript', 'Tailwind CSS'],
-    liveUrl: 'https://laoshi-consulting.vercel.app',
-    codeUrl: 'https://github.com/AndelsonTeufack/laochi_site',
   },
 ]
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
-    id: 'languages-backend',
+    id: 'mobile',
     title: {
-      fr: 'Langages, Back-end & APIs',
-      en: 'Languages, Back-End & APIs',
+      fr: 'Mobile',
+      en: 'Mobile',
     },
-    description: {
-      fr: 'Conception d’APIs REST, temps réel WebSockets, microservices et communication matérielle.',
-      en: 'Designing REST APIs, real-time WebSockets, microservices, and hardware socket communication.',
-    },
-    primary: ['Java', 'Spring Boot', 'Python', 'FastAPI', 'TypeScript', 'APIs REST'],
-    secondary: ['Django', 'Flask', 'Node.js', 'NestJS', 'JavaScript', 'Dart', 'C/C++', 'WebSockets', 'BluetoothSockets'],
+    primary: ['Flutter', 'Dart', 'Clean Architecture'],
+    secondary: ['Hive', 'Firebase', 'Android (Kotlin/Java)', 'BluetoothSockets'],
   },
   {
-    id: 'frontend-mobile',
+    id: 'web',
     title: {
-      fr: 'Développement Front-end & Mobile',
-      en: 'Front-End & Mobile Engineering',
+      fr: 'Web',
+      en: 'Web',
     },
-    description: {
-      fr: 'Applications mobiles offline-first publiées sur Play Store et interfaces web réactives.',
-      en: 'Offline-first mobile apps published on Google Play Store and high-precision web interfaces.',
-    },
-    primary: ['Flutter', 'React.js', 'Next.js', 'Clean Architecture', 'Offline-First', 'Tailwind CSS'],
-    secondary: [
-      'Android (Java, Kotlin)',
-      'HTML5 / CSS3',
-      'Bootstrap',
-      'SEO technique',
-      'Gestion d’état applicative',
-      'Déploiement Google Play Store',
-    ],
+    primary: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+    secondary: ['JavaScript', 'HTML5 / CSS3'],
   },
   {
-    id: 'databases-gis',
+    id: 'backend-api',
     title: {
-      fr: 'Bases de Données, Cache & SIG',
-      en: 'Databases, Caching & GIS',
+      fr: 'Back-end & API',
+      en: 'Back-end & API',
     },
-    description: {
-      fr: 'Modélisation relationnelle/NoSQL, indexation, caching Redis, stockage local et géomatique.',
-      en: 'Relational/NoSQL modeling, query optimization, Redis caching, offline storage, and spatial data.',
-    },
-    primary: ['PostgreSQL', 'MySQL', 'Redis', 'PostGIS', 'Firebase', 'Hive'],
-    secondary: ['MongoDB', 'Modélisation & Indexation', 'Optimisation des requêtes', 'Stratégies de cache', 'KoboCollect / ESRI / GeoJSON'],
+    primary: ['FastAPI', 'Spring Boot', 'Python', 'Java', 'REST'],
+    secondary: ['Node.js / NestJS', 'WebSockets'],
   },
   {
-    id: 'architecture-security',
+    id: 'data-gis',
     title: {
-      fr: 'Architecture Logicielle & Sécurité',
-      en: 'Software Architecture & Security',
+      fr: 'Données & SIG',
+      en: 'Data & GIS',
     },
-    description: {
-      fr: 'Systèmes distribués événementiels, conception modulaire et sécurisation des identités.',
-      en: 'Event-driven distributed systems, modular architecture, and enterprise identity/access security.',
-    },
-    primary: ['Architecture Microservices', 'JWT', 'OAuth2', 'Spring Security', 'RBAC'],
-    secondary: ['Kafka', 'RabbitMQ', 'UML', 'Merise', 'GanttProject', 'Sécurisation des APIs', 'IAM'],
+    primary: ['PostgreSQL / PostGIS', 'MySQL', 'Redis'],
+    secondary: ['MongoDB', 'KoboCollect', 'ESRI', 'GeoJSON'],
   },
   {
-    id: 'cloud-devops-qa',
+    id: 'security-arch',
     title: {
-      fr: 'Cloud, DevOps, Tests & Qualité',
-      en: 'Cloud, DevOps, Testing & QA',
+      fr: 'Sécurité & architecture',
+      en: 'Security & architecture',
     },
-    description: {
-      fr: 'Stockage objet S3/R2, conteneurisation, intégration continue CI/CD et tests automatisés.',
-      en: 'Object storage (S3/R2), containerization, CI/CD pipelines, and automated quality assurance.',
-    },
-    primary: ['Cloudflare (R2)', 'Docker', 'GitHub Actions (CI/CD)', 'JUnit', 'Pytest'],
-    secondary: ['AWS (S3)', 'Minio', 'TDD', 'Revues de code', 'Tests automatisés', 'Documentation technique'],
+    primary: ['JWT', 'RBAC', 'Spring Security'],
+    secondary: ['Microservices', 'UML / Merise', 'JUnit / Pytest'],
   },
   {
-    id: 'ai-it-tools',
+    id: 'devops-ai-tools',
     title: {
-      fr: 'IA, Data, ERP & Environnements IT',
-      en: 'AI, Data, ERP & Enterprise IT',
+      fr: 'DevOps, IA & outils',
+      en: 'DevOps, AI & tools',
     },
-    description: {
-      fr: 'Intégration de modèles LLM, automatisation de workflows, ERP Odoo et écosystème Microsoft.',
-      en: 'LLM API integration, workflow automation, Odoo ERP integration, and Microsoft enterprise tooling.',
-    },
-    primary: ['APIs LLM (Gemini)', 'Odoo ERP', 'n8n', 'Git / GitHub / GitLab'],
-    secondary: ['NumPy', 'Power BI', 'Microsoft 365', 'Microsoft Entra ID', 'Microsoft Intune', 'Jira', 'Notion', 'Windows / Linux (Ubuntu) / macOS'],
+    primary: ['Docker', 'Cloudflare R2', 'Gemini API', 'Git'],
+    secondary: ['GitHub Actions', 'n8n', 'Odoo', 'Jira'],
   },
+]
+
+export const SKILL_NOTIONS: string[] = [
+  'Kafka',
+  'RabbitMQ',
+  'Django',
+  'Flask',
+  'OAuth2',
+  'Power BI',
+  'C/C++',
 ]
 
 export const SOFT_SKILLS: BilingualList = {
   fr: [
-    'Rigueur, précision et sens du détail',
-    'Esprit d’analyse, de synthèse et de résolution de problèmes',
-    'Esprit critique et sens de l’initiative',
-    'Capacité d’adaptation et autonomie',
-    'Sens de l’écoute et aisance relationnelle',
-    'Intégrité, éthique professionnelle et sens des responsabilités',
-    'Aptitude au travail en équipe et sous pression',
-    'Communication professionnelle en anglais',
+    'Encadrement et mentorat de +15 étudiants en génie logiciel (IAI Douala)',
+    'Supervision des stagiaires sur les projets de digitalisation (Kamer Engineering Solution)',
+    'Promotion de stagiaire à responsable de la digitalisation en 6 mois (KES)',
   ],
   en: [
-    'Rigor, precision, and attention to detail',
-    'Analytical, synthesis, and problem-solving mindset',
-    'Critical thinking and sense of initiative',
-    'Rapid adaptability and strong autonomy',
-    'Active listening and interpersonal fluency',
-    'Integrity, professional ethics, and accountability',
-    'Effective teamwork under pressure',
-    'Professional business communication in English',
+    'Mentored and coached 15+ software engineering students (IAI Douala)',
+    'Supervised interns on inspection digitalization projects (Kamer Engineering Solution)',
+    'Promoted from intern to Head of Inspection Digitalization in 6 months (KES)',
   ],
 }
 
@@ -1485,19 +1582,19 @@ export const CERTIFICATIONS: CertificationItem[] = [
 
 export const LANGUAGES: LanguageSkill[] = [
   {
-    name: { fr: 'Yemba', en: 'Yemba' },
-    level: { fr: 'Langue maternelle', en: 'Native' },
-    detail: { fr: 'Maîtrise native', en: 'Native fluency' },
-  },
-  {
     name: { fr: 'Français', en: 'French' },
-    level: { fr: 'Courant', en: 'Fluent' },
-    detail: { fr: 'Langue de travail principale', en: 'Full professional & native proficiency' },
+    level: { fr: 'Natif', en: 'Native' },
+    detail: { fr: 'Langue de travail principale', en: 'Primary working language' },
   },
   {
     name: { fr: 'Anglais', en: 'English' },
     level: { fr: 'Niveau C1', en: 'C1 Level' },
-    detail: { fr: 'Communication professionnelle avancée', en: 'Advanced professional working proficiency' },
+    detail: { fr: 'Communication professionnelle (oral, écrit & technique)', en: 'Professional working proficiency' },
+  },
+  {
+    name: { fr: 'Yemba', en: 'Yemba' },
+    level: { fr: 'Natif', en: 'Native' },
+    detail: { fr: 'Langue nationale (Ouest Cameroun)', en: 'Cameroonian national language' },
   },
 ]
 
