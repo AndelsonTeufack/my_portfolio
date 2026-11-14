@@ -48,7 +48,7 @@ export default function ProjectPreview({
           <div className="col-span-7 space-y-2">
             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-500/15 text-sky-700 dark:text-sky-300 text-[9px] font-mono font-semibold">
               <Globe className="w-2.5 h-2.5" />
-              Next.js · NestJS
+              Next.js · Full-Stack
             </span>
             <p className="text-xs sm:text-sm font-bold font-display text-slate-900 dark:text-white leading-snug">
               {isEn

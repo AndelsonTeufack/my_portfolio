@@ -942,8 +942,8 @@ export const PROJECTS: ProjectItem[] = [
       en: 'Web · Live',
     },
     roleContext: {
-      fr: 'Client réel · Portail Next.js / NestJS en production',
-      en: 'Client delivery · Production Next.js / NestJS portal',
+      fr: 'Client réel · Portail Full-Stack Next.js en production',
+      en: 'Client delivery · Production Full-Stack Next.js portal',
     },
     tier: 'featured',
     previewType: 'laoshi',
@@ -961,8 +961,8 @@ export const PROJECTS: ProjectItem[] = [
       en: 'Multilingual web portal for an international study-abroad and immigration consultancy in China.',
     },
     problemSolution: {
-      fr: 'Structurer l’offre de bourses et qualifier les demandes d’étudiants internationaux via un portail Next.js et une API NestJS.',
-      en: 'Structure scholarship programs and qualify international student inquiries through a Next.js portal and NestJS API.',
+      fr: 'Structurer l’offre de bourses et qualifier les demandes d’étudiants internationaux via une architecture full-stack Next.js (App Router & API Routes).',
+      en: 'Structure scholarship programs and qualify international student inquiries through a full-stack Next.js architecture (App Router & API Routes).',
     },
     resultSummary: {
       fr: 'Déployé en production avec interface multilingue, référencement SEO technique et prise de rendez-vous en ligne.',
@@ -973,22 +973,22 @@ export const PROJECTS: ProjectItem[] = [
       en: 'The consultancy needed a fast, multilingual web platform to present university admission programs in China and capture qualified consultation requests.',
     },
     architectureNotes: {
-      fr: 'Frontend Next.js App Router (TypeScript, Tailwind CSS) optimisé pour le SEO, couplé à un backend NestJS structurant la validation des formulaires de qualification et les notifications de rendez-vous.',
-      en: 'SEO-focused Next.js App Router frontend (TypeScript, Tailwind CSS) paired with a NestJS backend managing lead qualification workflows and booking notifications.',
+      fr: 'Application full-stack conçue entièrement sous Next.js App Router (TypeScript, Tailwind CSS) avec rendu optimisé pour le SEO et routes serveur Next.js gérant la validation des formulaires de qualification et les notifications de rendez-vous.',
+      en: 'End-to-end Next.js App Router application (TypeScript, Tailwind CSS) combining SEO-focused rendering with Next.js server routes handling lead qualification and consultation booking notifications.',
     },
     highlights: {
       fr: [
         'Interface multilingue complète adaptée aux étudiants francophones, anglophones et internationaux.',
-        'Parcours de qualification des dossiers (bourses, filières, niveau d’étude) connecté au backend NestJS.',
+        'Parcours de qualification des dossiers (bourses, filières, niveau d’étude) et prise de rendez-vous gérés via les routes serveur Next.js.',
         'En ligne et accessible publiquement en production.',
       ],
       en: [
         'Multilingual navigation tailored for French-speaking, English-speaking, and international applicants.',
-        'Structured applicant qualification and consultation scheduling powered by NestJS.',
+        'Structured applicant qualification and consultation scheduling powered by Next.js server routes.',
         'Deployed and publicly live in production.',
       ],
     },
-    tags: ['Next.js', 'NestJS', 'TypeScript', 'Tailwind CSS'],
+    tags: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
     hasCaseStudy: true,
     liveUrl: 'https://laoshi-consulting.vercel.app',
   },
