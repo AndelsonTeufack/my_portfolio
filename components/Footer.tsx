@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { ArrowUp, Clock, Mail } from 'lucide-react'
 import { FaGithub, FaLinkedin } from 'react-icons/fa'
+import BrandLogo from '@/components/ui/BrandLogo'
 import { PORTFOLIO_PROFILE, type Language } from '@/lib/portfolio-data'
 import { getCurrentYear } from '@/lib/utils'
 
@@ -80,9 +81,12 @@ export default function Footer({ language }: FooterProps) {
         {/* Top Editorial Row */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2 max-w-md">
-            <span className="inline-block font-display font-bold text-base text-foreground">
-              {PORTFOLIO_PROFILE.fullName}
-            </span>
+            <div className="flex items-center gap-2.5">
+              <BrandLogo className="w-8 h-8 shrink-0" />
+              <span className="font-display font-bold text-base text-foreground">
+                {PORTFOLIO_PROFILE.fullName}
+              </span>
+            </div>
             <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
               {t.tagline}
             </p>

@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Moon, Sun } from 'lucide-react'
+import BrandLogo from '@/components/ui/BrandLogo'
 import { PORTFOLIO_PROFILE, type Language } from '@/lib/portfolio-data'
 
 interface HeaderProps {
@@ -99,11 +100,12 @@ export default function Header({
           {/* Unified Identity Brand */}
           <a
             href="#"
-            className="flex items-center shrink-0 font-display font-bold text-sm sm:text-base tracking-tight text-slate-900 dark:text-white hover:text-sky-700 dark:hover:text-sky-400 transition-colors"
+            className="flex items-center gap-2.5 shrink-0 font-display font-bold text-sm sm:text-base tracking-tight text-slate-900 dark:text-white hover:text-sky-700 dark:hover:text-sky-400 transition-colors"
             aria-label={`${PORTFOLIO_PROFILE.fullName} — ${
               language === 'en' ? 'Back to top' : 'Retour en haut'
             }`}
           >
+            <BrandLogo className="w-8 h-8 shrink-0" />
             <span>{PORTFOLIO_PROFILE.fullName}</span>
           </a>
 
