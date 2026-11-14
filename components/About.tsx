@@ -11,11 +11,13 @@ import {
   Globe2,
 } from 'lucide-react'
 import {
+  PORTFOLIO_PROFILE,
   ENGINEERING_PILLARS,
   EDUCATION,
   CERTIFICATIONS,
   type Language,
 } from '@/lib/portfolio-data'
+import { calculateAge } from '@/lib/utils'
 
 interface AboutProps {
   language: Language
@@ -24,6 +26,7 @@ interface AboutProps {
 const pillarIcons = [Smartphone, ShieldCheck, Layers, Globe2]
 
 export default function About({ language }: AboutProps) {
+  const age = calculateAge(PORTFOLIO_PROFILE.birthDate)
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-80px' })
 
@@ -31,7 +34,7 @@ export default function About({ language }: AboutProps) {
     fr: {
       eyebrow: '01 - À propos',
       title: 'De l’inspection terrain à la plateforme web',
-      bio: 'Développeur Full-Stack chez Kamer Engineering Solution, je pilote la digitalisation des inspections électriques et techniques : applications mobiles utilisables sans réseau, génération automatique de rapports, plateformes web collaboratives. Avant cela : fintech (Credix.cam), maintenance (Green Power) et enseignement du développement à l’IAI.',
+      bio: `Développeur Full-Stack (${age} ans) chez Kamer Engineering Solution, je pilote la digitalisation des inspections électriques et techniques : applications mobiles utilisables sans réseau, génération automatique de rapports, plateformes web collaboratives. Avant cela : fintech (Credix.cam), maintenance (Green Power) et enseignement du développement à l’IAI.`,
       metrics: [
         { value: '3 ans', label: 'de pratique en entreprise' },
         { value: '+15', label: 'étudiants mentorés' },
@@ -45,7 +48,7 @@ export default function About({ language }: AboutProps) {
     en: {
       eyebrow: '01 - About',
       title: 'From field inspection to web platform',
-      bio: 'Full-Stack Developer at Kamer Engineering Solution, I lead the digitalization of electrical and technical inspections: offline-capable mobile apps, automated report generation, and collaborative web platforms. Previously: fintech (Credix.cam), maintenance systems (Green Power), and software development teaching at IAI.',
+      bio: `Full-Stack Developer (${age} years old) at Kamer Engineering Solution, I lead the digitalization of electrical and technical inspections: offline-capable mobile apps, automated report generation, and collaborative web platforms. Previously: fintech (Credix.cam), maintenance systems (Green Power), and software development teaching at IAI.`,
       metrics: [
         { value: '3 years', label: 'of industry practice' },
         { value: '+15', label: 'students mentored' },

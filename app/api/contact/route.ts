@@ -27,16 +27,23 @@ function isRateLimited(ip: string): boolean {
 
   const existing = rateLimitStore.get(ip);
   if (!existing || now > existing.resetAt) {
-    rateLimitStore.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    if (existing) {
+      rateLimitStore.delete(ip);
+    }
     return false;
   }
 
-  if (existing.count >= RATE_LIMIT_MAX_REQUESTS) {
-    return true;
-  }
+  return existing.count >= RATE_LIMIT_MAX_REQUESTS;
+}
 
+function recordRateLimitHit(ip: string): void {
+  const now = Date.now();
+  const existing = rateLimitStore.get(ip);
+  if (!existing || now > existing.resetAt) {
+    rateLimitStore.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return;
+  }
   existing.count += 1;
-  return false;
 }
 
 export async function POST(request: Request) {
@@ -57,14 +64,14 @@ export async function POST(request: Request) {
         ? body.inquiryType.trim().slice(0, 60)
         : 'Général';
     const rawMessage = typeof body?.message === 'string' ? body.message.trim() : '';
-    const honeypot = typeof body?.website === 'string' ? body.website.trim() : '';
+    const honeypot = typeof body?._gotcha_hp === 'string' ? body._gotcha_hp.trim() : '';
 
-    // Honeypot anti-spam : réponse silencieuse sans envoi d'email
+    // Honeypot anti-spam : rejet explicite (jamais de faux positif 200)
     if (honeypot.length > 0) {
-      return NextResponse.json({
-        success: true,
-        message: 'Message traité.',
-      });
+      return NextResponse.json(
+        { error: 'Requête bloquée par le filtre anti-spam.' },
+        { status: 400 }
+      );
     }
 
     // Validation stricte des champs obligatoires
@@ -81,12 +88,16 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    const emailUser = process.env.EMAIL_USER?.trim();
+    const emailPass = process.env.EMAIL_PASS?.replace(/\s+/g, '');
+
+    if (!emailUser || !emailPass) {
       console.error('Configuration SMTP manquante (EMAIL_USER / EMAIL_PASS).');
-      return NextResponse.json(
-        { error: 'Le service d’envoi est temporairement indisponible.' },
-        { status: 503 }
-      );
+      const errorMessage =
+        process.env.NODE_ENV !== 'production'
+          ? 'Configuration SMTP manquante : ajoutez EMAIL_USER et EMAIL_PASS (mot de passe d’application Gmail) dans votre fichier .env.local puis redémarrez le serveur.'
+          : 'Le service d’envoi est temporairement indisponible.';
+      return NextResponse.json({ error: errorMessage }, { status: 503 });
     }
 
     // Configuration du transporteur SMTP
@@ -96,8 +107,8 @@ export async function POST(request: Request) {
       port: 587,
       secure: false,
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: emailUser,
+        pass: emailPass,
       },
     });
 
@@ -381,7 +392,7 @@ export async function POST(request: Request) {
     `;
 
     const mailOptions = {
-      from: `"Portfolio Andelson TEUFACK SONTSA" <${process.env.EMAIL_USER}>`,
+      from: `"Portfolio Andelson TEUFACK SONTSA" <${emailUser}>`,
       to: 'teufackandelson123@gmail.com',
       replyTo: rawEmail,
       subject: `📬 [PORTFOLIO · ${cleanSubjectType}] Nouveau message de ${cleanSubjectName}`,
@@ -389,18 +400,40 @@ export async function POST(request: Request) {
       html: htmlTemplate,
     };
 
-    await transporter.sendMail(mailOptions);
+    const info = await transporter.sendMail(mailOptions);
+    if (!info || !Array.isArray(info.accepted) || info.accepted.length === 0) {
+      throw new Error('SMTP_RECIPIENT_REJECTED');
+    }
+
+    recordRateLimitHit(clientIp);
 
     return NextResponse.json({
       success: true,
+      messageId: info.messageId,
       message: 'Email envoyé avec succès !',
     });
   } catch (error) {
     console.error('Erreur lors de l\'envoi:', error);
-    return NextResponse.json(
-      { error: 'Erreur lors de l\'envoi du message. Veuillez réessayer plus tard.' },
-      { status: 500 }
-    );
+    const err = error as { code?: string; responseCode?: number; message?: string };
+    let errorMessage = 'Erreur lors de l\'envoi du message. Veuillez réessayer plus tard.';
+
+    if (process.env.NODE_ENV !== 'production') {
+      if (err?.code === 'EAUTH' || err?.responseCode === 535) {
+        errorMessage =
+          'Authentification Gmail refusée : vérifiez EMAIL_USER et utilisez un mot de passe d’application Gmail (16 caractères) dans .env.local.';
+      } else if (
+        err?.code === 'ESOCKET' ||
+        err?.code === 'ETIMEDOUT' ||
+        err?.code === 'ECONNREFUSED'
+      ) {
+        errorMessage =
+          'Impossible de joindre le serveur SMTP Gmail (smtp.gmail.com:587). Vérifiez votre connexion réseau ou pare-feu.';
+      } else if (err?.message === 'SMTP_RECIPIENT_REJECTED') {
+        errorMessage = 'Le serveur SMTP a rejeté l’adresse destinataire.';
+      }
+    }
+
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
 

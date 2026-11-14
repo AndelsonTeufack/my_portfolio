@@ -36,13 +36,13 @@ export default function Contact({ language }: ContactProps) {
     email: string
     inquiryType: InquiryKey
     message: string
-    website: string
+    _gotcha_hp: string
   }>({
     name: '',
     email: '',
     inquiryType: 'recruitment',
     message: '',
-    website: '',
+    _gotcha_hp: '',
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSent, setIsSent] = useState(false)
@@ -194,13 +194,13 @@ export default function Contact({ language }: ContactProps) {
           email: trimmedEmail,
           inquiryType: t.inquiryOptions[formData.inquiryType],
           message: trimmedMessage,
-          website: formData.website,
+          _gotcha_hp: formData._gotcha_hp,
         }),
       })
 
       const data = await response.json().catch(() => null)
 
-      if (!response.ok) {
+      if (!response.ok || data?.success !== true || !data?.messageId) {
         const message = data?.error || t.errorToast
         setFormError(message)
         toast.error(message)
@@ -213,7 +213,7 @@ export default function Contact({ language }: ContactProps) {
         email: '',
         inquiryType: 'recruitment',
         message: '',
-        website: '',
+        _gotcha_hp: '',
       })
       toast.success(t.successToast)
     } catch {
@@ -455,16 +455,19 @@ export default function Contact({ language }: ContactProps) {
                   {/* Anti-spam honeypot field */}
                   <input
                     type="text"
-                    name="website"
-                    value={formData.website}
+                    name="_gotcha_hp"
+                    value={formData._gotcha_hp}
                     onChange={(e) =>
                       setFormData((prev) => ({
                         ...prev,
-                        website: e.target.value,
+                        _gotcha_hp: e.target.value,
                       }))
                     }
                     tabIndex={-1}
-                    autoComplete="off"
+                    autoComplete="new-password"
+                    data-lpignore="true"
+                    data-1p-ignore="true"
+                    data-form-type="other"
                     aria-hidden="true"
                     className="sr-only"
                   />

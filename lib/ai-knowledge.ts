@@ -8,11 +8,14 @@ import {
   LANGUAGES,
   SOFT_SKILLS,
 } from '@/lib/portfolio-data'
+import { calculateAge } from '@/lib/utils'
 
 export const ANDELSON_KNOWLEDGE = {
   profile: {
     fullName: PORTFOLIO_PROFILE.fullName,
     shortName: PORTFOLIO_PROFILE.displayName,
+    birthDate: PORTFOLIO_PROFILE.birthDate,
+    age: calculateAge(PORTFOLIO_PROFILE.birthDate),
     title: PORTFOLIO_PROFILE.title,
     currentRole: PORTFOLIO_PROFILE.currentRoleHeadline,
     currentCompany: PORTFOLIO_PROFILE.currentCompany,

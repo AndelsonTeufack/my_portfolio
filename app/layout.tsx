@@ -140,7 +140,7 @@ const jsonLdGraph = {
         'Andelson TEUFACK SONTSA est Développeur Full-Stack & Mobile basé à Douala, Cameroun. Il conçoit des applications mobiles offline-first et des plateformes web pour le terrain (inspections, données géospatiales, ERP) avec Flutter, Next.js, FastAPI, Spring Boot et PostgreSQL/PostGIS.',
       email: 'mailto:teufackandelson123@gmail.com',
       telephone: '+237690819035',
-      birthDate: '2003-12-14',
+      birthDate: '2002-12-14',
       gender: 'Male',
       nationality: {
         '@type': 'Country',

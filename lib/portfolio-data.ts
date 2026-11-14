@@ -102,7 +102,7 @@ export interface LanguageSkill {
 export const PORTFOLIO_PROFILE = {
   fullName: 'Andelson TEUFACK SONTSA',
   displayName: 'Andelson TEUFACK SONTSA',
-  birthDate: '2003-12-14',
+  birthDate: '2002-12-14',
   title: {
     fr: 'Développeur Full-Stack & Mobile',
     en: 'Full-Stack & Mobile Developer',
