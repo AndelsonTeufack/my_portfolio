@@ -6,8 +6,8 @@ import './globals.css'
 
 const SITE_URL = 'https://andelson-teufack.dev'
 const CANONICAL_URL = 'https://andelson-teufack.dev'
-const FULL_NAME = 'TEUFACK SONTSA Andelson'
-const JOB_TITLE = 'Ingénieur des Travaux Informatiques · Développeur Full-Stack & Mobile'
+const FULL_NAME = 'Andelson TEUFACK SONTSA'
+const JOB_TITLE = 'Développeur Full-Stack & Mobile'
 const OG_IMAGE = `${SITE_URL}/opengraph-image`
 
 export const metadata: Metadata = {
@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     template: `%s | ${FULL_NAME}`,
   },
   description:
-    'TEUFACK SONTSA Andelson (Andelson Teufack) — Ingénieur des Travaux Informatiques & Développeur Full-Stack/Mobile basé à Douala, Cameroun. '
-    + 'Spécialiste Flutter Offline-First, Spring Boot, Python (FastAPI, Django), React/Next.js, Odoo ERP & SIG PostGIS.',
+    'Andelson TEUFACK SONTSA — Développeur Full-Stack & Mobile à Douala, Cameroun. '
+    + 'Applications mobiles offline-first et plateformes web pour le terrain : inspections, données géospatiales et ERP (Flutter, Next.js, FastAPI, PostgreSQL/PostGIS).',
   keywords: [
     'TEUFACK SONTSA Andelson',
     'Teufack Sontsa Andelson',
@@ -51,8 +51,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${FULL_NAME} | ${JOB_TITLE} — Douala`,
     description:
-      'TEUFACK SONTSA Andelson — Ingénieur des Travaux Informatiques & Développeur Full-Stack/Mobile à Douala. '
-      + 'Flutter Offline-First · Spring Boot · Python (FastAPI/Django) · React/Next.js · Odoo ERP · SIG.',
+      'Andelson TEUFACK SONTSA — Développeur Full-Stack & Mobile à Douala. '
+      + 'Flutter · Next.js · FastAPI · PostgreSQL/PostGIS · Odoo ERP · SIG.',
     url: CANONICAL_URL,
     siteName: `${FULL_NAME} Portfolio`,
     locale: 'fr_CM',
@@ -64,16 +64,16 @@ export const metadata: Metadata = {
         secureUrl: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: `${FULL_NAME} — Ingénieur des Travaux Informatiques & Développeur Full-Stack`,
+        alt: `${FULL_NAME} — ${JOB_TITLE}`,
         type: 'image/png',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${FULL_NAME} | Ingénieur Logiciel & Développeur Full-Stack`,
+    title: `${FULL_NAME} | ${JOB_TITLE}`,
     description:
-      'TEUFACK SONTSA Andelson — Douala · Flutter Offline-First · Spring Boot · FastAPI · React/Next.js · Odoo ERP',
+      'Andelson TEUFACK SONTSA — Douala · Flutter · Next.js · FastAPI · PostgreSQL/PostGIS · Odoo ERP',
     images: [{ url: OG_IMAGE, alt: `${FULL_NAME} Portfolio` }],
   },
   robots: {
@@ -137,7 +137,7 @@ const jsonLdGraph = {
       },
       jobTitle: JOB_TITLE,
       description:
-        'TEUFACK SONTSA Andelson est Ingénieur des Travaux Informatiques et Développeur Full-Stack & Mobile basé à Douala, Cameroun. Spécialiste Flutter Offline-First, Gemini LLM, BluetoothSockets, Spring Boot, Python (FastAPI/Django), React/Next.js et Odoo ERP.',
+        'Andelson TEUFACK SONTSA est Développeur Full-Stack & Mobile basé à Douala, Cameroun. Il conçoit des applications mobiles offline-first et des plateformes web pour le terrain (inspections, données géospatiales, ERP) avec Flutter, Next.js, FastAPI, Spring Boot et PostgreSQL/PostGIS.',
       email: 'mailto:teufackandelson123@gmail.com',
       telephone: '+237690819035',
       birthDate: '2003-12-14',
@@ -239,18 +239,18 @@ const jsonLdGraph = {
       mainEntity: [
         {
           '@type': 'Question',
-          name: 'Qui est TEUFACK SONTSA Andelson ?',
+          name: 'Qui est Andelson TEUFACK SONTSA ?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'TEUFACK SONTSA Andelson (Andelson Teufack) est Ingénieur des Travaux Informatiques et Développeur Full-Stack & Mobile basé à Douala, Cameroun. Responsable de la digitalisation des inspections chez Kamer Engineering Solution, diplômé d’une Licence en Génie Logiciel à l’IAI-Cameroun (2024), étudiant en Master Professionnel à l’ENSPD et certifié Google IT Support.',
+            text: 'Andelson TEUFACK SONTSA est Développeur Full-Stack & Mobile basé à Douala, Cameroun. Actuellement chez Kamer Engineering Solution, il est diplômé d’une Licence en génie logiciel à l’IAI-Cameroun (2024), poursuit un Master professionnel en génie logiciel à l’ENSPD et détient la certification Google IT Support.',
           },
         },
         {
           '@type': 'Question',
-          name: 'Andelson Teufack a-t-il une expérience d’enseignement ou de mentorat ?',
+          name: 'Andelson TEUFACK SONTSA a-t-il une expérience d’enseignement ou de mentorat ?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Oui, TEUFACK SONTSA Andelson a été Formateur & Mentor en Développement Web & Mobile à l’IAI (Centre de Douala) de janvier à mai 2025, où il a dispensé des formations React/JS et Flutter et accompagné plus de 15 étudiants sur des projets applicatifs concrets.',
+            text: 'Oui, Andelson TEUFACK SONTSA a été Formateur & Mentor en développement web et mobile à l’IAI (Centre de Douala) de janvier à mai 2025, où il a encadré et mentoré plus de 15 étudiants sur React/JS et Flutter.',
           },
         },
         {

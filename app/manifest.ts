@@ -2,10 +2,10 @@ import { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'TEUFACK SONTSA Andelson — Ingénieur des Travaux Informatiques & Développeur Full-Stack',
-    short_name: 'Andelson Teufack',
+    name: 'Andelson TEUFACK SONTSA — Développeur Full-Stack & Mobile',
+    short_name: 'Andelson TEUFACK SONTSA',
     description:
-      'Portfolio professionnel de TEUFACK SONTSA Andelson, Ingénieur des Travaux Informatiques et Développeur Full-Stack & Mobile à Douala, Cameroun. Spécialiste Flutter Offline-First, Spring Boot, Python (FastAPI/Django), React/Next.js et Odoo ERP.',
+      'Portfolio professionnel de Andelson TEUFACK SONTSA, Développeur Full-Stack & Mobile à Douala, Cameroun. Applications mobiles offline-first, plateformes web, données géospatiales et ERP.',
     start_url: '/',
     display: 'standalone',
     background_color: '#090a0f',

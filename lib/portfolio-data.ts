@@ -82,25 +82,25 @@ export interface LanguageSkill {
 }
 
 export const PORTFOLIO_PROFILE = {
-  fullName: 'TEUFACK SONTSA Andelson',
-  displayName: 'Andelson Teufack',
+  fullName: 'Andelson TEUFACK SONTSA',
+  displayName: 'Andelson TEUFACK SONTSA',
   birthDate: '2003-12-14',
   title: {
-    fr: 'Ingénieur des Travaux Informatiques · Développeur Full-Stack & Mobile',
-    en: 'Software & IT Engineer · Full-Stack & Mobile Developer',
+    fr: 'Développeur Full-Stack & Mobile',
+    en: 'Full-Stack & Mobile Developer',
   },
   currentRoleHeadline: {
-    fr: 'Développeur Full-Stack & Responsable de la digitalisation des inspections',
-    en: 'Full-Stack Developer & Head of Inspection Digitalization',
+    fr: 'Développeur Full-Stack & Mobile',
+    en: 'Full-Stack & Mobile Developer',
   },
   currentCompany: 'Kamer Engineering Solution',
   availabilityBadge: {
-    fr: 'Ouvert aux opportunités stratégiques & missions d’architecture',
-    en: 'Open to strategic engineering roles & consulting',
+    fr: 'Douala, Cameroun',
+    en: 'Douala, Cameroon',
   },
   heroDescription: {
-    fr: 'Je conçois et déploie des systèmes logiciels critiques : applications mobiles offline-first assistées par IA, APIs backend sécurisées, plateformes collaboratives web, intégrations ERP/SIG et communication matérielle Bluetooth.',
-    en: 'I architect and ship mission-critical software systems: AI-assisted offline-first mobile apps, secure backend APIs, collaborative web platforms, ERP/GIS integrations, and Bluetooth hardware telemetry.',
+    fr: 'Je conçois des applications mobiles offline-first et des plateformes web pour le terrain : inspections, données géospatiales, ERP. Actuellement chez Kamer Engineering Solution, Douala.',
+    en: 'I build offline-first mobile applications and web platforms for field operations: inspections, geospatial data, and ERP. Currently at Kamer Engineering Solution, Douala.',
   },
   location: {
     fr: 'Douala, Cameroun (GMT+1)',
@@ -120,55 +120,50 @@ export const ENGINEERING_PILLARS: Array<{
   id: string
   title: BilingualText
   description: BilingualText
-  stack: string[]
 }> = [
   {
     id: 'mobile-offline-ai',
     title: {
-      fr: 'Mobilité Offline-First, IA & IoT',
-      en: 'Offline-First Mobile, AI & IoT',
+      fr: 'Mobile offline-first',
+      en: 'Offline-first mobile',
     },
     description: {
-      fr: 'Conception d’applications Flutter/Android résilientes hors connexion, assistées par APIs LLM (Gemini), communication BluetoothSockets avec appareils de mesure et génération automatisée de rapports normés (PDF, Word, Excel — JSA, Q18, Q19).',
-      en: 'Engineering resilient offline-first Flutter/Android apps powered by LLM APIs (Gemini), BluetoothSockets telemetry with pressure-testing hardware, and automated compliance reports (PDF, Word, Excel — JSA, Q18, Q19).',
+      fr: 'Flutter, synchronisation, rapports PDF/Word/Excel, assistance IA',
+      en: 'Flutter, offline sync, PDF/Word/Excel reports, AI assistance',
     },
-    stack: ['Flutter', 'Offline-First', 'Gemini LLM', 'BluetoothSockets', 'Hive'],
   },
   {
     id: 'backend-security',
     title: {
-      fr: 'Architectures Backend, APIs & Sécurité',
-      en: 'Backend Engineering, APIs & Security',
+      fr: 'Backend & API sécurisées',
+      en: 'Backend & secure APIs',
     },
     description: {
-      fr: 'Développement d’APIs REST, WebSockets et microservices avec Spring Boot, Python (FastAPI/Django/Flask) et NestJS, orchestrés via Redis, Kafka/RabbitMQ et protégés par JWT, OAuth2, Spring Security et RBAC.',
-      en: 'Building REST APIs, WebSockets, and microservices with Spring Boot, Python (FastAPI/Django/Flask), and NestJS, backed by Redis, Kafka/RabbitMQ, and hardened with JWT, OAuth2, Spring Security, and RBAC.',
+      fr: 'FastAPI, Spring Boot, JWT, RBAC',
+      en: 'FastAPI, Spring Boot, JWT, RBAC',
     },
-    stack: ['Spring Boot', 'FastAPI', 'PostgreSQL', 'Redis', 'JWT / RBAC'],
   },
   {
     id: 'web-erp-ota',
     title: {
-      fr: 'Plateformes Collaboratives, ERP & Cloud',
-      en: 'Collaborative Platforms, ERP & Cloud',
+      fr: 'Plateformes web & ERP',
+      en: 'Web platforms & ERP',
     },
     description: {
-      fr: 'Interconnexion web React/Next.js avec écosystèmes mobiles multi-inspecteurs, accès équipements par QR Code, mises à jour OTA via Cloudflare R2, ERP interne connecté à Odoo et automatisation de flux n8n.',
-      en: 'React/Next.js collaborative platforms connected to mobile field apps, QR Code equipment tracking, OTA updates via Cloudflare R2, Odoo-integrated internal ERP, and n8n workflow automation.',
+      fr: 'Next.js, Odoo, accès QR Code, mises à jour OTA',
+      en: 'Next.js, Odoo, QR Code access, OTA updates',
     },
-    stack: ['React / Next.js', 'Odoo ERP', 'Cloudflare R2', 'n8n', 'Docker'],
   },
   {
     id: 'gis-mapping',
     title: {
-      fr: 'Systèmes d’Information Géographique (SIG)',
-      en: 'Geographic Information Systems (GIS)',
+      fr: 'SIG & données géospatiales',
+      en: 'GIS & geospatial data',
     },
     description: {
-      fr: 'Exploitation de données spatiales PostGIS, personnalisation avancée de KoboCollect sur fonds cartographiques ESRI, traçage automatique de réseaux électriques et exportation GeoJSON pour l’audit d’actifs.',
-      en: 'Spatial data engineering with PostGIS, advanced KoboCollect customization over ESRI maps, automated power-grid tracing, and GeoJSON pipelines for infrastructure asset audits.',
+      fr: 'PostGIS, KoboCollect, ESRI, GeoJSON',
+      en: 'PostGIS, KoboCollect, ESRI, GeoJSON',
     },
-    stack: ['PostGIS', 'KoboCollect', 'ESRI', 'GeoJSON', 'QR Code'],
   },
 ]
 
@@ -1493,26 +1488,26 @@ export const EDUCATION: EducationItem[] = [
   {
     id: 'enspd-master',
     degree: {
-      fr: 'Master Professionnel en Génie Logiciel',
+      fr: 'Master professionnel en génie logiciel',
       en: 'Professional Master’s Degree in Software Engineering',
     },
-    institution: 'ENSPD (École Nationale Supérieure Polytechnique de Douala)',
+    institution: 'ENSPD (École nationale supérieure polytechnique de Douala)',
     period: {
       fr: 'En cours',
       en: 'In Progress',
     },
     status: {
-      fr: 'Cycle Master',
+      fr: 'Cycle master',
       en: 'Graduate Program',
     },
   },
   {
     id: 'iai-licence',
     degree: {
-      fr: 'Licence en Génie Logiciel',
+      fr: 'Licence en génie logiciel',
       en: 'Bachelor’s Degree in Software Engineering',
     },
-    institution: 'Institut Africain d’Informatique (IAI-Cameroun)',
+    institution: 'Institut africain d’informatique (IAI-Cameroun)',
     period: {
       fr: '2024',
       en: '2024',

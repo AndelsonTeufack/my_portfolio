@@ -40,12 +40,12 @@ export default function Footer({ language }: FooterProps) {
   const copy = {
     fr: {
       tagline:
-        'Ingénieur des Travaux Informatiques · Architecture Logicielle, Full-Stack & Mobile',
+        'Développeur Full-Stack & Mobile · Applications terrain, Web & ERP · Douala, Cameroun',
       backToTop: 'Haut de page',
       rights: 'Tous droits réservés.',
       localTimeLabel: 'Douala (GMT+1)',
       nav: [
-        { href: '#about', label: 'Profil' },
+        { href: '#about', label: 'À propos' },
         { href: '#experience', label: 'Expériences' },
         { href: '#projects', label: 'Projets' },
         { href: '#skills', label: 'Compétences' },
@@ -54,12 +54,12 @@ export default function Footer({ language }: FooterProps) {
     },
     en: {
       tagline:
-        'Software & IT Engineer · Software Architecture, Full-Stack & Mobile Systems',
+        'Full-Stack & Mobile Developer · Field Apps, Web Platforms & ERP · Douala, Cameroon',
       backToTop: 'Back to top',
       rights: 'All rights reserved.',
       localTimeLabel: 'Douala (GMT+1)',
       nav: [
-        { href: '#about', label: 'Profile' },
+        { href: '#about', label: 'About' },
         { href: '#experience', label: 'Experience' },
         { href: '#projects', label: 'Projects' },
         { href: '#skills', label: 'Skills' },
@@ -80,14 +80,9 @@ export default function Footer({ language }: FooterProps) {
         {/* Top Editorial Row */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2 max-w-md">
-            <div className="flex items-center gap-3">
-              <span className="w-8 h-8 rounded-lg bg-sky-600 dark:bg-sky-400 text-white dark:text-slate-950 font-mono font-bold text-xs flex items-center justify-center">
-                AT
-              </span>
-              <span className="font-display font-bold text-base text-foreground">
-                {PORTFOLIO_PROFILE.fullName}
-              </span>
-            </div>
+            <span className="inline-block font-display font-bold text-base text-foreground">
+              {PORTFOLIO_PROFILE.fullName}
+            </span>
             <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
               {t.tagline}
             </p>

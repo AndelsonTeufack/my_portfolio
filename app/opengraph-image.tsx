@@ -2,8 +2,7 @@ import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 
-export const alt =
-  'TEUFACK SONTSA Andelson — Ingénieur des Travaux Informatiques · Développeur Full-Stack & Mobile'
+export const alt = 'Andelson TEUFACK SONTSA — Développeur Full-Stack & Mobile'
 export const size = {
   width: 1200,
   height: 630,
@@ -37,28 +36,11 @@ export default async function Image() {
             width: '100%',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <div
-              style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '10px',
-                backgroundColor: '#11131a',
-                border: '1px solid rgba(56, 189, 248, 0.4)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#38bdf8',
-                fontSize: '20px',
-                fontWeight: 800,
-              }}
-            >
-              AT
-            </div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <span
               style={{
                 fontSize: '18px',
-                color: '#9ca3af',
+                color: '#cbd5e1',
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
                 fontWeight: 600,
@@ -96,7 +78,7 @@ export default async function Image() {
               fontWeight: 700,
             }}
           >
-            INGÉNIEUR DES TRAVAUX INFORMATIQUES
+            DÉVELOPPEUR FULL-STACK & MOBILE
           </div>
           <div
             style={{
@@ -107,18 +89,18 @@ export default async function Image() {
               lineHeight: 1.05,
             }}
           >
-            TEUFACK SONTSA Andelson
+            Andelson TEUFACK SONTSA
           </div>
           <div
             style={{
-              fontSize: '28px',
+              fontSize: '26px',
               fontWeight: 500,
               color: '#cbd5e1',
               maxWidth: '920px',
               lineHeight: 1.35,
             }}
           >
-            Développeur Full-Stack & Mobile · Responsable de la digitalisation des inspections
+            Applications mobiles offline-first et plateformes web pour le terrain · Kamer Engineering Solution
           </div>
         </div>
 
@@ -134,12 +116,10 @@ export default async function Image() {
         >
           <div style={{ display: 'flex', gap: '12px' }}>
             {[
-              'Spring Boot',
-              'Flutter Offline-First',
-              'React / Next.js',
-              'Python',
-              'Odoo ERP & SIG',
-              'Clean Architecture',
+              'Flutter',
+              'Next.js',
+              'FastAPI',
+              'PostgreSQL / PostGIS',
             ].map((item) => (
               <div
                 key={item}

@@ -3,7 +3,7 @@
 import { motion, Variants } from 'framer-motion'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Download, MapPin, Briefcase, GraduationCap } from 'lucide-react'
+import { ArrowRight, Download, Mail, MapPin } from 'lucide-react'
 import { PORTFOLIO_PROFILE, type Language } from '@/lib/portfolio-data'
 
 interface HeroProps {
@@ -12,30 +12,22 @@ interface HeroProps {
 
 const content = {
   en: {
-    eyebrow: 'SOFTWARE & IT ENGINEER',
-    ctaProjects: 'Explore Case Studies',
-    ctaExperiences: 'Experience Track',
+    ctaProjects: 'View my projects',
+    ctaContact: 'Contact me',
     downloadCV: 'Download CV',
-    stackLabel: 'Production Stack',
-    proofCompany: 'Kamer Engineering Solution',
-    proofCompanyRole: 'Head of Inspection Digitalization',
-    proofEducation: 'Master in Software Engineering (ENSPD)',
-    locationShort: 'Douala, Cameroon',
-    roleTag: 'Full-Stack & Mobile',
+    locationBadge: 'Douala',
+    imageAlt: 'Andelson TEUFACK SONTSA — Full-Stack & Mobile Developer',
   },
   fr: {
-    eyebrow: 'INGÉNIEUR DES TRAVAUX INFORMATIQUES',
-    ctaProjects: 'Découvrir mes réalisations',
-    ctaExperiences: 'Parcours professionnel',
+    ctaProjects: 'Voir mes projets',
+    ctaContact: 'Me contacter',
     downloadCV: 'Télécharger le CV',
-    stackLabel: 'Technologies de production',
-    proofCompany: 'Kamer Engineering Solution',
-    proofCompanyRole: 'Responsable de la digitalisation des inspections',
-    proofEducation: 'Master Pro Génie Logiciel (ENSPD)',
-    locationShort: 'Douala, Cameroun',
-    roleTag: 'Full-Stack & Mobile',
+    locationBadge: 'Douala',
+    imageAlt: 'Andelson TEUFACK SONTSA — Développeur Full-Stack & Mobile',
   },
 }
+
+const HERO_STACK = ['Flutter', 'Next.js', 'FastAPI', 'PostgreSQL/PostGIS']
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -71,7 +63,7 @@ export default function Hero({ language }: HeroProps) {
   }
 
   return (
-    <section className="relative pt-32 pb-20 sm:pt-36 sm:pb-24 px-4 sm:px-6 lg:px-8 border-b border-slate-200/80 dark:border-white/6">
+    <section className="relative pt-32 pb-20 sm:pt-36 sm:pb-24 px-4 sm:px-6 lg:px-8 border-b border-slate-200 dark:border-white/10">
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-10 items-center">
           {/* Editorial Main Column (7 cols) */}
@@ -81,119 +73,65 @@ export default function Hero({ language }: HeroProps) {
             variants={containerVariants}
             className="lg:col-span-7 space-y-6 text-left"
           >
-            {/* Availability Status */}
-            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-xs font-mono font-medium text-emerald-700 dark:text-emerald-400">
-                <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                {PORTFOLIO_PROFILE.availabilityBadge[language]}
-              </span>
-              <span className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                {t.eyebrow}
-              </span>
-            </motion.div>
-
-            {/* Name & Title */}
-            <motion.div variants={itemVariants} className="space-y-3">
+            {/* Name & Primary Role */}
+            <motion.div variants={itemVariants} className="space-y-2.5">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight font-display text-slate-900 dark:text-white leading-[1.08]">
                 {PORTFOLIO_PROFILE.fullName}
               </h1>
-              <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold text-sky-700 dark:text-sky-400 leading-snug">
+              <h2 className="text-xl sm:text-2xl font-semibold text-sky-700 dark:text-sky-400 leading-snug">
                 {PORTFOLIO_PROFILE.currentRoleHeadline[language]}
               </h2>
             </motion.div>
 
-            {/* Value Proposition */}
+            {/* Concise Value Proposition */}
             <motion.p
               variants={itemVariants}
-              className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl"
+              className="text-base sm:text-lg text-slate-700 dark:text-slate-200 leading-relaxed max-w-2xl"
             >
               {PORTFOLIO_PROFILE.heroDescription[language]}
             </motion.p>
 
-            {/* Proof Bar */}
-            <motion.div
-              variants={itemVariants}
-              className="grid sm:grid-cols-2 gap-3 pt-1 max-w-2xl"
-            >
-              <div className="flex items-start gap-3 p-3.5 rounded-xl editorial-surface">
-                <Briefcase className="w-4 h-4 text-sky-600 dark:text-sky-400 mt-0.5 shrink-0" />
-                <div className="min-w-0">
-                  <p className="text-xs font-semibold text-slate-900 dark:text-slate-100 truncate">
-                    {t.proofCompany}
-                  </p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
-                    {t.proofCompanyRole}
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3 p-3.5 rounded-xl editorial-surface">
-                <GraduationCap className="w-4 h-4 text-sky-600 dark:text-sky-400 mt-0.5 shrink-0" />
-                <div className="min-w-0">
-                  <p className="text-xs font-semibold text-slate-900 dark:text-slate-100 truncate">
-                    {t.proofEducation}
-                  </p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 mt-0.5">
-                    <MapPin className="w-3 h-3 shrink-0" />
-                    <span>{t.locationShort}</span>
-                  </p>
-                </div>
-              </div>
+            {/* Focused Stack (4 chips) */}
+            <motion.div variants={itemVariants} className="flex flex-wrap gap-2 pt-1">
+              {HERO_STACK.map((tech) => (
+                <span
+                  key={tech}
+                  className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/14 text-xs font-mono font-medium text-slate-800 dark:text-slate-100"
+                >
+                  {tech}
+                </span>
+              ))}
             </motion.div>
 
-            {/* Core Stack */}
-            <motion.div variants={itemVariants} className="pt-1">
-              <span className="text-[11px] font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 block mb-2.5">
-                {t.stackLabel}
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  'Spring Boot',
-                  'Flutter Offline-First',
-                  'React / Next.js',
-                  'Python / FastAPI',
-                  'Odoo ERP',
-                  'PostgreSQL / PostGIS',
-                  'BluetoothSockets',
-                ].map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 text-xs font-mono font-medium text-slate-700 dark:text-slate-300"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* CTAs */}
+            {/* CTAs: Projects -> Contact -> CV */}
             <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3 pt-2">
               <Button
                 size="lg"
-                onClick={() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' })}
-                className="rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-sky-500 dark:hover:bg-sky-400 text-white dark:text-slate-950 font-semibold px-6 cursor-pointer"
+                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                className="rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-sky-400 dark:hover:bg-sky-300 text-white dark:text-slate-950 font-semibold px-6 cursor-pointer"
               >
-                {t.ctaExperiences}
+                {t.ctaProjects}
                 <ArrowRight className="w-4 h-4 ml-1.5" />
               </Button>
 
               <Button
                 variant="outline"
                 size="lg"
-                onClick={handleDownloadCV}
-                className="rounded-xl border-slate-300 dark:border-white/15 bg-white dark:bg-[#11131a] hover:bg-slate-50 dark:hover:bg-white/[0.06] text-slate-900 dark:text-slate-100 font-semibold px-5 cursor-pointer"
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                className="rounded-xl border-slate-300 dark:border-white/20 bg-white dark:bg-[#11131a] hover:bg-slate-50 dark:hover:bg-white/[0.08] text-slate-900 dark:text-white font-semibold px-5 cursor-pointer"
               >
-                <Download className="w-4 h-4 mr-2 text-sky-600 dark:text-sky-400" />
-                {t.downloadCV}
+                <Mail className="w-4 h-4 mr-2 text-sky-700 dark:text-sky-400" />
+                {t.ctaContact}
               </Button>
 
               <Button
                 variant="ghost"
                 size="lg"
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                className="rounded-xl text-slate-600 dark:text-slate-300 hover:text-sky-700 dark:hover:text-sky-300 font-semibold cursor-pointer"
+                onClick={handleDownloadCV}
+                className="rounded-xl text-slate-700 dark:text-slate-200 hover:text-sky-700 dark:hover:text-sky-300 hover:bg-slate-100 dark:hover:bg-white/[0.06] font-semibold px-4 cursor-pointer"
               >
-                {t.ctaProjects}
+                <Download className="w-4 h-4 mr-2 text-sky-700 dark:text-sky-400" />
+                {t.downloadCV}
               </Button>
             </motion.div>
           </motion.div>
@@ -209,27 +147,16 @@ export default function Hero({ language }: HeroProps) {
               <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-slate-900">
                 <Image
                   src="/hero.jpg"
-                  alt="TEUFACK SONTSA Andelson — Ingénieur des Travaux Informatiques à Douala, Cameroun"
+                  alt={t.imageAlt}
                   fill
                   className="object-cover object-[center_20%]"
                   priority
                   sizes="(max-width: 768px) 100vw, 40vw"
                 />
 
-                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950/90 via-slate-950/45 to-transparent" />
-
-                <div className="absolute bottom-3.5 left-3.5 right-3.5 p-3.5 rounded-xl bg-slate-950/85 backdrop-blur-md border border-white/12 flex items-center justify-between gap-3">
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold text-white truncate">
-                      {t.proofCompany}
-                    </p>
-                    <p className="text-[11px] font-mono text-slate-300 truncate">
-                      {t.locationShort}
-                    </p>
-                  </div>
-                  <span className="shrink-0 text-[11px] font-mono font-semibold text-sky-300 bg-sky-500/15 px-2.5 py-1 rounded-md border border-sky-400/25">
-                    {t.roleTag}
-                  </span>
+                <div className="absolute bottom-3.5 left-3.5 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-950/80 backdrop-blur-md border border-white/15 text-xs font-mono font-medium text-slate-100">
+                  <MapPin className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+                  <span>{t.locationBadge}</span>
                 </div>
               </div>
             </div>

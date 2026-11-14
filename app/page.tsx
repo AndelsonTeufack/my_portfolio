@@ -77,7 +77,6 @@ export default function Home() {
           onThemeToggle={handleThemeToggle}
           language={language}
           onLanguageToggle={handleLanguageToggle}
-          onOpenAI={() => setIsChatOpen(true)}
         />
 
         <main className="relative z-10">
