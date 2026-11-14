@@ -171,15 +171,15 @@ export const ENGINEERING_PILLARS: Array<{
 
 export const EXPERIENCES: ExperienceItem[] = [
   {
-    id: 'kes',
+    id: 'kes-lead',
     company: 'Kamer Engineering Solution',
     role: {
-      fr: 'Responsable de la digitalisation des inspections (depuis sept. 2026, après un stage de développeur full-stack)',
-      en: 'Head of Inspection Digitalization (since Sept. 2026, following a full-stack developer internship)',
+      fr: 'Développeur Full-Stack / Responsable de la digitalisation des inspections',
+      en: 'Full-Stack Developer / Head of Inspection Digitalization',
     },
     period: {
-      fr: 'Mars 2026 – présent',
-      en: 'March 2026 – present',
+      fr: 'Septembre 2026 – présent',
+      en: 'September 2026 – present',
     },
     location: {
       fr: 'Douala',
@@ -188,225 +188,728 @@ export const EXPERIENCES: ExperienceItem[] = [
     isCurrent: true,
     isFeatured: true,
     summary: {
-      fr: 'Pilotage de la digitalisation des inspections, applications Flutter offline-first assistées par IA (Gemini), plateforme web multi-inspecteurs, SIG SOCAD’EL et supervision des stagiaires.',
-      en: 'Leading inspection digitalization, AI-assisted (Gemini) offline-first Flutter apps, multi-inspector web platform, SOCAD’EL GIS, and intern supervision.',
+      fr: 'Supervision des stagiaires, correction continue des applications d’inspection à partir des retours terrain, conception de l’app mobile Bluetooth pour appareils d’essais de pression, plateforme de maîtrise d’œuvre et ERP interne connecté à Odoo.',
+      en: 'Supervising interns, maintaining production inspection apps from field feedback, designing a Bluetooth pressure-testing app, a project supervision platform, and an Odoo-connected internal ERP.',
     },
     keyAchievements: {
       fr: [
-        'Pilote la digitalisation des inspections : corrections et mises à jour continues à partir des retours terrain, supervision des stagiaires.',
-        'Conçu des apps Flutter offline-first assistées par IA (Gemini) qui génèrent automatiquement les rapports PDF, Word et Excel (JSA, Q18, Q19).',
-        'Développé une plateforme web multi-inspecteurs (QR Code, mises à jour OTA via Cloudflare R2) et conçu une app Bluetooth centralisant les mesures des appareils d’essai de pression.',
-        'Contribué au SIG de la SOCAD’EL : KoboCollect adapté (carte ESRI, tracé automatique des réseaux, export GeoJSON).',
+        'Supervision, accompagnement technique et répartition des tâches des stagiaires sur les projets de digitalisation.',
+        'Analyse et correction constante des anomalies remontées lors des inspections, avec mise à jour continue des applications à partir des retours terrain.',
+        'Analyse et conception d’une application mobile BluetoothSockets communiquant avec les appareils d’essais de pression pour recevoir, centraliser et exploiter les données de mesure.',
+        'Analyse et conception d’une plateforme web et mobile de suivi des projets de maîtrise d’œuvre (échanges entre acteurs, évolutions, dépenses et planification) ainsi que d’un ERP interne connecté à Odoo avec accès client externe.',
+        'Assistance informatique et gestion des ressources du parc interne.',
       ],
       en: [
-        'Lead inspection digitalization: continuous bug fixes and updates driven by field feedback, supervising interns.',
-        'Built AI-assisted (Gemini) offline-first Flutter apps that automatically generate PDF, Word, and Excel reports (JSA, Q18, Q19).',
-        'Developed a multi-inspector web platform (QR Code, OTA updates via Cloudflare R2) and designed a Bluetooth app centralizing pressure-testing device measurements.',
-        'Contributed to the SOCAD’EL GIS: customized KoboCollect (ESRI map, automatic grid tracing, GeoJSON export).',
+        'Technical supervision, mentoring, and task distribution for interns working on digitalization projects.',
+        'Root-cause analysis and continuous resolution of field inspection anomalies, shipping ongoing app updates from inspector feedback.',
+        'Analysis and design of a BluetoothSockets mobile app communicating with pressure-testing equipment to receive, centralize, and process test measurements.',
+        'Analysis and design of a web and mobile project supervision platform (stakeholder exchanges, progress, expenses, planning) and an Odoo-integrated internal ERP with external client access.',
+        'Internal IT support and hardware resource administration.',
       ],
     },
     caseStudy: {
       context: {
-        fr: 'Entré comme stagiaire développeur full-stack (mars – sept. 2026), puis promu responsable de la digitalisation des inspections en septembre 2026. Ce rôle couvre le maintien en production des outils déployés sur le terrain, l’encadrement des stagiaires et la conception de nouvelles applications.',
-        en: 'Joined as a full-stack developer intern (March – Sept. 2026) and promoted to Head of Inspection Digitalization in September 2026. The role spans production field-tool maintenance, intern supervision, and the design of new internal and client-facing software.',
+        fr: 'Promu responsable de la digitalisation des inspections après 6 mois de stage chez Kamer Engineering Solution. Ce poste associe maintien en condition opérationnelle des applications déployées sur le terrain, encadrement des stagiaires et conception de nouveaux produits internes.',
+        en: 'Promoted to Head of Inspection Digitalization after a 6-month internship at Kamer Engineering Solution. Combines continuous field-application support, intern supervision, and new product design.',
       },
       workstreams: [
         {
           stage: 'production',
           title: {
-            fr: 'Apps mobiles d’inspection offline-first & génération de rapports',
-            en: 'Offline-first inspection mobile apps & automated reporting',
+            fr: 'Maintenance continue & retours terrain des apps d’inspection',
+            en: 'Continuous maintenance & field updates for inspection apps',
           },
           description: {
-            fr: 'Applications Flutter utilisables sans connexion (inspections électriques, thermographiques, éclairage, pression, levage, sécurité incendie, bilan de puissance, ascenseurs), assistées par l’API Gemini et capables de générer les rapports PDF, Word et Excel (JSA, Q18, Q19).',
-            en: 'Offline-capable Flutter apps covering electrical, thermographic, lighting, pressure, lifting, fire safety, power balance, and elevator inspections, assisted by the Gemini API with automated PDF, Word, and Excel report export (JSA, Q18, Q19).',
+            fr: 'Analyse et correction continue des anomalies remontées lors des inspections sur site, intégration des retours métier et publication régulière de mises à jour.',
+            en: 'Continuous bug investigation from live inspection sites, integrating inspector feedback into regular application updates.',
           },
           deliverables: {
             fr: [
-              'Persistance locale hors-ligne et synchronisation multi-inspecteurs',
-              'Export automatisé PDF / Word / Excel (JSA, Q18, Q19)',
-              'Mises à jour continues à partir des retours terrain',
+              'Corrections et mises à jour continues à partir des retours terrain',
+              'Support technique et gestion du parc informatique interne',
             ],
             en: [
-              'Offline local persistence and multi-inspector sync',
-              'Automated PDF / Word / Excel report generation (JSA, Q18, Q19)',
-              'Continuous field-feedback bug fixes and updates',
+              'Continuous field-driven fixes and releases',
+              'Internal IT support and equipment administration',
             ],
           },
         },
         {
           stage: 'production',
           title: {
-            fr: 'Plateforme web multi-inspecteurs & distribution OTA',
-            en: 'Multi-inspector web platform & OTA updates',
+            fr: 'Supervision & encadrement technique des stagiaires',
+            en: 'Technical supervision & mentoring of interns',
           },
           description: {
-            fr: 'Plateforme web Next.js / FastAPI interconnectée aux terminaux mobiles : missions collaboratives simultanées, accès rapide aux équipements par QR Code, sauvegardes et mises à jour automatiques via Cloudflare R2.',
-            en: 'Interconnected Next.js / FastAPI web platform supporting simultaneous collaborative inspections, QR Code equipment lookup, backups, and automatic updates hosted on Cloudflare R2.',
+            fr: 'Accompagnement quotidien, répartition des tâches, revues techniques et suivi des livrables des stagiaires impliqués dans la digitalisation.',
+            en: 'Day-to-day technical coaching, task assignment, reviews, and delivery follow-up for digitalization interns.',
           },
           deliverables: {
             fr: [
-              'Synchronisation collaborative web / mobile',
-              'Identification équipements par QR Code & mises à jour Cloudflare R2',
+              'Répartition des tâches et suivi d’avancement technique',
+              'Accompagnement sur les bonnes pratiques de développement',
             ],
             en: [
-              'Collaborative web/mobile inspection synchronization',
-              'QR Code asset access & Cloudflare R2 OTA updates',
-            ],
-          },
-        },
-        {
-          stage: 'production',
-          title: {
-            fr: 'SIG SOCAD’EL & automatisation e-mails',
-            en: 'SOCAD’EL GIS & email workflow automation',
-          },
-          description: {
-            fr: 'Contribution au Système d’Information Électrique du Cameroun et adaptation de KoboCollect (repositionnement cartographique ESRI, tracé automatique des réseaux électriques, historique et export GeoJSON). Développement en parallèle d’une app web de qualification d’e-mails (Soft/Hard Bounce, Outbound) couplée à n8n.',
-            en: 'Contributed to Cameroon’s Electrical Information System by customizing KoboCollect (ESRI map repositioning, automatic power grid tracing, submission history, GeoJSON export), alongside an email deliverability classifier integrated with n8n.',
-          },
-          deliverables: {
-            fr: [
-              'KoboCollect adapté avec carte ESRI & export GeoJSON / PostGIS',
-              'Filtre de délivrabilité e-mails et campagnes automatisées n8n',
-            ],
-            en: [
-              'Customized KoboCollect with ESRI mapping & GeoJSON / PostGIS export',
-              'Email deliverability classifier and n8n automation workflows',
+              'Task breakdown and engineering progress tracking',
+              'Guidance on development practices',
             ],
           },
         },
         {
           stage: 'design',
           title: {
-            fr: 'App Bluetooth (essais de pression), maîtrise d’œuvre & ERP Odoo',
-            en: 'Pressure-test Bluetooth app, project supervision & Odoo ERP',
+            fr: 'Application mobile BluetoothSockets (appareils d’essais de pression)',
+            en: 'BluetoothSockets mobile app (pressure-testing hardware)',
           },
           description: {
-            fr: 'Travaux d’analyse et de conception en cours depuis septembre 2026 : application mobile BluetoothSockets pour appareils d’essai de pression, plateforme web/mobile de maîtrise d’œuvre (suivi chantier, dépenses, planification) et ERP interne connecté à Odoo avec portail client.',
-            en: 'Ongoing analysis and design initiatives started in Sept. 2026: a BluetoothSockets mobile app for pressure-testing equipment, a web/mobile project supervision platform (progress, expenses, planning), and an Odoo-connected internal ERP with external client access.',
+            fr: 'Analyse et conception d’une application mobile interfacée en Bluetooth avec des appareils d’essais de pression pour recevoir, centraliser et exploiter les données de mesure.',
+            en: 'Analysis and design of a mobile app communicating over Bluetooth with pressure-testing devices to receive, centralize, and exploit measurements.',
           },
           deliverables: {
             fr: [
-              'Spécifications et module BluetoothSockets de collecte des mesures',
-              'Architecture plateforme maîtrise d’œuvre & connecteurs Odoo ERP',
+              'Cahier des charges et module de réception BluetoothSockets',
+              'Structuration et centralisation des séries de mesures',
             ],
             en: [
-              'Specifications and BluetoothSockets measurement capture module',
-              'Project supervision architecture & Odoo ERP integration design',
+              'Specifications and BluetoothSockets acquisition module',
+              'Structured measurement storage and processing',
+            ],
+          },
+        },
+        {
+          stage: 'design',
+          title: {
+            fr: 'Plateforme de maîtrise d’œuvre & ERP interne connecté à Odoo',
+            en: 'Project supervision platform & Odoo-connected internal ERP',
+          },
+          description: {
+            fr: 'Analyse et conception d’une plateforme web/mobile multi-acteurs de suivi des projets (échanges, évolutions, dépenses, planification) et d’un ERP interne interconnecté à Odoo avec portail d’accès client externe.',
+            en: 'Analysis and design of a multi-stakeholder web/mobile project supervision platform (communications, progress, expenses, planning) and an internal ERP integrated with Odoo featuring external client access.',
+          },
+          deliverables: {
+            fr: [
+              'Architecture suivi de projets : échanges, dépenses et planification',
+              'Synchronisation processus internes ↔ Odoo et portail client',
+            ],
+            en: [
+              'Project tracking workflows: communications, expenses, and planning',
+              'Internal ERP ↔ Odoo integration and external client portal',
             ],
           },
         },
       ],
       impact: {
         fr: [
-          'Promotion au poste de responsable de la digitalisation des inspections après 6 mois de stage.',
-          'Supervision technique des stagiaires et maintien continu du parc informatique interne.',
-          'Continuité des inspections sur sites sans réseau et réduction du temps de rédaction des rapports JSA, Q18 et Q19.',
+          'Prise de responsabilité technique complète des projets de digitalisation après 6 mois de stage.',
+          'Réactivité continue sur les anomalies remontées par les inspecteurs sur site.',
+          'Structuration des nouveaux chantiers logiciels internes (Bluetooth, maîtrise d’œuvre, Odoo).',
         ],
         en: [
-          'Promoted to Head of Inspection Digitalization after a 6-month internship.',
-          'Supervising incoming engineering interns and supporting internal IT operations.',
-          'Enabled offline field inspections and reduced manual drafting time for JSA, Q18, and Q19 reports.',
+          'Stepped up to full technical ownership of digitalization projects after 6 months as an intern.',
+          'Sustained responsiveness to issues reported from field inspections.',
+          'Structured the roadmap for new internal software initiatives (Bluetooth, project tracking, Odoo).',
         ],
       },
     },
-    technologies: ['Flutter', 'FastAPI', 'Next.js', 'PostGIS', 'Odoo'],
+    technologies: ['Flutter', 'BluetoothSockets', 'Next.js', 'FastAPI', 'Odoo', 'PostgreSQL'],
   },
   {
-    id: 'green-power',
-    company: 'Green Power Cameroon',
+    id: 'kes-intern',
+    company: 'Kamer Engineering Solution',
     role: {
-      fr: 'Analyste développeur de solutions IT (stagiaire)',
-      en: 'IT Solutions Analyst & Developer (intern)',
+      fr: 'Développeur Full-Stack (Mobile & Web) — Stagiaire',
+      en: 'Full-Stack Developer (Mobile & Web) — Intern',
     },
     period: {
-      fr: 'Nov. 2024 – nov. 2025',
-      en: 'Nov. 2024 – Nov. 2025',
+      fr: 'Mars 2026 – septembre 2026',
+      en: 'March 2026 – September 2026',
+    },
+    location: {
+      fr: 'Douala',
+      en: 'Douala',
+    },
+    summary: {
+      fr: 'Conception d’applications mobiles d’inspection offline-first assistées par IA (rapports PDF, Word, Excel — JSA, Q18, Q19), plateforme web multi-inspecteurs (QR Code, Cloudflare R2), SIG SOCAD’EL (KoboCollect/ESRI/GeoJSON) et qualification d’e-mails avec n8n.',
+      en: 'Built AI-assisted offline-first inspection mobile apps (PDF, Word, Excel — JSA, Q18, Q19), collaborative web platform (QR Code, Cloudflare R2), SOCAD’EL GIS (KoboCollect/ESRI/GeoJSON), and n8n email automation.',
+    },
+    keyAchievements: {
+      fr: [
+        'Analyse et conception d’applications mobiles d’inspection offline-first assistées par IA (électriques, thermographiques, éclairage, pression, levage, sécurité incendie, bilan de puissance, ascenseurs), avec génération automatique des rapports PDF, Word et Excel (JSA, Q18, Q19).',
+        'Conception d’une plateforme web interconnectée pour la gestion de missions multi-inspections collaboratives, l’accès rapide aux équipements par QR Code, les sauvegardes et la mise à jour automatique via Cloudflare R2.',
+        'Contribution au Système d’Information Électrique du Cameroun pour la SOCAD’EL (Web, Mobile, SIG) et adaptation de KoboCollect (repositionnement cartographique ESRI, traçage automatique des réseaux électriques, historique des soumissions et export GeoJSON).',
+        'Conception d’une application web de filtrage et qualification d’adresses e-mail (Soft Bounce, Hard Bounce, Outbound) et automatisation de campagnes / newsletters via n8n.',
+      ],
+      en: [
+        'Analyzed and built AI-assisted offline-first inspection mobile apps (electrical, thermographic, lighting, pressure, lifting, fire safety, power balance, elevators) with automated PDF, Word, and Excel report export (JSA, Q18, Q19).',
+        'Built an interconnected web platform for multi-inspector collaborative missions, QR Code equipment access, backups, and automatic OTA updates via Cloudflare R2.',
+        'Contributed Web, Mobile, and GIS modules to Cameroon’s Electrical Information System for SOCAD’EL and customized KoboCollect (ESRI coordinate repositioning, automated grid tracing, submission history, and GeoJSON export).',
+        'Developed an internal email qualification web app (Soft Bounce, Hard Bounce, Outbound) and automated campaigns / newsletters with n8n.',
+      ],
+    },
+    caseStudy: {
+      context: {
+        fr: 'Stage de 6 mois consacré à la numérisation des inspections techniques multi-domaines, au déploiement de la plateforme collaborative web et aux travaux SIG pour le réseau électrique camerounais.',
+        en: 'Six-month engineering internship dedicated to digitalizing multi-domain technical inspections, building the collaborative web platform, and delivering GIS tooling for Cameroon’s electrical grid.',
+      },
+      workstreams: [
+        {
+          stage: 'production',
+          title: {
+            fr: 'Apps mobiles d’inspection offline-first assistées par IA',
+            en: 'AI-assisted offline-first mobile inspection apps',
+          },
+          description: {
+            fr: 'Persistance hors connexion, sauvegarde locale et en ligne, partage de missions entre inspecteurs, assistance IA (Gemini) et génération automatique de rapports PDF, Word et Excel incluant les fiches JSA, Q18 et Q19.',
+            en: 'Offline persistence, local/cloud backup, inspector mission handoff, Gemini AI assistance, and automated PDF, Word, and Excel reports including JSA, Q18, and Q19.',
+          },
+          deliverables: {
+            fr: [
+              '8 domaines d’inspection couverts hors-ligne',
+              'Export automatique PDF / Word / Excel (JSA, Q18, Q19)',
+            ],
+            en: [
+              '8 inspection domains supported offline',
+              'Automated PDF / Word / Excel reporting (JSA, Q18, Q19)',
+            ],
+          },
+        },
+        {
+          stage: 'production',
+          title: {
+            fr: 'Plateforme web multi-inspecteurs, QR Code & Cloudflare R2',
+            en: 'Multi-inspector web platform, QR Code & Cloudflare R2',
+          },
+          description: {
+            fr: 'Gestion de missions multi-inspections, travail collaboratif simultané entre inspecteurs sur le terrain, accès aux équipements via QR Code et mises à jour automatiques sur Cloudflare R2.',
+            en: 'Multi-inspection mission orchestration, simultaneous field collaboration, QR Code equipment lookup, and automated Cloudflare R2 distribution.',
+          },
+          deliverables: {
+            fr: [
+              'Synchronisation web / mobile multi-inspecteurs',
+              'Distribution OTA via Cloudflare R2 & accès QR Code',
+            ],
+            en: [
+              'Multi-inspector web/mobile synchronization',
+              'Cloudflare R2 OTA updates & QR Code asset access',
+            ],
+          },
+        },
+        {
+          stage: 'production',
+          title: {
+            fr: 'SIG SOCAD’EL & adaptation KoboCollect (ESRI / GeoJSON)',
+            en: 'SOCAD’EL GIS & KoboCollect customization (ESRI / GeoJSON)',
+          },
+          description: {
+            fr: 'Contribution au Système d’Information Électrique du Cameroun (Web, Mobile, SIG) et personnalisation de KoboCollect pour le repositionnement de points sur fonds ESRI, le tracé automatique de réseaux électriques et l’export GeoJSON.',
+            en: 'Delivered Web, Mobile, and GIS modules for SOCAD’EL and customized KoboCollect with ESRI coordinate repositioning, automated grid tracing, submission history, and GeoJSON export.',
+          },
+          deliverables: {
+            fr: [
+              'Fork KoboCollect avec repositionnement ESRI & tracé réseau',
+              'Export normalisé GeoJSON & intégration PostGIS',
+            ],
+            en: [
+              'Customized KoboCollect with ESRI map repositioning & grid tracing',
+              'Standardized GeoJSON export & PostGIS integration',
+            ],
+          },
+        },
+        {
+          stage: 'production',
+          title: {
+            fr: 'Qualification d’e-mails & automatisation n8n',
+            en: 'Email qualification app & n8n automation',
+          },
+          description: {
+            fr: 'Application web interne classifiant automatiquement les adresses (Soft Bounce, Hard Bounce, Outbound) couplée à des workflows de newsletters automatisés sur n8n.',
+            en: 'Internal web app automatically classifying email statuses (Soft Bounce, Hard Bounce, Outbound) connected to n8n newsletter workflows.',
+          },
+          deliverables: {
+            fr: [
+              'Qualification automatique Soft/Hard Bounce et Outbound',
+              'Automatisations campagnes & newsletters sous n8n',
+            ],
+            en: [
+              'Automated Soft/Hard Bounce and Outbound classifier',
+              'Automated n8n campaign and newsletter pipelines',
+            ],
+          },
+        },
+      ],
+      impact: {
+        fr: [
+          'Continuité opérationnelle des inspections sur des sites industriels dépourvus de réseau.',
+          'Automatisation directe de la production des rapports réglementaires JSA, Q18 et Q19.',
+          'Recrutement et promotion en responsabilité technique à l’issue du stage.',
+        ],
+        en: [
+          'Enabled uninterrupted inspections on zero-connectivity industrial sites.',
+          'Automated regulatory JSA, Q18, and Q19 report generation.',
+          'Promoted to lead inspection digitalization upon completing the internship.',
+        ],
+      },
+    },
+    technologies: ['Flutter', 'Gemini API', 'Next.js', 'Cloudflare R2', 'KoboCollect / ESRI', 'PostGIS', 'n8n'],
+  },
+  {
+    id: 'green-power-2',
+    company: 'Green Power Cameroon',
+    role: {
+      fr: 'Analyste développeur de solutions IT — Stagiaire',
+      en: 'IT Solutions Analyst & Developer — Intern',
+    },
+    period: {
+      fr: 'Mai 2025 – novembre 2025',
+      en: 'May 2025 – November 2025',
     },
     location: {
       fr: 'Yaoundé',
       en: 'Yaoundé',
     },
     summary: {
-      fr: 'Conception et développement d’une GMAO web sur MySQL, automatisation du reporting en Python, audits BDD/réseau, support N2 et administration Microsoft 365.',
-      en: 'Built an internal web CMMS on MySQL, automated reporting pipelines with Python, performed DB/network audits, Level 2 IT support, and Microsoft 365 administration.',
+      fr: 'Conception et développement d’une application web interne de gestion de maintenance (GMAO) sur MySQL, tests unitaires et de non-régression, et automatisation du reporting via scripts Python.',
+      en: 'Designed and developed an internal web CMMS (GMAO) on MySQL, authored unit and regression tests, and automated reporting extraction/aggregation with Python.',
     },
     keyAchievements: {
       fr: [
-        'Conçu et développé une GMAO web interne sur MySQL, avec tests unitaires et de non-régression.',
-        'Automatisé l’extraction et l’agrégation des données de reporting avec des scripts Python.',
-        'Audité les performances et vulnérabilités (BDD, réseau) ; support N2 et administration Microsoft 365.',
+        'Conception et développement d’une application web interne dédiée à la gestion et au suivi des opérations de maintenance (GMAO).',
+        'Modélisation de la base de données relationnelle MySQL et implémentation des fonctionnalités métiers.',
+        'Rédaction et exécution de tests unitaires et de non-régression pour garantir la stabilité applicative et la continuité de service.',
+        'Automatisation de l’extraction et de l’agrégation des données de reporting via des scripts Python.',
       ],
       en: [
-        'Designed and built an internal web CMMS backed by MySQL, with unit and regression testing.',
-        'Automated reporting data extraction and aggregation using Python scripts.',
-        'Audited database and network performance and vulnerabilities; Level 2 IT support and Microsoft 365 administration.',
+        'Designed and built an internal web application for maintenance management and operations tracking (CMMS/GMAO).',
+        'Modeled the relational MySQL database and implemented core business workflows.',
+        'Authored and executed unit and non-regression tests to guarantee application stability and service continuity.',
+        'Automated extraction and aggregation of reporting datasets using Python scripts.',
       ],
     },
-    technologies: ['Python', 'MySQL', 'Pytest'],
+    caseStudy: {
+      context: {
+        fr: 'Second stage chez Green Power Cameroon centré sur le développement d’une plateforme web interne de GMAO remplaçant les suivis manuels de maintenance.',
+        en: 'Second internship at Green Power Cameroon focused on replacing manual maintenance tracking with a tested internal web CMMS platform.',
+      },
+      workstreams: [
+        {
+          title: {
+            fr: 'Application web GMAO & modélisation MySQL',
+            en: 'Internal GMAO web platform & MySQL database',
+          },
+          description: {
+            fr: 'Conception du schéma relationnel MySQL et développement des interfaces et fonctionnalités de suivi des opérations et ordres de maintenance.',
+            en: 'Relational MySQL modeling and development of web workflows to track maintenance operations and interventions.',
+          },
+          deliverables: {
+            fr: [
+              'Schéma relationnel MySQL structuré pour la maintenance',
+              'Application web interne complète de suivi des interventions',
+            ],
+            en: [
+              'Normalized MySQL schema for maintenance tracking',
+              'Internal web application for operational follow-up',
+            ],
+          },
+        },
+        {
+          title: {
+            fr: 'Tests automatisés & scripts Python de reporting',
+            en: 'Automated test suites & Python reporting scripts',
+          },
+          description: {
+            fr: 'Mise en place de tests unitaires et de non-régression avec Pytest, et écriture de scripts Python automatisant l’extraction et l’agrégation des indicateurs de reporting.',
+            en: 'Implemented Pytest unit and non-regression test suites alongside Python scripts automating reporting data extraction and aggregation.',
+          },
+          deliverables: {
+            fr: [
+              'Suite de tests unitaires et de non-régression',
+              'Scripts Python d’extraction et d’agrégation de données',
+            ],
+            en: [
+              'Unit and non-regression test suite',
+              'Automated Python reporting data scripts',
+            ],
+          },
+        },
+      ],
+      impact: {
+        fr: [
+          'Centralisation du suivi des opérations de maintenance dans une base MySQL fiable.',
+          'Réduction du travail manuel sur les extractions de reporting grâce à Python.',
+        ],
+        en: [
+          'Centralized maintenance records in a structured MySQL database.',
+          'Automated repetitive reporting extraction tasks using Python.',
+        ],
+      },
+    },
+    technologies: ['Python', 'MySQL', 'Pytest', 'HTML5 / CSS3', 'JavaScript'],
   },
   {
-    id: 'iai',
-    company: 'IAI (centre de Douala)',
+    id: 'iai-instructor',
+    company: 'IAI (Centre de Douala)',
     role: {
       fr: 'Formateur & mentor en développement web et mobile',
       en: 'Web & Mobile Development Instructor and Mentor',
     },
     period: {
-      fr: 'Janv. – mai 2025',
-      en: 'Jan. – May 2025',
+      fr: 'Janvier 2025 – mai 2025',
+      en: 'January 2025 – May 2025',
     },
     location: {
-      fr: '',
-      en: '',
+      fr: 'Douala',
+      en: 'Douala',
     },
     summary: {
-      fr: 'Animation des cours et TP de React.js et Flutter pour les 1ère et 2ème années ; encadrement de +15 étudiants.',
-      en: 'Taught React.js and Flutter lectures and labs for 1st- and 2nd-year students; mentored +15 students.',
+      fr: 'Animation de cours et TP intensifs React.js / JavaScript et Flutter / Dart pour les 1ʳᵉ et 2ᵉ années ; accompagnement technique de +15 étudiants sur leurs projets d’études et la préparation aux stages.',
+      en: 'Delivered intensive React.js and Flutter lectures and labs for 1st- and 2nd-year cohorts; mentored 15+ software engineering students on capstone projects and internship readiness.',
     },
     keyAchievements: {
       fr: [
-        'Animé les cours et TP de React.js et Flutter pour les 1ʳᵉ et 2ᵉ années ; encadré +15 étudiants.',
-        'Préparé les étudiants aux stages et projets de fin d’études (Git, clean code, APIs REST).',
+        'Animation de cours et travaux pratiques intensifs en développement web (React.js, JavaScript, HTML5/CSS3) et mobile (Flutter, Dart) pour les étudiants de 1ʳᵉ et 2ᵉ année.',
+        'Mentorat et accompagnement technique de +15 étudiants en génie logiciel dans la réalisation de leurs projets d’études, la structuration des architectures logicielles et la résolution de problèmes.',
+        'Préparation des étudiants aux stages en entreprise et aux certifications (bonnes pratiques de code, Git et intégration d’APIs REST).',
       ],
       en: [
-        'Taught React.js and Flutter lectures and labs for 1st- and 2nd-year students; mentored +15 students.',
-        'Prepared students for internships and capstone projects (Git, clean code, REST APIs, software architecture).',
+        'Delivered intensive lectures and hands-on labs in web (React.js, JavaScript, HTML5/CSS3) and mobile (Flutter, Dart) development for 1st- and 2nd-year students.',
+        'Mentored 15+ software engineering students on academic projects, software architecture structuring, and debugging.',
+        'Prepared students for corporate internships and certifications (clean code practices, Git workflows, REST API integration).',
       ],
     },
-    technologies: [],
+    caseStudy: {
+      context: {
+        fr: 'Mission d’enseignement et de mentorat au Centre de Douala de l’Institut Africain d’Informatique (IAI), axée sur la mise en pratique directe des standards professionnels en web et mobile.',
+        en: 'Teaching and mentoring engagement at IAI (Douala Campus), focused on equipping undergraduate students with practical industry skills in web and mobile engineering.',
+      },
+      workstreams: [
+        {
+          title: {
+            fr: 'Cours & travaux pratiques React.js et Flutter',
+            en: 'React.js and Flutter lectures & practical labs',
+          },
+          description: {
+            fr: 'Préparation et animation de séances intensives couvrant HTML5/CSS3, JavaScript, React.js côté web ainsi que Dart et Flutter côté mobile pour les promotions de 1ʳᵉ et 2ᵉ année.',
+            en: 'Prepared and delivered hands-on sessions covering HTML5/CSS3, JavaScript, React.js for web and Dart/Flutter for mobile across 1st- and 2nd-year cohorts.',
+          },
+          deliverables: {
+            fr: [
+              'Travaux pratiques guidés : interfaces web React.js et applications Flutter',
+              'Consommation et intégration d’APIs REST en conditions réelles',
+            ],
+            en: [
+              'Guided labs across React.js web apps and Flutter mobile apps',
+              'Hands-on REST API integration exercises',
+            ],
+          },
+        },
+        {
+          title: {
+            fr: 'Mentorat de +15 étudiants & préparation aux stages',
+            en: 'Mentoring 15+ students & internship readiness',
+          },
+          description: {
+            fr: 'Suivi individuel et en groupe de +15 étudiants sur la structuration de leurs architectures logicielles, la résolution de blocages techniques, l’usage de Git et la préparation aux stages.',
+            en: 'Coached 15+ students on software architecture structure, technical problem solving, Git discipline, and corporate internship preparation.',
+          },
+          deliverables: {
+            fr: [
+              'Accompagnement de +15 étudiants sur leurs projets d’études',
+              'Revues de code, Git et préparation aux entretiens de stage',
+            ],
+            en: [
+              'Project coaching for 15+ software engineering students',
+              'Code reviews, Git workflows, and internship preparation',
+            ],
+          },
+        },
+      ],
+      impact: {
+        fr: [
+          'Plus de 15 étudiants accompagnés concrètement jusqu’à leurs projets d’études et candidatures en entreprise.',
+          'Consolidation de la transmission pédagogique et de la pratique de revue de code.',
+        ],
+        en: [
+          'Coached 15+ students through capstone deliveries and internship applications.',
+          'Strengthened technical communication, code review, and mentoring practice.',
+        ],
+      },
+    },
+    technologies: ['React.js', 'Flutter', 'Dart', 'JavaScript', 'Git', 'APIs REST'],
   },
   {
-    id: 'credix',
-    company: 'Credix.cam SA',
+    id: 'green-power-1',
+    company: 'Green Power Cameroon',
     role: {
-      fr: 'Développeur web, puis développeur mobile (stagiaire)',
-      en: 'Web Developer, then Mobile Developer (intern)',
+      fr: 'Analyste développeur de solutions IT — Stagiaire',
+      en: 'IT Solutions Analyst & Developer — Intern',
     },
     period: {
-      fr: 'Juil.–sept. 2023 et août–oct. 2024',
-      en: 'July–Sept. 2023 & Aug.–Oct. 2024',
+      fr: 'Novembre 2024 – mai 2025',
+      en: 'November 2024 – May 2025',
     },
     location: {
       fr: 'Yaoundé',
       en: 'Yaoundé',
     },
     summary: {
-      fr: 'Migration du canal USSD vers une app mobile cross-platform avec Redis, service de réconciliation des transactions sur Momokash et app RH Spring Boot / React sécurisée par JWT.',
-      en: 'Migrated USSD workflows to a cross-platform mobile app backed by Redis sessions, built a Momokash failed-transaction reconciliation service, and delivered a JWT-secured Spring Boot / React HR portal.',
+      fr: 'Analyse des besoins et cahiers des charges techniques, audits de performance et vulnérabilités BDD/réseau, support applicatif niveau 2 (N2) et administration Windows / Microsoft 365.',
+      en: 'Requirements analysis and technical specifications, database/network performance and vulnerability audits, Level 2 application support, and Windows / Microsoft 365 administration.',
     },
     keyAchievements: {
       fr: [
-        'Conçu une app mobile cross-platform migrant les utilisateurs du canal USSD, avec un service backend et Redis pour les sessions.',
-        'Développé un service de détection des transactions en échec sur Momokash (réconciliation automatisée) et une app RH Spring Boot / React sécurisée par JWT.',
+        'Analyse des besoins métiers et rédaction de cahiers des charges techniques pour l’optimisation et la digitalisation des processus internes.',
+        'Diagnostic et audit des performances des bases de données et du réseau afin d’identifier les goulots d’étranglement et les vulnérabilités.',
+        'Diagnostic et résolution des incidents applicatifs de niveau 2 (N2), maintenance corrective et évolutive du système d’information.',
+        'Assistance technique aux utilisateurs et administration des environnements Windows et Microsoft 365.',
       ],
       en: [
-        'Built a cross-platform mobile app migrating users from USSD, backed by a backend service and Redis session management.',
-        'Developed a scheduled failed-transaction detection service on Momokash (automated reconciliation) and a JWT-secured Spring Boot / React HR app.',
+        'Analyzed business requirements and authored technical specification documents to optimize and digitalize internal processes.',
+        'Diagnosed and audited database and network performance to pinpoint bottlenecks and security vulnerabilities.',
+        'Diagnosed and resolved Level 2 (L2) application incidents alongside corrective and evolutive IS maintenance.',
+        'Provided user technical support and administered Windows and Microsoft 365 environments.',
       ],
     },
-    technologies: ['Flutter', 'Spring Boot', 'React', 'Redis'],
+    caseStudy: {
+      context: {
+        fr: 'Premier stage chez Green Power Cameroon dédié à l’analyse fonctionnelle et technique du système d’information, aux audits infrastructure et au support applicatif niveau 2.',
+        en: 'First internship at Green Power Cameroon focused on IT requirements engineering, database/network diagnostics, and Level 2 application support.',
+      },
+      workstreams: [
+        {
+          title: {
+            fr: 'Analyse métier, cahiers des charges & audits BDD/réseau',
+            en: 'Requirements drafting & DB/network performance audits',
+          },
+          description: {
+            fr: 'Recueil des besoins auprès des services internes, rédaction de spécifications techniques et évaluation des performances et vulnérabilités sur les bases de données et le réseau.',
+            en: 'Gathered internal team requirements, wrote technical specifications, and audited database and network performance and vulnerabilities.',
+          },
+          deliverables: {
+            fr: [
+              'Cahiers des charges techniques pour les processus à digitaliser',
+              'Diagnostics de performance et vulnérabilités BDD / réseau',
+            ],
+            en: [
+              'Technical specifications for internal digitalization',
+              'Database and network bottleneck/vulnerability reports',
+            ],
+          },
+        },
+        {
+          title: {
+            fr: 'Support niveau 2 (N2), maintenance SI & Microsoft 365',
+            en: 'Level 2 incident resolution & Microsoft 365 administration',
+          },
+          description: {
+            fr: 'Traitement et résolution des incidents applicatifs de niveau 2, maintenance corrective/évolutive du SI, support utilisateurs et administration Windows / Microsoft 365.',
+            en: 'Investigated and resolved L2 application incidents, maintained internal IS tools, supported staff, and administered Windows / Microsoft 365.',
+          },
+          deliverables: {
+            fr: [
+              'Résolution d’incidents applicatifs N2 et maintenance SI',
+              'Administration Windows et Microsoft 365',
+            ],
+            en: [
+              'L2 application incident resolution and IS maintenance',
+              'Windows and Microsoft 365 environment administration',
+            ],
+          },
+        },
+      ],
+      impact: {
+        fr: [
+          'Cadrage documenté des besoins préparant le développement ultérieur de la GMAO interne.',
+          'Maintien de la continuité d’exploitation du parc Windows / Microsoft 365 et du SI.',
+        ],
+        en: [
+          'Documented requirements that paved the way for the internal CMMS build.',
+          'Maintained operational continuity across Windows, Microsoft 365, and internal IS services.',
+        ],
+      },
+    },
+    technologies: ['SQL', 'UML / Merise', 'Windows', 'Microsoft 365', 'Diagnostic réseau & BDD'],
+  },
+  {
+    id: 'credix-mobile',
+    company: 'Credix.cam SA',
+    role: {
+      fr: 'Développeur mobile — Stagiaire',
+      en: 'Mobile Developer — Intern',
+    },
+    period: {
+      fr: 'Août 2024 – octobre 2024',
+      en: 'August 2024 – October 2024',
+    },
+    location: {
+      fr: 'Yaoundé',
+      en: 'Yaoundé',
+    },
+    summary: {
+      fr: 'Migration des parcours USSD vers une application mobile cross-platform avec service backend dédié gérant les sessions et données temporaires sous Redis, et rédaction de tests unitaires et d’intégration.',
+      en: 'Migrated USSD workflows to a cross-platform mobile app supported by a backend service managing sessions and temporary data via Redis, with unit and integration tests.',
+    },
+    keyAchievements: {
+      fr: [
+        'Conception et développement d’une application mobile cross-platform permettant de migrer les utilisateurs du canal USSD vers une expérience mobile native.',
+        'Mise en place d’un service backend dédié pour orchestrer les échanges avec l’application mobile et gérer les sessions et données temporaires via le cache Redis.',
+        'Élaboration et exécution de tests unitaires et d’intégration en collaboration avec les équipes backend et infrastructure.',
+      ],
+      en: [
+        'Designed and built a cross-platform mobile application migrating users from legacy USSD menus to a native mobile experience.',
+        'Implemented a dedicated backend service managing mobile exchanges, user sessions, and temporary state through Redis caching.',
+        'Authored and ran unit and integration tests in collaboration with backend and infrastructure teams.',
+      ],
+    },
+    caseStudy: {
+      context: {
+        fr: 'Second stage chez Credix.cam SA pour proposer une alternative mobile fluide aux menus USSD existants tout en garantissant la cohérence des sessions applicatives.',
+        en: 'Second internship at Credix.cam SA replacing rigid USSD menus with a cross-platform mobile interface while preserving reliable session state.',
+      },
+      workstreams: [
+        {
+          title: {
+            fr: 'Migration USSD vers application mobile cross-platform',
+            en: 'USSD-to-mobile cross-platform application',
+          },
+          description: {
+            fr: 'Conception des écrans et parcours mobiles cross-platform en Flutter remplaçant les menus USSD pas-à-pas.',
+            en: 'Built cross-platform Flutter screens and navigation flows replacing multi-step USSD menus.',
+          },
+          deliverables: {
+            fr: [
+              'Parcours mobile cross-platform remplaçant le canal USSD',
+              'Tests unitaires et d’intégration applicatifs',
+            ],
+            en: [
+              'Cross-platform mobile user journeys replacing USSD',
+              'Unit and integration test suites',
+            ],
+          },
+        },
+        {
+          title: {
+            fr: 'Service backend & gestion des sessions via Redis',
+            en: 'Backend orchestration service & Redis session cache',
+          },
+          description: {
+            fr: 'Développement d’un service backend dédié exploitant Redis pour conserver les sessions et données temporaires entre l’application mobile et les services métiers.',
+            en: 'Built a dedicated backend service leveraging Redis to handle user sessions and temporary data between the mobile app and core services.',
+          },
+          deliverables: {
+            fr: [
+              'Service backend d’échanges mobile ↔ APIs métiers',
+              'Gestion des sessions et états temporaires via Redis',
+            ],
+            en: [
+              'Backend service bridging mobile app and core APIs',
+              'Redis-backed session and temporary state management',
+            ],
+          },
+        },
+      ],
+      impact: {
+        fr: [
+          'Simplification du parcours utilisateur par rapport aux contraintes de session du canal USSD.',
+          'Intégration validée par tests unitaires et d’intégration avec les équipes backend et infrastructure.',
+        ],
+        en: [
+          'Replaced timeout-constrained USSD steps with a smoother mobile interface.',
+          'Validated integration alongside backend and infrastructure teams through automated tests.',
+        ],
+      },
+    },
+    technologies: ['Flutter', 'Dart', 'Spring Boot', 'Redis', 'APIs REST', 'JUnit'],
+  },
+  {
+    id: 'credix-web',
+    company: 'Credix.cam SA',
+    role: {
+      fr: 'Développeur web — Stagiaire',
+      en: 'Web Developer — Intern',
+    },
+    period: {
+      fr: 'Juillet 2023 – septembre 2023',
+      en: 'July 2023 – September 2023',
+    },
+    location: {
+      fr: 'Yaoundé',
+      en: 'Yaoundé',
+    },
+    summary: {
+      fr: 'Service backend planifié sur Momokash détectant automatiquement les transactions quotidiennes en échec et facilitant la réconciliation financière, plus une app full-stack RH (Spring Boot / React.js) sécurisée par JWT et Spring Security.',
+      en: 'Scheduled backend job on Momokash detecting failed daily transactions for financial reconciliation, plus a Spring Boot / React.js HR portal protected with JWT and Spring Security.',
+    },
+    keyAchievements: {
+      fr: [
+        'Développement d’un service backend planifié sur Momokash permettant de détecter automatiquement les transactions quotidiennes en échec et de faciliter la réconciliation financière.',
+        'Conception et réalisation d’une application full-stack (Spring Boot / React.js) dédiée à la gestion interne des ressources humaines.',
+        'Sécurisation des endpoints REST via l’authentification JWT et la gestion des rôles et permissions avec Spring Security.',
+      ],
+      en: [
+        'Built a scheduled backend service on Momokash to automatically detect daily failed transactions and support financial reconciliation.',
+        'Designed and implemented a full-stack internal HR web application using Spring Boot and React.js.',
+        'Secured REST endpoints with JWT authentication and Spring Security role/permission access control.',
+      ],
+    },
+    caseStudy: {
+      context: {
+        fr: 'Premier stage chez Credix.cam SA autour de deux besoins précis : la détection automatique des transactions en échec sur Momokash et la mise en place d’une application RH interne.',
+        en: 'First internship at Credix.cam SA addressing two concrete needs: automated detection of failed transactions on Momokash and building an internal HR portal.',
+      },
+      workstreams: [
+        {
+          title: {
+            fr: 'Service planifié de réconciliation financière (Momokash)',
+            en: 'Scheduled financial reconciliation service (Momokash)',
+          },
+          description: {
+            fr: 'Implémentation d’une tâche backend planifiée identifiant quotidiennement les transactions en échec pour simplifier et fiabiliser les rapprochements financiers.',
+            en: 'Implemented a scheduled backend job scanning daily transaction records for failures to assist financial reconciliation.',
+          },
+          deliverables: {
+            fr: [
+              'Tâche planifiée quotidienne de détection des transactions en échec',
+              'Support direct aux opérations de réconciliation financière',
+            ],
+            en: [
+              'Scheduled daily job flagging failed transactions',
+              'Streamlined financial reconciliation workflow',
+            ],
+          },
+        },
+        {
+          title: {
+            fr: 'Application full-stack RH (Spring Boot / React.js / JWT)',
+            en: 'Full-stack HR portal (Spring Boot / React.js / JWT)',
+          },
+          description: {
+            fr: 'Développement de l’API REST Spring Boot et de l’interface React.js de gestion du personnel, avec authentification JWT et gestion des rôles/permissions sous Spring Security.',
+            en: 'Developed the Spring Boot REST API and React.js UI for internal HR management, secured via JWT authentication and Spring Security role/permission rules.',
+          },
+          deliverables: {
+            fr: [
+              'API REST Spring Boot + interface React.js de gestion RH',
+              'Authentification JWT et contrôle d’accès Spring Security',
+            ],
+            en: [
+              'Spring Boot REST backend + React.js HR management UI',
+              'JWT authentication and Spring Security RBAC',
+            ],
+          },
+        },
+      ],
+      impact: {
+        fr: [
+          'Automatisation du repérage quotidien des anomalies transactionnelles sur Momokash.',
+          'Application RH sécurisée par JWT et gestion des rôles/permissions Spring Security.',
+        ],
+        en: [
+          'Automated daily identification of failed Momokash transactions.',
+          'Delivered an internal HR tool protected by JWT and Spring Security RBAC.',
+        ],
+      },
+    },
+    technologies: ['Spring Boot', 'Java', 'React.js', 'Spring Security', 'JWT', 'MongoDB'],
   },
 ]
 
