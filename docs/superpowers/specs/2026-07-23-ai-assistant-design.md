@@ -1,4 +1,4 @@
-# Spécification Technique — Assistant IA & Avatar Cyber Interactif (GEO / AI UX)
+# Spécification Technique - Assistant IA & Avatar Cyber Interactif (GEO / AI UX)
 
 **Date :** 2026-07-23  
 **Auteur :** Équipe IA & Lead Frontend Antigravity  

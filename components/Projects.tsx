@@ -34,7 +34,7 @@ export default function Projects({ language }: ProjectsProps) {
 
   const copy = {
     fr: {
-      eyebrow: '03 — PROJETS & ÉTUDES DE CAS',
+      eyebrow: '03 - PROJETS & ÉTUDES DE CAS',
       title: 'Systèmes Conçus & Applications Déployées',
       subtitle:
         'Sélection de réalisations terrain, applications mobiles publiées sur Google Play, APIs backend et plateformes collaboratives web.',
@@ -53,7 +53,7 @@ export default function Projects({ language }: ProjectsProps) {
       },
     },
     en: {
-      eyebrow: '03 — PROJECTS & CASE STUDIES',
+      eyebrow: '03 - PROJECTS & CASE STUDIES',
       title: 'Engineered Systems & Shipped Applications',
       subtitle:
         'Selected production deliveries across industrial inspection platforms, Google Play mobile apps, secure backend APIs, and full-stack tools.',
@@ -140,19 +140,17 @@ export default function Projects({ language }: ProjectsProps) {
                 role="tab"
                 aria-selected={isActive}
                 onClick={() => setSelectedCategory(tab.key)}
-                className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-mono font-medium transition-colors border ${
-                  isActive
+                className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-mono font-medium transition-colors border ${isActive
                     ? 'bg-sky-600 dark:bg-sky-400 text-white dark:text-slate-950 border-transparent'
                     : 'bg-card text-muted-foreground border-border hover:text-foreground hover:bg-muted'
-                }`}
+                  }`}
               >
                 <span>{tab.label}</span>
                 <span
-                  className={`px-1.5 py-0.5 rounded-md text-[10px] ${
-                    isActive
+                  className={`px-1.5 py-0.5 rounded-md text-[10px] ${isActive
                       ? 'bg-white/20 dark:bg-slate-950/15 text-current'
                       : 'bg-muted text-muted-foreground'
-                  }`}
+                    }`}
                 >
                   {tab.count}
                 </span>
@@ -246,7 +244,7 @@ export default function Projects({ language }: ProjectsProps) {
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
                           title={t.playStoreTitle}
-                          aria-label={`${project.title[language]} — ${t.playStoreTitle}`}
+                          aria-label={`${project.title[language]} - ${t.playStoreTitle}`}
                           className="p-2 rounded-lg bg-secondary hover:bg-muted border border-border text-emerald-700 dark:text-emerald-400 transition-colors"
                         >
                           <Smartphone className="w-3.5 h-3.5" />
@@ -259,7 +257,7 @@ export default function Projects({ language }: ProjectsProps) {
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
                           title={t.liveTitle}
-                          aria-label={`${project.title[language]} — ${t.liveTitle}`}
+                          aria-label={`${project.title[language]} - ${t.liveTitle}`}
                           className="p-2 rounded-lg bg-secondary hover:bg-muted border border-border text-sky-700 dark:text-sky-400 transition-colors"
                         >
                           <ExternalLink className="w-3.5 h-3.5" />
@@ -272,7 +270,7 @@ export default function Projects({ language }: ProjectsProps) {
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
                           title={t.videoTitle}
-                          aria-label={`${project.title[language]} — ${t.videoTitle}`}
+                          aria-label={`${project.title[language]} - ${t.videoTitle}`}
                           className="p-2 rounded-lg bg-secondary hover:bg-muted border border-border text-foreground transition-colors"
                         >
                           <Play className="w-3.5 h-3.5" />
@@ -285,7 +283,7 @@ export default function Projects({ language }: ProjectsProps) {
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
                           title={t.codeTitle}
-                          aria-label={`${project.title[language]} — ${t.codeTitle}`}
+                          aria-label={`${project.title[language]} - ${t.codeTitle}`}
                           className="p-2 rounded-lg bg-secondary hover:bg-muted border border-border text-foreground transition-colors"
                         >
                           <Code2 className="w-3.5 h-3.5" />

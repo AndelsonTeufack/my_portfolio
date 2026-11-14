@@ -40,7 +40,7 @@ export default function Contact({ language }: ContactProps) {
 
   const copy = {
     fr: {
-      eyebrow: '05 — CONTACT',
+      eyebrow: '05 - CONTACT',
       title: 'Échanger autour d’un projet ou d’une opportunité',
       subtitle:
         'Disponible pour discuter d’architecture logicielle, de développement full-stack/mobile critique ou de collaboration technique.',
@@ -84,7 +84,7 @@ export default function Contact({ language }: ContactProps) {
         'Une erreur est survenue lors de l’envoi. Vous pouvez me joindre directement par email.',
     },
     en: {
-      eyebrow: '05 — CONTACT',
+      eyebrow: '05 - CONTACT',
       title: 'Start an Engineering Conversation',
       subtitle:
         'Open to discussing software architecture, mission-critical full-stack/mobile delivery, or strategic technical roles.',

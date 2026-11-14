@@ -21,6 +21,12 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
           smoothWheel: true,
           wheelMultiplier: 1,
           touchMultiplier: 2,
+          prevent: (node: HTMLElement) =>
+            Boolean(
+              node?.closest?.(
+                '[data-lenis-prevent], [data-lenis-prevent-wheel], [data-lenis-prevent-touch], [role="dialog"]'
+              )
+            ),
         })
 
         function raf(time: number) {

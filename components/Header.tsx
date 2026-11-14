@@ -88,22 +88,19 @@ export default function Header({
         initial={{ y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.35, ease: 'easeOut' }}
-        className={`pointer-events-auto w-full max-w-5xl transition-all duration-300 border ${
-          isOpen ? 'rounded-2xl' : 'rounded-2xl md:rounded-full'
-        } ${
-          scrolled
+        className={`pointer-events-auto w-full max-w-5xl transition-all duration-300 border ${isOpen ? 'rounded-2xl' : 'rounded-2xl md:rounded-full'
+          } ${scrolled
             ? 'bg-white/95 dark:bg-[#11131a]/95 backdrop-blur-md border-slate-200 dark:border-white/14 shadow-sm dark:shadow-lg dark:shadow-black/40 py-2.5 px-4 sm:px-6'
             : 'bg-white/85 dark:bg-[#11131a]/80 backdrop-blur-md border-slate-200/90 dark:border-white/12 py-3 px-4 sm:px-6'
-        }`}
+          }`}
       >
         <div className="flex items-center justify-between gap-3">
           {/* Unified Identity Brand */}
           <a
             href="#"
             className="flex items-center gap-2.5 shrink-0 font-display font-bold text-sm sm:text-base tracking-tight text-slate-900 dark:text-white hover:text-sky-700 dark:hover:text-sky-400 transition-colors"
-            aria-label={`${PORTFOLIO_PROFILE.fullName} — ${
-              language === 'en' ? 'Back to top' : 'Retour en haut'
-            }`}
+            aria-label={`${PORTFOLIO_PROFILE.fullName} - ${language === 'en' ? 'Back to top' : 'Retour en haut'
+              }`}
           >
             <BrandLogo className="w-8 h-8 shrink-0" />
             <span>{PORTFOLIO_PROFILE.fullName}</span>
@@ -124,11 +121,10 @@ export default function Header({
                     e.preventDefault()
                     handleNavClick(item.href)
                   }}
-                  className={`relative px-3.5 py-1.5 text-xs font-medium rounded-full transition-colors ${
-                    isActive
+                  className={`relative px-3.5 py-1.5 text-xs font-medium rounded-full transition-colors ${isActive
                       ? 'text-sky-700 dark:text-sky-300 font-semibold'
                       : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
-                  }`}
+                    }`}
                 >
                   {isActive && (
                     <motion.span
@@ -207,11 +203,10 @@ export default function Header({
                       e.preventDefault()
                       handleNavClick(item.href)
                     }}
-                    className={`px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-                      isActive
+                    className={`px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors ${isActive
                         ? 'bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-400/30 font-semibold'
                         : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/6'
-                    }`}
+                      }`}
                   >
                     {item.name}
                   </a>

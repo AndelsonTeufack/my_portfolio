@@ -1,4 +1,4 @@
-# Plan d'implémentation — Assistant IA & Avatar Cyber "Andelson AI"
+# Plan d'implémentation - Assistant IA & Avatar Cyber "Andelson AI"
 
 > **Pour les agents :** SOUS-COMPÉTENCE REQUISE : Utilisez superpowers:subagent-driven-development ou planification pour suivre ce plan.
 

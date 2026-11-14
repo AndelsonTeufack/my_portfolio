@@ -1,4 +1,4 @@
-# Spécification de Design — Refonte Portfolio Ultra-Premium "Cyber-Minimalist Obsidian"
+# Spécification de Design - Refonte Portfolio Ultra-Premium "Cyber-Minimalist Obsidian"
 
 **Date :** 2026-07-22  
 **Auteur :** Antigravity & Andelson Teufack  
@@ -59,7 +59,7 @@ Le portfolio d'Andelson Teufack est repensé pour devenir une expérience web im
   - *"Me contacter"* (Bouton verre dépoli).
 - **Portrait / Visuel 3D :** Carte de profil avec effet de perspective 3D Tilt au survol et badge d'expérience flottant.
 
-### 3.4. Section À Propos & Vision — Bento Grid ([components/About.tsx](file:///home/andelson-teufack/Bureau/Projets/MyPortfolio/components/About.tsx))
+### 3.4. Section À Propos & Vision - Bento Grid ([components/About.tsx](file:///home/andelson-teufack/Bureau/Projets/MyPortfolio/components/About.tsx))
 - Disposition en **Grille Bento 4 cartes** :
   1. **Bio & Story :** Présentation engageante avec mise en valeur de la vision.
   2. **Compteurs de Métriques :** Chiffres clés (Années d'expérience, Projets réalisés, Technologies) avec incrémentation animée à l'apparition.

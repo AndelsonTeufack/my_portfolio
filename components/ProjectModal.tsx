@@ -47,8 +47,10 @@ export default function ProjectModal({
   useEffect(() => {
     if (!project) return
 
-    const previousOverflow = document.body.style.overflow
+    const previousBodyOverflow = document.body.style.overflow
+    const previousHtmlOverflow = document.documentElement.style.overflow
     document.body.style.overflow = 'hidden'
+    document.documentElement.style.overflow = 'hidden'
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -62,7 +64,8 @@ export default function ProjectModal({
 
     window.addEventListener('keydown', handleKeyDown)
     return () => {
-      document.body.style.overflow = previousOverflow
+      document.body.style.overflow = previousBodyOverflow
+      document.documentElement.style.overflow = previousHtmlOverflow
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [project, prevProject, nextProject, onClose, onSelectProject])
@@ -89,7 +92,7 @@ export default function ProjectModal({
       videoDemo: 'Voir la démo vidéo',
       sourceCode: 'Code source GitHub',
       confidentialNote:
-        'Application interne ou déployée sous confidentialité client — architecture et choix techniques détaillés ci-dessous.',
+        'Application interne ou déployée sous confidentialité client - architecture et choix techniques détaillés ci-dessous.',
     },
     en: {
       back: 'Back',
@@ -106,7 +109,7 @@ export default function ProjectModal({
       videoDemo: 'Watch Video Demo',
       sourceCode: 'GitHub Source Code',
       confidentialNote:
-        'Enterprise or client-confidential production system — architectural decisions and delivered scope documented below.',
+        'Enterprise or client-confidential production system - architectural decisions and delivered scope documented below.',
     },
   }
 
@@ -114,9 +117,9 @@ export default function ProjectModal({
 
   const hasAnyLink = Boolean(
     project?.playStoreUrl ||
-      project?.liveUrl ||
-      project?.videoUrl ||
-      project?.codeUrl
+    project?.liveUrl ||
+    project?.videoUrl ||
+    project?.codeUrl
   )
 
   return (
@@ -127,6 +130,7 @@ export default function ProjectModal({
           role="dialog"
           aria-modal="true"
           aria-labelledby="project-drawer-title"
+          data-lenis-prevent
         >
           {/* Backdrop */}
           <motion.div
@@ -200,7 +204,8 @@ export default function ProjectModal({
             {/* Scrollable Body */}
             <div
               ref={scrollContainerRef}
-              className="flex-1 overflow-y-auto px-5 sm:px-8 py-6 sm:py-8 space-y-8"
+              data-lenis-prevent
+              className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-5 sm:px-8 py-6 sm:py-8 space-y-8"
             >
               {/* Title & Context */}
               <div className="space-y-4 pb-6 border-b border-border">

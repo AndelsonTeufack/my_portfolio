@@ -1,4 +1,4 @@
-# Spécification Technique — SEO Mondial, Entity Branding & AI Search Optimization (GEO/SXO)
+# Spécification Technique - SEO Mondial, Entity Branding & AI Search Optimization (GEO/SXO)
 
 **Date :** 2026-07-23  
 **Auteur :** Antigravity & TEUFACK SONTSA Andelson  

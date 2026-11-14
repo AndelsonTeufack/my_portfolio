@@ -16,14 +16,14 @@ const content = {
     ctaContact: 'Contact me',
     downloadCV: 'Download CV',
     locationBadge: 'Douala',
-    imageAlt: 'Andelson TEUFACK SONTSA — Full-Stack & Mobile Developer',
+    imageAlt: 'Andelson TEUFACK SONTSA - Full-Stack & Mobile Developer',
   },
   fr: {
     ctaProjects: 'Voir mes projets',
     ctaContact: 'Me contacter',
     downloadCV: 'Télécharger le CV',
     locationBadge: 'Douala',
-    imageAlt: 'Andelson TEUFACK SONTSA — Développeur Full-Stack & Mobile',
+    imageAlt: 'Andelson TEUFACK SONTSA - Développeur Full-Stack & Mobile',
   },
 }
 

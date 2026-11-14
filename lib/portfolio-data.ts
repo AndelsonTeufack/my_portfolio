@@ -123,51 +123,51 @@ export const ENGINEERING_PILLARS: Array<{
   title: BilingualText
   description: BilingualText
 }> = [
-  {
-    id: 'mobile-offline-ai',
-    title: {
-      fr: 'Mobile offline-first',
-      en: 'Offline-first mobile',
+    {
+      id: 'mobile-offline-ai',
+      title: {
+        fr: 'Mobile offline-first',
+        en: 'Offline-first mobile',
+      },
+      description: {
+        fr: 'Flutter, synchronisation, rapports PDF/Word/Excel, assistance IA',
+        en: 'Flutter, offline sync, PDF/Word/Excel reports, AI assistance',
+      },
     },
-    description: {
-      fr: 'Flutter, synchronisation, rapports PDF/Word/Excel, assistance IA',
-      en: 'Flutter, offline sync, PDF/Word/Excel reports, AI assistance',
+    {
+      id: 'backend-security',
+      title: {
+        fr: 'Backend & API sécurisées',
+        en: 'Backend & secure APIs',
+      },
+      description: {
+        fr: 'FastAPI, Spring Boot, JWT, RBAC',
+        en: 'FastAPI, Spring Boot, JWT, RBAC',
+      },
     },
-  },
-  {
-    id: 'backend-security',
-    title: {
-      fr: 'Backend & API sécurisées',
-      en: 'Backend & secure APIs',
+    {
+      id: 'web-erp-ota',
+      title: {
+        fr: 'Plateformes web & ERP',
+        en: 'Web platforms & ERP',
+      },
+      description: {
+        fr: 'Next.js, Odoo, accès QR Code, mises à jour OTA',
+        en: 'Next.js, Odoo, QR Code access, OTA updates',
+      },
     },
-    description: {
-      fr: 'FastAPI, Spring Boot, JWT, RBAC',
-      en: 'FastAPI, Spring Boot, JWT, RBAC',
+    {
+      id: 'gis-mapping',
+      title: {
+        fr: 'SIG & données géospatiales',
+        en: 'GIS & geospatial data',
+      },
+      description: {
+        fr: 'PostGIS, KoboCollect, ESRI, GeoJSON',
+        en: 'PostGIS, KoboCollect, ESRI, GeoJSON',
+      },
     },
-  },
-  {
-    id: 'web-erp-ota',
-    title: {
-      fr: 'Plateformes web & ERP',
-      en: 'Web platforms & ERP',
-    },
-    description: {
-      fr: 'Next.js, Odoo, accès QR Code, mises à jour OTA',
-      en: 'Next.js, Odoo, QR Code access, OTA updates',
-    },
-  },
-  {
-    id: 'gis-mapping',
-    title: {
-      fr: 'SIG & données géospatiales',
-      en: 'GIS & geospatial data',
-    },
-    description: {
-      fr: 'PostGIS, KoboCollect, ESRI, GeoJSON',
-      en: 'PostGIS, KoboCollect, ESRI, GeoJSON',
-    },
-  },
-]
+  ]
 
 export const EXPERIENCES: ExperienceItem[] = [
   {
@@ -317,8 +317,8 @@ export const EXPERIENCES: ExperienceItem[] = [
     id: 'kes-intern',
     company: 'Kamer Engineering Solution',
     role: {
-      fr: 'Développeur Full-Stack (Mobile & Web) — Stagiaire',
-      en: 'Full-Stack Developer (Mobile & Web) — Intern',
+      fr: 'Développeur Full-Stack (Mobile & Web) - Stagiaire',
+      en: 'Full-Stack Developer (Mobile & Web) - Intern',
     },
     period: {
       fr: 'Mars 2026 – septembre 2026',
@@ -329,8 +329,8 @@ export const EXPERIENCES: ExperienceItem[] = [
       en: 'Douala',
     },
     summary: {
-      fr: 'Conception d’applications mobiles d’inspection offline-first assistées par IA (rapports PDF, Word, Excel — JSA, Q18, Q19), plateforme web multi-inspecteurs (QR Code, Cloudflare R2), SIG SOCAD’EL (KoboCollect/ESRI/GeoJSON) et qualification d’e-mails avec n8n.',
-      en: 'Built AI-assisted offline-first inspection mobile apps (PDF, Word, Excel — JSA, Q18, Q19), collaborative web platform (QR Code, Cloudflare R2), SOCAD’EL GIS (KoboCollect/ESRI/GeoJSON), and n8n email automation.',
+      fr: 'Conception d’applications mobiles d’inspection offline-first assistées par IA (rapports PDF, Word, Excel - JSA, Q18, Q19), plateforme web multi-inspecteurs (QR Code, Cloudflare R2), SIG SOCAD’EL (KoboCollect/ESRI/GeoJSON) et qualification d’e-mails avec n8n.',
+      en: 'Built AI-assisted offline-first inspection mobile apps (PDF, Word, Excel - JSA, Q18, Q19), collaborative web platform (QR Code, Cloudflare R2), SOCAD’EL GIS (KoboCollect/ESRI/GeoJSON), and n8n email automation.',
     },
     keyAchievements: {
       fr: [
@@ -456,8 +456,8 @@ export const EXPERIENCES: ExperienceItem[] = [
     id: 'green-power-2',
     company: 'Green Power Cameroon',
     role: {
-      fr: 'Analyste développeur de solutions IT — Stagiaire',
-      en: 'IT Solutions Analyst & Developer — Intern',
+      fr: 'Analyste développeur de solutions IT - Stagiaire',
+      en: 'IT Solutions Analyst & Developer - Intern',
     },
     period: {
       fr: 'Mai 2025 – novembre 2025',
@@ -640,8 +640,8 @@ export const EXPERIENCES: ExperienceItem[] = [
     id: 'green-power-1',
     company: 'Green Power Cameroon',
     role: {
-      fr: 'Analyste développeur de solutions IT — Stagiaire',
-      en: 'IT Solutions Analyst & Developer — Intern',
+      fr: 'Analyste développeur de solutions IT - Stagiaire',
+      en: 'IT Solutions Analyst & Developer - Intern',
     },
     period: {
       fr: 'Novembre 2024 – mai 2025',
@@ -733,8 +733,8 @@ export const EXPERIENCES: ExperienceItem[] = [
     id: 'credix-mobile',
     company: 'Credix.cam SA',
     role: {
-      fr: 'Développeur mobile — Stagiaire',
-      en: 'Mobile Developer — Intern',
+      fr: 'Développeur mobile - Stagiaire',
+      en: 'Mobile Developer - Intern',
     },
     period: {
       fr: 'Août 2024 – octobre 2024',
@@ -824,8 +824,8 @@ export const EXPERIENCES: ExperienceItem[] = [
     id: 'credix-web',
     company: 'Credix.cam SA',
     role: {
-      fr: 'Développeur web — Stagiaire',
-      en: 'Web Developer — Intern',
+      fr: 'Développeur web - Stagiaire',
+      en: 'Web Developer - Intern',
     },
     period: {
       fr: 'Juillet 2023 – septembre 2023',
@@ -917,8 +917,8 @@ export const PROJECTS: ProjectItem[] = [
   {
     id: 'mulema',
     title: {
-      fr: 'MULEMA — Apprentissage des Langues Nationales',
-      en: 'MULEMA — Native Language Learning Mobile App',
+      fr: 'MULEMA - Apprentissage des Langues Nationales',
+      en: 'MULEMA - Native Language Learning Mobile App',
     },
     category: 'mobile',
     categoryLabel: {
@@ -960,8 +960,8 @@ export const PROJECTS: ProjectItem[] = [
   {
     id: 'shikaku',
     title: {
-      fr: 'Shikaku — Jeu Mobile Multijoueur en Ligne & Local',
-      en: 'Shikaku — Online & Local Multiplayer Mobile Game',
+      fr: 'Shikaku - Jeu Mobile Multijoueur en Ligne & Local',
+      en: 'Shikaku - Online & Local Multiplayer Mobile Game',
     },
     category: 'mobile',
     categoryLabel: {
@@ -1004,8 +1004,8 @@ export const PROJECTS: ProjectItem[] = [
   {
     id: 'taillorpro',
     title: {
-      fr: 'TaillorPro — Gestion Offline-First d’Ateliers de Couture',
-      en: 'TaillorPro — Offline-First Tailoring Workshop App',
+      fr: 'TaillorPro - Gestion Offline-First d’Ateliers de Couture',
+      en: 'TaillorPro - Offline-First Tailoring Workshop App',
     },
     category: 'mobile',
     categoryLabel: {
@@ -1046,8 +1046,8 @@ export const PROJECTS: ProjectItem[] = [
   {
     id: 'momokash',
     title: {
-      fr: 'MomoKash Mobile — Migration USSD vers Flutter & Redis',
-      en: 'MomoKash Mobile — USSD-to-Flutter Fintech & Redis',
+      fr: 'MomoKash Mobile - Migration USSD vers Flutter & Redis',
+      en: 'MomoKash Mobile - USSD-to-Flutter Fintech & Redis',
     },
     category: 'mobile',
     categoryLabel: {
@@ -1089,8 +1089,8 @@ export const PROJECTS: ProjectItem[] = [
   {
     id: 'vote-iai',
     title: {
-      fr: 'Vote - IAI — Plateforme Web de Vote & Paiement Campay',
-      en: 'Vote - IAI — Paid Voting Web Platform & Campay API',
+      fr: 'Vote - IAI - Plateforme Web de Vote & Paiement Campay',
+      en: 'Vote - IAI - Paid Voting Web Platform & Campay API',
     },
     category: 'backend',
     categoryLabel: {
@@ -1131,8 +1131,8 @@ export const PROJECTS: ProjectItem[] = [
   {
     id: 'rental-desktop',
     title: {
-      fr: 'Gestion Locative Desktop — Suivi Immobilier PyQt',
-      en: 'Desktop Rental Property Manager — PyQt & MongoDB',
+      fr: 'Gestion Locative Desktop - Suivi Immobilier PyQt',
+      en: 'Desktop Rental Property Manager - PyQt & MongoDB',
     },
     category: 'automation',
     categoryLabel: {
@@ -1173,8 +1173,8 @@ export const PROJECTS: ProjectItem[] = [
   {
     id: 'credix-hrm',
     title: {
-      fr: 'Système de Gestion RH — Spring Boot, React & JWT',
-      en: 'Enterprise HR Management System — Spring Boot & React',
+      fr: 'Système de Gestion RH - Spring Boot, React & JWT',
+      en: 'Enterprise HR Management System - Spring Boot & React',
     },
     category: 'backend',
     categoryLabel: {

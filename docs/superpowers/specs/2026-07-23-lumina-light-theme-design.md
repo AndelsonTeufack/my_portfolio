@@ -1,4 +1,4 @@
-# Spécification Direction Artistique — Thème Clair "Lumina Executive Cyber"
+# Spécification Direction Artistique - Thème Clair "Lumina Executive Cyber"
 
 **Date :** 2026-07-23  
 **Auteur :** Directeur Artistique & Lead UI/UX Antigravity  

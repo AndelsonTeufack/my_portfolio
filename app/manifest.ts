@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Andelson TEUFACK SONTSA — Développeur Full-Stack & Mobile',
+    name: 'Andelson TEUFACK SONTSA - Développeur Full-Stack & Mobile',
     short_name: 'Andelson TEUFACK SONTSA',
     description:
       'Portfolio professionnel de Andelson TEUFACK SONTSA, Développeur Full-Stack & Mobile à Douala, Cameroun. Applications mobiles offline-first, plateformes web, données géospatiales et ERP.',

@@ -13,11 +13,11 @@ const OG_IMAGE = `${SITE_URL}/opengraph-image`
 export const metadata: Metadata = {
   metadataBase: new URL(CANONICAL_URL),
   title: {
-    default: `${FULL_NAME} | ${JOB_TITLE} — Douala, Cameroun`,
+    default: `${FULL_NAME} | ${JOB_TITLE} - Douala, Cameroun`,
     template: `%s | ${FULL_NAME}`,
   },
   description:
-    'Andelson TEUFACK SONTSA — Développeur Full-Stack & Mobile à Douala, Cameroun. '
+    'Andelson TEUFACK SONTSA - Développeur Full-Stack & Mobile à Douala, Cameroun. '
     + 'Applications mobiles offline-first et plateformes web pour le terrain : inspections, données géospatiales et ERP (Flutter, Next.js, FastAPI, PostgreSQL/PostGIS).',
   keywords: [
     'TEUFACK SONTSA Andelson',
@@ -49,9 +49,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: `${FULL_NAME} | ${JOB_TITLE} — Douala`,
+    title: `${FULL_NAME} | ${JOB_TITLE} - Douala`,
     description:
-      'Andelson TEUFACK SONTSA — Développeur Full-Stack & Mobile à Douala. '
+      'Andelson TEUFACK SONTSA - Développeur Full-Stack & Mobile à Douala. '
       + 'Flutter · Next.js · FastAPI · PostgreSQL/PostGIS · Odoo ERP · SIG.',
     url: CANONICAL_URL,
     siteName: `${FULL_NAME} Portfolio`,
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
         secureUrl: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: `${FULL_NAME} — ${JOB_TITLE}`,
+        alt: `${FULL_NAME} - ${JOB_TITLE}`,
         type: 'image/png',
       },
     ],
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `${FULL_NAME} | ${JOB_TITLE}`,
     description:
-      'Andelson TEUFACK SONTSA — Douala · Flutter · Next.js · FastAPI · PostgreSQL/PostGIS · Odoo ERP',
+      'Andelson TEUFACK SONTSA - Douala · Flutter · Next.js · FastAPI · PostgreSQL/PostGIS · Odoo ERP',
     images: [{ url: OG_IMAGE, alt: `${FULL_NAME} Portfolio` }],
   },
   robots: {
@@ -133,7 +133,7 @@ const jsonLdGraph = {
       image: {
         '@type': 'ImageObject',
         url: `${CANONICAL_URL}/hero.jpg`,
-        caption: `${FULL_NAME} — ${JOB_TITLE}`,
+        caption: `${FULL_NAME} - ${JOB_TITLE}`,
       },
       jobTitle: JOB_TITLE,
       description:
@@ -210,7 +210,7 @@ const jsonLdGraph = {
       '@type': 'ProfilePage',
       '@id': `${CANONICAL_URL}/#profilepage`,
       url: CANONICAL_URL,
-      name: `${FULL_NAME} — Official Professional Portfolio Page`,
+      name: `${FULL_NAME} - Official Professional Portfolio Page`,
       isPartOf: { '@id': `${CANONICAL_URL}/#website` },
       primaryImageOfPage: { '@type': 'ImageObject', url: `${CANONICAL_URL}/hero.jpg` },
       mainEntity: { '@id': `${CANONICAL_URL}/#person` },

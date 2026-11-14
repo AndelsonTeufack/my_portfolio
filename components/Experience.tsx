@@ -23,13 +23,13 @@ export default function Experience({ language }: ExperienceProps) {
 
   const copy = {
     fr: {
-      eyebrow: '02 — Expériences',
+      eyebrow: '02 - Expériences',
       title: 'Expériences',
       currentBadge: 'Poste actuel',
       detailsCta: 'Détails',
     },
     en: {
-      eyebrow: '02 — Experience',
+      eyebrow: '02 - Experience',
       title: 'Experience',
       currentBadge: 'Current role',
       detailsCta: 'Details',
@@ -92,41 +92,37 @@ export default function Experience({ language }: ExperienceProps) {
               >
                 {/* Timeline Marker Node */}
                 <div
-                  className={`absolute -left-8 sm:-left-10 top-6 w-6 h-6 rounded-full border flex items-center justify-center z-10 ${
-                    exp.isCurrent
+                  className={`absolute -left-8 sm:-left-10 top-6 w-6 h-6 rounded-full border flex items-center justify-center z-10 ${exp.isCurrent
                       ? 'bg-emerald-500/15 border-emerald-500 text-emerald-600 dark:text-emerald-400'
                       : 'bg-background border-slate-300 dark:border-white/25'
-                  }`}
+                    }`}
                   aria-hidden="true"
                 >
                   <span
-                    className={`w-2 h-2 rounded-full ${
-                      exp.isCurrent
+                    className={`w-2 h-2 rounded-full ${exp.isCurrent
                         ? 'bg-emerald-500'
                         : 'bg-sky-600 dark:bg-sky-400'
-                    }`}
+                      }`}
                   />
                 </div>
 
                 <SpotlightCard
                   interactive={hasDetails}
                   onClick={hasDetails ? () => setSelectedExperience(exp) : undefined}
-                  className={`rounded-2xl transition-colors ${
-                    isFeatured
+                  className={`rounded-2xl transition-colors ${isFeatured
                       ? 'p-6 sm:p-8 border-sky-500/35 dark:border-sky-400/30'
                       : 'p-5 sm:p-6'
-                  } ${hasDetails ? 'cursor-pointer group' : ''}`}
+                    } ${hasDetails ? 'cursor-pointer group' : ''}`}
                 >
                   <div className="space-y-4">
                     {/* Card Header: Title + Optional Current Badge + Single Meta Line */}
                     <div className="space-y-1.5">
                       <div className="flex flex-wrap items-start justify-between gap-3">
                         <h3
-                          className={`font-bold font-display text-slate-900 dark:text-white leading-snug ${
-                            isFeatured
+                          className={`font-bold font-display text-slate-900 dark:text-white leading-snug ${isFeatured
                               ? 'text-xl sm:text-2xl group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors'
                               : 'text-lg sm:text-xl'
-                          }`}
+                            }`}
                         >
                           {exp.role[language]}
                         </h3>

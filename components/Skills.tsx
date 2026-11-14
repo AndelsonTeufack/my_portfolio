@@ -44,7 +44,7 @@ export default function Skills({ language }: SkillsProps) {
 
   const copy = {
     fr: {
-      eyebrow: '04 — COMPÉTENCES & LANGUES',
+      eyebrow: '04 - COMPÉTENCES & LANGUES',
       title: 'Matrice Technique, Méthodes & Langues',
       subtitle:
         'Un socle d’ingénierie structuré autour du développement applicatif critique, de l’architecture sécurisée, des données et des outils terrain.',
@@ -59,7 +59,7 @@ export default function Skills({ language }: SkillsProps) {
       interestsTitle: 'Centres d’Intérêt',
     },
     en: {
-      eyebrow: '04 — SKILLS & LANGUAGES',
+      eyebrow: '04 - SKILLS & LANGUAGES',
       title: 'Engineering Matrix, Soft Skills & Languages',
       subtitle:
         'A structured engineering toolkit spanning mission-critical applications, secure APIs, relational/spatial data, DevOps, and AI-assisted systems.',

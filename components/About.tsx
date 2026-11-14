@@ -29,7 +29,7 @@ export default function About({ language }: AboutProps) {
 
   const copy = {
     fr: {
-      eyebrow: '01 — À propos',
+      eyebrow: '01 - À propos',
       title: 'De l’inspection terrain à la plateforme web',
       bio: 'Développeur Full-Stack chez Kamer Engineering Solution, je pilote la digitalisation des inspections électriques et techniques : applications mobiles utilisables sans réseau, génération automatique de rapports, plateformes web collaboratives. Avant cela : fintech (Credix.cam), maintenance (Green Power) et enseignement du développement à l’IAI.',
       metrics: [
@@ -43,7 +43,7 @@ export default function About({ language }: AboutProps) {
       certTitle: 'Certification professionnelle',
     },
     en: {
-      eyebrow: '01 — About',
+      eyebrow: '01 - About',
       title: 'From field inspection to web platform',
       bio: 'Full-Stack Developer at Kamer Engineering Solution, I lead the digitalization of electrical and technical inspections: offline-capable mobile apps, automated report generation, and collaborative web platforms. Previously: fintech (Credix.cam), maintenance systems (Green Power), and software development teaching at IAI.',
       metrics: [
@@ -164,11 +164,10 @@ export default function About({ language }: AboutProps) {
                       </div>
                       <div className="text-right shrink-0">
                         <span
-                          className={`inline-block px-2.5 py-0.5 rounded-md border text-[11px] font-mono font-semibold ${
-                            isInProgress
+                          className={`inline-block px-2.5 py-0.5 rounded-md border text-[11px] font-mono font-semibold ${isInProgress
                               ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-700 dark:text-emerald-300'
                               : 'bg-sky-50 dark:bg-sky-500/15 border-sky-200 dark:border-sky-400/25 text-sky-700 dark:text-sky-300'
-                          }`}
+                            }`}
                         >
                           {edu.period[language]}
                         </span>

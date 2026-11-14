@@ -1,4 +1,4 @@
-# Spécification de Design & Storytelling — Expérience de Formateur IAI & Leadership Technique
+# Spécification de Design & Storytelling - Expérience de Formateur IAI & Leadership Technique
 
 **Date :** 2026-07-23  
 **Auteur :** Antigravity & TEUFACK SONTSA Andelson  

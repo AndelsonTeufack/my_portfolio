@@ -46,8 +46,10 @@ export default function ExperienceDrawer({
   useEffect(() => {
     if (!experience) return
 
-    const previousOverflow = document.body.style.overflow
+    const previousBodyOverflow = document.body.style.overflow
+    const previousHtmlOverflow = document.documentElement.style.overflow
     document.body.style.overflow = 'hidden'
+    document.documentElement.style.overflow = 'hidden'
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -61,7 +63,8 @@ export default function ExperienceDrawer({
 
     window.addEventListener('keydown', handleKeyDown)
     return () => {
-      document.body.style.overflow = previousOverflow
+      document.body.style.overflow = previousBodyOverflow
+      document.documentElement.style.overflow = previousHtmlOverflow
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [experience, prevExperience, nextExperience, onClose, onSelectExperience])
@@ -114,6 +117,7 @@ export default function ExperienceDrawer({
           role="dialog"
           aria-modal="true"
           aria-labelledby="experience-drawer-title"
+          data-lenis-prevent
         >
           {/* Backdrop */}
           <motion.div
@@ -132,6 +136,7 @@ export default function ExperienceDrawer({
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', stiffness: 320, damping: 34 }}
+            data-lenis-prevent
             className="relative z-10 w-full max-w-2xl h-dvh bg-background border-l border-border shadow-2xl flex flex-col overflow-hidden"
           >
             {/* Sticky Top Bar */}
@@ -195,7 +200,8 @@ export default function ExperienceDrawer({
             {/* Scrollable Body */}
             <div
               ref={scrollContainerRef}
-              className="flex-1 overflow-y-auto px-5 sm:px-8 py-6 sm:py-8 space-y-8"
+              data-lenis-prevent
+              className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-5 sm:px-8 py-6 sm:py-8 space-y-8"
             >
               {/* Organization & Role Header */}
               <div className="space-y-4 pb-6 border-b border-border">
