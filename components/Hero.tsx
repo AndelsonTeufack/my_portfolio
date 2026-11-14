@@ -12,6 +12,7 @@ interface HeroProps {
 
 const content = {
   en: {
+    currentContext: 'Currently at Kamer Engineering Solution.',
     ctaProjects: 'View my projects',
     ctaContact: 'Contact me',
     downloadCV: 'Download CV',
@@ -19,6 +20,7 @@ const content = {
     imageAlt: 'Andelson TEUFACK SONTSA - Full-Stack & Mobile Developer',
   },
   fr: {
+    currentContext: 'Actuellement chez Kamer Engineering Solution.',
     ctaProjects: 'Voir mes projets',
     ctaContact: 'Me contacter',
     downloadCV: 'Télécharger le CV',
@@ -73,22 +75,22 @@ export default function Hero({ language }: HeroProps) {
             variants={containerVariants}
             className="lg:col-span-7 space-y-6 text-left"
           >
-            {/* Name & Primary Role */}
-            <motion.div variants={itemVariants} className="space-y-2.5">
+            {/* Name & Positioning */}
+            <motion.div variants={itemVariants} className="space-y-3">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight font-display text-slate-900 dark:text-white leading-[1.08]">
                 {PORTFOLIO_PROFILE.fullName}
               </h1>
-              <h2 className="text-xl sm:text-2xl font-semibold text-sky-700 dark:text-sky-400 leading-snug">
-                {PORTFOLIO_PROFILE.currentRoleHeadline[language]}
+              <h2 className="text-lg sm:text-xl font-semibold text-sky-700 dark:text-sky-400 leading-snug">
+                {PORTFOLIO_PROFILE.heroDescription[language]}
               </h2>
             </motion.div>
 
-            {/* Concise Value Proposition */}
+            {/* Concise Context */}
             <motion.p
               variants={itemVariants}
               className="text-base sm:text-lg text-slate-700 dark:text-slate-200 leading-relaxed max-w-2xl"
             >
-              {PORTFOLIO_PROFILE.heroDescription[language]}
+              {t.currentContext}
             </motion.p>
 
             {/* Focused Stack (4 chips) */}

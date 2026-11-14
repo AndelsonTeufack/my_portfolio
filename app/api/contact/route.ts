@@ -1,15 +1,91 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT_MAX_REQUESTS = 5;
+const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function getClientIp(request: Request): string {
+  const forwarded = request.headers.get('x-forwarded-for');
+  if (forwarded) {
+    return forwarded.split(',')[0].trim();
+  }
+  return request.headers.get('x-real-ip')?.trim() || 'unknown';
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  if (rateLimitStore.size > 1000) {
+    for (const [key, entry] of rateLimitStore.entries()) {
+      if (now > entry.resetAt) {
+        rateLimitStore.delete(key);
+      }
+    }
+  }
+
+  const existing = rateLimitStore.get(ip);
+  if (!existing || now > existing.resetAt) {
+    rateLimitStore.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+
+  if (existing.count >= RATE_LIMIT_MAX_REQUESTS) {
+    return true;
+  }
+
+  existing.count += 1;
+  return false;
+}
+
 export async function POST(request: Request) {
   try {
-    const { name, email, message } = await request.json();
-
-    // Validation des champs obligatoires
-    if (!name || !email || !message) {
+    const clientIp = getClientIp(request);
+    if (isRateLimited(clientIp)) {
       return NextResponse.json(
-        { error: 'Tous les champs sont requis.' },
+        { error: 'Trop de requêtes. Veuillez réessayer dans quelques minutes.' },
+        { status: 429 }
+      );
+    }
+
+    const body = await request.json();
+    const rawName = typeof body?.name === 'string' ? body.name.trim() : '';
+    const rawEmail = typeof body?.email === 'string' ? body.email.trim() : '';
+    const rawInquiryType =
+      typeof body?.inquiryType === 'string' && body.inquiryType.trim()
+        ? body.inquiryType.trim().slice(0, 60)
+        : 'Général';
+    const rawMessage = typeof body?.message === 'string' ? body.message.trim() : '';
+    const honeypot = typeof body?.website === 'string' ? body.website.trim() : '';
+
+    // Honeypot anti-spam : réponse silencieuse sans envoi d'email
+    if (honeypot.length > 0) {
+      return NextResponse.json({
+        success: true,
+        message: 'Message traité.',
+      });
+    }
+
+    // Validation stricte des champs obligatoires
+    if (
+      rawName.length < 2 ||
+      rawName.length > 120 ||
+      !EMAIL_REGEX.test(rawEmail) ||
+      rawMessage.length < 5 ||
+      rawMessage.length > 5000
+    ) {
+      return NextResponse.json(
+        { error: 'Veuillez renseigner un nom, un email valide et un message (min. 5 caractères).' },
         { status: 400 }
+      );
+    }
+
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      console.error('Configuration SMTP manquante (EMAIL_USER / EMAIL_PASS).');
+      return NextResponse.json(
+        { error: 'Le service d’envoi est temporairement indisponible.' },
+        { status: 503 }
       );
     }
 
@@ -35,9 +111,12 @@ export async function POST(request: Request) {
       second: '2-digit',
     });
 
-    const safeName = escapeHtml(name);
-    const safeEmail = escapeHtml(email);
-    const safeMessage = escapeHtml(message).replace(/\n/g, '<br/>');
+    const safeName = escapeHtml(rawName);
+    const safeEmail = escapeHtml(rawEmail);
+    const safeInquiryType = escapeHtml(rawInquiryType);
+    const safeMessage = escapeHtml(rawMessage).replace(/\n/g, '<br/>');
+    const cleanSubjectName = rawName.replace(/[\r\n]+/g, ' ');
+    const cleanSubjectType = rawInquiryType.replace(/[\r\n]+/g, ' ');
 
     // Template HTML Cyber-Minimalist Obsidian (compatible Gmail, Outlook, Apple Mail)
     const htmlTemplate = `
@@ -46,7 +125,7 @@ export async function POST(request: Request) {
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Nouveau Message - Portfolio TEUFACK SONTSA Andelson</title>
+        <title>Nouveau Message - Portfolio Andelson TEUFACK SONTSA</title>
         <style>
           * { margin: 0; padding: 0; box-sizing: border-box; }
           body {
@@ -231,12 +310,16 @@ export async function POST(request: Request) {
             <br/>
             <div class="status-pill">● Message Direct Portfolio</div>
             <h1>Nouveau Message Reçu</h1>
-            <p>Formulaire de contact · TEUFACK SONTSA Andelson</p>
+            <p>Formulaire de contact · Andelson TEUFACK SONTSA</p>
           </div>
 
           <div class="body-content">
             <span class="section-tag">// 01. EXPÉDITEUR</span>
             <div class="info-card">
+              <div class="info-row">
+                <span class="info-label">Type de demande :</span>
+                <span class="info-val">${safeInquiryType}</span>
+              </div>
               <div class="info-row">
                 <span class="info-label">Nom complet :</span>
                 <span class="info-val">${safeName}</span>
@@ -273,7 +356,7 @@ export async function POST(request: Request) {
               <a href="https://andelson-teufack.dev" target="_blank">Site Web</a>
             </div>
             <div class="copyright">
-              © ${new Date().getFullYear()} TEUFACK SONTSA Andelson · Full-Stack Developer & IT Analyst
+              © ${new Date().getFullYear()} Andelson TEUFACK SONTSA · Développeur Full-Stack & Mobile
             </div>
           </div>
         </div>
@@ -285,22 +368,23 @@ export async function POST(request: Request) {
       ======================================================
       NOUVEAU MESSAGE CLIENT / RECRUTEUR (PORTFOLIO)
       ======================================================
-      Nom: ${name}
-      Email: ${email}
+      Type de demande: ${rawInquiryType}
+      Nom: ${rawName}
+      Email: ${rawEmail}
       Date: ${formattedTime}
       
       ------------------------------------------------------
       MESSAGE:
       ------------------------------------------------------
-      ${message}
+      ${rawMessage}
       ======================================================
     `;
 
     const mailOptions = {
-      from: `"Portfolio TEUFACK SONTSA Andelson" <${process.env.EMAIL_USER}>`,
+      from: `"Portfolio Andelson TEUFACK SONTSA" <${process.env.EMAIL_USER}>`,
       to: 'teufackandelson123@gmail.com',
-      replyTo: email,
-      subject: `📬 [PORTFOLIO] Nouveau message de ${name}`,
+      replyTo: rawEmail,
+      subject: `📬 [PORTFOLIO · ${cleanSubjectType}] Nouveau message de ${cleanSubjectName}`,
       text: textTemplate,
       html: htmlTemplate,
     };

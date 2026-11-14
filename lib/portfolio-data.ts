@@ -117,8 +117,8 @@ export const PORTFOLIO_PROFILE = {
     en: 'Douala, Cameroon',
   },
   heroDescription: {
-    fr: 'Je conçois des applications mobiles offline-first et des plateformes web pour le terrain : inspections, données géospatiales, ERP. Actuellement chez Kamer Engineering Solution, Douala.',
-    en: 'I build offline-first mobile applications and web platforms for field operations: inspections, geospatial data, and ERP. Currently at Kamer Engineering Solution, Douala.',
+    fr: 'Développeur Full-Stack & Mobile · Applications terrain, Web & ERP · Douala, Cameroun',
+    en: 'Full-Stack & Mobile Developer · Field Apps, Web Platforms & ERP · Douala, Cameroon',
   },
   location: {
     fr: 'Douala, Cameroun (GMT+1)',
