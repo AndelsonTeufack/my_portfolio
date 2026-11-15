@@ -1,14 +1,29 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, type ReactNode } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Send, Loader2, Trash2, Copy, Check, Bot, User, CornerDownLeft } from 'lucide-react'
+import {
+  X,
+  Send,
+  Loader2,
+  Trash2,
+  Copy,
+  Check,
+  Bot,
+  User,
+  CornerDownLeft,
+  ArrowUpRight,
+  Download,
+  ChevronRight,
+} from 'lucide-react'
+import { type ChatAction } from '@/lib/chatbot/knowledge-graph'
 
 interface Message {
   id: string
   role: 'user' | 'assistant'
   content: string
   timestamp: string
+  actions?: ChatAction[]
 }
 
 interface AIChatModalProps {
@@ -36,30 +51,179 @@ const suggestedQuestions = {
   ],
 }
 
+function getSafeHref(url: string): string | null {
+  if (/^(https?:\/\/|mailto:|tel:|\/)/i.test(url.trim())) {
+    return url.trim()
+  }
+  return null
+}
+
+function renderInlineMarkdown(text: string): ReactNode[] {
+  const tokenRegex = /(\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*|`([^`]+)`|\*([^*]+)\*)/g
+  const nodes: ReactNode[] = []
+  let lastIdx = 0
+  let match: RegExpExecArray | null
+
+  while ((match = tokenRegex.exec(text)) !== null) {
+    if (match.index > lastIdx) {
+      nodes.push(text.slice(lastIdx, match.index))
+    }
+
+    if (match[2] && match[3]) {
+      const safeHref = getSafeHref(match[3])
+      if (safeHref) {
+        nodes.push(
+          <a
+            key={match.index}
+            href={safeHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sky-600 dark:text-sky-400 underline underline-offset-2 hover:text-sky-500 transition-colors font-medium"
+          >
+            {match[2]}
+          </a>
+        )
+      } else {
+        nodes.push(match[2])
+      }
+    } else if (match[4]) {
+      nodes.push(
+        <strong key={match.index} className="font-semibold text-foreground">
+          {match[4]}
+        </strong>
+      )
+    } else if (match[5]) {
+      nodes.push(
+        <code
+          key={match.index}
+          className="px-1.5 py-0.5 rounded bg-slate-200/80 dark:bg-white/10 font-mono text-[11px] text-sky-700 dark:text-sky-300"
+        >
+          {match[5]}
+        </code>
+      )
+    } else if (match[6]) {
+      nodes.push(
+        <em key={match.index} className="italic opacity-90">
+          {match[6]}
+        </em>
+      )
+    }
+
+    lastIdx = tokenRegex.lastIndex
+  }
+
+  if (lastIdx < text.length) {
+    nodes.push(text.slice(lastIdx))
+  }
+
+  return nodes
+}
+
+function renderMarkdownContent(content: string): ReactNode {
+  const lines = content.split('\n')
+  const blocks: ReactNode[] = []
+
+  lines.forEach((line, idx) => {
+    const trimmed = line.trim()
+
+    if (!trimmed) {
+      blocks.push(<div key={`sp-${idx}`} className="h-1.5" />)
+      return
+    }
+
+    if (/^---+$/.test(trimmed)) {
+      blocks.push(<hr key={`hr-${idx}`} className="my-2 border-slate-200/70 dark:border-white/10" />)
+      return
+    }
+
+    if (trimmed.startsWith('> ')) {
+      blocks.push(
+        <div
+          key={`bq-${idx}`}
+          className="pl-3 py-0.5 my-1 border-l-2 border-sky-500/60 text-slate-600 dark:text-slate-300"
+        >
+          {renderInlineMarkdown(trimmed.slice(2))}
+        </div>
+      )
+      return
+    }
+
+    const subBulletMatch = line.match(/^\s{2,}[*-]\s+(.*)$/)
+    if (subBulletMatch) {
+      blocks.push(
+        <div key={`sub-${idx}`} className="flex items-start gap-2 pl-4 leading-relaxed">
+          <span className="mt-2 h-1 w-1 rounded-full bg-slate-400 shrink-0" />
+          <span>{renderInlineMarkdown(subBulletMatch[1])}</span>
+        </div>
+      )
+      return
+    }
+
+    const bulletMatch = trimmed.match(/^[*-]\s+(.*)$/)
+    if (bulletMatch) {
+      blocks.push(
+        <div key={`li-${idx}`} className="flex items-start gap-2 pl-0.5 leading-relaxed">
+          <span className="mt-2 h-1.5 w-1.5 rounded-full bg-sky-500 dark:bg-sky-400 shrink-0" />
+          <span>{renderInlineMarkdown(bulletMatch[1])}</span>
+        </div>
+      )
+      return
+    }
+
+    const numberedMatch = trimmed.match(/^(\d+\.)\s+(.*)$/)
+    if (numberedMatch) {
+      blocks.push(
+        <div key={`ol-${idx}`} className="flex items-start gap-2 pl-0.5 leading-relaxed">
+          <span className="font-mono text-[11px] text-sky-600 dark:text-sky-400 font-semibold mt-0.5 shrink-0">
+            {numberedMatch[1]}
+          </span>
+          <span>{renderInlineMarkdown(numberedMatch[2])}</span>
+        </div>
+      )
+      return
+    }
+
+    blocks.push(
+      <p key={`p-${idx}`} className="leading-relaxed">
+        {renderInlineMarkdown(trimmed)}
+      </p>
+    )
+  })
+
+  return <div className="space-y-1 font-sans">{blocks}</div>
+}
+
+function buildWelcomeMessage(language: 'en' | 'fr'): Message {
+  return {
+    id: 'welcome',
+    role: 'assistant',
+    content:
+      language === 'en'
+        ? 'Hello! I am **Andelson’s Assistant**, powered by his verified engineering knowledge base.\n\nAsk me anything about his lead role at **Kamer Engineering Solution**, his projects (**Laoshi Consulting**, offline-first Flutter apps, **SOCAD’EL GIS**, **MomoKash**), his stack, or his CV.'
+        : 'Bonjour ! Je suis **l’Assistant d’Andelson**, adossé à sa base de connaissances d’ingénierie vérifiée.\n\nPosez-moi vos questions sur son rôle chez **Kamer Engineering Solution**, ses projets (**Laoshi Consulting**, apps Flutter offline-first, **SIG SOCAD’EL**, **MomoKash**), sa stack ou son CV !',
+    timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+  }
+}
+
 export default function AIChatModal({ isOpen, onClose, language }: AIChatModalProps) {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [copiedId, setCopiedId] = useState<string | null>(null)
+  const [dynamicSuggestions, setDynamicSuggestions] = useState<string[] | null>(null)
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  const activeSuggestions = language === 'en' ? suggestedQuestions.en : suggestedQuestions.fr
+  const activeSuggestions =
+    dynamicSuggestions ?? (language === 'en' ? suggestedQuestions.en : suggestedQuestions.fr)
 
-  // Initialize Welcome Message
+  // Initialize Welcome Message & refresh if user toggles language before chatting
   useEffect(() => {
     if (messages.length === 0) {
-      setMessages([
-        {
-          id: 'welcome',
-          role: 'assistant',
-          content:
-            language === 'en'
-              ? 'Hello! I am **Andelson AI**, the official digital extension of TEUFACK SONTSA Andelson.\n\nAsk me anything about his software engineering track record, Flutter & Spring Boot projects, or technical expertise!'
-              : 'Bonjour ! Je suis **Andelson AI**, l\'extension numérique officielle de TEUFACK SONTSA Andelson.\n\nPosez-moi n\'importe quelle question sur son parcours d\'ingénieur, ses projets Flutter & Spring Boot ou ses compétences !',
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        },
-      ])
+      setMessages([buildWelcomeMessage(language)])
+    } else if (messages.length === 1 && messages[0].id === 'welcome') {
+      setMessages([buildWelcomeMessage(language)])
+      setDynamicSuggestions(null)
     }
   }, [language, messages.length])
 
@@ -86,6 +250,16 @@ export default function AIChatModal({ isOpen, onClose, language }: AIChatModalPr
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isOpen, onClose])
 
+  const handleActionClick = (action: ChatAction) => {
+    if (action.type === 'scroll') {
+      onClose()
+      setTimeout(() => {
+        const el = document.querySelector(action.target)
+        el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 150)
+    }
+  }
+
   const handleSend = async (textToSend?: string) => {
     const text = (textToSend || input).trim()
     if (!text || isLoading) return
@@ -102,10 +276,12 @@ export default function AIChatModal({ isOpen, onClose, language }: AIChatModalPr
     setIsLoading(true)
 
     try {
-      const apiMessages = [...messages, userMsg].map((m) => ({
-        role: m.role,
-        content: m.content,
-      }))
+      const apiMessages = [...messages, userMsg]
+        .filter((m) => m.id !== 'welcome')
+        .map((m) => ({
+          role: m.role,
+          content: m.content,
+        }))
 
       const res = await fetch('/api/chat', {
         method: 'POST',
@@ -114,13 +290,20 @@ export default function AIChatModal({ isOpen, onClose, language }: AIChatModalPr
       })
 
       const data = await res.json()
-      const replyText = data.reply || (language === 'en' ? 'I could not generate a response.' : 'Impossible de générer une réponse.')
+      const replyText =
+        data.reply ||
+        (language === 'en' ? 'I could not generate a response.' : 'Impossible de générer une réponse.')
 
       const assistantMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
         content: replyText,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        actions: Array.isArray(data.actions) ? data.actions : undefined,
+      }
+
+      if (Array.isArray(data.followUpSuggestions) && data.followUpSuggestions.length > 0) {
+        setDynamicSuggestions(data.followUpSuggestions)
       }
 
       setMessages((prev) => [...prev, assistantMsg])
@@ -129,7 +312,10 @@ export default function AIChatModal({ isOpen, onClose, language }: AIChatModalPr
       const errorMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: language === 'en' ? 'An error occurred. Please try again.' : 'Une erreur s\'est produite. Veuillez réessayer.',
+        content:
+          language === 'en'
+            ? 'An error occurred. Please try again.'
+            : 'Une erreur s\'est produite. Veuillez réessayer.',
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       }
       setMessages((prev) => [...prev, errorMsg])
@@ -145,7 +331,8 @@ export default function AIChatModal({ isOpen, onClose, language }: AIChatModalPr
   }
 
   const handleClear = () => {
-    setMessages([])
+    setDynamicSuggestions(null)
+    setMessages([buildWelcomeMessage(language)])
   }
 
   return (
@@ -236,7 +423,61 @@ export default function AIChatModal({ isOpen, onClose, language }: AIChatModalPr
                         : 'editorial-surface text-foreground shadow-xs'
                     }`}
                   >
-                    <div className="whitespace-pre-wrap font-sans">{msg.content}</div>
+                    {msg.role === 'assistant' ? (
+                      renderMarkdownContent(msg.content)
+                    ) : (
+                      <div className="whitespace-pre-wrap font-sans">{msg.content}</div>
+                    )}
+
+                    {msg.role === 'assistant' && msg.actions && msg.actions.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 mt-3 pt-2.5 border-t border-slate-200/60 dark:border-white/10">
+                        {msg.actions.map((action, actionIdx) => {
+                          const pillClass =
+                            'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-sky-500/10 hover:bg-sky-500/20 border border-sky-500/25 text-[11px] font-medium text-sky-700 dark:text-sky-300 transition-colors cursor-pointer'
+
+                          if (action.type === 'scroll') {
+                            return (
+                              <button
+                                key={`${action.target}-${actionIdx}`}
+                                type="button"
+                                onClick={() => handleActionClick(action)}
+                                className={pillClass}
+                              >
+                                <ChevronRight className="w-3 h-3 shrink-0" />
+                                <span>{action.label}</span>
+                              </button>
+                            )
+                          }
+
+                          if (action.type === 'download') {
+                            return (
+                              <a
+                                key={`${action.target}-${actionIdx}`}
+                                href={action.target}
+                                download
+                                className={pillClass}
+                              >
+                                <Download className="w-3 h-3 shrink-0" />
+                                <span>{action.label}</span>
+                              </a>
+                            )
+                          }
+
+                          return (
+                            <a
+                              key={`${action.target}-${actionIdx}`}
+                              href={action.target}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={pillClass}
+                            >
+                              <ArrowUpRight className="w-3 h-3 shrink-0" />
+                              <span>{action.label}</span>
+                            </a>
+                          )
+                        })}
+                      </div>
+                    )}
 
                     <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-200/50 dark:border-white/5 text-[10px] opacity-70">
                       <span>{msg.timestamp}</span>
