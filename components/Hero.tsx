@@ -66,13 +66,23 @@ export default function Hero({ language }: HeroProps) {
             className="lg:col-span-7 space-y-6 text-left"
           >
             {/* Name & Positioning */}
-            <motion.div variants={itemVariants} className="space-y-3">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight font-display text-slate-900 dark:text-white leading-[1.08]">
-                {PORTFOLIO_PROFILE.fullName}
+            <motion.div variants={itemVariants} className="space-y-2.5">
+              <h1 className="text-[clamp(1.65rem,1.05rem+2.8vw,3.75rem)] font-extrabold tracking-tight font-display text-slate-900 dark:text-white leading-[1.08] text-balance">
+                <span className="block">Andelson</span>
+                <span className="block">TEUFACK SONTSA</span>
               </h1>
-              <h2 className="text-lg sm:text-xl font-semibold text-sky-700 dark:text-sky-400 leading-snug">
-                {PORTFOLIO_PROFILE.heroDescription[language]}
-              </h2>
+              <div className="space-y-1.5">
+                <h2 className="text-lg sm:text-xl font-semibold text-sky-700 dark:text-sky-400 leading-snug text-balance">
+                  {PORTFOLIO_PROFILE.title[language]}
+                </h2>
+                <p className="inline-flex items-center gap-2 text-sm sm:text-base font-medium text-slate-600 dark:text-slate-400">
+                  <MapPin
+                    className="w-4 h-4 text-slate-900 dark:text-white shrink-0"
+                    aria-hidden="true"
+                  />
+                  <span>{PORTFOLIO_PROFILE.availabilityBadge[language]}</span>
+                </p>
+              </div>
             </motion.div>
 
             {/* Concise Context */}
