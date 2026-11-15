@@ -16,7 +16,6 @@ import {
   Cpu,
   Lock,
 } from 'lucide-react'
-import ProjectPreview from '@/components/ui/ProjectPreview'
 import type { ProjectItem, Language } from '@/lib/portfolio-data'
 
 interface ProjectModalProps {
@@ -208,16 +207,8 @@ export default function ProjectModal({
               data-lenis-prevent
               className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-5 sm:px-8 py-6 sm:py-8 space-y-8"
             >
-              {/* Preview & Title Context */}
+              {/* Title Context */}
               <div className="space-y-4 pb-6 border-b border-border">
-                {project.previewType && (
-                  <ProjectPreview
-                    previewType={project.previewType}
-                    variant="modal"
-                    language={language}
-                  />
-                )}
-
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/15 text-xs font-mono font-medium text-foreground">
                     {project.roleBadge[language]}

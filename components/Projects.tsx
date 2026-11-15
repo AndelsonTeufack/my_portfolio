@@ -10,7 +10,6 @@ import {
   Code2,
 } from 'lucide-react'
 import SpotlightCard from '@/components/ui/SpotlightCard'
-import ProjectPreview from '@/components/ui/ProjectPreview'
 import ProjectModal from '@/components/ProjectModal'
 import {
   PROJECTS,
@@ -191,61 +190,51 @@ export default function Projects({ language }: ProjectsProps) {
               }
               className="p-6 sm:p-8 rounded-2xl border-sky-500/35 dark:border-sky-400/30 cursor-pointer group"
             >
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-                {leadProject.previewType && (
-                  <div className="lg:col-span-5">
-                    <ProjectPreview
-                      previewType={leadProject.previewType}
-                      variant="featured"
-                      language={language}
-                    />
+              <div className="space-y-4">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/15 text-[11px] font-mono font-medium text-slate-800 dark:text-slate-200">
+                    {leadProject.roleBadge[language]}
+                  </span>
+                  <span
+                    className={`px-2.5 py-0.5 rounded-full border text-[11px] font-mono font-semibold ${getStatusBadgeClasses(
+                      leadProject.statusTone
+                    )}`}
+                  >
+                    {leadProject.statusBadge[language]}
+                  </span>
+                </div>
+
+                <div className="space-y-1.5">
+                  <h3 className="text-2xl sm:text-3xl font-bold font-display text-slate-900 dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors">
+                    {leadProject.title[language]}
+                  </h3>
+                  <p className="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed max-w-4xl">
+                    {leadProject.summary[language]}
+                  </p>
+                </div>
+
+                {(leadProject.problemSolution || leadProject.resultSummary) && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm leading-relaxed pt-1">
+                    {leadProject.problemSolution && (
+                      <p className="text-slate-700 dark:text-slate-200 border-l-2 border-sky-500/40 pl-3.5 py-0.5">
+                        <span className="font-semibold text-slate-900 dark:text-white">
+                          {t.problemSolutionLabel}{' '}
+                        </span>
+                        {leadProject.problemSolution[language]}
+                      </p>
+                    )}
+                    {leadProject.resultSummary && (
+                      <p className="text-slate-700 dark:text-slate-300 border-l-2 border-emerald-500/40 pl-3.5 py-0.5">
+                        <span className="font-semibold text-slate-900 dark:text-white">
+                          {t.resultLabel}{' '}
+                        </span>
+                        {leadProject.resultSummary[language]}
+                      </p>
+                    )}
                   </div>
                 )}
 
-                <div className="lg:col-span-7 space-y-4">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/15 text-[11px] font-mono font-medium text-slate-800 dark:text-slate-200">
-                      {leadProject.roleBadge[language]}
-                    </span>
-                    <span
-                      className={`px-2.5 py-0.5 rounded-full border text-[11px] font-mono font-semibold ${getStatusBadgeClasses(
-                        leadProject.statusTone
-                      )}`}
-                    >
-                      {leadProject.statusBadge[language]}
-                    </span>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <h3 className="text-2xl sm:text-3xl font-bold font-display text-slate-900 dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors">
-                      {leadProject.title[language]}
-                    </h3>
-                    <p className="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed">
-                      {leadProject.summary[language]}
-                    </p>
-                  </div>
-
-                  {(leadProject.problemSolution || leadProject.resultSummary) && (
-                    <div className="space-y-2 text-sm leading-relaxed border-l-2 border-sky-500/40 pl-3.5 py-0.5">
-                      {leadProject.problemSolution && (
-                        <p className="text-slate-700 dark:text-slate-200">
-                          <span className="font-semibold text-slate-900 dark:text-white">
-                            {t.problemSolutionLabel}{' '}
-                          </span>
-                          {leadProject.problemSolution[language]}
-                        </p>
-                      )}
-                      {leadProject.resultSummary && (
-                        <p className="text-slate-700 dark:text-slate-300">
-                          <span className="font-semibold text-slate-900 dark:text-white">
-                            {t.resultLabel}{' '}
-                          </span>
-                          {leadProject.resultSummary[language]}
-                        </p>
-                      )}
-                    </div>
-                  )}
-
+                <div className="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-slate-200/80 dark:border-white/10">
                   <div className="flex flex-wrap gap-1.5">
                     {leadProject.tags.slice(0, 4).map((tag) => (
                       <span
@@ -284,14 +273,6 @@ export default function Projects({ language }: ProjectsProps) {
                 className="w-full p-6 rounded-2xl flex flex-col justify-between gap-5 cursor-pointer group"
               >
                 <div className="space-y-4">
-                  {project.previewType && (
-                    <ProjectPreview
-                      previewType={project.previewType}
-                      variant="featured"
-                      language={language}
-                    />
-                  )}
-
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/15 text-[11px] font-mono font-medium text-slate-800 dark:text-slate-200">
                       {project.roleBadge[language]}
@@ -377,14 +358,6 @@ export default function Projects({ language }: ProjectsProps) {
                 }`}
               >
                 <div className="space-y-3.5">
-                  {project.previewType && (
-                    <ProjectPreview
-                      previewType={project.previewType}
-                      variant="compact"
-                      language={language}
-                    />
-                  )}
-
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/15 text-[11px] font-mono font-medium text-slate-800 dark:text-slate-200">
                       {project.roleBadge[language]}
@@ -444,14 +417,6 @@ export default function Projects({ language }: ProjectsProps) {
                 <article key={project.id} className="flex">
                   <SpotlightCard className="w-full p-5 sm:p-6 rounded-2xl flex flex-col justify-between gap-4">
                     <div className="space-y-3.5">
-                      {project.previewType && (
-                        <ProjectPreview
-                          previewType={project.previewType}
-                          variant="compact"
-                          language={language}
-                        />
-                      )}
-
                       <div className="flex flex-wrap items-center gap-2">
                         <span className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/15 text-[11px] font-mono font-medium text-slate-800 dark:text-slate-200">
                           {project.roleBadge[language]}

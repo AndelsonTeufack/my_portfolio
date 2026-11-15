@@ -37,15 +37,6 @@ export interface ExperienceItem {
   technologies: string[]
 }
 
-export type ProjectPreviewType =
-  | 'laoshi'
-  | 'kes-inspection'
-  | 'socadel-gis'
-  | 'momokash'
-  | 'taillorpro'
-  | 'mulema'
-  | 'shikaku'
-
 export interface ProjectItem {
   id: string
   title: BilingualText
@@ -53,7 +44,6 @@ export interface ProjectItem {
   categoryLabel: BilingualText
   roleContext: BilingualText
   tier: 'featured' | 'compact' | 'published' | 'other'
-  previewType?: ProjectPreviewType
   roleBadge: BilingualText
   statusBadge: BilingualText
   statusTone: 'live' | 'production' | 'playstore' | 'prototype'
@@ -946,7 +936,6 @@ export const PROJECTS: ProjectItem[] = [
       en: 'Client delivery · Production Full-Stack Next.js portal',
     },
     tier: 'featured',
-    previewType: 'laoshi',
     roleBadge: {
       fr: 'Auteur',
       en: 'Author',
@@ -1008,7 +997,6 @@ export const PROJECTS: ProjectItem[] = [
       en: 'Anonymized case study · Kamer Engineering Solution',
     },
     tier: 'featured',
-    previewType: 'kes-inspection',
     roleBadge: {
       fr: 'Projet d’entreprise',
       en: 'Company project',
@@ -1069,7 +1057,6 @@ export const PROJECTS: ProjectItem[] = [
       en: 'Company project · Kamer Engineering Solution',
     },
     tier: 'featured',
-    previewType: 'socadel-gis',
     roleBadge: {
       fr: 'Projet d’entreprise',
       en: 'Company project',
@@ -1130,7 +1117,6 @@ export const PROJECTS: ProjectItem[] = [
       en: 'Company project · Credix.cam SA',
     },
     tier: 'compact',
-    previewType: 'momokash',
     roleBadge: {
       fr: 'Projet d’entreprise',
       en: 'Company project',
@@ -1182,7 +1168,6 @@ export const PROJECTS: ProjectItem[] = [
       en: 'Personal project · Flutter & Firebase',
     },
     tier: 'compact',
-    previewType: 'taillorpro',
     roleBadge: {
       fr: 'Auteur',
       en: 'Author',
@@ -1234,7 +1219,6 @@ export const PROJECTS: ProjectItem[] = [
       en: 'Volunteer contributor V1 & V2 · Google Play Store',
     },
     tier: 'published',
-    previewType: 'mulema',
     roleBadge: {
       fr: 'Contributeur',
       en: 'Contributor',
@@ -1286,7 +1270,6 @@ export const PROJECTS: ProjectItem[] = [
       en: 'Contributor (analysis, QA & release) · Google Play Store',
     },
     tier: 'published',
-    previewType: 'shikaku',
     roleBadge: {
       fr: 'Contributeur',
       en: 'Contributor',
