@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 import {
   ArrowUpRight,
@@ -57,6 +58,7 @@ export default function Projects({ language }: ProjectsProps) {
       resultLabel: 'Résultat :',
       visitSite: 'Voir le site',
       caseStudy: 'Étude de cas',
+      fullPage: 'Page dédiée',
       videoDemo: 'Démo vidéo',
       githubCode: 'Code GitHub',
       playStore: 'Play Store',
@@ -71,6 +73,7 @@ export default function Projects({ language }: ProjectsProps) {
       resultLabel: 'Result:',
       visitSite: 'Visit site',
       caseStudy: 'Case study',
+      fullPage: 'Full page',
       videoDemo: 'Video demo',
       githubCode: 'GitHub code',
       playStore: 'Play Store',
@@ -149,6 +152,15 @@ export default function Projects({ language }: ProjectsProps) {
           <ArrowUpRight className="w-3.5 h-3.5" />
         </button>
       )}
+
+      <Link
+        href={`/projets/${project.id}`}
+        onClick={(e) => e.stopPropagation()}
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-secondary/70 hover:bg-muted text-xs font-mono font-medium text-foreground transition-colors"
+      >
+        <span>{t.fullPage}</span>
+        <ExternalLink className="w-3 h-3 text-sky-600 dark:text-sky-400" />
+      </Link>
     </div>
   )
 
@@ -160,7 +172,7 @@ export default function Projects({ language }: ProjectsProps) {
     >
       {/* Section Header */}
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 1, y: 0 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.4 }}
         className="mb-10 sm:mb-12 space-y-2.5"
@@ -177,7 +189,7 @@ export default function Projects({ language }: ProjectsProps) {
         {/* #1 Featured Lead Project: Full-width editorial split */}
         {leadProject && (
           <motion.article
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 1, y: 0 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.4 }}
           >
@@ -206,7 +218,13 @@ export default function Projects({ language }: ProjectsProps) {
 
                 <div className="space-y-1.5">
                   <h3 className="text-2xl sm:text-3xl font-bold font-display text-slate-900 dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors">
-                    {leadProject.title[language]}
+                    <Link
+                      href={`/projets/${leadProject.id}`}
+                      onClick={(e) => e.stopPropagation()}
+                      className="hover:underline underline-offset-4"
+                    >
+                      {leadProject.title[language]}
+                    </Link>
                   </h3>
                   <p className="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed max-w-4xl">
                     {leadProject.summary[language]}
@@ -258,7 +276,7 @@ export default function Projects({ language }: ProjectsProps) {
           {secondaryFeatured.map((project, index) => (
             <motion.article
               key={project.id}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 1, y: 0 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.08 + index * 0.06 }}
               className="flex"
@@ -288,7 +306,13 @@ export default function Projects({ language }: ProjectsProps) {
 
                   <div className="space-y-1.5">
                     <h3 className="text-xl font-bold font-display text-slate-900 dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors">
-                      {project.title[language]}
+                      <Link
+                        href={`/projets/${project.id}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="hover:underline underline-offset-4"
+                      >
+                        {project.title[language]}
+                      </Link>
                     </h3>
                     <p className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
                       {project.summary[language]}
@@ -341,7 +365,7 @@ export default function Projects({ language }: ProjectsProps) {
           {compactProjects.map((project, index) => (
             <motion.article
               key={project.id}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 1, y: 0 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.38, delay: 0.14 + index * 0.05 }}
               className="flex"
@@ -373,7 +397,13 @@ export default function Projects({ language }: ProjectsProps) {
 
                   <div className="space-y-1.5">
                     <h3 className="text-lg sm:text-xl font-bold font-display text-slate-900 dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors">
-                      {project.title[language]}
+                      <Link
+                        href={`/projets/${project.id}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="hover:underline underline-offset-4"
+                      >
+                        {project.title[language]}
+                      </Link>
                     </h3>
                     <p className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
                       {project.summary[language]}
@@ -432,7 +462,12 @@ export default function Projects({ language }: ProjectsProps) {
 
                       <div className="space-y-1.5">
                         <h4 className="text-lg sm:text-xl font-bold font-display text-slate-900 dark:text-white">
-                          {project.title[language]}
+                          <Link
+                            href={`/projets/${project.id}`}
+                            className="hover:text-sky-700 dark:hover:text-sky-400 hover:underline underline-offset-4 transition-colors"
+                          >
+                            {project.title[language]}
+                          </Link>
                         </h4>
                         <p className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
                           {project.summary[language]}
@@ -477,7 +512,12 @@ export default function Projects({ language }: ProjectsProps) {
                   <div className="space-y-2">
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <h4 className="text-base font-bold font-display text-slate-900 dark:text-white">
-                        {project.title[language]}
+                        <Link
+                          href={`/projets/${project.id}`}
+                          className="hover:text-sky-700 dark:hover:text-sky-400 hover:underline underline-offset-4 transition-colors"
+                        >
+                          {project.title[language]}
+                        </Link>
                       </h4>
                       <div className="flex items-center gap-1.5">
                         <span className="px-2 py-0.5 rounded-full bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/15 text-[11px] font-mono text-slate-700 dark:text-slate-300">

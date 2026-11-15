@@ -1436,7 +1436,7 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
       en: 'Back-end & API',
     },
     primary: ['FastAPI', 'Spring Boot', 'Python', 'Java', 'REST'],
-    secondary: ['Node.js / NestJS', 'WebSockets'],
+    secondary: ['Node.js / Express', 'WebSockets'],
   },
   {
     id: 'data-gis',

@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import { Analytics } from '@vercel/analytics/next'
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { fontSans, fontDisplay, fontMono } from '@/lib/fonts'
+import { PROJECTS } from '@/lib/portfolio-data'
 import './globals.css'
 
 const SITE_URL = 'https://andelson-teufack.dev'
@@ -45,7 +46,10 @@ export const metadata: Metadata = {
     languages: {
       'fr-CM': CANONICAL_URL,
       'fr-FR': CANONICAL_URL,
-      'en-US': CANONICAL_URL,
+      fr: CANONICAL_URL,
+      'en-US': `${CANONICAL_URL}/en`,
+      en: `${CANONICAL_URL}/en`,
+      'x-default': CANONICAL_URL,
     },
   },
   openGraph: {
@@ -191,10 +195,11 @@ const jsonLdGraph = {
         'Java', 'Spring Boot', 'Python', 'FastAPI', 'Django', 'Flask',
         'Flutter', 'Offline-First Mobile Architecture', 'Android (Java, Kotlin)',
         'BluetoothSockets', 'Gemini LLM API', 'React.js', 'Next.js',
-        'TypeScript', 'Node.js', 'NestJS', 'Odoo ERP', 'n8n',
-        'PostgreSQL', 'PostGIS', 'MySQL', 'Redis', 'Hive', 'Firebase',
+        'TypeScript', 'Node.js', 'Express', 'Odoo ERP', 'n8n',
+        'PostgreSQL', 'PostGIS', 'Systèmes d’Information Géographique (SIG)',
+        'MySQL', 'Redis', 'Hive', 'Firebase',
         'JWT', 'OAuth2', 'Spring Security', 'RBAC',
-        'Cloudflare R2', 'Docker', 'GitHub Actions', 'KoboCollect', 'SIG / GeoJSON',
+        'Cloudflare R2', 'Docker', 'GitHub Actions', 'KoboCollect', 'GeoJSON',
       ],
       knowsLanguage: [
         { '@type': 'Language', name: 'French' },
@@ -224,60 +229,26 @@ const jsonLdGraph = {
       description: `Site web et portfolio officiel de ${FULL_NAME}, Ingénieur des Travaux Informatiques et Développeur Full-Stack & Mobile à Douala.`,
       publisher: { '@id': `${CANONICAL_URL}/#person` },
       inLanguage: ['fr', 'en'],
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: {
-          '@type': 'EntryPoint',
-          urlTemplate: `${CANONICAL_URL}/?s={search_term_string}`,
-        },
-        'query-input': 'required name=search_term_string',
-      },
     },
     {
-      '@type': 'FAQPage',
-      '@id': `${CANONICAL_URL}/#faq`,
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: 'Qui est Andelson TEUFACK SONTSA ?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Andelson TEUFACK SONTSA est Développeur Full-Stack & Mobile basé à Douala, Cameroun. Actuellement chez Kamer Engineering Solution, il est diplômé d’une Licence en génie logiciel à l’IAI-Cameroun (2024), poursuit un Master professionnel en génie logiciel à l’ENSPD et détient la certification Google IT Support.',
-          },
+      '@type': 'ItemList',
+      '@id': `${CANONICAL_URL}/#projects`,
+      name: `Projets et études de cas — ${FULL_NAME}`,
+      numberOfItems: PROJECTS.length,
+      itemListElement: PROJECTS.map((project, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        url: `${CANONICAL_URL}/projets/${project.id}`,
+        item: {
+          '@type': 'CreativeWork',
+          '@id': `${CANONICAL_URL}/projets/${project.id}/#project`,
+          url: `${CANONICAL_URL}/projets/${project.id}`,
+          name: project.title.fr,
+          description: project.summary.fr,
+          creator: { '@id': `${CANONICAL_URL}/#person` },
+          keywords: project.tags.join(', '),
         },
-        {
-          '@type': 'Question',
-          name: 'Andelson TEUFACK SONTSA a-t-il une expérience d’enseignement ou de mentorat ?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Oui, Andelson TEUFACK SONTSA a été Formateur & Mentor en développement web et mobile à l’IAI (Centre de Douala) de janvier à mai 2025, où il a encadré et mentoré plus de 15 étudiants sur React/JS et Flutter.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Quelles sont les compétences techniques d’Andelson Teufack ?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Andelson Teufack maîtrise Flutter (Clean Architecture, Offline-First, BluetoothSockets), Java / Spring Boot, Python (FastAPI, Django, Flask), React.js / Next.js, NestJS, PostgreSQL / PostGIS, Redis, Firebase, Hive, la sécurité JWT/OAuth2/RBAC, l’intégration Odoo ERP et Cloudflare R2.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Quels projets marquants ont été réalisés par TEUFACK SONTSA Andelson ?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Parmi ses réalisations figurent la suite digitale d’inspections industrielles (mobile offline-first + IA Gemini + BluetoothSockets + web collaboratif) et l’ERP interne connecté à Odoo chez Kamer Engineering Solution, les applications MULEMA et Shikaku publiées sur Google Play Store, la plateforme SIG KoboCollect/ESRI et le module de réconciliation financière MomoKash.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Comment contacter TEUFACK SONTSA Andelson ?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Vous pouvez contacter Andelson Teufack par email à teufackandelson123@gmail.com, par téléphone / WhatsApp au +237 690 819 035, ou via son profil LinkedIn.',
-          },
-        },
-      ],
+      })),
     },
     {
       '@type': 'BreadcrumbList',
@@ -286,38 +257,14 @@ const jsonLdGraph = {
         {
           '@type': 'ListItem',
           position: 1,
-          name: 'Accueil',
+          name: 'Accueil (FR)',
           item: CANONICAL_URL,
         },
         {
           '@type': 'ListItem',
           position: 2,
-          name: 'Profil',
-          item: `${CANONICAL_URL}/#about`,
-        },
-        {
-          '@type': 'ListItem',
-          position: 3,
-          name: 'Expériences',
-          item: `${CANONICAL_URL}/#experience`,
-        },
-        {
-          '@type': 'ListItem',
-          position: 4,
-          name: 'Projets',
-          item: `${CANONICAL_URL}/#projects`,
-        },
-        {
-          '@type': 'ListItem',
-          position: 5,
-          name: 'Compétences',
-          item: `${CANONICAL_URL}/#skills`,
-        },
-        {
-          '@type': 'ListItem',
-          position: 6,
-          name: 'Contact',
-          item: `${CANONICAL_URL}/#contact`,
+          name: 'English Portfolio (EN)',
+          item: `${CANONICAL_URL}/en`,
         },
       ],
     },
@@ -332,8 +279,12 @@ export default function RootLayout({
   return (
     <html lang="fr" className="dark scroll-smooth">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="alternate"
+          type="text/plain"
+          href="/llms.txt"
+          title="Profil & Projets pour systèmes IA (LLMs)"
+        />
         <link rel="dns-prefetch" href="//vercel.com" />
       </head>
       <body

@@ -231,7 +231,7 @@ export default function Contact({ language }: ContactProps) {
     >
       {/* Header */}
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 1, y: 0 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.4 }}
         className="max-w-2xl mb-10 sm:mb-12 space-y-2.5"
@@ -250,7 +250,7 @@ export default function Contact({ language }: ContactProps) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
         {/* Left Column: Direct Channels + Links */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4, delay: 0.08 }}
           className="lg:col-span-5 flex flex-col gap-6"
@@ -412,7 +412,7 @@ export default function Contact({ language }: ContactProps) {
 
         {/* Right Column: Contact Form (Matched Height) */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4, delay: 0.14 }}
           className="lg:col-span-7 flex"

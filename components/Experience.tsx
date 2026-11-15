@@ -55,7 +55,7 @@ export default function Experience({ language }: ExperienceProps) {
     >
       {/* Section Header */}
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 1, y: 0 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.4 }}
         className="mb-10 sm:mb-12 space-y-2.5"
@@ -85,7 +85,7 @@ export default function Experience({ language }: ExperienceProps) {
             return (
               <motion.article
                 key={exp.id}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 1, y: 0 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.35, delay: Math.min(index * 0.06, 0.24) }}
                 className="relative"

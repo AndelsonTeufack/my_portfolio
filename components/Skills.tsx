@@ -76,7 +76,7 @@ export default function Skills({ language }: SkillsProps) {
     >
       {/* Header + Single Legend */}
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 1, y: 0 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.4 }}
         className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-10 sm:mb-12"
@@ -108,7 +108,7 @@ export default function Skills({ language }: SkillsProps) {
           return (
             <motion.div
               key={category.id}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 1, y: 0 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{
                 duration: 0.35,
@@ -164,7 +164,7 @@ export default function Skills({ language }: SkillsProps) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         {/* Supervision & Responsibilities */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4, delay: 0.15 }}
           className="lg:col-span-5 flex"
@@ -193,7 +193,7 @@ export default function Skills({ language }: SkillsProps) {
 
         {/* Languages */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4, delay: 0.2 }}
           className="lg:col-span-4 flex"
@@ -231,7 +231,7 @@ export default function Skills({ language }: SkillsProps) {
 
         {/* Compact Interests */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4, delay: 0.25 }}
           className="lg:col-span-3 flex"

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   X,
@@ -87,6 +88,7 @@ export default function ProjectModal({
       highlightsTitle: 'Réalisations & résultats',
       stackTitle: 'Technologies utilisées',
       linksTitle: 'Accès & livrables',
+      standalonePage: 'Ouvrir la page dédiée',
       playStore: 'Google Play Store',
       liveDemo: 'Voir le site',
       videoDemo: 'Voir la démo vidéo',
@@ -104,6 +106,7 @@ export default function ProjectModal({
       highlightsTitle: 'Deliverables & outcomes',
       stackTitle: 'Technologies used',
       linksTitle: 'Links & deliverables',
+      standalonePage: 'Open dedicated page',
       playStore: 'Google Play Store',
       liveDemo: 'Visit site',
       videoDemo: 'Watch video demo',
@@ -291,11 +294,30 @@ export default function ProjectModal({
                         <ExternalLink className="w-3.5 h-3.5 text-muted-foreground" />
                       </a>
                     )}
+
+                    <Link
+                      href={`/projets/${project.id}`}
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-secondary hover:bg-muted border border-border text-foreground font-semibold text-xs sm:text-sm transition-colors"
+                    >
+                      <ExternalLink className="w-4 h-4 text-sky-600 dark:text-sky-400" />
+                      <span>{t.standalonePage}</span>
+                    </Link>
                   </div>
                 ) : (
-                  <div className="flex items-start gap-2.5 p-3.5 rounded-xl bg-muted/60 border border-border text-xs sm:text-sm text-muted-foreground">
-                    <Lock className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0 mt-0.5" />
-                    <span>{t.confidentialNote}</span>
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-2.5 p-3.5 rounded-xl bg-muted/60 border border-border text-xs sm:text-sm text-muted-foreground">
+                      <Lock className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0 mt-0.5" />
+                      <span>{t.confidentialNote}</span>
+                    </div>
+                    <div>
+                      <Link
+                        href={`/projets/${project.id}`}
+                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-secondary hover:bg-muted border border-border text-foreground font-semibold text-xs sm:text-sm transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4 text-sky-600 dark:text-sky-400" />
+                        <span>{t.standalonePage}</span>
+                      </Link>
+                    </div>
                   </div>
                 )}
               </section>

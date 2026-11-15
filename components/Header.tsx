@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
+import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Moon, Sun } from 'lucide-react'
 import BrandLogo from '@/components/ui/BrandLogo'
@@ -102,10 +103,7 @@ export default function Header({
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40 flex justify-center pt-4 px-4 pointer-events-none">
-      <motion.div
-        initial={{ y: -24, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.35, ease: 'easeOut' }}
+      <div
         className={`pointer-events-auto w-full max-w-5xl transition-all duration-300 border ${isOpen ? 'rounded-2xl' : 'rounded-2xl md:rounded-full'
           } ${scrolled
             ? 'bg-white/95 dark:bg-[#11131a]/95 backdrop-blur-md border-slate-200 dark:border-white/14 shadow-sm dark:shadow-lg dark:shadow-black/40 py-2.5 px-4 sm:px-6'
@@ -159,8 +157,9 @@ export default function Header({
 
           {/* Controls */}
           <div className="flex items-center gap-2 shrink-0">
-            <button
-              type="button"
+            <Link
+              href={language === 'fr' ? '/en' : '/'}
+              scroll={false}
               onClick={onLanguageToggle}
               className="px-2.5 py-1.5 rounded-full bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/14 hover:border-sky-500/50 dark:hover:border-sky-400/50 text-xs font-mono font-semibold text-slate-800 dark:text-slate-100 transition-colors cursor-pointer"
               title={language === 'en' ? 'Passer en Français' : 'Switch to English'}
@@ -173,7 +172,7 @@ export default function Header({
               <span className={language === 'en' ? 'text-sky-700 dark:text-sky-300 font-bold' : 'text-slate-500 dark:text-slate-400'}>
                 EN
               </span>
-            </button>
+            </Link>
 
             <button
               type="button"
@@ -233,7 +232,7 @@ export default function Header({
             </motion.nav>
           )}
         </AnimatePresence>
-      </motion.div>
+      </div>
     </header>
   )
 }

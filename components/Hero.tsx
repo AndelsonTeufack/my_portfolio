@@ -32,37 +32,27 @@ const content = {
 const HERO_STACK = ['Flutter', 'Next.js', 'FastAPI', 'PostgreSQL/PostGIS']
 
 const containerVariants: Variants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.05,
+      staggerChildren: 0.06,
+      delayChildren: 0.02,
     },
   },
 }
 
 const itemVariants: Variants = {
-  hidden: { y: 16, opacity: 0 },
+  hidden: { y: 0, opacity: 1 },
   visible: {
     y: 0,
     opacity: 1,
-    transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
   },
 }
 
 export default function Hero({ language }: HeroProps) {
   const t = content[language]
-
-  const handleDownloadCV = () => {
-    const cvUrl = '/CV - Andelson TEUFACK.pdf'
-    const link = document.createElement('a')
-    link.href = cvUrl
-    link.download = 'CV - Andelson TEUFACK.pdf'
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
 
   return (
     <section className="relative pt-32 pb-20 sm:pt-36 sm:pb-24 px-4 sm:px-6 lg:px-8 border-b border-slate-200 dark:border-white/10">
@@ -108,41 +98,62 @@ export default function Hero({ language }: HeroProps) {
             {/* CTAs: Projects -> Contact -> CV */}
             <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3 pt-2">
               <Button
+                asChild
                 size="lg"
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
                 className="rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-sky-400 dark:hover:bg-sky-300 text-white dark:text-slate-950 font-semibold px-6 cursor-pointer"
               >
-                {t.ctaProjects}
-                <ArrowRight className="w-4 h-4 ml-1.5" />
+                <a
+                  href="#projects"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
+                  }}
+                >
+                  {t.ctaProjects}
+                  <ArrowRight className="w-4 h-4 ml-1.5" />
+                </a>
               </Button>
 
               <Button
+                asChild
                 variant="outline"
                 size="lg"
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 className="rounded-xl border-slate-300 dark:border-white/20 bg-white dark:bg-[#11131a] hover:bg-slate-50 dark:hover:bg-white/[0.08] text-slate-900 dark:text-white font-semibold px-5 cursor-pointer"
               >
-                <Mail className="w-4 h-4 mr-2 text-sky-700 dark:text-sky-400" />
-                {t.ctaContact}
+                <a
+                  href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+                  }}
+                >
+                  <Mail className="w-4 h-4 mr-2 text-sky-700 dark:text-sky-400" />
+                  {t.ctaContact}
+                </a>
               </Button>
 
               <Button
+                asChild
                 variant="ghost"
                 size="lg"
-                onClick={handleDownloadCV}
                 className="rounded-xl text-slate-700 dark:text-slate-200 hover:text-sky-700 dark:hover:text-sky-300 hover:bg-slate-100 dark:hover:bg-white/[0.06] font-semibold px-4 cursor-pointer"
               >
-                <Download className="w-4 h-4 mr-2 text-sky-700 dark:text-sky-400" />
-                {t.downloadCV}
+                <a
+                  href="/CV - Andelson TEUFACK.pdf"
+                  download="CV - Andelson TEUFACK.pdf"
+                >
+                  <Download className="w-4 h-4 mr-2 text-sky-700 dark:text-sky-400" />
+                  {t.downloadCV}
+                </a>
               </Button>
             </motion.div>
           </motion.div>
 
           {/* Portrait Column (5 cols) */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
+            transition={{ duration: 0.4 }}
             className="lg:col-span-5 flex justify-center lg:justify-end"
           >
             <div className="w-full max-w-md rounded-2xl editorial-surface p-3">
@@ -153,6 +164,7 @@ export default function Hero({ language }: HeroProps) {
                   fill
                   className="object-cover object-[center_20%]"
                   priority
+                  fetchPriority="high"
                   sizes="(max-width: 768px) 100vw, 40vw"
                 />
 
