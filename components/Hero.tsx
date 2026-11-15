@@ -16,7 +16,7 @@ const content = {
     ctaProjects: 'View my projects',
     ctaContact: 'Contact me',
     downloadCV: 'Download CV',
-    locationBadge: 'Douala',
+    availabilityBadge: 'Available for missions',
     imageAlt: 'Andelson TEUFACK SONTSA - Full-Stack & Mobile Developer',
   },
   fr: {
@@ -24,7 +24,7 @@ const content = {
     ctaProjects: 'Voir mes projets',
     ctaContact: 'Me contacter',
     downloadCV: 'Télécharger le CV',
-    locationBadge: 'Douala',
+    availabilityBadge: 'Disponible pour des missions',
     imageAlt: 'Andelson TEUFACK SONTSA - Développeur Full-Stack & Mobile',
   },
 }
@@ -178,10 +178,20 @@ export default function Hero({ language }: HeroProps) {
                   sizes="(max-width: 768px) 100vw, 40vw"
                 />
 
-                <div className="absolute bottom-3.5 left-3.5 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-950/80 backdrop-blur-md border border-white/15 text-xs font-mono font-medium text-slate-100">
-                  <MapPin className="w-3.5 h-3.5 text-sky-400 shrink-0" />
-                  <span>{t.locationBadge}</span>
-                </div>
+                <a
+                  href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+                  }}
+                  className="absolute bottom-3.5 left-3.5 inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-slate-950/85 hover:bg-slate-900/95 backdrop-blur-md border border-emerald-400/30 hover:border-emerald-400/60 text-xs font-mono font-medium text-slate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+                >
+                  <span className="relative flex h-2.5 w-2.5 shrink-0" aria-hidden="true">
+                    <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
+                  </span>
+                  <span>{t.availabilityBadge}</span>
+                </a>
               </div>
             </div>
           </motion.div>
